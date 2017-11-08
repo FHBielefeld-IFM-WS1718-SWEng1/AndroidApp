@@ -5,5 +5,15 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <!-- SigIn -->
     <string name="logo_fragment_discription">Papla Logo</string>
+    <string name="signin_fragment_discription">Log In</string>
+    <string name="signin_as_guest">Als Gast einloggen</string>
+    <string name="signin">Anmelden</string>
+    <string name="forgotPass">Passwort vergessen?</string>
+    <string name="register">Registrieren</string>
+    <string name="pw">Password</string>
+    <string name="username">Benutzername</string>
+
 </resources>
