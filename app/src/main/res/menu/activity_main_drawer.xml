@@ -1,5 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <!-- Bilder??
+        android:icon="@drawable/ic_menu_camera"
+        -->
+        <item
+            android:id="@+id/home"
+            android:title="Home" />
+
+        <item
+            android:id="@+id/profile"
+            android:title="Profil" />
+
+        <item
+            android:id="@+id/ownEvents"
+            android:title="Eigene Veranstaltungen" />
+
+        <item
+            android:id="@+id/contacts"
+            android:title="Kontakte" />
+
+        <item android:title="">
+            <menu>
+                <item
+                    android:id="@+id/help"
+                    android:title="Hilfe"/>
+
+
+                <item
+                    android:id="@+id/contactFormular"
+                    android:title="Kontaktformulas"/>
+
+
+                <item
+                    android:id="@+id/impressum"
+                    android:title="Impressum"/>
+                <item
+
+                    android:id="@+id/logout"
+                    android:title="Ausloggen" />
+
+            </menu>
+        </item>
+
+    </group>
+
 </menu>
