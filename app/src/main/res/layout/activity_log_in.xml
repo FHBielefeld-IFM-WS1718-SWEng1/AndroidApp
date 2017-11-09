@@ -11,11 +11,13 @@
         android:id="@+id/fragment3"
         android:name="partyplaner.partyplaner.LogIn.LogoFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        tools:layout="@layout/fragment_login_logo" />
 
     <fragment
         android:id="@+id/fragment4"
         android:name="partyplaner.partyplaner.LogIn.SignInFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        tools:layout="@layout/fragment_login_signin" />
 </LinearLayout>

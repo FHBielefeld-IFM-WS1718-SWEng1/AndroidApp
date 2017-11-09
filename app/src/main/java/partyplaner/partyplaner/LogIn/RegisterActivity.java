@@ -8,21 +8,17 @@ import android.view.View;
 import partyplaner.partyplaner.MainActivity;
 import partyplaner.partyplaner.R;
 
-public class LogInActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_in);
+        setContentView(R.layout.activity_register);
     }
 
-    public void signUp(View view) {
+    public void saveRegister(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
-    public void openRegister(View view) {
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
-    }
 }
