@@ -16,6 +16,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import partyplaner.partyplaner.ContactForm.ContactForm;
+import partyplaner.partyplaner.ContactForm.ContactFragment;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -86,17 +89,21 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.home) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.profile) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.ownEvents) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.contacts) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.help) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.contactFormular) {
+            setFragmentToContent(new ContactFragment());
+        } else if (id == R.id.impressum) {
+
+        } else if (id == R.id.logout) {
 
         }
 

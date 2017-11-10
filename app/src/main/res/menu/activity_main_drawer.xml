@@ -34,7 +34,7 @@
 
                 <item
                     android:id="@+id/contactFormular"
-                    android:title="Kontaktformulas"/>
+                    android:title="Kontaktformular" />
 
 
                 <item

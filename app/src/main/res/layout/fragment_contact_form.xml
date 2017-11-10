@@ -4,6 +4,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     tools:context="partyplaner.partyplaner.ContactForm.ContactForm">
 
     <!-- TODO: Update blank fragment layout -->
@@ -13,12 +14,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="55dp"
         android:text="@string/betreff"
         android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/betreffInputText"
         app:layout_constraintEnd_toStartOf="@+id/betreffInputText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:labelFor="@+id/betreffInputText"
@@ -58,12 +58,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="20dp"
         android:text="@string/nachname"
         android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/NachnameInput"
         app:layout_constraintEnd_toStartOf="@+id/NachnameInput"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/VornameText" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/NachnameInput"
@@ -80,12 +79,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="22dp"
         android:text="@string/telefon"
         android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/TelefonInput"
         app:layout_constraintEnd_toStartOf="@+id/TelefonInput"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NachnameText" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/TelefonInput"
@@ -102,20 +100,19 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="20dp"
         android:text="@string/e_mail"
         android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/EmailInput"
         app:layout_constraintEnd_toStartOf="@+id/EmailInput"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TelefonText" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/EmailInput"
-        android:labelFor="@+id/EmailInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
+        android:labelFor="@+id/EmailInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TelefonInput" />
 
@@ -124,20 +121,19 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="24dp"
-        android:textSize="16sp"
         android:text="@string/e_mail_wiederholen"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/Email2Input"
         app:layout_constraintEnd_toStartOf="@+id/Email2Input"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EmailText" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/Email2Input"
-        android:labelFor="@+id/Email2Input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textEmailAddress"
+        android:labelFor="@+id/Email2Input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/EmailInput" />
 
@@ -154,15 +150,14 @@
 
     <EditText
         android:id="@+id/AnfrageInput"
-        android:labelFor="@+id/AnfrageInput"
         android:layout_width="0dp"
-        android:layout_height="78dp"
+        android:layout_height="64dp"
         android:layout_marginBottom="80dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textMultiLine"
+        android:labelFor="@+id/AnfrageInput"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
