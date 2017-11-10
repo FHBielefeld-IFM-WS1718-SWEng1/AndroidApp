@@ -20,5 +20,13 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="betreff">Betreff :</string>
+    <string name="e_mail_wiederholen">E-Mail wiederholen :</string>
+    <string name="e_mail">E-Mail :</string>
+    <string name="ihre_anfrage">Ihre Anfrage</string>
+    <string name="senden">Senden</string>
+    <string name="vorname">Vorname :</string>
+    <string name="nachname">Nachname :</string>
+    <string name="telefon">Telefon :</string>
 
 </resources>
