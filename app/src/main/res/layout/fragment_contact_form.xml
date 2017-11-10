@@ -10,37 +10,37 @@
 
     <TextView
         android:id="@+id/BetreffText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="467dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="55dp"
         android:text="Betreff :"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/BetreffInputText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/BetreffInputText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
         android:ems="10"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="172dp"
-        tools:layout_editor_absoluteY="45dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/VornameText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="20dp"
         android:text="Vorname :"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="100dp" />
+        android:textSize="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/VornameInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BetreffText" />
 
     <EditText
         android:id="@+id/VornameInput"
@@ -48,17 +48,20 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="172dp"
-        tools:layout_editor_absoluteY="90dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BetreffInputText" />
 
     <TextView
         android:id="@+id/NachnameText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="20dp"
         android:text="Nachname :"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="149dp" />
+        android:textSize="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/NachnameInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/VornameText" />
 
     <EditText
         android:id="@+id/NachnameInput"
@@ -66,17 +69,20 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="172dp"
-        tools:layout_editor_absoluteY="136dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/VornameInput" />
 
     <TextView
         android:id="@+id/TelefonText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="22dp"
         android:text="Telefon :"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="191dp" />
+        android:textSize="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/TelefonInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NachnameText" />
 
     <EditText
         android:id="@+id/TelefonInput"
@@ -84,19 +90,20 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="phone"
-        tools:layout_editor_absoluteX="172dp"
-        tools:layout_editor_absoluteY="182dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NachnameInput" />
 
     <TextView
         android:id="@+id/EmailText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:layout_marginEnd="112dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="20dp"
         android:text="E-Mail :"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/Email2Text"
-        app:layout_constraintEnd_toStartOf="@+id/EmailInput" />
+        android:textSize="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/EmailInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TelefonText" />
 
     <EditText
         android:id="@+id/EmailInput"
@@ -104,17 +111,19 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="172dp"
-        tools:layout_editor_absoluteY="228dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TelefonInput" />
 
     <TextView
         android:id="@+id/Email2Text"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="24dp"
         android:text="E-Mail wiederholen :"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="286dp" />
+        app:layout_constraintEnd_toStartOf="@+id/Email2Input"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EmailText" />
 
     <EditText
         android:id="@+id/Email2Input"
@@ -122,17 +131,19 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="172dp"
-        tools:layout_editor_absoluteY="274dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EmailInput" />
 
     <TextView
         android:id="@+id/AnfrageText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
         android:text="Ihre Anfrage"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="328dp" />
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Email2Text" />
 
     <EditText
         android:id="@+id/AnfrageInput"
@@ -144,7 +155,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textMultiLine"
-        android:textAppearance="@android:style/TextAppearance.Material.Large.Inverse"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.135"
@@ -156,8 +167,12 @@
         android:id="@+id/SendButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:text="Senden"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="447dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AnfrageInput" />
 
 </android.support.constraint.ConstraintLayout>
