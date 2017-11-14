@@ -5,16 +5,12 @@
     android:orientation="vertical">
 
     <ExpandableListView
+        android:id="@+id/expandableView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@color/black"
-        android:dividerHeight="4dp"
+        android:dividerHeight="2dp"
         android:scrollbars="horizontal">
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
     </ExpandableListView>
 </LinearLayout>

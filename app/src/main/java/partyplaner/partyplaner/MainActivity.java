@@ -18,6 +18,7 @@ import android.view.MenuItem;
 
 import partyplaner.partyplaner.ContactForm.ContactForm;
 import partyplaner.partyplaner.ContactForm.ContactFragment;
+import partyplaner.partyplaner.Veranstaltung.VeranstaltungMainFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.contacts) {
 
         } else if (id == R.id.help) {
-
+            setFragmentToContent(new VeranstaltungMainFragment());
         } else if (id == R.id.contactFormular) {
             setFragmentToContent(new ContactFragment());
         } else if (id == R.id.impressum) {

@@ -7,13 +7,13 @@
     mein
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/parentTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:padding="8dp"
         android:text="TextView"
         android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:padding="8dp" />
+        android:textSize="18sp" />
 
 </LinearLayout>
