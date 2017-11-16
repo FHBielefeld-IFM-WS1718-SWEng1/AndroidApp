@@ -8,12 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 import partyplaner.partyplaner.R;
+import partyplaner.partyplaner.Veranstaltung.Fragmente.Aufgabenliste;
+import partyplaner.partyplaner.Veranstaltung.Fragmente.Galerie;
 
 /**
  * Created by malte on 10.11.2017.
@@ -21,35 +25,54 @@ import partyplaner.partyplaner.R;
 
 public class VeranstaltungMainFragment extends Fragment {
 
+    ExpandableListView expandableListView;
+    VeranstaltungViewAdaper adapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_veranstaltung_main, container, false);
 
         Activity activity = getActivity();
-        ExpandableListView expandableListView = (ExpandableListView) view.findViewById(R.id.expandableView);
-        HashMap<String, List<String>> testHashmap = initHashmap();
-        ArrayList<String> testHashmapKeys = new ArrayList<>(testHashmap.keySet());
+        expandableListView = (ExpandableListView) view.findViewById(R.id.expandableView);
+        List<String> testHashmapKeys = Arrays.asList(getResources().getStringArray(R.array.veranstaltungs_header));
+        HashMap<String, Integer> testHashmap = initHashmap(testHashmapKeys);
+        List<ImageView> gallery = initImageList();
 
-        VeranstaltungViewAdaper adapter = new VeranstaltungViewAdaper(activity, testHashmap, testHashmapKeys);
+        adapter = new VeranstaltungViewAdaper(activity, testHashmap, testHashmapKeys, getFragmentManager(), gallery);
         expandableListView.setAdapter(adapter);
-
+        openAllGroups();
         return view;
     }
 
-    private HashMap<String, List<String>> initHashmap(){
-        HashMap<String, List<String>> testHashmap = new HashMap<>();
+    private void openAllGroups() {
+        int count = adapter.getGroupCount();
+        for (int position = 0; position < count; position++)
+            expandableListView.expandGroup(position);
+    }
 
-        ArrayList<String> testStrings = new ArrayList<>();
-        testStrings.add("Hallo1");
-        testStrings.add("Hallo2");
-        testHashmap.put("Hallo", testStrings);
+    private void closeAllGroups() {
+        int count = adapter.getGroupCount();
+        for (int position = 0; position < count; position++)
+            expandableListView.collapseGroup(position);
+    }
 
-        testStrings = new ArrayList<>();
-        testStrings.add("Hi1");
-        testStrings.add("Hi2");
-        testHashmap.put("Hi", testStrings);
+    private HashMap<String, Integer> initHashmap(List<String> keys){
+        HashMap<String, Integer> testHashmap = new HashMap<>();
+        testHashmap.put(keys.get(0), R.layout.veranstaltung_fragment_galerie);
+        testHashmap.put(keys.get(1), R.layout.veranstaltung_fragment_aufgabenliste);
 
         return testHashmap;
+    }
+
+    private List<ImageView> initImageList(){
+        List<ImageView> view = new ArrayList<ImageView>();
+        for(int i = 0; i < 10; i++) {
+            ImageView image = new ImageView(getActivity());
+            image.setImageResource(R.drawable.ic_launcher_background);
+            view.add(image);
+        }
+
+        return view;
     }
 }
