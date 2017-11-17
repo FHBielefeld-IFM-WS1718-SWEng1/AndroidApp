@@ -1,41 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/body_tasklist"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="8dp">
 
-    <LinearLayout
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:stretchColumns="1">
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TextView" />
+        <TableRow>
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TextView" />
+            <TextView
+                android:padding="3dip"
+                android:text="Aufgabe"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TextView" />
+            <TextView
+                android:gravity="right"
+                android:padding="3dip"
+                android:text="Name"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
 
-    </LinearLayout>
+            <TextView
+                android:gravity="right"
+                android:paddingBottom="3dip"
+                android:paddingLeft="32dip"
+                android:paddingRight="3dip"
+                android:paddingTop="3dip"
+                android:text="Status"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+        </TableRow>
+    </TableLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/black"
         android:orientation="horizontal"></LinearLayout>
+
 </LinearLayout>

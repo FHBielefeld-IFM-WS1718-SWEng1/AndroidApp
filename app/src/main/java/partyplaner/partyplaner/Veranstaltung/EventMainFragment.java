@@ -14,8 +14,10 @@ import java.util.List;
 
 import partyplaner.partyplaner.Keys;
 import partyplaner.partyplaner.R;
+import partyplaner.partyplaner.Veranstaltung.Fragmente.EventHeaders;
 import partyplaner.partyplaner.Veranstaltung.Fragmente.ExpandableFragment;
 import partyplaner.partyplaner.Veranstaltung.Fragmente.Gallery;
+import partyplaner.partyplaner.Veranstaltung.Fragmente.TaskList;
 
 /**
  * Fragment for the detailed event view.
@@ -33,11 +35,12 @@ public class EventMainFragment extends Fragment {
         return view;
     }
 
-    private void addFragment(String name,Fragment content) {
+    private void addFragment(String name, int id) {
         FragmentManager fm = getFragmentManager();
 
         Bundle arguments = new Bundle();
         arguments.putString(Keys.EXTRA_NAME, name);
+        arguments.putInt(Keys.EXTRA_ID, id);
         ExpandableFragment fragment = new ExpandableFragment();
         fragment.setArguments(arguments);
 
@@ -45,25 +48,19 @@ public class EventMainFragment extends Fragment {
         transaction.add(R.id.eventBody, fragment);
         transaction.commit();
         headers.add(fragment);
-
-        if (content != null) {
-            transaction = fm.beginTransaction();
-            transaction.add(R.id.body, content);
-            transaction.commit();
-        }
     }
 
     private void setUpExpandableView(View view) {
         LinearLayout layout = view.findViewById(R.id.eventBody);
         layout.removeAllViews();
 
-        addFragment("Gallerie", new Gallery());
-        addFragment("Aufgaben", null);
-        addFragment("Gäste", null);
-        addFragment("Abstimmungen", null);
-        addFragment("Bewertungen", null);
-        addFragment("Abstimmungen", null);
-        addFragment("Kommentare", null);
+        addFragment("Gallerie", 0);
+        addFragment("Aufgaben", 1);
+        addFragment("Gäste", 2);
+        addFragment("Abstimmungen", 2);
+        addFragment("Bewertungen", 2);
+        addFragment("Abstimmungen", 2);
+        addFragment("Kommentare", 2);
     }
 
     /**

@@ -1,6 +1,7 @@
 package partyplaner.partyplaner.Veranstaltung.Fragmente;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,10 @@ public class ExpandableFragment extends Fragment {
         TextView text = view.findViewById(R.id.expandableTitle);
         text.setText(title);
 
+        int id = arguments.getInt(Keys.EXTRA_ID);
+        if(id < 2)
+            setFragment(view, id);
+
         RelativeLayout head = view.findViewById(R.id.head);
         head.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +55,16 @@ public class ExpandableFragment extends Fragment {
         return view;
     }
 
+    private void setFragment(View view, int id) {
+        LinearLayout layout = view.findViewById(R.id.body);
+        layout.removeAllViews();
+
+        layout.addView(EventHeaders.values()[id].getFragment());
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.add(R.id.body, EventHeaders.values()[id].getFragment());
+        transaction.commit();
+    }
 
     /**
      * This methode expands the body of the group.
