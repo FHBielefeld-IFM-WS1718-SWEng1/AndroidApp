@@ -72,7 +72,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/imageParty"
                     android:layout_width="match_parent"
                     android:layout_height="64dp"
                     android:layout_weight="1"
