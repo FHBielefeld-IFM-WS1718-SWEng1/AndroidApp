@@ -7,7 +7,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1">
 
         <LinearLayout
@@ -17,25 +17,22 @@
             android:orientation="vertical">
 
             <fragment
-                android:id="@+id/fragment"
+                android:id="@+id/fragment6"
                 android:name="partyplaner.partyplaner.home.PartyHomeFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:layout="@layout/fragment_home_party" />
+                android:layout_height="wrap_content" />
 
             <fragment
-                android:id="@+id/fragment2"
+                android:id="@+id/fragment7"
                 android:name="partyplaner.partyplaner.home.PartyHomeFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:layout="@layout/fragment_home_party" />
+                android:layout_height="wrap_content" />
 
             <fragment
-                android:id="@+id/fragment5"
+                android:id="@+id/fragment8"
                 android:name="partyplaner.partyplaner.home.PartyHomeFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:layout="@layout/fragment_home_party" />
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
