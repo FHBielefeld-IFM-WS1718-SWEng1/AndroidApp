@@ -26,7 +26,7 @@ public class Gallery extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.veranstaltung_fragment_galerie, container, false);
+        View view = inflater.inflate(R.layout.event_fragment_gallery, container, false);
 
         setTestSetUp();
         initImages(view);
