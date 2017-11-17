@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/textPartyname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sauf Party"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/paplacolorSecondary"
+        android:orientation="vertical"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="155dp"
+        android:layoutDirection="rtl"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="4dp">
+
+            <ImageButton
+                android:id="@+id/btnInfo"
+                android:layout_width="62dp"
+                android:layout_height="52dp"
+                android:layout_gravity="center"
+                android:backgroundTint="#FFFFFF"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/info" />
+
+            <ImageButton
+                android:id="@+id/btnThumbsUp"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_gravity="center"
+                android:backgroundTint="#FFFFFF"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/thumbsup" />
+
+            <ImageButton
+                android:id="@+id/btnThumbsDown"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_gravity="center"
+                android:backgroundTint="#FFFFFF"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/thumbsdown" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="64dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="255dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/textWho"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Wer?: Malte" />
+
+                    <TextView
+                        android:id="@+id/textWhere"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Wo?: Bierbude" />
+
+                    <TextView
+                        android:id="@+id/textWhen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Wann?: 30.02.2117, 19 Uhr" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_weight="2"
+                    app:srcCompat="@drawable/ic_launcher_background" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textDescriptionHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/description"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="4"
+                android:text="Es gibt im Moment in diese Mannschaft, oh, einige Spieler vergessen ihnen Profi was sie sind. Ich lese nicht sehr viele Zeitungen, aber ich habe gehört viele Situationen. Erstens: wir haben nicht offensiv gespielt. Es gibt keine deutsche Mannschaft spielt offensiv und die Name offensiv wie Bayern. Letzte Spiel hatten wir in Platz drei Spitzen: Elber, Jancka und dann Zickler. Wir müssen nicht vergessen Zickler. Zickler ist eine Spitzen mehr, Mehmet eh mehr Basler. Ist klar diese Wörter, ist möglich verstehen, was ich hab gesagt? Danke. " />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/paplacolorSecondary"
+        android:orientation="vertical"></LinearLayout>
+
+</LinearLayout>
