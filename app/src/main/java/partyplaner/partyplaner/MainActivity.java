@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import partyplaner.partyplaner.home.HomeFragment;
+import partyplaner.partyplaner.ownEvents.OwnEventsFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -90,8 +91,8 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.home) {
             setFragmentToContent(new HomeFragment());
-        } else if (id == R.id.nav_gallery) {
-
+        } else if (id == R.id.ownEvents) {
+            setFragmentToContent(new OwnEventsFragment());
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
