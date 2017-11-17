@@ -16,23 +16,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <fragment
-                android:id="@+id/fragment6"
-                android:name="partyplaner.partyplaner.home.PartyHomeFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <fragment
-                android:id="@+id/fragment7"
-                android:name="partyplaner.partyplaner.home.PartyHomeFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <fragment
-                android:id="@+id/fragment8"
-                android:name="partyplaner.partyplaner.home.PartyHomeFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
