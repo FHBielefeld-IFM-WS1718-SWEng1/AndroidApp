@@ -22,7 +22,7 @@
             android:textColor="@android:color/black" />
 
         <ImageView
-            android:id="@+id/imageView7"
+            android:id="@+id/editButtonTask"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:padding="8dp"
@@ -36,7 +36,7 @@
             android:clickable="false" />
 
         <ImageView
-            android:id="@+id/imageView8"
+            android:id="@+id/deleteButtonTask"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:padding="6dp"

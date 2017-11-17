@@ -25,10 +25,16 @@ public class Task extends Fragment {
         String name = arguments.getString(Keys.EXTRA_NAME);
         String task = arguments.getString(Keys.EXTRA_TASK);
         boolean status = arguments.getBoolean(Keys.EXTRA_STATUS);
+        boolean owner = arguments.getBoolean(Keys.EXTRA_OWNER);
 
         TextView nameText = view.findViewById(R.id.name_tasklist);
         TextView taskText = view.findViewById(R.id.task_tasklist);
         CheckBox statusBox = view.findViewById(R.id.status_tasklist);
+        if (!owner) {
+            view.findViewById(R.id.deleteButtonTask).setVisibility(View.INVISIBLE);
+            view.findViewById(R.id.editButtonTask).setVisibility(View.INVISIBLE);
+        }
+
         nameText.setText(name);
         taskText.setText(task);
         statusBox.setChecked(status);

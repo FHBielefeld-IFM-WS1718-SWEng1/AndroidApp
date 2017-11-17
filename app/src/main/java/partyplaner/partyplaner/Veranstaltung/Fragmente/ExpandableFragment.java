@@ -22,6 +22,7 @@ import partyplaner.partyplaner.R;
 public class ExpandableFragment extends Fragment {
 
     boolean expandend;
+    private int id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,6 +34,10 @@ public class ExpandableFragment extends Fragment {
         String title = arguments.getString(Keys.EXTRA_NAME);
         TextView text = view.findViewById(R.id.expandableTitle);
         text.setText(title);
+
+        id = View.generateViewId();
+        LinearLayout body = view.findViewById(R.id.body);
+        body.setId(id);
 
         int id = arguments.getInt(Keys.EXTRA_ID);
         if(id < 2)
@@ -56,13 +61,11 @@ public class ExpandableFragment extends Fragment {
     }
 
     private void setFragment(View view, int id) {
-        LinearLayout layout = view.findViewById(R.id.body);
-        layout.removeAllViews();
-
-        layout.addView(EventHeaders.values()[id].getFragment());
+        LinearLayout body = view.findViewById(this.id);
+        body.removeAllViews();
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.add(R.id.body, EventHeaders.values()[id].getFragment());
+        transaction.add(this.id, EventHeaders.values()[id].getFragment());
         transaction.commit();
     }
 
@@ -76,7 +79,7 @@ public class ExpandableFragment extends Fragment {
 
     private void expandGroup(View fragment) {
         if(fragment != null) {
-            LinearLayout body = fragment.findViewById(R.id.body);
+            LinearLayout body = fragment.findViewById(id);
             ImageView arrow = fragment.findViewById(R.id.arrow);
 
             body.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -95,7 +98,7 @@ public class ExpandableFragment extends Fragment {
 
     private void collapseGroup(View fragment) {
         if (fragment != null) {
-            LinearLayout body = fragment.findViewById(R.id.body);
+            LinearLayout body = fragment.findViewById(id);
             ImageView arrow = fragment.findViewById(R.id.arrow);
 
             body.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0));
