@@ -5,7 +5,7 @@ before_install:
   - chmod +x gradlew
 install:
   - cd app/
-  - gradlew assemble
+  - ./gradlew assemble
 script:
   - cd app/
-  - gradlew check
+  - ./gradlew check
