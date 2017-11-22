@@ -1,6 +1,8 @@
 language: java
 jdk:
   - oraclejdk8
+before_install:
+  - chmod +x gradlew
 install:
   - cd app/
   - gradlew assemble
