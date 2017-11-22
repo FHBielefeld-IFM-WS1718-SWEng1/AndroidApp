@@ -3,6 +3,7 @@ package partyplaner.partyplaner;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 
 import partyplaner.partyplaner.ContactForm.ContactForm;
 import partyplaner.partyplaner.ContactForm.ContactFragment;
+import partyplaner.partyplaner.poll.CreatePoll;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -98,7 +100,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.contacts) {
 
         } else if (id == R.id.help) {
-
+            Intent intent = new Intent(this, CreatePoll.class);
+            startActivity(intent);
         } else if (id == R.id.contactFormular) {
             setFragmentToContent(new ContactFragment());
         } else if (id == R.id.impressum) {
