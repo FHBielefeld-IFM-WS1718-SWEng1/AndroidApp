@@ -1,6 +1,7 @@
 package partyplaner.partyplaner.Veranstaltung.Fragmente;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import partyplaner.partyplaner.R;
 public class ExpandableFragment extends Fragment {
 
     boolean expandend;
+    private int id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,6 +34,14 @@ public class ExpandableFragment extends Fragment {
         String title = arguments.getString(Keys.EXTRA_NAME);
         TextView text = view.findViewById(R.id.expandableTitle);
         text.setText(title);
+
+        id = View.generateViewId();
+        LinearLayout body = view.findViewById(R.id.body);
+        body.setId(id);
+
+        int id = arguments.getInt(Keys.EXTRA_ID);
+        if(id < 2)
+            setFragment(view, id);
 
         RelativeLayout head = view.findViewById(R.id.head);
         head.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +60,14 @@ public class ExpandableFragment extends Fragment {
         return view;
     }
 
+    private void setFragment(View view, int id) {
+        LinearLayout body = view.findViewById(this.id);
+        body.removeAllViews();
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.add(this.id, EventHeaders.values()[id].getFragment());
+        transaction.commit();
+    }
 
     /**
      * This methode expands the body of the group.
@@ -61,7 +79,7 @@ public class ExpandableFragment extends Fragment {
 
     private void expandGroup(View fragment) {
         if(fragment != null) {
-            LinearLayout body = fragment.findViewById(R.id.body);
+            LinearLayout body = fragment.findViewById(id);
             ImageView arrow = fragment.findViewById(R.id.arrow);
 
             body.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -80,7 +98,7 @@ public class ExpandableFragment extends Fragment {
 
     private void collapseGroup(View fragment) {
         if (fragment != null) {
-            LinearLayout body = fragment.findViewById(R.id.body);
+            LinearLayout body = fragment.findViewById(id);
             ImageView arrow = fragment.findViewById(R.id.arrow);
 
             body.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0));

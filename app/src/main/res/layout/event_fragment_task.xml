@@ -1,11 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableRow xmlns:android="http://schemas.android.com/apk/res/android">
-    <TextView
-        android:text=""
-        android:padding="3dip" />
-    <TextView
-        android:text=""
-        android:gravity="right"
-        android:padding="3dip" />
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:stretchColumns="1"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp">
+    <TableRow>
 
-</TableRow>
+        <TextView
+            android:id="@+id/task_tasklist"
+            android:padding="3dip"
+            android:text="Aufgabe"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/name_tasklist"
+            android:gravity="right"
+            android:padding="3dip"
+            android:text="Tim"
+            android:textColor="@android:color/black" />
+
+        <ImageView
+            android:id="@+id/editButtonTask"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:padding="8dp"
+            app:srcCompat="@drawable/pen_icon" />
+
+        <CheckBox
+            android:id="@+id/status_tasklist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:clickable="false" />
+
+        <ImageView
+            android:id="@+id/deleteButtonTask"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:padding="6dp"
+            app:srcCompat="@drawable/delete_icon" />
+    </TableRow>
+</TableLayout>
