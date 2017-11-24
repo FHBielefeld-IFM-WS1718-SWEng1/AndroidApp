@@ -93,11 +93,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.home) {
-            // Handle the camera action
+            setFragmentToContent(new HomeFragment());
         } else if (id == R.id.profile) {
             setFragmentToContent(new ProfileFragment());
-        } else if (id == R.id.ownEvents) {
-            setFragmentToContent(new HomeFragment());
         } else if (id == R.id.contacts) {
 
         } else if (id == R.id.ownEvents) {
