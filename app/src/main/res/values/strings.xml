@@ -31,6 +31,7 @@
 
     <!-- Poll -->
     <string name="poll_label_create">Neue Abstimmung erstellen</string>
+    <string name="poll_label_poll">Abstimmen</string>
     <string name="poll_question">Frage?</string>
     <string name="poll_question_hint">Frage hier eingeben...</string>
     <string name="poll_plus">+</string>

@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import partyplaner.partyplaner.ContactForm.ContactForm;
 import partyplaner.partyplaner.ContactForm.ContactFragment;
 import partyplaner.partyplaner.poll.CreatePoll;
+import partyplaner.partyplaner.poll.Poll;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -98,7 +99,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.ownEvents) {
 
         } else if (id == R.id.contacts) {
-
+            Intent intent = new Intent(this, Poll.class);
+            startActivity(intent);
         } else if (id == R.id.help) {
             Intent intent = new Intent(this, CreatePoll.class);
             startActivity(intent);
