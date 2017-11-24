@@ -23,11 +23,10 @@ public class AllContacts extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_all_contacts, container, false);
         contactHolder = getView().findViewById(R.id.layout_all_single_contacts);
+        updateContacts();
         return view;
     }
     private void updateContacts() {
-        if(contactHolder != null)
-            contactHolder.removeAllViews();
 
         int ContactsCount = getContactCount();
 
