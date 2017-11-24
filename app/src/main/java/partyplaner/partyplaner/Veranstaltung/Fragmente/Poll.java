@@ -30,6 +30,7 @@ public class Poll extends Fragment {
 
         Bundle arguments = new Bundle();
         arguments.putString(Keys.EXTRA_NAME, "Abstimmung");
+        arguments.putBoolean(Keys.EXTRA_OWNER, true);
 
         SinglePoll poll = new SinglePoll();
         poll.setArguments(arguments);
