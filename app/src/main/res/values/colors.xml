@@ -10,4 +10,6 @@
     <color name="paplacolorbg">#f4f3f1</color>
     <color name="highlightPrimary">#47fe4c</color>
     <color name="highlightSecondary">#e8fc65</color>
+    <item name="visible" type="id"/>
+    <item name="masked" type="id"/>
 </resources>
