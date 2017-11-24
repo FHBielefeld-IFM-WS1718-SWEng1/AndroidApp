@@ -31,19 +31,17 @@
 
                 <TextView
                     android:id="@+id/FirstNameText"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="7dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="20dp"
                     android:text="@string/vorname"
-                    app:layout_constraintEnd_toStartOf="@+id/FirstNameInput"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/FirstNameInput"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="83dp"
                     android:layout_marginTop="8dp"
@@ -51,24 +49,22 @@
                     android:inputType="textPersonName"
                     android:labelFor="@+id/FirstNameInput"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/FirstNameText"
+                    app:layout_constraintStart_toStartOf="@+id/LastNameInput"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/LastNameText"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="2dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="15dp"
                     android:text="@string/nachname"
-                    app:layout_constraintEnd_toStartOf="@+id/LastNameInput"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/FirstNameInput" />
 
                 <EditText
                     android:id="@+id/LastNameInput"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="83dp"
                     android:ems="10"
@@ -80,12 +76,11 @@
 
                 <TextView
                     android:id="@+id/AdressText"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="21dp"
                     android:text="@string/adresse"
-                    app:layout_constraintEnd_toStartOf="@+id/AdressTextInput"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/LastNameText" />
 
@@ -94,22 +89,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="83dp"
-                    android:layout_marginStart="16dp"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:labelFor="@+id/AdressTextInput"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/AdressText"
+                    app:layout_constraintStart_toStartOf="@+id/LastNameInput"
                     app:layout_constraintTop_toBottomOf="@+id/LastNameInput" />
 
                 <TextView
                     android:id="@+id/BirthdateText"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="18dp"
                     android:text="@string/geb_datum"
-                    app:layout_constraintEnd_toStartOf="@+id/BirthdateInput"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/AdressTextInput" />
 
@@ -122,18 +115,16 @@
                     android:inputType="date"
                     android:labelFor="@+id/BirthdateInput"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/BirthdateText"
+                    app:layout_constraintStart_toStartOf="@+id/AdressTextInput"
                     app:layout_constraintTop_toBottomOf="@+id/AdressTextInput" />
 
                 <TextView
                     android:id="@+id/EmailText"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="24dp"
                     android:text="@string/e_mail"
-                    app:layout_constraintEnd_toStartOf="@+id/EmailInput"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/BirthdateText" />
 
@@ -146,7 +137,7 @@
                     android:inputType="textEmailSubject"
                     android:labelFor="@+id/EmailInput"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/EmailText"
+                    app:layout_constraintStart_toStartOf="@+id/BirthdateInput"
                     app:layout_constraintTop_toBottomOf="@+id/BirthdateInput" />
 
                 <Button
