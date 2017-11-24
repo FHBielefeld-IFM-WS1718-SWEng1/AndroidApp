@@ -26,7 +26,13 @@
     <string name="ihre_anfrage">Ihre Anfrage</string>
     <string name="senden">Senden</string>
     <string name="vorname">Vorname :</string>
-    <string name="nachname">Nachname :</string>
     <string name="telefon">Telefon :</string>
-
+    <string name="nachname">Nachname :</string>
+    <string name="adresse">Adresse :</string>
+    <string name="geb_datum">Geb-Datum :</string>
+    <string name="profildaten_erstellen">Profildaten erstellen</string>
+    <string name="nutzer_löschen">Nutzer löschen</string>
+    <string name="vergangene_veranstaltung">Vergangene Veranstaltung</string>
+    <string name="zukünftige_veranstaltung">Zukünftige Veranstaltung</string>
+    <string name="todo">TODO</string>
 </resources>
