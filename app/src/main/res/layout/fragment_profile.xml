@@ -86,7 +86,7 @@
 
                 <EditText
                     android:id="@+id/AdressTextInput"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="83dp"
                     android:ems="10"
@@ -108,7 +108,7 @@
 
                 <EditText
                     android:id="@+id/BirthdateInput"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="83dp"
                     android:ems="10"
@@ -130,7 +130,7 @@
 
                 <EditText
                     android:id="@+id/EmailInput"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="83dp"
                     android:ems="10"
