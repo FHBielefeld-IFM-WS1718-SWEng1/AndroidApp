@@ -62,7 +62,6 @@ public class EventMainFragment extends Fragment {
         addFragment("Gäste", 4);
         addFragment("Abstimmungen", 3);
         addFragment("Bewertungen", 4);
-        addFragment("Abstimmungen", 4);
         addFragment("Kommentare", 4);
     }
 
