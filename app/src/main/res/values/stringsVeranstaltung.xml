@@ -3,6 +3,9 @@
     <string name="add_pictures">Bilder hinzufügen</string>
     <string name="placeholder">xxx</string>
     <string name="arrow">arrow</string>
+    <string name="task">Aufgabe</string>
+    <string name="status">Status</string>
+    <string name="delete">delete</string>
     <string-array name="veranstaltungs_header">
         <item>Gallerie</item>
         <item>Aufgaben</item>

@@ -9,7 +9,8 @@ import android.app.Fragment;
 public enum EventHeaders {
     GALLERY(new Gallery()),
     TASKLIST(new TaskList()),
-    TODO(new TODO());
+    TODO(new TODO()),
+    POLL(new Poll());
 
     private Fragment fragment;
     EventHeaders(Fragment fragment) {
