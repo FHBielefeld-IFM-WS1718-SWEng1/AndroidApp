@@ -19,6 +19,7 @@ import partyplaner.partyplaner.ContactForm.ContactForm;
 import partyplaner.partyplaner.ContactForm.ContactFragment;
 import partyplaner.partyplaner.home.HomeFragment;
 import partyplaner.partyplaner.ownEvents.OwnEventsFragment;
+import partyplaner.partyplaner.Imprint.ImprintFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.contactFormular) {
             setFragmentToContent(new ContactFragment());
         } else if (id == R.id.impressum) {
-
+            setFragmentToContent(new ImprintFragment());
         } else if (id == R.id.logout) {
 
         }
