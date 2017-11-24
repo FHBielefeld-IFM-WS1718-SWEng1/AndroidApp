@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import java.util.Random;
-
 import partyplaner.partyplaner.R;
 
 /**
@@ -23,7 +22,7 @@ public class AllContacts extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_all_contacts, container, false);
-        contactHolder = getView().findViewById(R.id.single_contact_layout);
+        contactHolder = getView().findViewById(R.id.layout_all_single_contacts);
         return view;
     }
     private void updateContacts() {
@@ -39,7 +38,7 @@ public class AllContacts extends Fragment {
     private void addContact() {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.single_contact_layout, new SingleContact());
+        fragmentTransaction.add(R.id.layout_all_single_contacts, new SingleContact());
         fragmentTransaction.commit();
     }
     private int getContactCount() {
