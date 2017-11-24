@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import partyplaner.partyplaner.ContactForm.ContactForm;
 import partyplaner.partyplaner.ContactForm.ContactFragment;
+import partyplaner.partyplaner.Profile.ProfileFragment;
 import partyplaner.partyplaner.home.HomeFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.home) {
             // Handle the camera action
         } else if (id == R.id.profile) {
-
+            setFragmentToContent(new ProfileFragment());
         } else if (id == R.id.ownEvents) {
             setFragmentToContent(new HomeFragment());
 
