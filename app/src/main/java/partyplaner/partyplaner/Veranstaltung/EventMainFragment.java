@@ -59,9 +59,9 @@ public class EventMainFragment extends Fragment {
         if(true) {
             addFragment("TODO", 2);
         }
-        addFragment("Gäste", 4);
+        addFragment("Gäste", 5);
         addFragment("Abstimmungen", 3);
-        addFragment("Bewertungen", 4);
+        addFragment("Bewertungen", 5);
         addFragment("Kommentare", 4);
     }
 

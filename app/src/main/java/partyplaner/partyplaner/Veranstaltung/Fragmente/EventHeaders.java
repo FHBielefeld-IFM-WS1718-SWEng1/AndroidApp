@@ -10,7 +10,8 @@ public enum EventHeaders {
     GALLERY(new Gallery()),
     TASKLIST(new TaskList()),
     TODO(new TODO()),
-    POLL(new Poll());
+    POLL(new Poll()),
+    COMMENT(new CommentBody());
 
     private Fragment fragment;
     EventHeaders(Fragment fragment) {
