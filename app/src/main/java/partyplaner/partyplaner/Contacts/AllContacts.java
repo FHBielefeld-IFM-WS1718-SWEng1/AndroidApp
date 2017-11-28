@@ -18,11 +18,12 @@ import partyplaner.partyplaner.R;
 public class AllContacts extends Fragment {
 
     private LinearLayout contactHolder;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_all_contacts, container, false);
-        contactHolder = getView().findViewById(R.id.layout_all_single_contacts);
+        contactHolder = view.findViewById(R.id.layout_all_single_contacts);
         updateContacts();
         return view;
     }
