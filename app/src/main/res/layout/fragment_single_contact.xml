@@ -9,10 +9,14 @@
 
     <ImageButton
         android:id="@+id/delete_contact"
-        tools:ignore="ContentDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/btn_dialog" android:contentDescription="TODO" />
+        android:contentDescription="TODO"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/btn_dialog"
+        tools:ignore="ContentDescription" />
 
     <EditText
         android:id="@+id/contact_name"
@@ -31,13 +35,14 @@
 
     <ImageButton
         android:id="@+id/contact_settings"
-        tools:ignore="ContentDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/contact_name"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@android:drawable/ic_dialog_dialer" />
+        app:srcCompat="@android:drawable/ic_dialog_dialer"
+        tools:ignore="ContentDescription" />
 
 </android.support.constraint.ConstraintLayout>
