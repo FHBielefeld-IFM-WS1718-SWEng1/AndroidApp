@@ -11,7 +11,9 @@ public enum EventHeaders {
     TASKLIST(new TaskList()),
     TODO(new TODO()),
     POLL(new Poll()),
-    COMMENT(new CommentBody());
+    COMMENT(new CommentBody()),
+    GUESTLIST(new GuestList());
+
 
     private Fragment fragment;
     EventHeaders(Fragment fragment) {
