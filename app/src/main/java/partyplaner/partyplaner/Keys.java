@@ -14,4 +14,7 @@ public class Keys {
     public static final String EXTRA_OWNER = "OWNER";
     public static final String EXTRA_PRICE = "PRICE";
     public static final String EXTRA_COMMENT = "COMMENT";
+    public static final String EXTRA_RATINGS = "RATING";
+    public static final String EXTRA_NUMBER_RATINGS = "NUMRATES";
+
 }
