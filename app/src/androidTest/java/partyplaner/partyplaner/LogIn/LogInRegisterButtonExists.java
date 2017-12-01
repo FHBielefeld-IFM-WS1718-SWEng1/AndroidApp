@@ -22,29 +22,28 @@ import partyplaner.partyplaner.R;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class LogInActivityTest5 {
+public class LogInRegisterButtonExists {
 
     @Rule
     public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
     @Test
-    public void logInActivityTest5() {
-        ViewInteraction imageView = onView(
-                allOf(withId(R.id.imageView2), withContentDescription("Papla Logo"),
+    public void logInRegisterButtonExists() {
+        ViewInteraction button = onView(
+                allOf(withId(R.id.signInRegister),
                         childAtPosition(
-                                allOf(withId(R.id.fragment3),
+                                allOf(withId(R.id.fragment4),
                                         childAtPosition(
                                                 IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                                0)),
-                                0),
+                                                1)),
+                                4),
                         isDisplayed()));
-        imageView.check(matches(isDisplayed()));
+        button.check(matches(isDisplayed()));
 
     }
 

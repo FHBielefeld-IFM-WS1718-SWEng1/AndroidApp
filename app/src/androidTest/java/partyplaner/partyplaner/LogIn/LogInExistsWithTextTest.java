@@ -28,7 +28,7 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class LogInActivityTest {
+public class LogInExistsWithTextTest {
 
     @Rule
     public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
@@ -46,6 +46,16 @@ public class LogInActivityTest {
                         isDisplayed()));
         textView.check(matches(withText("Log In")));
 
+        ViewInteraction textView2 = onView(
+                allOf(withId(R.id.signInTitle), withText("Log In"),
+                        childAtPosition(
+                                allOf(withId(R.id.fragment4),
+                                        childAtPosition(
+                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                                1)),
+                                0),
+                        isDisplayed()));
+        textView2.check(matches(isDisplayed()));
     }
 
     private static Matcher<View> childAtPosition(

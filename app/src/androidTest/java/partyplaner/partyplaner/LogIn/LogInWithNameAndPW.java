@@ -12,7 +12,6 @@ import android.view.ViewParent;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,118 +19,107 @@ import org.junit.runner.RunWith;
 import partyplaner.partyplaner.R;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.Espresso.pressBack;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.pressImeActionButton;
+import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
+import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class LogInActivityTest6 {
+public class LogInWithNameAndPW {
 
     @Rule
     public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
     @Test
-    public void logInActivityTest6() {
-        ViewInteraction imageView = onView(
-                allOf(withId(R.id.imageView2), withContentDescription("Papla Logo"),
-                        childAtPosition(
-                                allOf(withId(R.id.fragment3),
-                                        childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        imageView.check(matches(isDisplayed()));
-
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.signInTitle), withText("Log In"),
-                        childAtPosition(
-                                allOf(withId(R.id.fragment4),
-                                        childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                                1)),
-                                0),
-                        isDisplayed()));
-        textView.check(matches(withText("Log In")));
-
-        ViewInteraction editText2 = onView(
+    public void logInActivityTest8() {
+        ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.editText),
                         childAtPosition(
                                 allOf(withId(R.id.fragment4),
                                         childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                                withClassName(is("android.widget.LinearLayout")),
                                                 1)),
                                 1),
                         isDisplayed()));
-        editText2.check(matches(isDisplayed()));
+        appCompatEditText.perform(click());
 
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.signInTitle), withText("Log In"),
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.editText),
                         childAtPosition(
                                 allOf(withId(R.id.fragment4),
                                         childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                                withClassName(is("android.widget.LinearLayout")),
                                                 1)),
-                                0),
+                                1),
                         isDisplayed()));
-        textView2.check(matches(isDisplayed()));
+        appCompatEditText2.perform(replaceText("Hallo"), closeSoftKeyboard());
 
-        ViewInteraction editText4 = onView(
+        ViewInteraction appCompatEditText3 = onView(
                 allOf(withId(R.id.editText2),
                         childAtPosition(
                                 allOf(withId(R.id.fragment4),
                                         childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                                withClassName(is("android.widget.LinearLayout")),
                                                 1)),
                                 2),
                         isDisplayed()));
-        editText4.check(matches(isDisplayed()));
+        appCompatEditText3.perform(replaceText("geheim"), closeSoftKeyboard());
 
-        ViewInteraction button = onView(
-                allOf(withId(R.id.signInForgetPw),
+        ViewInteraction appCompatEditText4 = onView(
+                allOf(withId(R.id.editText2), withText("geheim"),
                         childAtPosition(
                                 allOf(withId(R.id.fragment4),
                                         childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                                withClassName(is("android.widget.LinearLayout")),
+                                                1)),
+                                2),
+                        isDisplayed()));
+        appCompatEditText4.perform(pressImeActionButton());
+
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.signInForgetPw), withText("Passwort vergessen?"),
+                        childAtPosition(
+                                allOf(withId(R.id.fragment4),
+                                        childAtPosition(
+                                                withClassName(is("android.widget.LinearLayout")),
                                                 1)),
                                 5),
                         isDisplayed()));
-        button.check(matches(isDisplayed()));
+        appCompatButton.perform(click());
 
-        ViewInteraction button2 = onView(
-                allOf(withId(R.id.signInLogIn),
+        ViewInteraction appCompatButton2 = onView(
+                allOf(withId(R.id.signInLogIn), withText("Anmelden"),
                         childAtPosition(
                                 allOf(withId(R.id.fragment4),
                                         childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                                withClassName(is("android.widget.LinearLayout")),
                                                 1)),
                                 3),
                         isDisplayed()));
-        button2.check(matches(isDisplayed()));
+        appCompatButton2.perform(click());
 
-        ViewInteraction button3 = onView(
-                allOf(withId(R.id.signInRegister),
+        pressBack();
+
+        ViewInteraction appCompatButton3 = onView(
+                allOf(withId(R.id.signInRegister), withText("Registrieren"),
                         childAtPosition(
                                 allOf(withId(R.id.fragment4),
                                         childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                                withClassName(is("android.widget.LinearLayout")),
                                                 1)),
                                 4),
                         isDisplayed()));
-        button3.check(matches(isDisplayed()));
+        appCompatButton3.perform(click());
 
-        ViewInteraction linearLayout = onView(
-                allOf(childAtPosition(
-                        childAtPosition(
-                                withId(android.R.id.content),
-                                0),
-                        0),
-                        isDisplayed()));
-        linearLayout.check(matches(isDisplayed()));
+        pressBack();
 
     }
 

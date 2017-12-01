@@ -1,3 +1,4 @@
+
 package partyplaner.partyplaner.LogIn;
 
 
@@ -20,7 +21,6 @@ import org.junit.runner.RunWith;
 import partyplaner.partyplaner.R;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -29,34 +29,24 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class LogInActivityTest4 {
+public class LogInUserNameTextAreaWorks {
 
     @Rule
     public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
     @Test
-    public void logInActivityTest4() {
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.signInTitle), withText("Log In"),
+    public void logInActivityTest() {
+        ViewInteraction editText2 = onView(
+                allOf(withId(R.id.editText),
                         childAtPosition(
                                 allOf(withId(R.id.fragment4),
                                         childAtPosition(
                                                 IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
                                                 1)),
-                                0),
+                                1),
                         isDisplayed()));
-        textView.check(matches(withText("Log In")));
+        editText2.check(matches(isDisplayed()));
 
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.signInTitle), withText("Log In"),
-                        childAtPosition(
-                                allOf(withId(R.id.fragment4),
-                                        childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                                1)),
-                                0),
-                        isDisplayed()));
-        textView2.check(matches(isDisplayed()));
     }
 
     private static Matcher<View> childAtPosition(
