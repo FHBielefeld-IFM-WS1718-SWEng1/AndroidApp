@@ -6,16 +6,17 @@
     android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/NameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:text="@string/name"
+        android:textColor="@android:color/black" />
 
     <CheckBox
-        android:id="@+id/checkBox2"
+        android:id="@+id/AdminStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:text="CheckBox" />
+        android:text="@string/admin" />
 </LinearLayout>

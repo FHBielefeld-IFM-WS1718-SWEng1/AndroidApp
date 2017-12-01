@@ -16,6 +16,6 @@ public class SingleGuest extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.event_fragment_single_guest, container, false);
+        return inflater.inflate(R.layout.event_fragment_single_guest_accepted, container, false);
     }
 }
