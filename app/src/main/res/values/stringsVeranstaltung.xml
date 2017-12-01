@@ -13,4 +13,11 @@
         <item>Gallerie</item>
         <item>Aufgaben</item>
     </string-array>
+    <string name="what">Was?:</string>
+    <string name="who">Wer?:</string>
+    <string name="where">Wo?:</string>
+    <string name="when">Wann?:</string>
+    <string name="more">mehr...</string>
+    <string name="partypicture">partyPicture</string>
+
 </resources>
