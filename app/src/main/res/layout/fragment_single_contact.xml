@@ -6,50 +6,31 @@
     android:layout_width="match_parent"
     android:layout_height="50dp">
 
-    <LinearLayout
-        android:id="@+id/button_delete_layout"
+    <ImageButton
+        android:id="@+id/button_delete"
         android:layout_width="55dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        app:srcCompat="@android:drawable/btn_dialog"
+        tools:ignore="ContentDescription" />
 
-        <ImageButton
-            android:id="@+id/button_delete"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@android:drawable/btn_dialog"
-            tools:ignore="ContentDescription" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/contact_name_layout"
-        android:layout_width="250dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/contact_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:labelFor="@+id/contact_name"
-            android:text="@string/horst_teesofa"
-            tools:ignore="ContentDescription" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/button_contactsettings_layout"
+    <EditText
+        android:id="@+id/contact_name"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:labelFor="@+id/contact_name"
+        android:text="@string/horst_teesofa"
+        tools:ignore="ContentDescription" />
 
-        <ImageButton
-            android:id="@+id/button_contactsettings"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@android:drawable/ic_menu_more"
-            tools:ignore="ContentDescription" />
-    </LinearLayout>
+    <ImageButton
+        android:id="@+id/button_contactsettings"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        app:srcCompat="@android:drawable/btn_dropdown"
+        tools:ignore="ContentDescription" />
 
 </LinearLayout>
