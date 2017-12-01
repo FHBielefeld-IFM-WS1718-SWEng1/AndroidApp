@@ -17,18 +17,19 @@ import partyplaner.partyplaner.R;
  */
 
 public class GuestList extends Fragment {
-    private LinearLayout guestHolder;
+    //private LinearLayout guestHolder;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.event_fragment_guestlist, container, false);
-        guestHolder = view.findViewById(R.id.guest_list);
+        //guestHolder = view.findViewById(R.id.guest_list);
 
-        updateGuests();
+        //updateGuests();
 
         return view;
     }
 
+    /*
     private void updateGuests(){
         guestHolder.removeAllViews();
         int guestCount = getGuestCount();
@@ -42,11 +43,11 @@ public class GuestList extends Fragment {
     private void addGuest(){
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.guest_list, new SingleGuest());
+        //fragmentTransaction.add(R.id.guest_list, new SingleGuest());
         fragmentTransaction.commit();
     }
 
     private int getGuestCount(){
         return new Random().nextInt(6) + 2;
-    }
+    }*/
 }
