@@ -20,25 +20,40 @@ import org.junit.runner.RunWith;
 import partyplaner.partyplaner.R;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class LogInPaplaLogoExists {
+public class RegistryPaplaLogoExistsTest {
 
     @Rule
     public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
     @Test
-    public void logInActivityTest5() {
+    public void registryPaplaLogoExistsTest() {
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.signInRegister), withText("Registrieren"),
+                        childAtPosition(
+                                allOf(withId(R.id.fragment4),
+                                        childAtPosition(
+                                                withClassName(is("android.widget.LinearLayout")),
+                                                1)),
+                                4),
+                        isDisplayed()));
+        appCompatButton.perform(click());
+
         ViewInteraction imageView = onView(
                 allOf(withId(R.id.imageView2), withContentDescription("Papla Logo"),
                         childAtPosition(
-                                allOf(withId(R.id.fragment3),
+                                allOf(withId(R.id.logo),
                                         childAtPosition(
                                                 IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
                                                 0)),

@@ -27,21 +27,21 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class LogInRegisterButtonExists {
+public class LogInForgetPasswordExistsTest {
 
     @Rule
     public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
     @Test
-    public void logInRegisterButtonExists() {
+    public void logInForgetPasswordExists() {
         ViewInteraction button = onView(
-                allOf(withId(R.id.signInRegister),
+                allOf(withId(R.id.signInForgetPw),
                         childAtPosition(
                                 allOf(withId(R.id.fragment4),
                                         childAtPosition(
                                                 IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
                                                 1)),
-                                4),
+                                5),
                         isDisplayed()));
         button.check(matches(isDisplayed()));
 

@@ -2,7 +2,6 @@ package partyplaner.partyplaner.LogIn;
 
 
 import android.support.test.espresso.ViewInteraction;
-import android.support.test.espresso.proto.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
@@ -21,32 +20,45 @@ import org.junit.runner.RunWith;
 import partyplaner.partyplaner.R;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class LogInLogInButtonExists {
+public class RegistryPassword2TextAreaExistsTest {
 
     @Rule
     public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
     @Test
-    public void logInLogInButtonExists() {
-        ViewInteraction button;
-        button = onView(
-                allOf(withId(R.id.signInLogIn),
+    public void registryPassword2TextAreaExistsTest() {
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.signInRegister), withText("Registrieren"),
                         childAtPosition(
                                 allOf(withId(R.id.fragment4),
                                         childAtPosition(
+                                                withClassName(is("android.widget.LinearLayout")),
+                                                1)),
+                                4),
+                        isDisplayed()));
+        appCompatButton.perform(click());
+
+        ViewInteraction editText = onView(
+                allOf(withId(R.id.regPassWdg),
+                        childAtPosition(
+                                allOf(withId(R.id.fragment),
+                                        childAtPosition(
                                                 IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
                                                 1)),
-                                3),
+                                4),
                         isDisplayed()));
-        button.check(matches(isDisplayed()));
+        editText.check(matches(isDisplayed()));
 
     }
 

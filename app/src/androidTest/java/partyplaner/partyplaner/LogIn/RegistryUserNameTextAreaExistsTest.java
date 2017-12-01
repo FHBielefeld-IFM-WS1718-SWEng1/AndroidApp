@@ -20,42 +20,46 @@ import org.junit.runner.RunWith;
 import partyplaner.partyplaner.R;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class LogInExistsWithTextTest {
+public class RegistryUserNameTextAreaExistsTest {
 
     @Rule
     public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
     @Test
-    public void logInActivityTest() {
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.signInTitle), withText("Log In"),
+    public void registryUserNameTextAreaWorksTest() {
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.signInRegister), withText("Registrieren"),
                         childAtPosition(
                                 allOf(withId(R.id.fragment4),
                                         childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                                withClassName(is("android.widget.LinearLayout")),
                                                 1)),
-                                0),
+                                4),
                         isDisplayed()));
-        textView.check(matches(withText("Log In")));
+        appCompatButton.perform(click());
 
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.signInTitle), withText("Log In"),
+        ViewInteraction editText = onView(
+                allOf(withId(R.id.regName),
                         childAtPosition(
-                                allOf(withId(R.id.fragment4),
+                                allOf(withId(R.id.fragment),
                                         childAtPosition(
                                                 IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
                                                 1)),
-                                0),
+                                1),
                         isDisplayed()));
-        textView2.check(matches(isDisplayed()));
+        editText.check(matches(isDisplayed()));
+
     }
 
     private static Matcher<View> childAtPosition(

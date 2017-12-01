@@ -22,30 +22,40 @@ import partyplaner.partyplaner.R;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class LogInPasswordTextAreaWorks {
+public class LogInLoginLabelExistsWithTextTest {
 
     @Rule
     public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
     @Test
-    public void logInActivityTest6() {
-        ViewInteraction editText = onView(
-                allOf(withId(R.id.editText2),
+    public void logInActivityTest() {
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.signInTitle), withText("Log In"),
                         childAtPosition(
                                 allOf(withId(R.id.fragment4),
                                         childAtPosition(
                                                 IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
                                                 1)),
-                                2),
+                                0),
                         isDisplayed()));
-        editText.check(matches(isDisplayed()));
+        textView.check(matches(withText("Log In")));
+
+        ViewInteraction textView2 = onView(
+                allOf(withId(R.id.signInTitle), withText("Log In"),
+                        childAtPosition(
+                                allOf(withId(R.id.fragment4),
+                                        childAtPosition(
+                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                                1)),
+                                0),
+                        isDisplayed()));
+        textView2.check(matches(isDisplayed()));
     }
 
     private static Matcher<View> childAtPosition(
