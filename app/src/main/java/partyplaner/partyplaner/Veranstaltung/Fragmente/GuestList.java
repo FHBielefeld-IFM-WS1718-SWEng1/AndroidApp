@@ -30,9 +30,7 @@ public class GuestList extends Fragment {
     }
 
     private void updateGuests(){
-        if(guestHolder != null){
-            guestHolder.removeAllViews();
-        }
+        guestHolder.removeAllViews();
         int guestCount = getGuestCount();
 
         for(int i = 0; i<=guestCount; i++){
