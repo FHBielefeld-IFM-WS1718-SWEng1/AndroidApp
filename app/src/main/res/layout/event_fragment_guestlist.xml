@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
     <TabHost
+        android:id="@+id/tabhost"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -24,27 +26,46 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:id="@+id/Zusagen"
+                    android:id="@+id/zusagen"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
+                    <TextView
+                        android:id="@+id/empty_list_accepted"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="@string/emptyList"
+                        android:textStyle="italic" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/Absagen"
+                    android:id="@+id/absagen"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
+                    <TextView
+                        android:id="@+id/empty_list_denied"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="@string/emptyList" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/Ausstehend"
+                    android:id="@+id/ausstehend"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
+                    <TextView
+                        android:id="@+id/empty_list_pending"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="@string/emptyList" />
                 </LinearLayout>
             </FrameLayout>
         </LinearLayout>

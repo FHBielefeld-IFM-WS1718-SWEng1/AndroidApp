@@ -31,8 +31,7 @@
     <string name="gaeste">Gäste</string>
     <string name="name">Name</string>
     <string name="admin">Admin</string>
-    <string name="name">Name</string>
     <string name="todo">TODO</string>
-    <string name="todo">TODO</string>
+    <string name="emptyList">Liste leer</string>
 
 </resources>

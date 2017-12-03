@@ -7,19 +7,22 @@
     android:padding="8dp">
 
     <TextView
-        android:id="@+id/name_accepted"
+        android:id="@+id/name_pending"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/name"
         android:paddingTop="8dp"
+        android:text="@string/name"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
         android:textColor="@android:color/black" />
 
-    <CheckBox
-        android:id="@+id/admin_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/delete_pending"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_weight="0"
-        android:text="@string/admin"
-        android:visibility="visible" />
+        android:padding="4dp"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/delete_icon" />
 </LinearLayout>
