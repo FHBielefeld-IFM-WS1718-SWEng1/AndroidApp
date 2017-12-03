@@ -17,4 +17,5 @@ public class Keys {
     public static final String EXTRA_RATINGS = "RATING";
     public static final String EXTRA_NUMBER_RATINGS = "NUMRATES";
 
+    public static final String EXTRA_ADMIN = "ADMIN";
 }

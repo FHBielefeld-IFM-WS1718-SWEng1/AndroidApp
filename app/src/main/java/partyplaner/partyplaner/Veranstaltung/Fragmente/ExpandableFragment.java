@@ -40,8 +40,7 @@ public class ExpandableFragment extends Fragment {
         body.setId(id);
 
         int id = arguments.getInt(Keys.EXTRA_ID);
-        if(id < 6)
-            setFragment(view, id);
+        setFragment(view, id);
 
         RelativeLayout head = view.findViewById(R.id.head);
         head.setOnClickListener(new View.OnClickListener() {
