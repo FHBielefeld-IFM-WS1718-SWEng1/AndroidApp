@@ -13,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import partyplaner.data.party.PartyList;
 import partyplaner.partyplaner.ContactForm.ContactForm;
 import partyplaner.partyplaner.ContactForm.ContactFragment;
 import partyplaner.partyplaner.Profile.ProfileFragment;
@@ -109,7 +111,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.contacts) {
             setFragmentToContent(new AllContacts());
         } else if (id == R.id.ownEvents) {
-            setFragmentToContent(new OwnEventsFragment());
+            OwnEventsFragment ownEvent = new OwnEventsFragment();
+            Bundle args = new Bundle();
+            args.putSerializable(Keys.EXTRA_PARTYLIST, new PartyList());
+            ownEvent.setArguments(args);
+            setFragmentToContent(ownEvent);
         } else if (id == R.id.help) {
             setFragmentToContent(new EventMainFragment());
         } else if (id == R.id.contactFormular) {
