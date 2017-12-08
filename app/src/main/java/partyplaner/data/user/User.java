@@ -3,7 +3,11 @@ package partyplaner.data.user;
 import android.media.Image;
 
 /**
- * Created by André on 24.11.2017.
+ * Ein User Objekt beinhaltet alle Informationen, die man über einen
+ * Benutzer wissen sollte.
+ *
+ * @author André
+ * @since 24.11.2017
  */
 
 public class User {
@@ -49,6 +53,14 @@ public class User {
         return profilePicture;
     }
 
+    /**
+     * Erstellt einen User, der für Tests verwendet werden kann, ohne mit der Server API Nutzerdaten
+     * abzufragen.
+     *
+     * @return Testnutzer
+     * @deprecated Wenn möglich, bitte einen Nutzer über die API abfragen
+     */
+    @Deprecated
     public static User createTestUser() {
         return new User(0, "tsm@fh-bielefeld.de", "henkershelfer",
                 "17.7.1954", 1, null);
