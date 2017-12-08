@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/own_events_back"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -11,7 +12,7 @@
         android:id="@+id/textPartyname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sauf Party"/>
+        android:text="Sauf Party" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,7 +42,7 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_launcher_background" />
+                    app:srcCompat="@mipmap/ic_launcher" />
 
                 <LinearLayout
                     android:layout_width="255dp"

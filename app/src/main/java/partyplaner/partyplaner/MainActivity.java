@@ -28,6 +28,7 @@ import partyplaner.partyplaner.poll.Poll;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static int currentTab = R.id.home;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //TODO setActiveFragment(currentTab);
         //load starting page
         setFragmentToContent(new ExampleFragment());
     }
@@ -95,6 +97,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        //TODO auslagern damit es in OnCreate auch genutzt werden kann über currentTab
         if (id == R.id.home) {
             setFragmentToContent(new HomeFragment());
         } else if (id == R.id.profile) {
@@ -104,7 +107,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.ownEvents) {
             setFragmentToContent(new OwnEventsFragment());
         } else if (id == R.id.help) {
-            setFragmentToContent(new EventMainFragment());
+            
         } else if (id == R.id.contactFormular) {
             setFragmentToContent(new ContactFragment());
         } else if (id == R.id.impressum) {
