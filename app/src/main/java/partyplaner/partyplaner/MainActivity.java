@@ -109,6 +109,9 @@ public class MainActivity extends AppCompatActivity
             profile.setArguments(args);
             setFragmentToContent(profile);
         } else if (id == R.id.contacts) {
+            AllContacts all_contacts = new AllContacts();
+            Bundle args = new Bundle();
+            args.putString(Keys.EXTRA_NAME, "");
             setFragmentToContent(new AllContacts());
         } else if (id == R.id.ownEvents) {
             OwnEventsFragment ownEvent = new OwnEventsFragment();
