@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import partyplaner.partyplaner.ContactForm.ContactForm;
 import partyplaner.partyplaner.ContactForm.ContactFragment;
 import partyplaner.partyplaner.Profile.ProfileFragment;
+import partyplaner.partyplaner.Contacts.AllContacts;
 import partyplaner.partyplaner.home.HomeFragment;
 import partyplaner.partyplaner.ownEvents.OwnEventsFragment;
 import partyplaner.partyplaner.Imprint.ImprintFragment;
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.profile) {
             setFragmentToContent(new ProfileFragment());
         } else if (id == R.id.contacts) {
-
+            setFragmentToContent(new AllContacts());
         } else if (id == R.id.ownEvents) {
             setFragmentToContent(new OwnEventsFragment());
         } else if (id == R.id.help) {
