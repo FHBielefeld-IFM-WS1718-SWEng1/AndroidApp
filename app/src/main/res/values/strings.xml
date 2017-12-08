@@ -35,4 +35,8 @@
     <string name="vergangene_veranstaltung">Vergangene Veranstaltung</string>
     <string name="zukünftige_veranstaltung">Zukünftige Veranstaltung</string>
     <string name="todo">TODO</string>
+    <string name="gaeste">Gäste</string>
+    <string name="name">Name</string>
+    <string name="admin">Admin</string>
+    <string name="emptyList">Liste leer</string>
 </resources>
