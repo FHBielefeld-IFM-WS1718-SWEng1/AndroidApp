@@ -16,6 +16,8 @@ public class Keys {
     public static final String EXTRA_COMMENT = "COMMENT";
     public static final String EXTRA_RATINGS = "RATING";
     public static final String EXTRA_NUMBER_RATINGS = "NUMRATES";
-
     public static final String EXTRA_ADMIN = "ADMIN";
+    public static final String EXTRA_BIRTHDATE = "BIRTHDATE";
+    public static final String EXTRA_EMAIL = "EMAIL";
+    public static final String EXTRA_GENDER = "GENDER";
 }

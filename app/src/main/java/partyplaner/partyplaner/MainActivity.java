@@ -98,7 +98,14 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.home) {
             setFragmentToContent(new HomeFragment());
         } else if (id == R.id.profile) {
-            setFragmentToContent(new ProfileFragment());
+            ProfileFragment profile = new ProfileFragment();
+            Bundle args = new Bundle();
+            args.putString(Keys.EXTRA_NAME, "");
+            args.putString(Keys.EXTRA_BIRTHDATE, "");
+            args.putString(Keys.EXTRA_EMAIL, "");
+            args.putString(Keys.EXTRA_GENDER, "");
+            profile.setArguments(args);
+            setFragmentToContent(profile);
         } else if (id == R.id.contacts) {
             setFragmentToContent(new AllContacts());
         } else if (id == R.id.ownEvents) {
