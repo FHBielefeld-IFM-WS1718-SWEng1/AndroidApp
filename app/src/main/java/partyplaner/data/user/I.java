@@ -15,7 +15,7 @@ public class I extends User{
         this.key = apiKey;
     }
 
-    public String getKey() {
+    public String getApiKey() {
         return key;
     }
 }

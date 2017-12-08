@@ -8,19 +8,25 @@ import android.media.Image;
 
 public class User {
 
+    private int id;
     private String email;
     private String name;
     private String birthdate;
     private int gender;
     private Image profilePicture;
 
-    public User(String email, String username,
+    public User(int id, String email, String username,
                 String birthday, int gender, Image profilePicture) {
+        this.id = id;
         this.email = email;
         this.name = username;
         this.birthdate = birthday;
         this.gender = gender;
         this.profilePicture = profilePicture;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getEmail() {
@@ -44,7 +50,7 @@ public class User {
     }
 
     public static User createTestUser() {
-        return new User("tsm@fh-bielefeld.de", "henkershelfer",
+        return new User(0, "tsm@fh-bielefeld.de", "henkershelfer",
                 "17.7.1954", 1, null);
     }
 }
