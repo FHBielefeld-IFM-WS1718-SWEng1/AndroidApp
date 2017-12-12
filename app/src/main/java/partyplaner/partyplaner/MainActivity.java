@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.ownEvents) {
             setFragmentToContent(new OwnEventsFragment());
         } else if (id == R.id.help) {
-            
+            startActivity(new Intent(this, Poll.class));
         } else if (id == R.id.contactFormular) {
             setFragmentToContent(new ContactFragment());
         } else if (id == R.id.impressum) {
