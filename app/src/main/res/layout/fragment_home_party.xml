@@ -24,12 +24,12 @@
         android:orientation="vertical"></LinearLayout>
 
     <LinearLayout
-        android:paddingStart="4dp"
-        android:paddingEnd="4dp"
         android:layout_width="match_parent"
-        android:layout_height="155dp"
+        android:layout_height="wrap_content"
         android:layoutDirection="rtl"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingEnd="4dp"
+        android:paddingStart="4dp">
 
         <LinearLayout
             android:layout_width="48dp"
@@ -38,27 +38,27 @@
             android:paddingTop="4dp">
 
             <ImageView
-                android:padding="8dp"
                 android:id="@+id/btnInfo"
                 android:layout_width="62dp"
-                android:layout_height="52dp"
+                android:layout_height="48dp"
                 android:layout_gravity="center"
+                android:padding="8dp"
                 app:srcCompat="@drawable/info" />
 
             <ImageView
-                android:padding="8dp"
                 android:id="@+id/btnThumbsUp"
                 android:layout_width="62dp"
-                android:layout_height="52dp"
+                android:layout_height="48dp"
                 android:layout_gravity="center"
+                android:padding="8dp"
                 app:srcCompat="@drawable/thumbsup" />
 
             <ImageView
-                android:padding="8dp"
                 android:id="@+id/btnThumbsDown"
                 android:layout_width="62dp"
-                android:layout_height="52dp"
+                android:layout_height="48dp"
                 android:layout_gravity="center"
+                android:padding="8dp"
                 app:srcCompat="@drawable/thumbsdown" />
 
         </LinearLayout>
@@ -91,22 +91,15 @@
                         android:id="@+id/textWho"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/black"
-                        android:text="Wer?: Malte" />
-
-                    <TextView
-                        android:id="@+id/textWhere"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@android:color/black"
-                        android:text="Wo?: Bierbude" />
+                        android:text="Wer?: Malte"
+                        android:textColor="@android:color/black" />
 
                     <TextView
                         android:id="@+id/textWhen"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/black"
-                        android:text="Wann?: 30.02.2117, 19 Uhr" />
+                        android:text="Wann?: 30.02.2117, 19 Uhr"
+                        android:textColor="@android:color/black" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -123,9 +116,9 @@
                 android:id="@+id/textDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
                 android:maxLines="4"
-                android:text="Es gibt im Moment in diese Mannschaft, oh, einige Spieler vergessen ihnen Profi was sie sind. Ich lese nicht sehr viele Zeitungen, aber ich habe gehört viele Situationen. Erstens: wir haben nicht offensiv gespielt. Es gibt keine deutsche Mannschaft spielt offensiv und die Name offensiv wie Bayern. Letzte Spiel hatten wir in Platz drei Spitzen: Elber, Jancka und dann Zickler. Wir müssen nicht vergessen Zickler. Zickler ist eine Spitzen mehr, Mehmet eh mehr Basler. Ist klar diese Wörter, ist möglich verstehen, was ich hab gesagt? Danke. " />
+                android:text="Es gibt im Moment in diese Mannschaft, oh, einige Spieler vergessen ihnen Profi was sie sind. Ich lese nicht sehr viele Zeitungen, aber ich habe gehört viele Situationen. Erstens: wir haben nicht offensiv gespielt. Es gibt keine deutsche Mannschaft spielt offensiv und die Name offensiv wie Bayern. Letzte Spiel hatten wir in Platz drei Spitzen: Elber, Jancka und dann Zickler. Wir müssen nicht vergessen Zickler. Zickler ist eine Spitzen mehr, Mehmet eh mehr Basler. Ist klar diese Wörter, ist möglich verstehen, was ich hab gesagt? Danke. "
+                android:textColor="@android:color/black" />
 
         </LinearLayout>
 
