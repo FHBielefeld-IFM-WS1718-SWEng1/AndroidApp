@@ -62,6 +62,11 @@ public class LoginData {
         if (email == null || password == null) {
             return null;
         }
-        return LoginHandler.loginUser(this);
+        if (I.getMyself() != null) {
+            return null;
+        }
+        I i = LoginHandler.loginUser(this);
+        I.setMyself(i);
+        return i;
     }
 }

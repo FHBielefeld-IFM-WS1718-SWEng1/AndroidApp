@@ -12,6 +12,8 @@ import android.media.Image;
 
 public class I extends User{
 
+    private static I myself;
+
     private String key;
 
     private I(int id, String email, String name, String birthdate, int gender, Image profilePicture, String apiKey) {
@@ -21,5 +23,13 @@ public class I extends User{
 
     public String getApiKey() {
         return key;
+    }
+
+    static void setMyself(I i) {
+        myself = i;
+    }
+
+    public static I getMyself() {
+        return myself;
     }
 }
