@@ -28,6 +28,7 @@ import partyplaner.partyplaner.poll.Poll;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static int currentTab = R.id.home;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,9 +53,9 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(currentTab);
 
-        //load starting page
-        setFragmentToContent(new ExampleFragment());
+        setActiveFragment(currentTab);
     }
 
     @Override
@@ -95,6 +96,15 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        setActiveFragment(id);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    private void setActiveFragment(int id) {
+        currentTab = id;
         if (id == R.id.home) {
             setFragmentToContent(new HomeFragment());
         } else if (id == R.id.profile) {
@@ -104,7 +114,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.ownEvents) {
             setFragmentToContent(new OwnEventsFragment());
         } else if (id == R.id.help) {
-            setFragmentToContent(new EventMainFragment());
+
         } else if (id == R.id.contactFormular) {
             setFragmentToContent(new ContactFragment());
         } else if (id == R.id.impressum) {
@@ -112,10 +122,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.logout) {
 
         }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     public void setFragmentToContent(Fragment fragment) {
