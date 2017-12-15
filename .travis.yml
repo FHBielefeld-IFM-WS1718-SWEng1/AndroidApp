@@ -18,14 +18,15 @@ before_script:
   - android list targets
   - echo no | android create avd --force --name test --target $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd test -no-skin -no-audio -no-window &
+  - android-wait-for-emulator
+  - adb devices
+  - adb shell input keyevent 82 &
 
 before_install:
   - pip install --user codecov
   
 script:
-  - android-wait-for-emulator
-  - adb devices
-  - adb shell input keyevent 82 &
+ 
   - ./gradlew assemble
   - ./gradlew connectedAndroidTest -PdisablePreDex --stacktrace
 
