@@ -18,6 +18,7 @@ import partyplaner.data.party.PartyList;
 import partyplaner.data.user.I;
 import partyplaner.partyplaner.ContactForm.ContactFragment;
 import partyplaner.partyplaner.Contacts.AllContacts;
+import partyplaner.partyplaner.Profile.ProfileFragment;
 import partyplaner.partyplaner.home.HomeFragment;
 import partyplaner.partyplaner.ownEvents.OwnEventsFragment;
 import partyplaner.partyplaner.Imprint.ImprintFragment;
@@ -104,25 +105,8 @@ public class MainActivity extends AppCompatActivity
         currentTab = id;
         if (id == R.id.home) {
             setFragmentToContent(new HomeFragment());
-        } else if (id == R.id.profile) {
-            I profil = I.getMyself();
-            TextView nameText = findViewById(R.id.textView5);
-            nameText.setText(profil.getName());
-            TextView adressText = findViewById(R.id.GenderTextView);
-            adressText.setText(profil.getAdress());
-            TextView birthdateText = findViewById(R.id.BirthdateTextView);
-            profil.getBirthdate();
-            profil.getEmail();
-
-
-          /*  ProfileFragment profile = new ProfileFragment();
-            Bundle args = new Bundle();
-            args.putString(Keys.EXTRA_NAME, "");
-            args.putString(Keys.EXTRA_BIRTHDATE, "");
-            args.putString(Keys.EXTRA_EMAIL, "");
-            args.putString(Keys.EXTRA_GENDER, "");
-            profile.setArguments(args);
-            setFragmentToContent(profile);*/
+        } else if (id == R.id.profile){
+            setFragmentToContent(new ProfileFragment());
         } else if (id == R.id.contacts) {
             AllContacts all_contacts = new AllContacts();
             Bundle args = new Bundle();
