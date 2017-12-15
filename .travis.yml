@@ -9,8 +9,7 @@ android:
   - sys-img-armeabi-v7a-android-19
 before_script:
   - chmod +x gradlew
-  - -avd Nexus_5X_API_23 -wipe-data
-  - -avd Nexus_5X_API_23 -wipe-data & EMULATOR_PID=$!
+  - $ANDROID_SDK/tools/emulator -avd Nexus_5X_API_23 -wipe-data & EMULATOR_PID=$!
 
 before_install:
   - pip install --user codecov
