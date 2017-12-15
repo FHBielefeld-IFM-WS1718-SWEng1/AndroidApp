@@ -1,7 +1,5 @@
 language: android
-env:
-    matrix:
-     - ANDROID_TARGET=android-19 ANDROID_ABI=armeabi-v7a
+
      
 android:
 
@@ -16,7 +14,7 @@ android:
 before_script:
   - chmod +x gradlew
   - android list targets
-  - echo no | android create avd --force --name test --target $ANDROID_TARGET --abi $ANDROID_ABI
+  - echo no | android create avd --force --name test --target android-26 --abi armeabi-v7a -c 32M
   - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
   - adb devices
@@ -27,8 +25,7 @@ before_install:
   
 script:
  
-  - ./gradlew assemble
-  - ./gradlew connectedAndroidTest -PdisablePreDex --stacktrace
+  - ./gradlew build checkstyle connectedCheck -PdisablePreDex
 
 after_success:
   - codecov
