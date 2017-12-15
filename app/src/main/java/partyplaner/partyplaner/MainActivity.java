@@ -53,10 +53,9 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(currentTab);
 
-        //TODO setActiveFragment(currentTab);
-        //load starting page
-        setFragmentToContent(new ExampleFragment());
+        setActiveFragment(currentTab);
     }
 
     @Override
@@ -97,7 +96,15 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        //TODO auslagern damit es in OnCreate auch genutzt werden kann über currentTab
+        setActiveFragment(id);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    private void setActiveFragment(int id) {
+        currentTab = id;
         if (id == R.id.home) {
             setFragmentToContent(new HomeFragment());
         } else if (id == R.id.profile) {
@@ -107,7 +114,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.ownEvents) {
             setFragmentToContent(new OwnEventsFragment());
         } else if (id == R.id.help) {
-            startActivity(new Intent(this, Poll.class));
+
         } else if (id == R.id.contactFormular) {
             setFragmentToContent(new ContactFragment());
         } else if (id == R.id.impressum) {
@@ -115,10 +122,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.logout) {
 
         }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     public void setFragmentToContent(Fragment fragment) {
