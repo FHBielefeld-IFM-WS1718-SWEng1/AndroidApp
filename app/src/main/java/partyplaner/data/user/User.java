@@ -41,8 +41,10 @@ public class User {
         return name;
     }
 
+
     public String getBirthdate() {
         return birthdate;
+
     }
 
     public int getGender() {
@@ -53,6 +55,7 @@ public class User {
         return profilePicture;
     }
 
+
     /**
      * Erstellt einen User, der für Tests verwendet werden kann, ohne mit der Server API Nutzerdaten
      * abzufragen.
@@ -62,6 +65,7 @@ public class User {
      */
     @Deprecated
     public static User createTestUser() {
+
         return new User(0, "tsm@fh-bielefeld.de", "henkershelfer",
                 "17.7.1954", 1, null);
     }

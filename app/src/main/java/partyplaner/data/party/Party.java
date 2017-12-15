@@ -2,6 +2,7 @@ package partyplaner.data.party;
 
 import android.media.Image;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import partyplaner.data.user.User;
  * Created by André on 25.11.2017.
  */
 
-public class Party {
+public class Party implements Serializable{
 
     private String name;
     private String description;

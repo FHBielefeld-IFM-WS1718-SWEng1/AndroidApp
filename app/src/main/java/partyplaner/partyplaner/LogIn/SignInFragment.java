@@ -1,6 +1,7 @@
 package partyplaner.partyplaner.LogIn;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import partyplaner.data.user.I;
 import partyplaner.data.user.LoginData;
@@ -49,6 +51,12 @@ public class SignInFragment extends Fragment {
         if (i != null) {
             Intent intent = new Intent(this.getActivity(), MainActivity.class);
             startActivity(intent);
+        } else {
+            Context context = getActivity();
+            CharSequence text = "Login fehlgeschlagen!";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
         }
     }
 }

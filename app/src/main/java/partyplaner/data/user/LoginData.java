@@ -61,8 +61,7 @@ public class LoginData {
      * @return I Objekt des eingeloggten Nutzers, falls nicht erfolgreich, dann null
      */
     public I login() {
-        if (email == null || password == null) {
-            Log.e("LoginData", "Email oder Passwort null");
+        if (email.equals("") || password.equals("")) {
             return null;
         }
         I i = LoginHandler.loginUser(this);

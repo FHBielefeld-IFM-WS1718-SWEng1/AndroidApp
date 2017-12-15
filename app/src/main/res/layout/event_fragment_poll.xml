@@ -5,4 +5,9 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <Button
+        android:id="@+id/create_poll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Neue Abstimmung" />
 </LinearLayout>
