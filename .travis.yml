@@ -12,6 +12,7 @@ android:
   - build-tools-26.0.2
   - android-26
   - sys-img-armeabi-v7a-android-19
+  - sys-img-armeabi-v7a-android-26
 before_script:
   - chmod +x gradlew
   - android list targets
