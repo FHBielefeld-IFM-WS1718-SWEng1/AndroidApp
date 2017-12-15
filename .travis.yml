@@ -7,7 +7,7 @@ android:
   - android-26
   - extra-android-m2repository
 install:
-  - cd apps
+  - cd app
   - ./gradlew build connectedCheck
 script:
   - cd app
