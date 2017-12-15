@@ -40,7 +40,6 @@ public class APIConnectionHandler {
 
     private static APIConnectionHandler apiConHandler;
     private Gson gson;
-    //private Response response;
 
     private APIConnectionHandler() {
         gson = new Gson();
@@ -56,7 +55,7 @@ public class APIConnectionHandler {
 
     public I login(LoginData data) throws IOException {
         String postResponse = post(baseURL+ APIConnectionType.LOGIN.getRoute(), gson.toJson(data));
-        if (!postResponse.contains("error")) {
+        if (!postResponse.toLowerCase().contains("error")) {
             return gson.fromJson(postResponse, I.class);
         } else {
             return null;
@@ -69,7 +68,6 @@ public class APIConnectionHandler {
     }
 
     private String post(String url, String data) throws IOException {
-        Log.e("APIConnectionHandler", "before connection");
 
         Connection conn = new Connection();
         ;
@@ -96,9 +94,7 @@ public class APIConnectionHandler {
                 .addHeader("Cache-Control", "no-cache")
                 .build();
 
-        Log.e("APIConnectionHandler", "before execute");
         Response response = client.newCall(request).execute();
-        Log.e("APIConnectionHandler", "after execute");
         return response;
     }
 }
