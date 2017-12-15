@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import partyplaner.data.party.PartyList;
+import partyplaner.data.user.I;
 import partyplaner.partyplaner.ContactForm.ContactForm;
 import partyplaner.partyplaner.ContactForm.ContactFragment;
 import partyplaner.partyplaner.Profile.ProfileFragment;
@@ -100,14 +101,16 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.home) {
             setFragmentToContent(new HomeFragment());
         } else if (id == R.id.profile) {
-            ProfileFragment profile = new ProfileFragment();
+            I.getMyself();
+
+          /*  ProfileFragment profile = new ProfileFragment();
             Bundle args = new Bundle();
             args.putString(Keys.EXTRA_NAME, "");
             args.putString(Keys.EXTRA_BIRTHDATE, "");
             args.putString(Keys.EXTRA_EMAIL, "");
             args.putString(Keys.EXTRA_GENDER, "");
             profile.setArguments(args);
-            setFragmentToContent(profile);
+            setFragmentToContent(profile);*/
         } else if (id == R.id.contacts) {
             AllContacts all_contacts = new AllContacts();
             Bundle args = new Bundle();
