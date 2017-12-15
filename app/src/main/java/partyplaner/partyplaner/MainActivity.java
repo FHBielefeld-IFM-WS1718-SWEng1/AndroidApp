@@ -3,7 +3,6 @@ package partyplaner.partyplaner;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,17 +16,11 @@ import android.widget.TextView;
 
 import partyplaner.data.party.PartyList;
 import partyplaner.data.user.I;
-import partyplaner.partyplaner.ContactForm.ContactForm;
 import partyplaner.partyplaner.ContactForm.ContactFragment;
-import partyplaner.partyplaner.Profile.ProfileFragment;
 import partyplaner.partyplaner.Contacts.AllContacts;
 import partyplaner.partyplaner.home.HomeFragment;
 import partyplaner.partyplaner.ownEvents.OwnEventsFragment;
 import partyplaner.partyplaner.Imprint.ImprintFragment;
-import partyplaner.partyplaner.ContactForm.ContactFragment;
-import partyplaner.partyplaner.Veranstaltung.EventMainFragment;
-import partyplaner.partyplaner.poll.CreatePoll;
-import partyplaner.partyplaner.poll.Poll;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -115,9 +108,9 @@ public class MainActivity extends AppCompatActivity
             I profil = I.getMyself();
             TextView nameText = findViewById(R.id.textView5);
             nameText.setText(profil.getName());
-            TextView adressText = findViewById(R.id.textView6);
+            TextView adressText = findViewById(R.id.GenderTextView);
             adressText.setText(profil.getAdress());
-            TextView birthdateText = findViewById(R.id.textView7);
+            TextView birthdateText = findViewById(R.id.BirthdateTextView);
             profil.getBirthdate();
             profil.getEmail();
 

@@ -21,13 +21,13 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         I profil = I.getMyself();
-        TextView nameText = view.findViewById(R.id.textView5);
+        TextView nameText = view.findViewById(R.id.NameTextView);
         nameText.setText(profil.getName());
-        TextView adressText = view.findViewById(R.id.textView6);
+        TextView adressText = view.findViewById(R.id.GenderTextView);
         adressText.setText(profil.getGender());
-        TextView birthdateText = view.findViewById(R.id.textView7);
+        TextView birthdateText = view.findViewById(R.id.BirthdateTextView);
         birthdateText.setText(profil.getBirthdate());
-        TextView emailText = view.findViewById(R.id.textView9);
+        TextView emailText = view.findViewById(R.id.EmailTextView);
         emailText.setText(profil.getEmail());
         return view;
     }

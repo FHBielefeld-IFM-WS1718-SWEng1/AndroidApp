@@ -160,7 +160,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/VergangeneVeranstaltungView" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/NameTextView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
@@ -169,10 +169,10 @@
                     android:textSize="18sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/FirstNameText"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView6" />
+                    app:layout_constraintStart_toStartOf="@+id/GenderTextView" />
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/GenderTextView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
@@ -181,10 +181,10 @@
                     android:textSize="18sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/AdressText"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView7" />
+                    app:layout_constraintStart_toStartOf="@+id/BirthdateTextView" />
 
                 <TextView
-                    android:id="@+id/textView7"
+                    android:id="@+id/BirthdateTextView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
@@ -197,7 +197,7 @@
                     app:layout_constraintStart_toEndOf="@+id/BirthdateText" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/EmailTextView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
@@ -206,7 +206,7 @@
                     android:textSize="18sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/EmailText"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView7" />
+                    app:layout_constraintStart_toStartOf="@+id/BirthdateTextView" />
 
             </android.support.constraint.ConstraintLayout>
         </LinearLayout>
