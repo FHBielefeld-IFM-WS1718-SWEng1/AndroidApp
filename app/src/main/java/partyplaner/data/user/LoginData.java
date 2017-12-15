@@ -1,5 +1,7 @@
 package partyplaner.data.user;
 
+import android.util.Log;
+
 import partyplaner.api.LoginHandler;
 
 /**
@@ -60,9 +62,7 @@ public class LoginData {
      */
     public I login() {
         if (email == null || password == null) {
-            return null;
-        }
-        if (I.getMyself() != null) {
+            Log.e("LoginData", "Email oder Passwort null");
             return null;
         }
         I i = LoginHandler.loginUser(this);

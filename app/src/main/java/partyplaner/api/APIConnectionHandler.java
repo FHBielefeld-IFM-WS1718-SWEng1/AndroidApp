@@ -1,5 +1,7 @@
 package partyplaner.api;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -46,6 +48,8 @@ public class APIConnectionHandler {
     }
 
     private String post(String url, String data) throws IOException {
+        Log.e("APIConnectionHandler", "before connection");
+
         OkHttpClient client = new OkHttpClient();
 
         MediaType mediaType = MediaType.parse("application/json");
@@ -57,7 +61,9 @@ public class APIConnectionHandler {
                 .addHeader("Cache-Control", "no-cache")
                 .build();
 
+        Log.e("APIConnectionHandler", "before execute");
         Response response = client.newCall(request).execute();
+        Log.e("APIConnectionHandler", "after execute");
 
         return response.body().string();
     }

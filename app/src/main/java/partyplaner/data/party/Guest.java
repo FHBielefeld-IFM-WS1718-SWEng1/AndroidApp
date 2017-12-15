@@ -15,10 +15,10 @@ public class Guest extends User{
     private InviteState inviteState;
     private boolean admin;
 
-    public Guest(String email, String name, String surname, String password,
-                GregorianCalendar birthday, String gender, String address, Image profilePicture,
+    public Guest(int id, String email, String username,
+                String birthday, int gender, Image profilePicture,
                  InviteState inviteState, boolean admin) {
-        super(email, name, surname, password, birthday, gender, address, profilePicture);
+        super(id, email, username, birthday, gender, profilePicture);
         this.inviteState = inviteState;
         this.admin = admin;
     }

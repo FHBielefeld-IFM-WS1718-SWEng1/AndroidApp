@@ -1,5 +1,7 @@
 package partyplaner.api;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -91,14 +93,15 @@ public class LoginHandler {
      * @return I Objekt, das alle über die API empfangenen Daten enthält
      */
     public static I loginUser (LoginData data) {
-        if (checkEmail(data.getEmail()) && checkPassword(data.getPassword())) {
+        //if (checkEmail(data.getEmail()) && checkPassword(data.getPassword())) {
             try {
                 return APIConnectionHandler.getAPIConnectionHandler().login(data);
             } catch (IOException e) {
                 return null;
             }
-        }
-        return null;
+        //}
+        //Log.e("LoginHandler", "Email oder Passwort im falschen Format");
+        //return null;
     }
 
     /**
