@@ -55,7 +55,12 @@ public class APIConnectionHandler {
     }
 
     public I login(LoginData data) throws IOException {
-        return gson.fromJson(post(baseURL+ APIConnectionType.LOGIN.getRoute(), gson.toJson(data)), I.class);
+        String postResponse = post(baseURL+ APIConnectionType.LOGIN.getRoute(), gson.toJson(data));
+        if (!postResponse.contains("error")) {
+            return gson.fromJson(postResponse, I.class);
+        } else {
+            return null;
+        }
     }
 
     public boolean register(RegistrationData data) throws IOException {

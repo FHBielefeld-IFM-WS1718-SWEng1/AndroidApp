@@ -125,8 +125,12 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.impressum) {
             setFragmentToContent(new ImprintFragment());
         } else if (id == R.id.logout) {
-
+            logOut();
         }
+    }
+
+    private void logOut() {
+
     }
 
     public void setFragmentToContent(Fragment fragment) {
