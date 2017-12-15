@@ -16,7 +16,7 @@ public class User {
     private String email;
     private String name;
     private String birthdate;
-    private int gender;
+    private Integer gender;
     private Image profilePicture;
 
     public User(int id, String email, String username,
