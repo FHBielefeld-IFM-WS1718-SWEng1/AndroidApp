@@ -24,7 +24,7 @@ before_install:
   - pip install --user codecov
   
 script:
- 
+  - ./gradlew connectedAndroidTest -i
   - ./gradlew build checkstyle connectedCheck -PdisablePreDex
 
 after_success:
