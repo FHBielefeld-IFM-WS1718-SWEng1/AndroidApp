@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#3f51b5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="black">#959595</color>
@@ -10,4 +10,8 @@
     <color name="paplacolorbg">#f4f3f1</color>
     <color name="highlightPrimary">#47fe4c</color>
     <color name="highlightSecondary">#e8fc65</color>
+    <color name="green">#21ff19</color>
+    <color name="blue">#2642fb</color>s
+    <item name="visible" type="id"/>
+    <item name="masked" type="id"/>
 </resources>

@@ -3,10 +3,8 @@ package partyplaner.partyplaner;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -18,9 +16,14 @@ import android.view.MenuItem;
 import partyplaner.partyplaner.ContactForm.ContactForm;
 import partyplaner.partyplaner.ContactForm.ContactFragment;
 import partyplaner.partyplaner.Profile.ProfileFragment;
+import partyplaner.partyplaner.Contacts.AllContacts;
 import partyplaner.partyplaner.home.HomeFragment;
 import partyplaner.partyplaner.ownEvents.OwnEventsFragment;
 import partyplaner.partyplaner.Imprint.ImprintFragment;
+import partyplaner.partyplaner.ContactForm.ContactFragment;
+import partyplaner.partyplaner.Veranstaltung.EventMainFragment;
+import partyplaner.partyplaner.poll.CreatePoll;
+import partyplaner.partyplaner.poll.Poll;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -97,11 +100,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.profile) {
             setFragmentToContent(new ProfileFragment());
         } else if (id == R.id.contacts) {
-
+            setFragmentToContent(new AllContacts());
         } else if (id == R.id.ownEvents) {
             setFragmentToContent(new OwnEventsFragment());
         } else if (id == R.id.help) {
-
+            setFragmentToContent(new EventMainFragment());
         } else if (id == R.id.contactFormular) {
             setFragmentToContent(new ContactFragment());
         } else if (id == R.id.impressum) {

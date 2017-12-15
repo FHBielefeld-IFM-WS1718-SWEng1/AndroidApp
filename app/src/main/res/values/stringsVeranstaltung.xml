@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_pictures">Bilder hinzufügen</string>
+    <string name="placeholder">xxx</string>
+    <string name="arrow">arrow</string>
+    <string name="task">Aufgabe</string>
+    <string name="status">Status</string>
+    <string name="delete">delete</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</string>
+    <string name="profile">Profil</string>
+    <string name="comment">Kommentar</string>
+    <string-array name="veranstaltungs_header">
+        <item>Gallerie</item>
+        <item>Aufgaben</item>
+    </string-array>
+    <string name="what">Was?:</string>
+    <string name="who">Wer?:</string>
+    <string name="where">Wo?:</string>
+    <string name="when">Wann?:</string>
+    <string name="more">mehr...</string>
+    <string name="partypicture">partyPicture</string>
+
+</resources>
