@@ -7,6 +7,7 @@ package partyplaner.partyplaner;
  */
 public class Keys {
 
+    public static final String EXTRA_POLL = "POLL";
     public static final String EXTRA_NAME = "NAME";
     public static final String EXTRA_TASK = "TASK";
     public static final String EXTRA_STATUS = "STATUS";
