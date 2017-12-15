@@ -15,7 +15,11 @@ before_install:
   - pip install --user codecov
   
 script:
-  - android-wait-for-emulator
+  - WAIT_CMD="$ANDROID_SDK/platform-tools/adb wait-for-device shell getprop init.svc.bootanim"
+    until $WAIT_CMD | grep -m 1 stopped; do
+      echo "Waiting..."
+      sleep 1
+    done
   - adb shell input keyevent 82 &
   - ./gradlew connectedAndroidTest -i
   - ./gradlew assemble
