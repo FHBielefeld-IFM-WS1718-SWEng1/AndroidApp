@@ -20,6 +20,7 @@
         android:textSize="14sp" />
 
     <ImageView
+        android:id="@+id/go_to_poll"
         android:layout_width="64dp"
         android:layout_height="32dp"
         android:layout_weight="0"

@@ -7,6 +7,7 @@ package partyplaner.partyplaner;
  */
 public class Keys {
 
+    public static final String EXTRA_POLL = "POLL";
     public static final String EXTRA_NAME = "NAME";
     public static final String EXTRA_TASK = "TASK";
     public static final String EXTRA_STATUS = "STATUS";
@@ -16,6 +17,13 @@ public class Keys {
     public static final String EXTRA_COMMENT = "COMMENT";
     public static final String EXTRA_RATINGS = "RATING";
     public static final String EXTRA_NUMBER_RATINGS = "NUMRATES";
-
     public static final String EXTRA_ADMIN = "ADMIN";
+    public static final String EXTRA_BIRTHDATE = "BIRTHDATE";
+    public static final String EXTRA_EMAIL = "EMAIL";
+    public static final String EXTRA_GENDER = "GENDER";
+    public static final String EXTRA_TIME = "TIME";
+    public static final String EXTRA_EVENTNAME = "EVENTNAME";
+    public static final String EXTRA_DESCRIPTION = "DESCRIPTION";
+    public static final String EXTRA_LOCATION = "LOCATION";
+    public static final String EXTRA_PARTYLIST = "PARTYLIST";
 }

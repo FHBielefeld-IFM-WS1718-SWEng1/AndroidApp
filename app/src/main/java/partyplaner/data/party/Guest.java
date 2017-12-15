@@ -14,7 +14,6 @@ public class Guest extends User{
 
     private InviteState inviteState;
     private boolean admin;
-
     public Guest(int id, String email, String username,
                 String birthday, int gender, Image profilePicture,
                  InviteState inviteState, boolean admin) {

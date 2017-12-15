@@ -7,46 +7,52 @@
     android:orientation="vertical"
     tools:context="partyplaner.partyplaner.poll.Poll">
 
-    <TextView
-        android:id="@+id/textView4"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Wo ist Tim?"
-        android:textStyle="bold"
-        android:textSize="22sp"
-        android:padding="8dp"/>
+        android:layout_height="wrap_content">
 
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp">
-
-        <RadioButton
-            android:id="@+id/radioButton"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Zuhause" />
+            android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Am schlafen" />
+            <TextView
+                android:id="@+id/poll_question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/placeholder"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
-        <RadioButton
-            android:id="@+id/radioButton3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Ladekabel festhalten" />
-    </RadioGroup>
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
 
-    <Button
-        android:id="@+id/btn_sendAnswer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/poll_send" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/btn_sendAnswer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/poll_send" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/chart1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>
