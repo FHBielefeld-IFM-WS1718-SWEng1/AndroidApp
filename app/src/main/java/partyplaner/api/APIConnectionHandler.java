@@ -6,6 +6,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -24,7 +25,6 @@ import partyplaner.data.user.RegistrationData;
 public class APIConnectionHandler {
 
     private class Connection extends AsyncTask<String, Void, Response> {
-        private Response response;
         @Override
         protected Response doInBackground(String... arg0) {
             try {
@@ -33,14 +33,6 @@ public class APIConnectionHandler {
                 e.printStackTrace();
                 return null;
             }
-        }
-        @Override
-        protected void onPostExecute(Response response) {
-            this.response = response;
-        }
-
-        Response getResponse() {
-            return response;
         }
     }
 
@@ -75,15 +67,16 @@ public class APIConnectionHandler {
         Log.e("APIConnectionHandler", "before connection");
 
         Connection conn = new Connection();
-        conn.execute(url, data);
-        Response res = conn.getResponse();
-
-        if (conn.getResponse() != null) {
-            return conn.getResponse().body().string();
-        } else {
-            return null;
+        ;
+        try {
+            Response response= conn.execute(url, data).get();
+            return  response.body().string();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
-
+        return null;
     }
 
     private Response connect(String url, String data) throws IOException {
@@ -102,8 +95,5 @@ public class APIConnectionHandler {
         Response response = client.newCall(request).execute();
         Log.e("APIConnectionHandler", "after execute");
         return response;
-
-
     }
-
 }
