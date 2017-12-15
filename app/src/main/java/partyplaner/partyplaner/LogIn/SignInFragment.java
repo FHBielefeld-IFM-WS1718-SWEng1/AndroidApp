@@ -47,10 +47,8 @@ public class SignInFragment extends Fragment {
         Log.e("SignInFragment", username.getText().toString());
         Log.e("SignInFragment", password.getText().toString());
         LoginData loginData = new LoginData(username.getText().toString(), password.getText().toString());
-        username.setText("");
         I i = loginData.login();
         if (i != null) {
-            password.setText("");
             Intent intent = new Intent(this.getActivity(), MainActivity.class);
             startActivity(intent);
         }

@@ -1,5 +1,6 @@
 package partyplaner.api;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -22,14 +23,37 @@ import partyplaner.data.user.RegistrationData;
 
 public class APIConnectionHandler {
 
+    private class Connection extends AsyncTask<String, Void, Response> {
+        private Response response;
+        @Override
+        protected Response doInBackground(String... arg0) {
+            try {
+                return connect(arg0[0], arg0[1]);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        @Override
+        protected void onPostExecute(Response response) {
+            this.response = response;
+        }
+
+        Response getResponse() {
+            return response;
+        }
+    }
+
     private static final String baseURL = "http://api.dleunig.de";
 
     private static APIConnectionHandler apiConHandler;
     private Gson gson;
+    //private Response response;
 
     private APIConnectionHandler() {
         gson = new Gson();
     }
+
 
     static APIConnectionHandler getAPIConnectionHandler() {
         if(apiConHandler == null) {
@@ -50,6 +74,19 @@ public class APIConnectionHandler {
     private String post(String url, String data) throws IOException {
         Log.e("APIConnectionHandler", "before connection");
 
+        Connection conn = new Connection();
+        conn.execute(url, data);
+        Response res = conn.getResponse();
+
+        if (conn.getResponse() != null) {
+            return conn.getResponse().body().string();
+        } else {
+            return null;
+        }
+
+    }
+
+    private Response connect(String url, String data) throws IOException {
         OkHttpClient client = new OkHttpClient();
 
         MediaType mediaType = MediaType.parse("application/json");
@@ -64,8 +101,9 @@ public class APIConnectionHandler {
         Log.e("APIConnectionHandler", "before execute");
         Response response = client.newCall(request).execute();
         Log.e("APIConnectionHandler", "after execute");
+        return response;
 
-        return response.body().string();
+
     }
 
 }
