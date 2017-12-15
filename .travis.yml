@@ -1,11 +1,11 @@
 language: android
 android:
   components:
-  - platform-tools
   - tools
+  - tools
+  - platform-tools
   - build-tools-26.0.2
   - android-26
-  - extra-android-m2repository
 install:
   - cd app
   - ./gradlew build connectedCheck
