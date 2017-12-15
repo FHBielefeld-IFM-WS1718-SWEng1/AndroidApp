@@ -8,10 +8,10 @@ android:
   - extra-android-m2repository
 install:
   - cd app
-  - ./gradlew connectedCheck
+  - ./gradlew build connectedCheck
 script:
   - cd app
-  - ./gradlew connectedCheck 
+  - ./gradlew build connectedCheck 
 
   
  
