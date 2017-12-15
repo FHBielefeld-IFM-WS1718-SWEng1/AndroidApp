@@ -43,6 +43,8 @@
     <string name="kontakte_durchsuchen">Kontakte durchsuchen</string>
     <string name="todo">TODO</string>
 
+    <string name="gender">Gender</string>
+
     <!-- Poll -->
     <string name="poll_label_create">Neue Abstimmung erstellen</string>
     <string name="poll_label_poll">Abstimmen</string>

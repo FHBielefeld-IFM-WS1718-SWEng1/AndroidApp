@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import partyplaner.data.party.PartyList;
 import partyplaner.data.user.I;
@@ -111,7 +112,15 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.home) {
             setFragmentToContent(new HomeFragment());
         } else if (id == R.id.profile) {
-            I.getMyself();
+            I profil = I.getMyself();
+            TextView nameText = findViewById(R.id.textView5);
+            nameText.setText(profil.getName());
+            TextView adressText = findViewById(R.id.textView6);
+            adressText.setText(profil.getAdress());
+            TextView birthdateText = findViewById(R.id.textView7);
+            profil.getBirthdate();
+            profil.getEmail();
+
 
           /*  ProfileFragment profile = new ProfileFragment();
             Bundle args = new Bundle();

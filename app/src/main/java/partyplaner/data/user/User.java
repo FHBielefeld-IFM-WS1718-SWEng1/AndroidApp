@@ -55,6 +55,7 @@ public class User {
         return profilePicture;
     }
 
+
     /**
      * Erstellt einen User, der für Tests verwendet werden kann, ohne mit der Server API Nutzerdaten
      * abzufragen.
