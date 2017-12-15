@@ -12,6 +12,7 @@ android:
   - sys-img-armeabi-v7a-android-19
 before_script:
   - chmod +x gradlew
+  - android list targets
   - echo no | android create avd --force -n test -t android-19 --abi armeabi-v7a
   - emulator -avd test -no-skin -no-audio -no-window &
 
@@ -20,6 +21,7 @@ before_install:
   
 script:
   - android-wait-for-emulator
+  - adb devices
   - adb shell input keyevent 82 &
   - ./gradlew assemble
   - ./gradlew connectedAndroidTest -PdisablePreDex --stacktrace
