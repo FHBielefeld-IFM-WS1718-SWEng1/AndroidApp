@@ -31,7 +31,7 @@ public class LoginHandler {
     /**
      * Regulärer Ausdruck zum Testen auf ein passendes Passwort.
      */
-    public static final String passwordRegEx = "^[\\w!-]{5,50}$";
+    public static final String passwordRegEx = "^[\\w!-]{3,50}$";
 
     private LoginHandler() {}
 

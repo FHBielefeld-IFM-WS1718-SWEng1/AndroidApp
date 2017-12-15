@@ -44,8 +44,6 @@ public class SignInFragment extends Fragment {
     }
 
     public void login(View view) {
-        Log.e("SignInFragment", username.getText().toString());
-        Log.e("SignInFragment", password.getText().toString());
         LoginData loginData = new LoginData(username.getText().toString(), password.getText().toString());
         I i = loginData.login();
         if (i != null) {
