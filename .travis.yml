@@ -13,7 +13,7 @@ android:
 before_script:
   - chmod +x gradlew
   - android list targets
-  - echo no | android create avd --force -n test -t android-19 --abi armeabi-v7a
+  - echo no | android create avd --force --name test --target $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd test -no-skin -no-audio -no-window &
 
 before_install:
