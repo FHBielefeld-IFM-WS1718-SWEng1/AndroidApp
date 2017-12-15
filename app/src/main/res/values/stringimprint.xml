@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="AdressText">FH-Bielefeld</string>
+    <string name="AdressText2">Campus Minden</string>
+    <string name="StreetText">Artilleriestraße 9</string>
+    <string name="CityText">32427 Minden</string>
+    <string name="ContactText">Ansprechpartner: </string>
+    <string name="TelText">Telefonnummer :</string>
+    <string name="EMailText">E-Mail Adresse:</string>
+    <string name="VersionText">Versionsnummer: Dionysos 0.0.0.2</string>
+    <string name="DescriptionText">Diese App ist während eines Projekts im Fach Software Engineering entstanden.</string>
+</resources>

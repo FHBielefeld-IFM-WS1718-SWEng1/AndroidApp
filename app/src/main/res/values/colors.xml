@@ -4,4 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="black">#959595</color>
+    <color name="paplacolorPrimary">#5c258d</color>
+    <color name="paplacolorSecondary">#4a6997</color>
+    <color name="paplacolorThird">#4389a2</color>
+    <color name="paplacolorbg">#f4f3f1</color>
+    <color name="highlightPrimary">#47fe4c</color>
+    <color name="highlightSecondary">#e8fc65</color>
 </resources>

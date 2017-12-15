@@ -15,9 +15,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import partyplaner.partyplaner.ContactForm.ContactForm;
 import partyplaner.partyplaner.ContactForm.ContactFragment;
+import partyplaner.partyplaner.Profile.ProfileFragment;
+import partyplaner.partyplaner.home.HomeFragment;
+import partyplaner.partyplaner.ownEvents.OwnEventsFragment;
+import partyplaner.partyplaner.Imprint.ImprintFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -90,19 +93,19 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.home) {
-            // Handle the camera action
+            setFragmentToContent(new HomeFragment());
         } else if (id == R.id.profile) {
-
-        } else if (id == R.id.ownEvents) {
-
+            setFragmentToContent(new ProfileFragment());
         } else if (id == R.id.contacts) {
 
+        } else if (id == R.id.ownEvents) {
+            setFragmentToContent(new OwnEventsFragment());
         } else if (id == R.id.help) {
 
         } else if (id == R.id.contactFormular) {
             setFragmentToContent(new ContactFragment());
         } else if (id == R.id.impressum) {
-
+            setFragmentToContent(new ImprintFragment());
         } else if (id == R.id.logout) {
 
         }
