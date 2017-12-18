@@ -1,36 +1,29 @@
 language: android
-
+env:
+ global:
+   - ANDROID_TARGET=android-19
+   - ANDROID_ABI=x86
+   
 android:
-
   components:
   - tools
   - platform-tools
   - tools
   - build-tools-26.0.2
-  - android-26
-  - sys-img-armeabi-v7a-android-19
-  - sys-img-armeabi-v7a-android-26
+  - android-19
   - extra-google-google_play_services
   - extra-google-m2repository
   - extra-android-m2repository
-  - addon-google_apis-google-19
+  - sys-img-x86-android-19
    
-before_script:
-  - chmod +x gradlew
+
+script:
   - android list targets
-  - echo no | android create avd --force --name test --target android-19 --abi armeabi-v7a-android-19
+  - echo no | android create avd --force -n test -t android-19 --abi x86 -no-accel
   - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
-  - adb devices
-  - adb shell input keyevent 82 &
+  - adb shell setprop dalvik.vm.dexopt-flags v=n,o=vm
+  - ./gradlew installDebug
 
-before_install:
-  - pip install --user codecov
-  
-script:
-  - ./gradlew connectedAndroidTest -i
-  - ./gradlew build checkstyle connectedCheck -PdisablePreDex
 
-after_success:
-  - codecov
   
