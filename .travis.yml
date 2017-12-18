@@ -1,29 +1,47 @@
 language: android
 env:
  global:
-   - ANDROID_TARGET=android-19
-   - ANDROID_ABI=x86
+   - ANDROID_ABI=26
+   - EMULATOR_API=19
+   - ANDROID_BUILD_TOOLS=26.0.2
    
 android:
   components:
   - tools
   - platform-tools
   - tools
-  - build-tools-26.0.2
-  - android-19
+  - build-tools-$ANDROID_BUILD_TOOLS
+  - android-$ANDROID_ABI
+  - android-$EMULATOR_API
+  - addon-google_apis-google-19
   - extra-google-google_play_services
+  - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
+  - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
   - extra-google-m2repository
   - extra-android-m2repository
   - sys-img-x86-android-19
+  licenses:
+  - android-sdk-preview-license-.+
+  - android-sdk-license-.+
+  - google-gdk-license-.+
+  
+before_install:
+ - mkdir "$ANDROID_HOME/licenses" || true
+ - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > 
+ "$ANDROID_HOME/licenses/android-sdk-license"
+ - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
+ - chmod +x gradlew
+ - ./gradlew dependencies || true 
+
+before_script:
+ - echo no | android create avd --force -n test -t android-19 --abi armeabi-v7a
+ - emulator -avd test -no-skin -no-audio -no-window &
+ - android-wait-for-emulator
+ - adb shell input keyevent 82 & 
    
 
 script:
-  - android list targets
-  - echo no | android create avd --force -n test -t android-19 --abi x86 -no-accel
-  - emulator -avd test -no-skin -no-audio -no-window &
-  - android-wait-for-emulator
-  - adb shell setprop dalvik.vm.dexopt-flags v=n,o=vm
-  - ./gradlew installDebug
+  - "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
 
 
   
