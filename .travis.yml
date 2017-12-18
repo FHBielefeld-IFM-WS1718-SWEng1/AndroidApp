@@ -7,16 +7,9 @@ android:
   - platform-tools
   - tools
   - build-tools-26.0.2
-  - android-4
-  - android-10
   - android-19
-  - android-23
-  - android-25
-  - addon-google_apis-google-19
-  - extra-google-google_play_services
-  - sys-img-armeabi-v7a-google_apis-$ANDROID_API_LEVEL
-  - sys-img-armeabi-v7a-google_apis-$EMULATOR_API_LEVEL
   - extra-google-m2repository
+  - extra-google-google_play_services
   - extra-android-m2repository
   - sys-img-x86-android-19
   licenses:
@@ -27,9 +20,9 @@ android:
 before_script:
  - android list targets
  - jdk_switcher use oraclejdk8
- - echo no | android create avd --force -n test -t android-26 --abi armeabi-v7a
+ - echo no | android create avd --force -n test -t android-19 --abi x86 -no-accel
  - emulator -avd test -no-skin -no-audio -no-window &
- - adb wait-for-emulator
+ - android-wait-for-emulator
  - adb shell input keyevent 82 & 
    
 
