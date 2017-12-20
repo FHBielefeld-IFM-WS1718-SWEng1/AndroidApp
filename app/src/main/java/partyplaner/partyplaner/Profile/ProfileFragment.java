@@ -84,19 +84,6 @@ public class ProfileFragment extends Fragment {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            /*Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            profile.setImageBitmap(imageBitmap);
-            profile.requestLayout();
-            try {
-                InputStream inputStream = getActivity().getContentResolver().openInputStream(data.getData());
-                BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
-                Bitmap profileBit = BitmapFactory.decodeStream(bufferedInputStream);
-                profile.setImageBitmap(profileBit);
-                profile.requestLayout();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }*/
         }
     }
 
