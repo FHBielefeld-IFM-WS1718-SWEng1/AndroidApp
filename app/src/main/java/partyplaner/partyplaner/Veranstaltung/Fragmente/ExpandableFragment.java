@@ -62,8 +62,8 @@ public class ExpandableFragment extends Fragment {
             }
         });
 
-        expandGroup();
-        collapseGroup(view);
+        //expandGroup();
+        quickCollapseGroup(view);
         this.view = view;
         return view;
     }
@@ -126,6 +126,19 @@ public class ExpandableFragment extends Fragment {
             ExpandableAnimator anim = new ExpandableAnimator(body, height, 0, arrow, 0, -90);
             anim.setDuration(300);
             back.startAnimation(anim);
+
+            expandend = false;
+        }
+    }
+
+    private void quickCollapseGroup(View fragment) {
+        if (fragment != null) {
+            LinearLayout body = fragment.findViewById(id);
+            LinearLayout back = fragment.findViewById(R.id.expand_back);
+            ImageView arrow = fragment.findViewById(R.id.arrow);
+
+            arrow.setRotation(-90);
+            body.getLayoutParams().height = 0;
 
             expandend = false;
         }
