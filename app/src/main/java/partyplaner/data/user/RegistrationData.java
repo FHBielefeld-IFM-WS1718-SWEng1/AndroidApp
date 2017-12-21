@@ -1,6 +1,8 @@
 package partyplaner.data.user;
 
 
+import android.util.Log;
+
 import partyplaner.api.LoginHandler;
 
 /**
@@ -33,6 +35,7 @@ public class RegistrationData extends LoginData {
      */
     public RegistrationData (String email, String name, String password, String passwordRepeated) {
         super(email, password);
+        this.name = name;
         this.passwordRepeated = passwordRepeated;
     }
 
@@ -46,6 +49,7 @@ public class RegistrationData extends LoginData {
      */
     public void setData(String email, String password, String name, String passwordRepeated) {
         super.setData(email, password);
+        this.name = name;
         this.passwordRepeated = passwordRepeated;
     }
 
@@ -79,7 +83,7 @@ public class RegistrationData extends LoginData {
      */
     public I registerAndLogin() {
         if (register()) {
-            super.login();
+            return new LoginData(this.getEmail(), this.getPassword()).login();
         }
         return null;
     }

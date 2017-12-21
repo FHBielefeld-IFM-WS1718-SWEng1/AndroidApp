@@ -52,11 +52,7 @@ public class SignInFragment extends Fragment {
             Intent intent = new Intent(this.getActivity(), MainActivity.class);
             startActivity(intent);
         } else {
-            Context context = getActivity();
-            CharSequence text = "Login fehlgeschlagen!";
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
+            Toast.makeText(getActivity(), "Login fehlgeschlagen!", Toast.LENGTH_SHORT).show();
         }
     }
 }
