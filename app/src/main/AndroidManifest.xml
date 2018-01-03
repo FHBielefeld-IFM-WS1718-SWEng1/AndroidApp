@@ -32,7 +32,9 @@
         <activity
             android:name=".poll.Poll"
             android:label="@string/poll_label_poll"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".EventMainActivity"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

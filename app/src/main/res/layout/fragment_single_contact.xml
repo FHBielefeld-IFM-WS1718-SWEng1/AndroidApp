@@ -6,31 +6,37 @@
     android:layout_width="match_parent"
     android:layout_height="50dp">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/button_delete"
-        android:layout_width="55dp"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_weight="0"
         app:srcCompat="@android:drawable/btn_dialog"
         tools:ignore="ContentDescription" />
 
-    <EditText
+    <TextView
         android:id="@+id/contact_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:ems="10"
         android:inputType="textPersonName"
         android:labelFor="@+id/contact_name"
         android:text="@string/horst_teesofa"
+        android:textColor="@android:color/black"
+        android:paddingTop="11dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textSize="18sp"
         tools:ignore="ContentDescription" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/button_contactsettings"
         android:layout_width="50dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_weight="0"
-        app:srcCompat="@android:drawable/btn_dropdown"
+        android:padding="8dp"
+        app:srcCompat="@drawable/edit"
         tools:ignore="ContentDescription" />
 
 </LinearLayout>

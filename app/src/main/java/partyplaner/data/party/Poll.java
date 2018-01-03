@@ -1,5 +1,6 @@
 package partyplaner.data.party;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import partyplaner.data.user.User;
  * Created by André on 25.11.2017.
  */
 
-public class Poll {
+public class Poll implements Serializable {
 
     private String question;
     private List<PollOption> pollOptions;
@@ -46,17 +47,17 @@ public class Poll {
         return optionTitles;
     }
 
-    public List<User> getVotedUsers() {
+    /*public List<User> getVotedUsers() {
         List<User> votedUsers = new ArrayList<>();
         for (PollOption current : pollOptions)
             votedUsers.addAll(current.getVotedUsers());
         return votedUsers;
-    }
+    }*/
 
-    public int getVoteCount() {
+    /*public int getVoteCount() {
         int count = 0;
         for (PollOption current : pollOptions)
             count += current.getVoteCount();
         return count;
-    }
+    }*/
 }
