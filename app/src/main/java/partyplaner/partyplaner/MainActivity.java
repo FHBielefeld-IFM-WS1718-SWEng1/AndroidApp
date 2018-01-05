@@ -44,7 +44,13 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(currentTab);
 
+        loadData();
+
         setActiveFragment(currentTab);
+    }
+
+    private void loadData() {
+        
     }
 
     @Override

@@ -16,8 +16,13 @@ public class Party implements Serializable{
 
     private String name;
     private String description;
-    private User organizer;
+    private String startDate;
+    private String enddate;
     private String location;
+    private int user_id;
+    private boolean ersteller;
+
+    private User organizer;
     private GregorianCalendar dateAndTime;
 
     private List<Image> gallery;
