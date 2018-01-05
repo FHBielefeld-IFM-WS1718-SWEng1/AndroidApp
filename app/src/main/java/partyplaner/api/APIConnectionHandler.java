@@ -133,7 +133,7 @@ public class APIConnectionHandler {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        return "";
+        return null;
     }
 
     private Response connect(String url, RouteType route,  String data) throws IOException {
