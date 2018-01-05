@@ -52,4 +52,13 @@
     <string name="poll_question_hint">Frage hier eingeben...</string>
     <string name="poll_plus">+</string>
     <string name="poll_send">Senden</string>
+    <string name="profildaten_bearbeiten">Profildaten bearbeiten</string>
+    <string name="_01_01_2018">01.01.2018</string>
+    <string name="horstteesofa_web_de">HorstTeesofa@web.de</string>
+    <string name="horst_teesofa">Horst Teesofa</string>
+    <string name="non_binary">Non-Binary</string>
+    <string name="editProfileName">Name:</string>
+    <string name="editProfileGender">Gender:</string>
+    <string name="editProfileE_Mail">E-Mail:</string>
+    <string name="editProfileGeb_Datum">Geb-Datum:</string>
 </resources>
