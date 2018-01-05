@@ -3,7 +3,6 @@ package partyplaner.partyplaner;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,17 +12,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import partyplaner.partyplaner.ContactForm.ContactForm;
+import android.widget.TextView;
+
+import partyplaner.data.party.PartyList;
+import partyplaner.data.user.I;
 import partyplaner.partyplaner.ContactForm.ContactFragment;
-import partyplaner.partyplaner.Profile.ProfileFragment;
 import partyplaner.partyplaner.Contacts.AllContacts;
+import partyplaner.partyplaner.Profile.ProfileFragment;
 import partyplaner.partyplaner.home.HomeFragment;
 import partyplaner.partyplaner.ownEvents.OwnEventsFragment;
 import partyplaner.partyplaner.Imprint.ImprintFragment;
-import partyplaner.partyplaner.ContactForm.ContactFragment;
-import partyplaner.partyplaner.Veranstaltung.EventMainFragment;
-import partyplaner.partyplaner.poll.CreatePoll;
-import partyplaner.partyplaner.poll.Poll;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -35,15 +33,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -60,11 +49,10 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+        //TODO Bei zurück zum vorherigen Menüpunkt gehen
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
     }
 
@@ -82,10 +70,11 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        /*if (id == R.id.action_settings) {
-            return true;
-        }*/
+        switch (id) {
+            case R.id.action_settings:
+
+                break;
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -107,12 +96,19 @@ public class MainActivity extends AppCompatActivity
         currentTab = id;
         if (id == R.id.home) {
             setFragmentToContent(new HomeFragment());
-        } else if (id == R.id.profile) {
+        } else if (id == R.id.profile){
             setFragmentToContent(new ProfileFragment());
         } else if (id == R.id.contacts) {
+            AllContacts all_contacts = new AllContacts();
+            Bundle args = new Bundle();
+            args.putString(Keys.EXTRA_NAME, "");
             setFragmentToContent(new AllContacts());
         } else if (id == R.id.ownEvents) {
-            setFragmentToContent(new OwnEventsFragment());
+            OwnEventsFragment ownEvent = new OwnEventsFragment();
+            Bundle args = new Bundle();
+            args.putSerializable(Keys.EXTRA_PARTYLIST, new PartyList());
+            ownEvent.setArguments(args);
+            setFragmentToContent(ownEvent);
         } else if (id == R.id.help) {
 
         } else if (id == R.id.contactFormular) {
@@ -120,8 +116,12 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.impressum) {
             setFragmentToContent(new ImprintFragment());
         } else if (id == R.id.logout) {
-
+            logOut();
         }
+    }
+
+    private void logOut() {
+
     }
 
     public void setFragmentToContent(Fragment fragment) {

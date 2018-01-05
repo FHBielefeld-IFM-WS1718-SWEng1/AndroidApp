@@ -2,33 +2,35 @@ package partyplaner.data.user;
 
 import android.media.Image;
 
-import java.util.GregorianCalendar;
-
 /**
- * Created by André on 24.11.2017.
+ * Ein User Objekt beinhaltet alle Informationen, die man über einen
+ * Benutzer wissen sollte.
+ *
+ * @author André
+ * @since 24.11.2017
  */
 
 public class User {
 
+    private int id;
     private String email;
     private String name;
-    private String surname;
-    private String password;
-    private GregorianCalendar birthday;
-    private String gender;
-    private String address;
+    private String birthdate;
+    private Integer gender;
     private Image profilePicture;
 
-    public User(String email, String name, String surname, String password,
-                GregorianCalendar birthday, String gender, String address, Image profilePicture) {
+    public User(int id, String email, String username,
+                String birthday, int gender, Image profilePicture) {
+        this.id = id;
         this.email = email;
-        this.name = name;
-        this.surname = surname;
-        this.password = password;
-        this.birthday = birthday;
+        this.name = username;
+        this.birthdate = birthday;
         this.gender = gender;
-        this.address = address;
         this.profilePicture = profilePicture;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getEmail() {
@@ -39,33 +41,32 @@ public class User {
         return name;
     }
 
-    public String getSurname() {
-        return surname;
+
+    public String getBirthdate() {
+        return birthdate;
+
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public GregorianCalendar getBirthday() {
-        return birthday;
-    }
-
-    public String getGender() {
+    public int getGender() {
         return gender;
-    }
-
-    public String getAddress() {
-        return address;
     }
 
     public Image getProfilePicture() {
         return profilePicture;
     }
 
+
+    /**
+     * Erstellt einen User, der für Tests verwendet werden kann, ohne mit der Server API Nutzerdaten
+     * abzufragen.
+     *
+     * @return Testnutzer
+     * @deprecated Wenn möglich, bitte einen Nutzer über die API abfragen
+     */
+    @Deprecated
     public static User createTestUser() {
-        return new User("tsm@fh-bielefeld.de", "Tim", "Meier",
-                "tsm", new GregorianCalendar(1954, 7, 17), "(Fe)Male",
-                "Tim-Steven-Meier-Straße 1, 12345 Timstadt", null);
+
+        return new User(0, "tsm@fh-bielefeld.de", "henkershelfer",
+                "17.7.1954", 1, null);
     }
 }
