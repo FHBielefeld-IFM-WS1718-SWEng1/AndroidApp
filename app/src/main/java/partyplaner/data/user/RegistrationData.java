@@ -83,6 +83,7 @@ public class RegistrationData extends LoginData {
      */
     public I registerAndLogin() {
         if (register()) {
+            Log.e("RegistrationData", "Registrierung erfolgreich");
             return new LoginData(this.getEmail(), this.getPassword()).login();
         }
         return null;
