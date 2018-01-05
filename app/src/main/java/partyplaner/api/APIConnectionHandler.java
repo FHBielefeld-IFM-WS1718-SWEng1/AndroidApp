@@ -55,7 +55,7 @@ public class APIConnectionHandler {
 
     public I login(LoginData data) throws IOException {
         String postResponse = post(APIConnectionType.LOGIN.getRoute(), gson.toJson(data));
-        if (!postResponse.toLowerCase().contains("error")) {
+        if (postResponse != null && !postResponse.toLowerCase().contains("error")) {
             return gson.fromJson(postResponse, I.class);
         } else {
             return null;
@@ -84,7 +84,9 @@ public class APIConnectionHandler {
         Connection conn = new Connection();
         try {
             Response response = conn.execute(baseURL + url, "GET", null).get();
-            return  response.body().string();
+            if (response != null) {
+                return response.body().string();
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -97,7 +99,9 @@ public class APIConnectionHandler {
         Connection conn = new Connection();
         try {
             Response response = conn.execute(baseURL + url, "PUT", data).get();
-            return  response.body().string();
+            if (response != null) {
+                return response.body().string();
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -111,7 +115,9 @@ public class APIConnectionHandler {
         Connection conn = new Connection();
         try {
             Response response = conn.execute(baseURL + url, "POST", data).get();
-            return  response.body().string();
+            if (response != null) {
+                return response.body().string();
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -124,7 +130,9 @@ public class APIConnectionHandler {
         Connection conn = new Connection();
         try {
             Response response = conn.execute(baseURL + url, "DELETE", data).get();
-            return  response.body().string();
+            if (response != null) {
+                return response.body().string();
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -178,7 +186,7 @@ public class APIConnectionHandler {
                 break;
         }
 
-        if (request == null) {
+        if (request != null) {
             Response response = client.newCall(request).execute();
             return response;
         }
