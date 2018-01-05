@@ -81,7 +81,6 @@ public class APIConnectionHandler {
     }
 
     String get(String url) throws IOException {
-
         Connection conn = new Connection();
         try {
             Response response = conn.execute(baseURL + url, "GET", null).get();
@@ -95,7 +94,6 @@ public class APIConnectionHandler {
     }
 
     String put(String url, String data) throws IOException {
-
         Connection conn = new Connection();
         try {
             Response response = conn.execute(baseURL + url, "PUT", data).get();
@@ -123,7 +121,6 @@ public class APIConnectionHandler {
     }
 
     String delete(String url, String data) throws IOException {
-
         Connection conn = new Connection();
         try {
             Response response = conn.execute(baseURL + url, "DELETE", data).get();
