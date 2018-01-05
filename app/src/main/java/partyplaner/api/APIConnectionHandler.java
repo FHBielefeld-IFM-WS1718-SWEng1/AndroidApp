@@ -80,7 +80,35 @@ public class APIConnectionHandler {
         }
     }
 
-    private String post(String url, String data) throws IOException {
+    String get(String url) throws IOException {
+
+        Connection conn = new Connection();
+        try {
+            Response response = conn.execute(baseURL + url, "GET", null).get();
+            return  response.body().string();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    String put(String url, String data) throws IOException {
+
+        Connection conn = new Connection();
+        try {
+            Response response = conn.execute(baseURL + url, "PUT", data).get();
+            return  response.body().string();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    String post(String url, String data) throws IOException {
 
         Connection conn = new Connection();
         try {
@@ -94,7 +122,7 @@ public class APIConnectionHandler {
         return null;
     }
 
-    private String delete(String url, String data) throws IOException {
+    String delete(String url, String data) throws IOException {
 
         Connection conn = new Connection();
         try {
@@ -123,9 +151,16 @@ public class APIConnectionHandler {
                         .build();
                 break;
             case PUT:
+                RequestBody body = RequestBody.create(mediaType, data);
+                request = new Request.Builder()
+                        .url(url)
+                        .put(body)
+                        .addHeader("Content-Type", "application/json")
+                        .addHeader("Cache-Control", "no-cache")
+                        .build();
                 break;
             case POST:
-                RequestBody body = RequestBody.create(mediaType, data);
+                body = RequestBody.create(mediaType, data);
                 request = new Request.Builder()
                         .url(url)
                         .post(body)
