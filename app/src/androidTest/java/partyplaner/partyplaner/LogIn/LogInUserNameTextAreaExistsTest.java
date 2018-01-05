@@ -37,7 +37,7 @@ public class LogInUserNameTextAreaExistsTest {
     @Test
     public void logInActivityTest() {
         ViewInteraction editText2 = onView(
-                allOf(withId(R.id.editText),
+                allOf(withId(R.id.username),
                         childAtPosition(
                                 allOf(withId(R.id.fragment4),
                                         childAtPosition(

@@ -40,7 +40,7 @@ public class LogInUsernamePasswordTest {
     @Test
     public void logInUsernamePasswordTest() {
         ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.editText),
+                allOf(withId(R.id.username),
                         childAtPosition(
                                 allOf(withId(R.id.fragment4),
                                         childAtPosition(
@@ -49,9 +49,9 @@ public class LogInUsernamePasswordTest {
                                 1),
                         isDisplayed()));
         appCompatEditText.perform(click());
-// Benutzername ist als Beispiel "Mister Hallo" und wird in das Feld geschrieben
+// Benutzername ist als Beispiel "testvom@test.de" und wird in das Feld geschrieben
         ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.editText),
+                allOf(withId(R.id.username),
                         childAtPosition(
                                 allOf(withId(R.id.fragment4),
                                         childAtPosition(
@@ -59,10 +59,10 @@ public class LogInUsernamePasswordTest {
                                                 1)),
                                 1),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("Mister Hallo"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("testvom@test.de"), closeSoftKeyboard());
 //Passwort wird in das Passwort Feld geschrieben
         ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.editText2),
+                allOf(withId(R.id.password),
                         childAtPosition(
                                 allOf(withId(R.id.fragment4),
                                         childAtPosition(
@@ -74,7 +74,7 @@ public class LogInUsernamePasswordTest {
 
 //Anmelden über den Button
         ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.signInLogIn), withText("Anmelden"),
+                allOf(withId(R.id.btn_login), withText("Anmelden"),
                         childAtPosition(
                                 allOf(withId(R.id.fragment4),
                                         childAtPosition(

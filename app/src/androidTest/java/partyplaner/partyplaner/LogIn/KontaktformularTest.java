@@ -12,7 +12,6 @@ import android.view.ViewParent;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,13 +34,13 @@ import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class ProfilAllTest {
+public class KontaktformularTest {
 
     @Rule
     public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
     @Test
-    public void profilAllTest() {
+    public void kontaktformularTest() {
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.username),
                         childAtPosition(
@@ -125,59 +124,174 @@ public class ProfilAllTest {
                                 childAtPosition(
                                         withId(R.id.nav_view),
                                         0)),
-                        2),
+                        8),
                         isDisplayed()));
         navigationMenuItemView.perform(click());
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.FirstNameText), withText("Name :"),
+                allOf(withId(R.id.betreffText), withText("Betreff :"),
                         childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                        0),
-                                1),
+                                allOf(withId(R.id.frameLayout),
+                                        childAtPosition(
+                                                withId(R.id.content),
+                                                0)),
+                                0),
                         isDisplayed()));
         textView.check(matches(isDisplayed()));
 
-        ViewInteraction textView3 = onView(
-                allOf(withId(R.id.BirthdateText), withText("Geb-Datum :"),
+        ViewInteraction editText = onView(
+                allOf(withId(R.id.betreffInputText),
                         childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                        0),
+                                allOf(withId(R.id.frameLayout),
+                                        childAtPosition(
+                                                withId(R.id.content),
+                                                0)),
+                                1),
+                        isDisplayed()));
+        editText.check(matches(isDisplayed()));
+
+        ViewInteraction textView2 = onView(
+                allOf(withId(R.id.VornameText), withText("Name :"),
+                        childAtPosition(
+                                allOf(withId(R.id.frameLayout),
+                                        childAtPosition(
+                                                withId(R.id.content),
+                                                0)),
+                                2),
+                        isDisplayed()));
+        textView2.check(matches(isDisplayed()));
+
+        ViewInteraction editText2 = onView(
+                allOf(withId(R.id.VornameInput),
+                        childAtPosition(
+                                allOf(withId(R.id.frameLayout),
+                                        childAtPosition(
+                                                withId(R.id.content),
+                                                0)),
                                 3),
+                        isDisplayed()));
+        editText2.check(matches(isDisplayed()));
+
+        ViewInteraction textView3 = onView(
+                allOf(withId(R.id.NachnameText), withText("Nachname :"),
+                        childAtPosition(
+                                allOf(withId(R.id.frameLayout),
+                                        childAtPosition(
+                                                withId(R.id.content),
+                                                0)),
+                                4),
                         isDisplayed()));
         textView3.check(matches(isDisplayed()));
 
-        ViewInteraction textView4 = onView(
-                allOf(withId(R.id.EmailText), withText("E-Mail :"),
+        ViewInteraction editText3 = onView(
+                allOf(withId(R.id.NachnameInput),
                         childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                        0),
-                                4),
+                                allOf(withId(R.id.frameLayout),
+                                        childAtPosition(
+                                                withId(R.id.content),
+                                                0)),
+                                5),
+                        isDisplayed()));
+        editText3.check(matches(isDisplayed()));
+
+        ViewInteraction textView4 = onView(
+                allOf(withId(R.id.TelefonText), withText("Telefon :"),
+                        childAtPosition(
+                                allOf(withId(R.id.frameLayout),
+                                        childAtPosition(
+                                                withId(R.id.content),
+                                                0)),
+                                6),
                         isDisplayed()));
         textView4.check(matches(isDisplayed()));
 
-        ViewInteraction textView5 = onView(
-                allOf(withId(R.id.ZukünftigeVeranstaltung), withText("Zukünftige Veranstaltung"),
+        ViewInteraction editText4 = onView(
+                allOf(withId(R.id.TelefonInput),
                         childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                        0),
+                                allOf(withId(R.id.frameLayout),
+                                        childAtPosition(
+                                                withId(R.id.content),
+                                                0)),
+                                7),
+                        isDisplayed()));
+        editText4.check(matches(isDisplayed()));
+
+        ViewInteraction textView5 = onView(
+                allOf(withId(R.id.EmailText), withText("E-Mail :"),
+                        childAtPosition(
+                                allOf(withId(R.id.frameLayout),
+                                        childAtPosition(
+                                                withId(R.id.content),
+                                                0)),
                                 8),
                         isDisplayed()));
         textView5.check(matches(isDisplayed()));
 
-        ViewInteraction textView6 = onView(
-                allOf(withId(R.id.VergangeneVeranstaltung), withText("Vergangene Veranstaltung"),
+        ViewInteraction editText5 = onView(
+                allOf(withId(R.id.EmailInput),
                         childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                        0),
-                                6),
+                                allOf(withId(R.id.frameLayout),
+                                        childAtPosition(
+                                                withId(R.id.content),
+                                                0)),
+                                9),
+                        isDisplayed()));
+        editText5.check(matches(isDisplayed()));
+
+        ViewInteraction textView6 = onView(
+                allOf(withId(R.id.Email2Text), withText("E-Mail wiederholen :"),
+                        childAtPosition(
+                                allOf(withId(R.id.frameLayout),
+                                        childAtPosition(
+                                                withId(R.id.content),
+                                                0)),
+                                10),
                         isDisplayed()));
         textView6.check(matches(isDisplayed()));
+
+        ViewInteraction editText6 = onView(
+                allOf(withId(R.id.Email2Input),
+                        childAtPosition(
+                                allOf(withId(R.id.frameLayout),
+                                        childAtPosition(
+                                                withId(R.id.content),
+                                                0)),
+                                11),
+                        isDisplayed()));
+        editText6.check(matches(isDisplayed()));
+
+        ViewInteraction textView7 = onView(
+                allOf(withId(R.id.AnfrageText), withText("Ihre Anfrage"),
+                        childAtPosition(
+                                allOf(withId(R.id.frameLayout),
+                                        childAtPosition(
+                                                withId(R.id.content),
+                                                0)),
+                                12),
+                        isDisplayed()));
+        textView7.check(matches(isDisplayed()));
+
+        ViewInteraction editText7 = onView(
+                allOf(withId(R.id.AnfrageInput),
+                        childAtPosition(
+                                allOf(withId(R.id.frameLayout),
+                                        childAtPosition(
+                                                withId(R.id.content),
+                                                0)),
+                                13),
+                        isDisplayed()));
+        editText7.check(matches(isDisplayed()));
+
+        ViewInteraction button = onView(
+                allOf(withId(R.id.SendButton),
+                        childAtPosition(
+                                allOf(withId(R.id.frameLayout),
+                                        childAtPosition(
+                                                withId(R.id.content),
+                                                0)),
+                                14),
+                        isDisplayed()));
+        button.check(matches(isDisplayed()));
 
     }
 

@@ -38,7 +38,7 @@ public class LogInLogInButtonExistsTest {
     public void logInLogInButtonExists() {
         ViewInteraction button;
         button = onView(
-                allOf(withId(R.id.signInLogIn),
+                allOf(withId(R.id.btn_login),
                         childAtPosition(
                                 allOf(withId(R.id.fragment4),
                                         childAtPosition(

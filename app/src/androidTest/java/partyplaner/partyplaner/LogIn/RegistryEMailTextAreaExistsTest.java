@@ -50,8 +50,7 @@ public class RegistryEMailTextAreaExistsTest {
         appCompatButton.perform(click());
 
         ViewInteraction editText = onView(
-                allOf(withId(R.id.regEmail)
-                        ,
+                allOf(withId(R.id.regEmail),
                         childAtPosition(
                                 allOf(withId(R.id.fragment),
                                         childAtPosition(

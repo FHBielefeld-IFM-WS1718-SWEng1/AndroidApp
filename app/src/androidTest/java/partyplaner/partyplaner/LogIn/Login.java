@@ -19,7 +19,6 @@ import org.junit.runner.RunWith;
 import partyplaner.partyplaner.R;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.pressImeActionButton;
@@ -33,15 +32,15 @@ import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class LogInWithNameAndPWTest {
+public class Login {
 
     @Rule
     public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
     @Test
-    public void logInActivityTest8() {
+    public void login() {
         ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.editText),
+                allOf(withId(R.id.username),
                         childAtPosition(
                                 allOf(withId(R.id.fragment4),
                                         childAtPosition(
@@ -51,8 +50,8 @@ public class LogInWithNameAndPWTest {
                         isDisplayed()));
         appCompatEditText.perform(click());
 
-        ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.editText),
+        appCompatEditText = onView(
+                allOf(withId(R.id.username),
                         childAtPosition(
                                 allOf(withId(R.id.fragment4),
                                         childAtPosition(
@@ -60,10 +59,21 @@ public class LogInWithNameAndPWTest {
                                                 1)),
                                 1),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("Hallo"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("testvom@test.de"), closeSoftKeyboard());
 
-        ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.editText2),
+        appCompatEditText = onView(
+                allOf(withId(R.id.username), withText("testvom@test.de"),
+                        childAtPosition(
+                                allOf(withId(R.id.fragment4),
+                                        childAtPosition(
+                                                withClassName(is("android.widget.LinearLayout")),
+                                                1)),
+                                1),
+                        isDisplayed()));
+        appCompatEditText.perform(pressImeActionButton());
+
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.password),
                         childAtPosition(
                                 allOf(withId(R.id.fragment4),
                                         childAtPosition(
@@ -71,10 +81,10 @@ public class LogInWithNameAndPWTest {
                                                 1)),
                                 2),
                         isDisplayed()));
-        appCompatEditText3.perform(replaceText("geheim"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("test"), closeSoftKeyboard());
 
-        ViewInteraction appCompatEditText4 = onView(
-                allOf(withId(R.id.editText2), withText("geheim"),
+        appCompatEditText2 = onView(
+                allOf(withId(R.id.password), withText("test"),
                         childAtPosition(
                                 allOf(withId(R.id.fragment4),
                                         childAtPosition(
@@ -82,21 +92,10 @@ public class LogInWithNameAndPWTest {
                                                 1)),
                                 2),
                         isDisplayed()));
-        appCompatEditText4.perform(pressImeActionButton());
+        appCompatEditText2.perform(pressImeActionButton());
 
         ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.signInForgetPw), withText("Passwort vergessen?"),
-                        childAtPosition(
-                                allOf(withId(R.id.fragment4),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                1)),
-                                5),
-                        isDisplayed()));
-        appCompatButton.perform(click());
-
-        ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.signInLogIn), withText("Anmelden"),
+                allOf(withId(R.id.btn_login), withText("Anmelden"),
                         childAtPosition(
                                 allOf(withId(R.id.fragment4),
                                         childAtPosition(
@@ -104,22 +103,7 @@ public class LogInWithNameAndPWTest {
                                                 1)),
                                 3),
                         isDisplayed()));
-        appCompatButton2.perform(click());
-
-        pressBack();
-
-        ViewInteraction appCompatButton3 = onView(
-                allOf(withId(R.id.signInRegister), withText("Registrieren"),
-                        childAtPosition(
-                                allOf(withId(R.id.fragment4),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                1)),
-                                4),
-                        isDisplayed()));
-        appCompatButton3.perform(click());
-
-        pressBack();
+        appCompatButton.perform(click());
 
     }
 
