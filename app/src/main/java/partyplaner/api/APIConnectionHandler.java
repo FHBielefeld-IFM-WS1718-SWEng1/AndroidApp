@@ -115,6 +115,12 @@ public class APIConnectionHandler {
         MediaType mediaType = MediaType.parse("application/json");
         switch (route) {
             case GET:
+                request = new Request.Builder()
+                        .url(url)
+                        .get()
+                        .addHeader("Content-Type", "application/json")
+                        .addHeader("Cache-Control", "no-cache")
+                        .build();
                 break;
             case PUT:
                 break;
