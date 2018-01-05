@@ -25,7 +25,7 @@
     <string name="e_mail">E-Mail :</string>
     <string name="ihre_anfrage">Ihre Anfrage</string>
     <string name="senden">Senden</string>
-    <string name="vorname">Vorname :</string>
+    <string name="vorname">Name :</string>
     <string name="telefon">Telefon :</string>
     <string name="nachname">Nachname :</string>
     <string name="adresse">Adresse :</string>
@@ -42,6 +42,8 @@
     <string name="horst_teesofa">Horst Teesofa</string>
     <string name="kontakte_durchsuchen">Kontakte durchsuchen</string>
     <string name="todo">TODO</string>
+
+    <string name="gender">Gender :</string>
 
     <!-- Poll -->
     <string name="poll_label_create">Neue Abstimmung erstellen</string>

@@ -25,10 +25,6 @@ public class Rating extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.event_fragment_rating, container, false);
 
-        /*Bundle args = getArguments();
-        numRates = args.getInt(Keys.EXTRA_NUMBER_RATINGS);
-        rating = args.getDouble(Keys.EXTRA_RATINGS);*/
-
         TextView showRates = view.findViewById(R.id.numRates);
         showRates.setText(numRates + " haben abgestimmt");
 

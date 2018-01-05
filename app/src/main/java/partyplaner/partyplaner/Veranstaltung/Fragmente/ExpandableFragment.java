@@ -1,16 +1,22 @@
 package partyplaner.partyplaner.Veranstaltung.Fragmente;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import partyplaner.anmations.ExpandableAnimator;
 import partyplaner.partyplaner.Keys;
 import partyplaner.partyplaner.R;
 
@@ -23,6 +29,8 @@ public class ExpandableFragment extends Fragment {
 
     boolean expandend;
     private int id;
+    private int height;
+    private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,9 +62,19 @@ public class ExpandableFragment extends Fragment {
             }
         });
 
-        expandGroup();
-        collapseGroup(view);
+        //expandGroup();
+        quickCollapseGroup(view);
+        this.view = view;
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        LinearLayout body = view.findViewById(id);
+        body.measure(0,0);
+        height = body.getMeasuredHeight();
+
     }
 
     private void setFragment(View view, int id) {
@@ -70,7 +88,7 @@ public class ExpandableFragment extends Fragment {
 
     /**
      * This methode expands the body of the group.
-     * Works only if the "onCreateView()" called before.
+     * Works only if the "onCreateView()" is called before.
      */
     public void expandGroup() {
         expandGroup(getView());
@@ -79,10 +97,13 @@ public class ExpandableFragment extends Fragment {
     private void expandGroup(View fragment) {
         if(fragment != null) {
             LinearLayout body = fragment.findViewById(id);
+            LinearLayout back = fragment.findViewById(R.id.expand_back);
             ImageView arrow = fragment.findViewById(R.id.arrow);
 
-            body.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            arrow.setRotation(0);
+            ExpandableAnimator anim = new ExpandableAnimator(body, 0, height, arrow, -90, 0);
+            anim.setDuration(300);
+            back.startAnimation(anim);
+
             expandend = true;
         }
     }
@@ -98,10 +119,27 @@ public class ExpandableFragment extends Fragment {
     private void collapseGroup(View fragment) {
         if (fragment != null) {
             LinearLayout body = fragment.findViewById(id);
+            LinearLayout back = fragment.findViewById(R.id.expand_back);
             ImageView arrow = fragment.findViewById(R.id.arrow);
 
-            body.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0));
+
+            ExpandableAnimator anim = new ExpandableAnimator(body, height, 0, arrow, 0, -90);
+            anim.setDuration(300);
+            back.startAnimation(anim);
+
+            expandend = false;
+        }
+    }
+
+    private void quickCollapseGroup(View fragment) {
+        if (fragment != null) {
+            LinearLayout body = fragment.findViewById(id);
+            LinearLayout back = fragment.findViewById(R.id.expand_back);
+            ImageView arrow = fragment.findViewById(R.id.arrow);
+
             arrow.setRotation(-90);
+            body.getLayoutParams().height = 0;
+
             expandend = false;
         }
     }

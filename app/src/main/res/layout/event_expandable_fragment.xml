@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/expand_back"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -8,8 +9,7 @@
     <RelativeLayout
         android:id="@+id/head"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/darker_gray">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/arrow"
@@ -32,6 +32,12 @@
             android:textColor="@android:color/black"
             android:textSize="18sp" />
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/expandeble_divde_linde"
+        android:orientation="vertical"></LinearLayout>
 
     <LinearLayout
         android:id="@+id/body"
