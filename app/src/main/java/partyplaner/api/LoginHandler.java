@@ -93,15 +93,14 @@ public class LoginHandler {
      * @return I Objekt, das alle über die API empfangenen Daten enthält
      */
     public static I loginUser (LoginData data) {
-        //if (checkEmail(data.getEmail()) && checkPassword(data.getPassword())) {
+        if (checkEmail(data.getEmail()) && checkPassword(data.getPassword())) {
             try {
                 return APIConnectionHandler.getAPIConnectionHandler().login(data);
             } catch (IOException e) {
                 return null;
             }
-        //}
-        //Log.e("LoginHandler", "Email oder Passwort im falschen Format");
-        //return null;
+        }
+        return null;
     }
 
     /**
