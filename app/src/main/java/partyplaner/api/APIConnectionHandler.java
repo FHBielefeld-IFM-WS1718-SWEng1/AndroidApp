@@ -64,7 +64,7 @@ public class APIConnectionHandler {
 
     public boolean logout() throws IOException {
         String postResponse = delete(APIConnectionType.LOGOUT.getRoute() + "?api=" + I.getMyself().getApiKey(), null);
-        if (!postResponse.toLowerCase().contains("error")) {
+        if (postResponse != null && !postResponse.toLowerCase().contains("error")) {
             return true;
         } else {
             return false;
@@ -73,7 +73,7 @@ public class APIConnectionHandler {
 
     public boolean register(RegistrationData data) throws IOException {
         String postResponse = post(APIConnectionType.REGISTER.getRoute(), gson.toJson(data));
-        if (!postResponse.toLowerCase().contains("error")) {
+        if (postResponse != null && !postResponse.toLowerCase().contains("error")) {
             return true;
         } else {
             return false;
