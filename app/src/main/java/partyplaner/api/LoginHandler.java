@@ -122,4 +122,12 @@ public class LoginHandler {
         }
         return false;
     }
+
+    public static boolean logout() {
+        try {
+            return APIConnectionHandler.getAPIConnectionHandler().logout();
+        } catch (IOException e) {
+            return false;
+        }
+    }
 }
