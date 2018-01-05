@@ -94,12 +94,12 @@
 
                 <EditText
                     android:id="@+id/EditFirstName"
-                    android:labelFor="@+id/EditFirstName"
-                    android:layout_width="0dp"
+                    android:layout_width="242dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:ems="10"
                     android:inputType="textPersonName"
+                    android:labelFor="@+id/EditFirstName"
                     android:text="@string/horst_teesofa"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toTopOf="@+id/GenderTextEdit"
@@ -107,7 +107,7 @@
 
                 <EditText
                     android:id="@+id/EditGender"
-                    android:layout_width="0dp"
+                    android:layout_width="242dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:ems="10"
@@ -119,7 +119,7 @@
 
                 <EditText
                     android:id="@+id/EditBirthdate"
-                    android:layout_width="0dp"
+                    android:layout_width="242dp"
                     android:layout_height="46dp"
                     android:layout_marginEnd="8dp"
                     android:ems="10"
@@ -131,7 +131,7 @@
 
                 <EditText
                     android:id="@+id/EditEmail"
-                    android:layout_width="0dp"
+                    android:layout_width="242dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:ems="10"
