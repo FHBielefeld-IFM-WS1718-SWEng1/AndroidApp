@@ -52,4 +52,6 @@
     <string name="poll_question_hint">Frage hier eingeben...</string>
     <string name="poll_plus">+</string>
     <string name="poll_send">Senden</string>
+    <string name="gender">Gender :</string>
+    <string name="e_mail">E-Mail :</string>
 </resources>
