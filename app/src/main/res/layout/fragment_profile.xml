@@ -78,18 +78,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/BirthdateText" />
 
-                <Button
-                    android:id="@+id/CreateButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/profildaten_erstellen"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/EmailText" />
-
                 <ScrollView
                     android:id="@+id/ZukünftigeVeranstaltungView"
                     android:layout_width="0dp"
@@ -143,24 +131,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:text="@string/zukünftige_veranstaltung"
                     android:textColor="@android:color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/CreateButton"></TextView>
-
-                <Button
-                    android:id="@+id/DeleteButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:text="@string/nutzer_löschen"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/VergangeneVeranstaltungView" />
+                    app:layout_constraintTop_toBottomOf="@+id/EmailTextView"></TextView>
 
                 <TextView
                     android:id="@+id/NameTextView"
