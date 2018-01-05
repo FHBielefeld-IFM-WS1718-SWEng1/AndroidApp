@@ -85,6 +85,18 @@ public class APIConnectionHandler {
         return null;
     }
 
+    public String get(String url) {
+        Connection conn = new Connection();
+        try {
+            Response response= conn.execute(baseURL + url, null).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
     private Response connect(String url, String data) throws IOException {
         OkHttpClient client = new OkHttpClient();
 
