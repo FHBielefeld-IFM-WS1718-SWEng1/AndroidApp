@@ -129,76 +129,6 @@ public class VeranstaltungTest {
                                 0)));
         linearLayout.perform(scrollTo(), click());
 
-        ViewInteraction relativeLayout3 = onView(
-                allOf(withId(R.id.head),
-                        childAtPosition(
-                                allOf(withId(R.id.expand_back),
-                                        childAtPosition(
-                                                withId(R.id.eventBody),
-                                                0)),
-                                0)));
-        relativeLayout3.perform(scrollTo(), click());
-
-        ViewInteraction relativeLayout4 = onView(
-                allOf(withId(R.id.head),
-                        childAtPosition(
-                                allOf(withId(R.id.expand_back),
-                                        childAtPosition(
-                                                withId(R.id.eventBody),
-                                                1)),
-                                0)));
-        relativeLayout4.perform(scrollTo(), click());
-
-        ViewInteraction relativeLayout5 = onView(
-                allOf(withId(R.id.head),
-                        childAtPosition(
-                                allOf(withId(R.id.expand_back),
-                                        childAtPosition(
-                                                withId(R.id.eventBody),
-                                                2)),
-                                0)));
-        relativeLayout5.perform(scrollTo(), click());
-
-        ViewInteraction relativeLayout6 = onView(
-                allOf(withId(R.id.head),
-                        childAtPosition(
-                                allOf(withId(R.id.expand_back),
-                                        childAtPosition(
-                                                withId(R.id.eventBody),
-                                                3)),
-                                0)));
-        relativeLayout6.perform(scrollTo(), click());
-
-        ViewInteraction relativeLayout7 = onView(
-                allOf(withId(R.id.head),
-                        childAtPosition(
-                                allOf(withId(R.id.expand_back),
-                                        childAtPosition(
-                                                withId(R.id.eventBody),
-                                                4)),
-                                0)));
-        relativeLayout7.perform(scrollTo(), click());
-
-        ViewInteraction relativeLayout8 = onView(
-                allOf(withId(R.id.head),
-                        childAtPosition(
-                                allOf(withId(R.id.expand_back),
-                                        childAtPosition(
-                                                withId(R.id.eventBody),
-                                                5)),
-                                0)));
-        relativeLayout8.perform(scrollTo(), click());
-
-        ViewInteraction relativeLayout9 = onView(
-                allOf(withId(R.id.head),
-                        childAtPosition(
-                                allOf(withId(R.id.expand_back),
-                                        childAtPosition(
-                                                withId(R.id.eventBody),
-                                                6)),
-                                0)));
-        relativeLayout9.perform(scrollTo(), click());
-
         ViewInteraction imageView = onView(
                 allOf(withId(R.id.imageView7),
                         childAtPosition(
@@ -250,7 +180,7 @@ public class VeranstaltungTest {
         textView4.check(matches(isDisplayed()));
 
         ViewInteraction textView5 = onView(
-                allOf(withId(R.id.event_description), withText("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa..."),
+                allOf(withId(R.id.event_description),
                         childAtPosition(
                                 childAtPosition(
                                         IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class),
@@ -260,7 +190,7 @@ public class VeranstaltungTest {
         textView5.check(matches(isDisplayed()));
 
         ViewInteraction textView6 = onView(
-                allOf(withId(R.id.event_what), withText("Feier"),
+                allOf(withId(R.id.event_what),
                         childAtPosition(
                                 childAtPosition(
                                         IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
@@ -270,7 +200,7 @@ public class VeranstaltungTest {
         textView6.check(matches(isDisplayed()));
 
         ViewInteraction textView7 = onView(
-                allOf(withId(R.id.event_who), withText("Tim"),
+                allOf(withId(R.id.event_who),
                         childAtPosition(
                                 childAtPosition(
                                         IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
@@ -280,7 +210,7 @@ public class VeranstaltungTest {
         textView7.check(matches(isDisplayed()));
 
         ViewInteraction textView8 = onView(
-                allOf(withId(R.id.event_where), withText("Hier"),
+                allOf(withId(R.id.event_where),
                         childAtPosition(
                                 childAtPosition(
                                         IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
@@ -290,7 +220,7 @@ public class VeranstaltungTest {
         textView8.check(matches(isDisplayed()));
 
         ViewInteraction textView9 = onView(
-                allOf(withId(R.id.event_when), withText("Jetzt"),
+                allOf(withId(R.id.event_when),
                         childAtPosition(
                                 childAtPosition(
                                         IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
@@ -308,6 +238,17 @@ public class VeranstaltungTest {
                                 2),
                         isDisplayed()));
         button.check(matches(isDisplayed()));
+
+//Gallerie öffnen
+        ViewInteraction relativeLayout3 = onView(
+                allOf(withId(R.id.head),
+                        childAtPosition(
+                                allOf(withId(R.id.expand_back),
+                                        childAtPosition(
+                                                withId(R.id.eventBody),
+                                                0)),
+                                0)));
+        relativeLayout3.perform(scrollTo(), click());
 
         ViewInteraction textView10 = onView(
                 allOf(withId(R.id.expandableTitle), withText("Gallerie"),
@@ -351,6 +292,28 @@ public class VeranstaltungTest {
                                 0),
                         isDisplayed()));
         button2.check(matches(isDisplayed()));
+
+        relativeLayout3 = onView(
+                allOf(withId(R.id.head),
+                        childAtPosition(
+                                allOf(withId(R.id.expand_back),
+                                        childAtPosition(
+                                                withId(R.id.eventBody),
+                                                0)),
+                                0)));
+        relativeLayout3.perform(scrollTo(), click());
+
+
+        //Aufgaben
+        ViewInteraction relativeLayout4 = onView(
+                allOf(withId(R.id.head),
+                        childAtPosition(
+                                allOf(withId(R.id.expand_back),
+                                        childAtPosition(
+                                                withId(R.id.eventBody),
+                                                1)),
+                                0)));
+        relativeLayout4.perform(scrollTo(), click());
 
         ViewInteraction imageView3 = onView(
                 allOf(withId(R.id.arrow), withContentDescription("arrow"),
@@ -426,6 +389,28 @@ public class VeranstaltungTest {
                         isDisplayed()));
         textView15.check(matches(isDisplayed()));
 
+        relativeLayout4 = onView(
+                allOf(withId(R.id.head),
+                        childAtPosition(
+                                allOf(withId(R.id.expand_back),
+                                        childAtPosition(
+                                                withId(R.id.eventBody),
+                                                1)),
+                                0)));
+        relativeLayout4.perform(scrollTo(), click());
+
+
+        //TOD.O
+        ViewInteraction relativeLayout5 = onView(
+                allOf(withId(R.id.head),
+                        childAtPosition(
+                                allOf(withId(R.id.expand_back),
+                                        childAtPosition(
+                                                withId(R.id.eventBody),
+                                                2)),
+                                0)));
+        relativeLayout5.perform(scrollTo(), click());
+
         ViewInteraction imageView4 = onView(
                 allOf(withId(R.id.arrow), withContentDescription("arrow"),
                         childAtPosition(
@@ -490,6 +475,28 @@ public class VeranstaltungTest {
                         isDisplayed()));
         textView18.check(matches(isDisplayed()));
 
+        relativeLayout5 = onView(
+                allOf(withId(R.id.head),
+                        childAtPosition(
+                                allOf(withId(R.id.expand_back),
+                                        childAtPosition(
+                                                withId(R.id.eventBody),
+                                                2)),
+                                0)));
+        relativeLayout5.perform(scrollTo(), click());
+
+
+        //Gäste
+        ViewInteraction relativeLayout6 = onView(
+                allOf(withId(R.id.head),
+                        childAtPosition(
+                                allOf(withId(R.id.expand_back),
+                                        childAtPosition(
+                                                withId(R.id.eventBody),
+                                                3)),
+                                0)));
+        relativeLayout6.perform(scrollTo(), click());
+
         ViewInteraction imageView5 = onView(
                 allOf(withId(R.id.arrow), withContentDescription("arrow"),
                         childAtPosition(
@@ -553,6 +560,28 @@ public class VeranstaltungTest {
                         isDisplayed()));
         textView22.check(matches(isDisplayed()));
 
+        relativeLayout6 = onView(
+                allOf(withId(R.id.head),
+                        childAtPosition(
+                                allOf(withId(R.id.expand_back),
+                                        childAtPosition(
+                                                withId(R.id.eventBody),
+                                                3)),
+                                0)));
+        relativeLayout6.perform(scrollTo(), click());
+
+
+        //Abstimmungen
+        ViewInteraction relativeLayout7 = onView(
+                allOf(withId(R.id.head),
+                        childAtPosition(
+                                allOf(withId(R.id.expand_back),
+                                        childAtPosition(
+                                                withId(R.id.eventBody),
+                                                4)),
+                                0)));
+        relativeLayout7.perform(scrollTo(), click());
+
         ViewInteraction imageView6 = onView(
                 allOf(withId(R.id.arrow), withContentDescription("arrow"),
                         childAtPosition(
@@ -596,6 +625,28 @@ public class VeranstaltungTest {
                                 0),
                         isDisplayed()));
         button4.check(matches(isDisplayed()));
+
+        relativeLayout7 = onView(
+                allOf(withId(R.id.head),
+                        childAtPosition(
+                                allOf(withId(R.id.expand_back),
+                                        childAtPosition(
+                                                withId(R.id.eventBody),
+                                                4)),
+                                0)));
+        relativeLayout7.perform(scrollTo(), click());
+
+
+        //Bewertungen
+        ViewInteraction relativeLayout8 = onView(
+                allOf(withId(R.id.head),
+                        childAtPosition(
+                                allOf(withId(R.id.expand_back),
+                                        childAtPosition(
+                                                withId(R.id.eventBody),
+                                                5)),
+                                0)));
+        relativeLayout8.perform(scrollTo(), click());
 
         ViewInteraction imageView7 = onView(
                 allOf(withId(R.id.arrow), withContentDescription("arrow"),
@@ -679,6 +730,28 @@ public class VeranstaltungTest {
                         isDisplayed()));
         textView25.check(matches(isDisplayed()));
 
+        relativeLayout8 = onView(
+                allOf(withId(R.id.head),
+                        childAtPosition(
+                                allOf(withId(R.id.expand_back),
+                                        childAtPosition(
+                                                withId(R.id.eventBody),
+                                                5)),
+                                0)));
+        relativeLayout8.perform(scrollTo(), click());
+
+
+        //Kommentare
+        ViewInteraction relativeLayout9 = onView(
+                allOf(withId(R.id.head),
+                        childAtPosition(
+                                allOf(withId(R.id.expand_back),
+                                        childAtPosition(
+                                                withId(R.id.eventBody),
+                                                6)),
+                                0)));
+        relativeLayout9.perform(scrollTo(), click());
+
         ViewInteraction imageView10 = onView(
                 allOf(withId(R.id.arrow), withContentDescription("arrow"),
                         childAtPosition(
@@ -731,6 +804,16 @@ public class VeranstaltungTest {
                                 1),
                         isDisplayed()));
         imageView11.check(matches(isDisplayed()));
+
+        relativeLayout9 = onView(
+                allOf(withId(R.id.head),
+                        childAtPosition(
+                                allOf(withId(R.id.expand_back),
+                                        childAtPosition(
+                                                withId(R.id.eventBody),
+                                                6)),
+                                0)));
+        relativeLayout9.perform(scrollTo(), click());
 
     }
 
