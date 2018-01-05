@@ -8,5 +8,20 @@ enum RouteType {
     GET,
     POST,
     PUT,
-    DELETE
+    DELETE;
+
+    public static RouteType stringToRoute(String name) {
+        switch (name) {
+            case "GET":
+                return GET;
+            case "POST":
+                return POST;
+            case "PUT":
+                return PUT;
+            case "DELETE":
+                return DELETE;
+            default:
+                return null;
+        }
+    }
 }

@@ -28,7 +28,7 @@ public class APIConnectionHandler {
         @Override
         protected Response doInBackground(String... arg0) {
             try {
-                return connect(arg0[0], arg0[1]);
+                return connect(arg0[0], RouteType.stringToRoute(arg0[1]), arg0[2]);
             } catch (IOException e) {
                 e.printStackTrace();
                 return null;
@@ -62,6 +62,15 @@ public class APIConnectionHandler {
         }
     }
 
+    public boolean logout() throws IOException {
+        String postResponse = delete(APIConnectionType.LOGOUT.getRoute() + "?api=" + I.getMyself().getApiKey(), null);
+        if (!postResponse.toLowerCase().contains("error")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public boolean register(RegistrationData data) throws IOException {
         String postResponse = post(APIConnectionType.REGISTER.getRoute(), gson.toJson(data));
         if (!postResponse.toLowerCase().contains("error")) {
@@ -75,7 +84,7 @@ public class APIConnectionHandler {
 
         Connection conn = new Connection();
         try {
-            Response response= conn.execute(baseURL + url, data).get();
+            Response response = conn.execute(baseURL + url, "POST", data).get();
             return  response.body().string();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -85,19 +94,56 @@ public class APIConnectionHandler {
         return null;
     }
 
-    private Response connect(String url, String data) throws IOException {
+    private String delete(String url, String data) throws IOException {
+
+        Connection conn = new Connection();
+        try {
+            Response response = conn.execute(baseURL + url, "DELETE", data).get();
+            return  response.body().string();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private Response connect(String url, RouteType route,  String data) throws IOException {
         OkHttpClient client = new OkHttpClient();
+        Request request = null;
 
         MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(mediaType, data);
-        Request request = new Request.Builder()
-                .url(url)
-                .post(body)
-                .addHeader("Content-Type", "application/json")
-                .addHeader("Cache-Control", "no-cache")
-                .build();
+        switch (route) {
+            case GET:
+                break;
+            case PUT:
+                break;
+            case POST:
+                RequestBody body = RequestBody.create(mediaType, data);
+                request = new Request.Builder()
+                        .url(url)
+                        .post(body)
+                        .addHeader("Content-Type", "application/json")
+                        .addHeader("Cache-Control", "no-cache")
+                        .build();
+                break;
+            case DELETE:
+                body = RequestBody.create(mediaType, data);
+                request = new Request.Builder()
+                        .url(url)
+                        .post(body)
+                        .addHeader("Content-Type", "application/json")
+                        .addHeader("Cache-Control", "no-cache")
+                        .build();
+                break;
+            default:
+                break;
+        }
 
-        Response response = client.newCall(request).execute();
-        return response;
+        if (request == null) {
+            Response response = client.newCall(request).execute();
+            return response;
+        }
+        return null;
     }
 }

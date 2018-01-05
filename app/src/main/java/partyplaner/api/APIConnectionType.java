@@ -6,7 +6,7 @@ package partyplaner.api;
 
 enum APIConnectionType {
     LOGIN("/login", RouteType.POST, false),
-    DELETE("/logout", RouteType.DELETE, false),
+    LOGOUT("/logout", RouteType.DELETE, false),
     REGISTER("/register", RouteType.POST, false);
 
 
