@@ -54,7 +54,7 @@ public class APIConnectionHandler {
     }
 
     public I login(LoginData data) throws IOException {
-        String postResponse = post(baseURL+ APIConnectionType.LOGIN.getRoute(), gson.toJson(data));
+        String postResponse = post(APIConnectionType.LOGIN.getRoute(), gson.toJson(data));
         if (!postResponse.toLowerCase().contains("error")) {
             return gson.fromJson(postResponse, I.class);
         } else {
@@ -63,7 +63,7 @@ public class APIConnectionHandler {
     }
 
     public boolean register(RegistrationData data) throws IOException {
-        String postResponse = post(baseURL+ APIConnectionType.REGISTER.getRoute(), gson.toJson(data));
+        String postResponse = post(APIConnectionType.REGISTER.getRoute(), gson.toJson(data));
         if (!postResponse.toLowerCase().contains("error")) {
             return true;
         } else {
@@ -75,7 +75,7 @@ public class APIConnectionHandler {
 
         Connection conn = new Connection();
         try {
-            Response response= conn.execute(url, data).get();
+            Response response= conn.execute(baseURL + url, data).get();
             return  response.body().string();
         } catch (InterruptedException e) {
             e.printStackTrace();
