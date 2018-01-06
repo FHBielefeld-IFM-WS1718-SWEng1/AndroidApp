@@ -9,8 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.google.gson.Gson;
+
 import java.util.Random;
 
+import partyplaner.api.GeneralAPIRequestHandler;
+import partyplaner.api.RouteType;
+import partyplaner.data.party.Party;
+import partyplaner.data.user.I;
+import partyplaner.partyplaner.Keys;
 import partyplaner.partyplaner.R;
 
 /**
@@ -20,6 +27,8 @@ import partyplaner.partyplaner.R;
 public class HomeFragment extends Fragment{
 
     private LinearLayout partyHolder;
+    private Party[] parties;
+    private Gson gson;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,26 +36,40 @@ public class HomeFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         partyHolder = view.findViewById(R.id.party_list);
 
+        gson = new Gson();
+        parties = loadData();
         updateParties();
 
         return view;
     }
 
+    private Party[] loadData() {
+        String json = GeneralAPIRequestHandler.request("/party?api=" + I.getMyself().getApiKey(), RouteType.GET, null);
+        json = json.replaceAll(".*?\\[", "[");
+        json = json.replaceAll("].", "]");
+        return gson.fromJson(json, Party[].class);
+    }
+
     private void updateParties() {
-        if(partyHolder != null)
-            partyHolder.removeAllViews();
+        partyHolder.removeAllViews();
 
-        int partyCount = getPartyCount();
-
-        for (int i = 0; i <= partyCount; i++) {
-            addParty();
+        for (Party party: parties) {
+            addParty(party);
         }
     }
 
-    private void addParty() {
+    private void addParty(Party party) {
+        Bundle args = new Bundle();
+        args.putString(Keys.EXTRA_PARTY, party.getName());
+        args.putString(Keys.EXTRA_WHEN, party.getStartDate());
+        args.putString(Keys.EXTRA_DESCRIPTION, party.getDescription());
+        args.putInt(Keys.EXTRA_USERID, party.getUserID());
+        PartyHomeFragment partyHomeFragment = new PartyHomeFragment();
+        partyHomeFragment.setArguments(args);
+
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.party_list, new PartyHomeFragment());
+        fragmentTransaction.add(R.id.party_list, partyHomeFragment);
         fragmentTransaction.commit();
     }
 

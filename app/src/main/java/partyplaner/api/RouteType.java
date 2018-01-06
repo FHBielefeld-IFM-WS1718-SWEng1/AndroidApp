@@ -4,7 +4,7 @@ package partyplaner.api;
  * Created by André on 08.12.2017.
  */
 
-enum RouteType {
+public enum RouteType {
     GET,
     POST,
     PUT,

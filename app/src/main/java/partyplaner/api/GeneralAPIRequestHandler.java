@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class GeneralAPIRequestHandler {
 
-    public String request(String url, RouteType routeType, String data) {
+    public static String request(String url, RouteType routeType, String data) {
         try {
             switch (routeType) {
                 case GET:

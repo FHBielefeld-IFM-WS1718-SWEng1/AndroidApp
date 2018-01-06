@@ -10,10 +10,16 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
+import partyplaner.api.GeneralAPIRequestHandler;
+import partyplaner.api.RouteType;
+import partyplaner.data.party.Party;
 import partyplaner.data.party.PartyList;
 import partyplaner.data.user.I;
 import partyplaner.partyplaner.ContactForm.ContactFragment;
@@ -27,6 +33,9 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static int currentTab = R.id.home;
+    private Party[] parties;
+    private Gson gson;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,13 +53,18 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(currentTab);
 
+        gson = new Gson();
         loadData();
 
         setActiveFragment(currentTab);
     }
 
     private void loadData() {
-        
+        String json = GeneralAPIRequestHandler.request("/party?api=" + I.getMyself().getApiKey(), RouteType.GET, null);
+        json = json.replaceAll(".*?\\[", "[");
+        json = json.replaceAll("].", "]");
+        parties = gson.fromJson(json, Party[].class);
+
     }
 
     @Override

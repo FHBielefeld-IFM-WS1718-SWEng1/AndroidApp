@@ -3,10 +3,14 @@ package partyplaner.partyplaner.home;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.Arrays;
 
 import partyplaner.partyplaner.EventMainActivity;
 import partyplaner.partyplaner.Keys;
@@ -22,6 +26,11 @@ public class PartyHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_party, container, false);
+
+        Bundle args = getArguments();
+
+        setText(view, args);
+
         LinearLayout background = view.findViewById(R.id.invited_event_back);
         background.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,5 +41,29 @@ public class PartyHomeFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    private void setText(View view, Bundle args) {
+        TextView name = view.findViewById(R.id.textPartyname);
+        name.setText(args.getString(Keys.EXTRA_PARTY));
+
+        TextView when = view.findViewById(R.id.textWhen);
+        String date = parseDate(args.getString(Keys.EXTRA_WHEN));
+        when.setText("Wann? " + date);
+
+        TextView description = view.findViewById(R.id.textDescription);
+        description.setText(args.getString(Keys.EXTRA_DESCRIPTION));
+
+        TextView who = view.findViewById(R.id.textWho);
+        //TODO User aus der API holen
+    }
+
+    private String parseDate(String when) {
+        String[] timeDate = when.split("T");
+        Log.e("parse Date", Arrays.toString(timeDate));
+        String[] date = timeDate[0].split("-");
+        Log.e("parser", timeDate[1].split(".").length + "");
+
+        return date[2] + "." + date[1] + "." + date[0] + ", " + timeDate[1].substring(0, 5) + "Uhr";
     }
 }
