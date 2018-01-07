@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,11 +35,15 @@ public class HomeFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        partyHolder = view.findViewById(R.id.party_list);
 
-        gson = new Gson();
-        parties = loadData();
-        updateParties();
+        //keine Doppelten Partys, wenn das Handy gekippt wird
+        if (savedInstanceState == null) {
+            partyHolder = view.findViewById(R.id.party_list);
+
+            gson = new Gson();
+            parties = loadData();
+            updateParties();
+        }
 
         return view;
     }
@@ -51,7 +56,8 @@ public class HomeFragment extends Fragment{
     }
 
     private void updateParties() {
-        partyHolder.removeAllViews();
+        partyHolder.removeAllViewsInLayout();
+        Log.e("Home", "parties:" + parties.length);
 
         for (Party party: parties) {
             addParty(party);
@@ -71,9 +77,5 @@ public class HomeFragment extends Fragment{
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.party_list, partyHomeFragment);
         fragmentTransaction.commit();
-    }
-
-    private int getPartyCount() {
-        return new Random().nextInt(6) + 2;
     }
 }

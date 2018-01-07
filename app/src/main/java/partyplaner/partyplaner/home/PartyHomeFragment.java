@@ -60,9 +60,7 @@ public class PartyHomeFragment extends Fragment {
 
     private String parseDate(String when) {
         String[] timeDate = when.split("T");
-        Log.e("parse Date", Arrays.toString(timeDate));
         String[] date = timeDate[0].split("-");
-        Log.e("parser", timeDate[1].split(".").length + "");
 
         return date[2] + "." + date[1] + "." + date[0] + ", " + timeDate[1].substring(0, 5) + "Uhr";
     }
