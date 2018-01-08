@@ -19,7 +19,7 @@ public class Party implements Serializable{
     private String startDate;
     private String enddate;
     private String location;
-    private int userId;
+    private int user_id;
     private boolean ersteller;
 
     private User organizer;
@@ -99,6 +99,10 @@ public class Party implements Serializable{
     }
 
     public int getUserID() {
-        return userId;
+        return user_id;
+    }
+
+    public boolean isErsteller() {
+        return ersteller;
     }
 }

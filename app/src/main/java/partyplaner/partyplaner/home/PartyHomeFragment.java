@@ -10,8 +10,14 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.util.Arrays;
 
+import partyplaner.api.GeneralAPIRequestHandler;
+import partyplaner.api.RouteType;
+import partyplaner.data.user.I;
+import partyplaner.data.user.User;
 import partyplaner.partyplaner.EventMainActivity;
 import partyplaner.partyplaner.Keys;
 import partyplaner.partyplaner.R;
@@ -22,12 +28,16 @@ import partyplaner.partyplaner.R;
 
 public class PartyHomeFragment extends Fragment {
 
+    private Gson gson;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_party, container, false);
 
         Bundle args = getArguments();
+
+        gson = new Gson();
 
         setText(view, args);
 
@@ -55,7 +65,16 @@ public class PartyHomeFragment extends Fragment {
         description.setText(args.getString(Keys.EXTRA_DESCRIPTION));
 
         TextView who = view.findViewById(R.id.textWho);
-        //TODO User aus der API holen
+        User owner = getUser(args);
+        who.setText("Wer? " + owner.getName());
+    }
+
+    private User getUser(Bundle args) {
+        int userId = args.getInt(Keys.EXTRA_USERID);
+        String reqeust = "/user/" + userId + "?api=" + I.getMyself().getApiKey();
+        String ownerJson = GeneralAPIRequestHandler.request(
+               reqeust , RouteType.GET, null);
+        return gson.fromJson(ownerJson, User.class);
     }
 
     private String parseDate(String when) {

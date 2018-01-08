@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+
 import partyplaner.api.GeneralAPIRequestHandler;
 import partyplaner.api.RouteType;
 import partyplaner.data.party.Party;
@@ -30,7 +32,7 @@ import partyplaner.partyplaner.ownEvents.OwnEventsFragment;
 import partyplaner.partyplaner.Imprint.ImprintFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, IFragmentDataManeger {
 
     private static int currentTab = R.id.home;
     private Party[] parties;
@@ -64,7 +66,6 @@ public class MainActivity extends AppCompatActivity
         json = json.replaceAll(".*?\\[", "[");
         json = json.replaceAll("].", "]");
         parties = gson.fromJson(json, Party[].class);
-
     }
 
     @Override
@@ -152,5 +153,21 @@ public class MainActivity extends AppCompatActivity
         transaction.replace(R.id.content, fragment);
 
         transaction.commit();
+    }
+
+    @Override
+    public Party[] getParties() {
+        return parties;
+    }
+
+    @Override
+    public Party[] getOwnParties() {
+        ArrayList<Party> ownParties = new ArrayList<>();
+        for (Party party : parties) {
+            if (party.isErsteller()) {
+                ownParties.add(party);
+            }
+        }
+        return ownParties.toArray(new Party[ownParties.size()]);
     }
 }
