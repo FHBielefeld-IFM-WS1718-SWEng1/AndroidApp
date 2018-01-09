@@ -21,6 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+import partyplaner.data.user.Gender;
 import partyplaner.data.user.I;
 import partyplaner.partyplaner.R;
 
@@ -41,9 +42,9 @@ public class ProfileFragment extends Fragment {
         TextView nameText = view.findViewById(R.id.NameTextView);
         nameText.setText(profil.getName());
         TextView adressText = view.findViewById(R.id.GenderTextView);
-        adressText.setText(profil.getGender() + "");
+        adressText.setText(Gender.getGenderNameByID(profil.getGender()));
         TextView birthdateText = view.findViewById(R.id.BirthdateTextView);
-        birthdateText.setText(profil.getBirthdate());
+        birthdateText.setText(formatDate(profil.getBirthdate()));
         TextView emailText = view.findViewById(R.id.EmailTextView);
         emailText.setText(profil.getEmail());
 
@@ -85,6 +86,11 @@ public class ProfileFragment extends Fragment {
                 e.printStackTrace();
             }
         }
+    }
+
+    private String formatDate(String date) {
+        String[] part = date.split("-");
+        return part[2] + part[1] + part[0];
     }
 
     //TODO hochladen des Images

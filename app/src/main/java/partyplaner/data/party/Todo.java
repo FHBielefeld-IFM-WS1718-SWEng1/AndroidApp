@@ -5,4 +5,19 @@ package partyplaner.data.party;
  */
 
 public class Todo {
+    private String text;
+    private int status;
+
+    public Todo(String text, int status) {
+        this.text = text;
+        this.status = status;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public int getStatus() {
+        return status;
+    }
 }

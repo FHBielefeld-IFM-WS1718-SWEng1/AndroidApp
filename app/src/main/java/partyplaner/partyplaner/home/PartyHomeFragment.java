@@ -29,6 +29,7 @@ import partyplaner.partyplaner.R;
 public class PartyHomeFragment extends Fragment {
 
     private Gson gson;
+    private int id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,7 +37,7 @@ public class PartyHomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home_party, container, false);
 
         Bundle args = getArguments();
-
+        id = args.getInt(Keys.EXTRA_PARTYID);
         gson = new Gson();
 
         setText(view, args);
@@ -47,6 +48,7 @@ public class PartyHomeFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), EventMainActivity.class);
                 intent.putExtra(Keys.EXTRA_OWNER, true);
+                intent.putExtra(Keys.EXTRA_PARTYID, id);
                 startActivity(intent);
             }
         });

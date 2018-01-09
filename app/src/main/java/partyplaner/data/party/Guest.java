@@ -12,18 +12,18 @@ import partyplaner.data.user.User;
 
 public class Guest extends User{
 
-    private InviteState inviteState;
+    private int status;
     private boolean admin;
     public Guest(int id, String email, String username,
                 String birthday, int gender, Image profilePicture,
-                 InviteState inviteState, boolean admin) {
+                 int status, boolean admin) {
         super(id, email, username, birthday, gender, profilePicture);
-        this.inviteState = inviteState;
+        this.status = status;
         this.admin = admin;
     }
 
-    public InviteState getInviteState() {
-        return inviteState;
+    public int getInviteState() {
+        return status;
     }
 
     public boolean isAdmin() {

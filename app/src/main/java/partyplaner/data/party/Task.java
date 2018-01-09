@@ -8,25 +8,25 @@ import partyplaner.data.user.User;
 
 public class Task {
 
-    private String title;
-    private User responsibleUser;
-    private boolean done;
+    private String text;
+    private User user;
+    private int status;
 
-    public Task(String title, User responsibleUser, boolean done) {
-        this.title = title;
-        this.responsibleUser = responsibleUser;
-        this.done = done;
+    public Task(String title, User responsibleUser, int status) {
+        this.text = title;
+        this.user = responsibleUser;
+        this.status = status;
     }
 
     public String getTitle() {
-        return title;
+        return text;
     }
 
     public User getResponsibleUser() {
-        return responsibleUser;
+        return user;
     }
 
-    public boolean isDone() {
-        return done;
+    public int isDone() {
+        return status;
     }
 }

@@ -16,7 +16,7 @@ import partyplaner.partyplaner.R;
  * Created by malte on 23.11.2017.
  */
 
-public class TODO extends Fragment {
+public class TODOFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -71,6 +71,7 @@ public class HomeFragment extends Fragment{
     private void addParty(Party party) {
         Bundle args = new Bundle();
         args.putString(Keys.EXTRA_PARTY, party.getName());
+        args.putInt(Keys.EXTRA_PARTYID, party.getId());
         args.putString(Keys.EXTRA_WHEN, party.getStartDate());
         args.putString(Keys.EXTRA_DESCRIPTION, party.getDescription());
         args.putInt(Keys.EXTRA_USERID, party.getUserID());

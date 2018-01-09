@@ -28,6 +28,7 @@ public class APIConnectionHandler {
         @Override
         protected Response doInBackground(String... arg0) {
             try {
+                Log.e("APIConnectionHandler", "doInBackground");
                 return connect(arg0[0], RouteType.stringToRoute(arg0[1]), arg0[2]);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -82,8 +83,10 @@ public class APIConnectionHandler {
 
     String get(String url) throws IOException {
         Connection conn = new Connection();
+        Log.e("APIConnectionHandler", "get()");
         try {
             Response response = conn.execute(baseURL + url, "GET", null).get();
+            Log.e("APIConnectionHandler", "response");
             if (response != null) {
                 return response.body().string();
             }
@@ -143,48 +146,35 @@ public class APIConnectionHandler {
 
     private Response connect(String url, RouteType route,  String data) throws IOException {
         OkHttpClient client = new OkHttpClient();
+        Log.e("APIConnectionHandler", "connect_start");
         Request request = null;
+        Request.Builder builder = new Request.Builder()
+                .url(url);
 
         MediaType mediaType = MediaType.parse("application/json");
         switch (route) {
             case GET:
-                request = new Request.Builder()
-                        .url(url)
-                        .get()
-                        .addHeader("Content-Type", "application/json")
-                        .addHeader("Cache-Control", "no-cache")
-                        .build();
+                builder.get();
                 break;
             case PUT:
                 RequestBody body = RequestBody.create(mediaType, data);
-                request = new Request.Builder()
-                        .url(url)
-                        .put(body)
-                        .addHeader("Content-Type", "application/json")
-                        .addHeader("Cache-Control", "no-cache")
-                        .build();
+                builder.put(body);
                 break;
             case POST:
                 body = RequestBody.create(mediaType, data);
-                request = new Request.Builder()
-                        .url(url)
-                        .post(body)
-                        .addHeader("Content-Type", "application/json")
-                        .addHeader("Cache-Control", "no-cache")
-                        .build();
+                builder.post(body);
                 break;
             case DELETE:
                 body = RequestBody.create(mediaType, data);
-                request = new Request.Builder()
-                        .url(url)
-                        .post(body)
-                        .addHeader("Content-Type", "application/json")
-                        .addHeader("Cache-Control", "no-cache")
-                        .build();
+                builder.post(body);
                 break;
             default:
                 break;
         }
+        request = builder.addHeader("Content-Type", "application/json")
+                .addHeader("Cache-Control", "no-cache")
+                .build();
+        Log.e("APIConnectionHandler", "connect_end");
 
         if (request != null) {
             Response response = client.newCall(request).execute();

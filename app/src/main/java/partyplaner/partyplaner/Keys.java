@@ -26,6 +26,7 @@ public class Keys {
     public static final String EXTRA_LOCATION = "LOCATION";
     public static final String EXTRA_PARTYLIST = "PARTYLIST";
     public static final String EXTRA_PARTY = "PARTY";
+    public static final String EXTRA_PARTYID = "PARTYID";
     public static final String EXTRA_WHERE = "WHERE";
     public static final String EXTRA_DESCRIPTION = "DESCRIPTION";
     public static final String EXTRA_USERID = "USERID";

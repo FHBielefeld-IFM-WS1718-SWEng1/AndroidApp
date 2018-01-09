@@ -28,12 +28,15 @@ import partyplaner.partyplaner.Veranstaltung.EventMainFragment;
 
 public class OwnEventFragment extends Fragment {
 
+    private int id;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ownevents_ownevent, container, false);
 
         Bundle args = getArguments();
+        id = args.getInt(Keys.EXTRA_PARTYID);
         setText(view, args);
 
         LinearLayout background = view.findViewById(R.id.own_events_back);
@@ -41,7 +44,9 @@ public class OwnEventFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), EventMainActivity.class);
-                //TODO: intent.putExtra(Keys.EXTRA_OWNER, true);
+                intent.putExtra(Keys.EXTRA_OWNER, true);
+                String party = GeneralAPIRequestHandler.request("/party/" + id + "?api=" + I.getMyself().getApiKey(), RouteType.GET, null);
+                intent.putExtra(Keys.EXTRA_PARTY, party);
                 startActivity(intent);
             }
         });

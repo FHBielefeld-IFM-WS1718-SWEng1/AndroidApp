@@ -14,10 +14,12 @@ import partyplaner.data.user.User;
 
 public class Party implements Serializable{
 
+    private int id;
     private String name;
     private String description;
     private String startDate;
     private String enddate;
+    private User owner;
     private String location;
     private int user_id;
     private boolean ersteller;
@@ -27,16 +29,17 @@ public class Party implements Serializable{
 
     private List<Image> gallery;
 
-    //TODO: ToDo-/Kostenliste
-    private List<Guest> guests;
+    //TODOFragment: ToDo-/Kostenliste
     private List<Comment> comments;
     private Rating rating;
-    private List<Poll> polls;
-    private List<Task> tasks;
+    private Poll[] polls;
+    private Guest[] guests;
+    private Task[] tasks;
+    private Todo[] todo;
 
     public Party(String name, String description, User organizer, String location,
-                 GregorianCalendar dateAndTime, List<Image> gallery, List<Guest> guests,
-                 List<Comment> comments, Rating rating, List<Poll> polls, List<Task> tasks) {
+                 GregorianCalendar dateAndTime, List<Image> gallery, Guest[] guests,
+                 List<Comment> comments, Rating rating, Poll[] polls, Task[] tasks) {
         this.name = name;
         this.description = description;
         this.organizer = organizer;
@@ -48,6 +51,10 @@ public class Party implements Serializable{
         this.rating = rating;
         this.polls = polls;
         this.tasks = tasks;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -74,7 +81,7 @@ public class Party implements Serializable{
         return gallery;
     }
 
-    public List<Guest> getGuests() {
+    public Guest[] getGuests() {
         return guests;
     }
 
@@ -86,11 +93,11 @@ public class Party implements Serializable{
         return rating;
     }
 
-    public List<Task> getTasks() {
+    public Task[] getTasks() {
         return tasks;
     }
 
-    public List<Poll> getPolls() {
+    public Poll[] getPolls() {
         return polls;
     }
 
