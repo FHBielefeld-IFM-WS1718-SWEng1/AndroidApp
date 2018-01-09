@@ -18,7 +18,7 @@
     <string name="username">Benutzername</string>
     <string name="email">E-Mail</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <!--TODOFragmentTODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="betreff">Betreff :</string>
     <string name="e_mail_wiederholen">E-Mail wiederholen :</string>
