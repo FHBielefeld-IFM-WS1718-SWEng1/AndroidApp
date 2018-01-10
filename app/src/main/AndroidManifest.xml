@@ -38,5 +38,7 @@
             android:parentActivityName=".MainActivity" />
         <activity android:name=".EventMainActivity"
             android:parentActivityName=".MainActivity"></activity>
+        <service android:name="partyplaner.api.APIService"
+            android:exported="false" />
     </application>
 </manifest>

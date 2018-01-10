@@ -45,8 +45,6 @@ public class OwnEventFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), EventMainActivity.class);
                 intent.putExtra(Keys.EXTRA_OWNER, true);
-                String party = GeneralAPIRequestHandler.request("/party/" + id + "?api=" + I.getMyself().getApiKey(), RouteType.GET, null);
-                intent.putExtra(Keys.EXTRA_PARTY, party);
                 startActivity(intent);
             }
         });

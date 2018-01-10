@@ -31,4 +31,8 @@ public class Keys {
     public static final String EXTRA_DESCRIPTION = "DESCRIPTION";
     public static final String EXTRA_USERID = "USERID";
     public static final String EXTRA_WHEN = "WHEN";
+    public static final String EXTRA_REQUEST = "REQUESTTYPE";
+    public static final String EXTRA_URL = "URL";
+    public static final String EXTRA_DATA = "DATA";
+    public static final String EXTRA_SERVICE = "SERVICE_BRADCAST";
 }

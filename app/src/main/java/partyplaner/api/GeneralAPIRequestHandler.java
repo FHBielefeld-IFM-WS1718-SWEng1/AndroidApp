@@ -11,11 +11,9 @@ import java.io.IOException;
 public class GeneralAPIRequestHandler {
 
     public static String request(String url, RouteType routeType, String data) {
-        Log.e("GeneralAPIRequestHandl", "request");
         try {
             switch (routeType) {
                 case GET:
-                    Log.e("GeneralAPIRequestHandl", "GET");
                     return APIConnectionHandler.getAPIConnectionHandler().get(url);
                 case PUT:
                     return APIConnectionHandler.getAPIConnectionHandler().put(url, data);

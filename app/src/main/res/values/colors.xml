@@ -15,7 +15,8 @@
     <color name="green">#21ff19</color>
     <color name="blue">#2642fb</color>
     <color name="expandeble_backgroud">#f1f1f1</color>
-    <color name="expandeble_divde_linde">#4389a2</color>s
+    <color name="expandeble_divde_linde">#4389a2</color>
+    <color name="loadingColor">#c1f4f4f4</color>s
     <item name="visible" type="id"/>
     <item name="masked" type="id"/>
 </resources>

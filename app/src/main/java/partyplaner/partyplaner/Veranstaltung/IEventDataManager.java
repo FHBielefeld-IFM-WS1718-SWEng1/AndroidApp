@@ -9,9 +9,11 @@ import partyplaner.data.party.Task;
 
 public interface IEventDataManager {
 
-    String[] getGeneralInformations();
+    public String[] getGeneralInformations();
 
-    Guest[] getGuests();
+    public Guest[] getGuests();
 
-    Task[] getTasks();
+    public Task[] getTasks();
+
+    public boolean isOwner();
 }

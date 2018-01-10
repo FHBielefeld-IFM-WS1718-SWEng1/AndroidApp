@@ -112,4 +112,8 @@ public class Party implements Serializable{
     public boolean isErsteller() {
         return ersteller;
     }
+
+    public User getOwner() {
+        return owner;
+    }
 }
