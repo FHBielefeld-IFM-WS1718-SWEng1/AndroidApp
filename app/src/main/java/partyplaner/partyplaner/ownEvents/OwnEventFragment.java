@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 
 import partyplaner.api.GeneralAPIRequestHandler;
 import partyplaner.api.RouteType;
+import partyplaner.data.party.Party;
 import partyplaner.data.user.I;
 import partyplaner.data.user.User;
 import partyplaner.partyplaner.EventMainActivity;
@@ -57,17 +58,11 @@ public class OwnEventFragment extends Fragment {
         name.setText(args.getString(Keys.EXTRA_PARTY));
 
         TextView when = view.findViewById(R.id.textWhen);
-        String date = parseDate(args.getString(Keys.EXTRA_WHEN));
+        String date = Party.parseDate(args.getString(Keys.EXTRA_WHEN));
         when.setText("Wann? " + date);
 
         TextView description = view.findViewById(R.id.textDescription);
         description.setText(args.getString(Keys.EXTRA_DESCRIPTION));
     }
 
-    private String parseDate(String when) {
-        String[] timeDate = when.split("T");
-        String[] date = timeDate[0].split("-");
-
-        return date[2] + "." + date[1] + "." + date[0] + ", " + timeDate[1].substring(0, 5) + "Uhr";
-    }
 }

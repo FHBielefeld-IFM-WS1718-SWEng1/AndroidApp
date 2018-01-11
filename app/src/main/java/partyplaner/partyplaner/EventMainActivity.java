@@ -72,32 +72,26 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
     }
 
     @Override
-    public Guest[] getGuests() {
-        return new Guest[0];
-    }
-
-    @Override
-    public Task[] getTasks() {
-        return new Task[0];
-    }
-
-    @Override
-    public boolean isOwner() {
-        return party.isErsteller();
+    public Party getParty() {
+        return party;
     }
 
     public void receiveData(String json) {
         json = json.replaceAll(",\"ersteller\":", ",\"owner\":");
         json = json.replaceAll("User", "user");
-        Log.e("EventMainActivity", json);
 
-        party = gson.fromJson(json, Party.class);
+        if (json.contains("Error")) {
+            //TODO: Fehlerbhandlung
+        } else {
+            party = gson.fromJson(json, Party.class);
+            if (party != null) {
+                eventMainFragment.receiveData();
 
-        eventMainFragment.receiveData();
-
-        LinearLayout eventHolder = findViewById(R.id.event_loading_indicator);
-        eventHolder.setVisibility(View.INVISIBLE);
-        ProgressBar progressBar = findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.INVISIBLE);
+                LinearLayout eventHolder = findViewById(R.id.event_loading_indicator);
+                eventHolder.setVisibility(View.INVISIBLE);
+                ProgressBar progressBar = findViewById(R.id.progressBar);
+                progressBar.setVisibility(View.INVISIBLE);
+            }
+        }
     }
 }

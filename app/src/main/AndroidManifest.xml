@@ -31,11 +31,11 @@
         <activity
             android:name=".poll.CreatePoll"
             android:label="@string/poll_label_create"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".EventMainActivity" />
         <activity
             android:name=".poll.Poll"
             android:label="@string/poll_label_poll"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".EventMainActivity" />
         <activity android:name=".EventMainActivity"
             android:parentActivityName=".MainActivity"></activity>
         <service android:name="partyplaner.api.APIService"

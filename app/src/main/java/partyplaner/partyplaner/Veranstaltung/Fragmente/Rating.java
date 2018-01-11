@@ -16,7 +16,7 @@ import partyplaner.partyplaner.R;
  * Created by malte on 01.12.2017.
  */
 
-public class Rating extends Fragment {
+public class Rating extends Fragment implements IReceiveData {
     private double rating = 0.25;
     private int numRates = 2;
 
@@ -36,5 +36,10 @@ public class Rating extends Fragment {
         posRating.setLayoutParams(new LinearLayout.LayoutParams((int)(width * rating), ViewGroup.LayoutParams.MATCH_PARENT));
 
         return view;
+    }
+
+    @Override
+    public void receiveData() {
+
     }
 }

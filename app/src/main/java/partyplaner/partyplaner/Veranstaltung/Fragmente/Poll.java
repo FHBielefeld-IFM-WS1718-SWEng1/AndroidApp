@@ -18,7 +18,7 @@ import partyplaner.partyplaner.poll.CreatePoll;
  * Created by malte on 24.11.2017.
  */
 
-public class Poll extends Fragment {
+public class Poll extends Fragment implements IReceiveData {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,4 +55,10 @@ public class Poll extends Fragment {
         transaction.add(R.id.body_poll, fragment);
         transaction.commit();
     }
+
+    @Override
+    public void receiveData() {
+
+    }
+
 }

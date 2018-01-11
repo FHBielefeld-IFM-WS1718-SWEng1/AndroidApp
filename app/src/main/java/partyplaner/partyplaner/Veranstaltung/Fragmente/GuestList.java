@@ -23,7 +23,7 @@ import partyplaner.partyplaner.R;
  * Created by Jan Augstein on 30.11.2017.
  */
 
-public class GuestList extends Fragment {
+public class GuestList extends Fragment implements IReceiveData {
     private ArrayList<String> accepted = new ArrayList<>();
     private ArrayList<String> denied = new ArrayList<>();
     private ArrayList<String> pending = new ArrayList<>();
@@ -133,6 +133,11 @@ public class GuestList extends Fragment {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.add(layout, fragment);
         transaction.commit();
+    }
+
+    @Override
+    public void receiveData() {
+
     }
 
     /*

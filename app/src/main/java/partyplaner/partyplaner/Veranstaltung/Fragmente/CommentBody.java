@@ -19,7 +19,7 @@ import partyplaner.partyplaner.R;
  * Created by malte on 27.11.2017.
  */
 
-public class CommentBody extends Fragment {
+public class CommentBody extends Fragment implements IReceiveData {
 
     public static final Pattern VALID_COMMENT = Pattern.compile("[ ]*");
     public static boolean validateComment(String comment) {
@@ -58,5 +58,10 @@ public class CommentBody extends Fragment {
             transaction.add(R.id.body_comment, fragment);
             transaction.commit();
         }
+    }
+
+    @Override
+    public void receiveData() {
+
     }
 }

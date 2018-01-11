@@ -116,4 +116,15 @@ public class Party implements Serializable{
     public User getOwner() {
         return owner;
     }
+
+    public Todo[] getTodo() {
+        return todo;
+    }
+
+    static public String parseDate(String when) {
+        String[] timeDate = when.split("T");
+        String[] date = timeDate[0].split("-");
+
+        return date[2] + "." + date[1] + "." + date[0] + ", " + timeDate[1].substring(0, 5) + "Uhr";
+    }
 }

@@ -4,6 +4,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,7 @@ public class ExpandableFragment extends Fragment {
     private int id;
     private int height;
     private View view;
+    private IReceiveData fragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,15 +73,18 @@ public class ExpandableFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        LinearLayout body = view.findViewById(id);
-        body.measure(0,0);
-        height = body.getMeasuredHeight();
+        recalculateHeight();
 
+    }
+
+    public void receiveData() {
+        fragment.receiveData();
     }
 
     private void setFragment(View view, int id) {
         LinearLayout body = view.findViewById(this.id);
         body.removeAllViews();
+        fragment = (IReceiveData) EventHeaders.values()[id].getFragment();
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.add(this.id, EventHeaders.values()[id].getFragment());
@@ -99,6 +104,7 @@ public class ExpandableFragment extends Fragment {
             LinearLayout body = fragment.findViewById(id);
             LinearLayout back = fragment.findViewById(R.id.expand_back);
             ImageView arrow = fragment.findViewById(R.id.arrow);
+            recalculateHeight();
 
             ExpandableAnimator anim = new ExpandableAnimator(body, 0, height, arrow, -90, 0);
             anim.setDuration(300);
@@ -144,4 +150,10 @@ public class ExpandableFragment extends Fragment {
         }
     }
 
+    private void recalculateHeight() {
+        LinearLayout body = view.findViewById(id);
+        body.measure(0,0);
+        height = body.getMeasuredHeight();
+
+    }
 }

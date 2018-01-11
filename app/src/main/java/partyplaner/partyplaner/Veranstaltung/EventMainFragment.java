@@ -15,12 +15,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import partyplaner.data.party.Party;
 import partyplaner.partyplaner.IFragmentDataManeger;
 import partyplaner.partyplaner.Keys;
 import partyplaner.partyplaner.R;
 import partyplaner.partyplaner.Veranstaltung.Fragmente.EventHeaders;
 import partyplaner.partyplaner.Veranstaltung.Fragmente.ExpandableFragment;
 import partyplaner.partyplaner.Veranstaltung.Fragmente.Gallery;
+import partyplaner.partyplaner.Veranstaltung.Fragmente.IReceiveData;
 import partyplaner.partyplaner.Veranstaltung.Fragmente.TaskList;
 
 /**
@@ -37,6 +39,7 @@ public class EventMainFragment extends Fragment {
     private String when = "";
     private String description = "";
     private boolean shortText = true;
+    private List<ExpandableFragment> fragments = new ArrayList<>();
     private View view;
 
     List<ExpandableFragment> headers = new ArrayList<>();
@@ -55,30 +58,32 @@ public class EventMainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_event_main, container, false);
         this.view = view;
-        setUpDescription(view);
-        setUpExpandableView(view);
+        if(savedInstanceState == null) {
+            setUpDescription(view);
+            setUpExpandableView(view);
 
-        final Button more = view.findViewById(R.id.button_more);
-        more.setVisibility(View.INVISIBLE);
+            final Button more = view.findViewById(R.id.button_more);
+            more.setVisibility(View.INVISIBLE);
 
-        if (description.length() > 80) {
-            more.setVisibility(View.VISIBLE);
-            more.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    TextView description = view.findViewById(R.id.event_description);
-                    if (shortText) {
-                        description.setText(getDescription());
-                        more.setText("weniger...");
-                        shortText = false;
-                    } else {
-                        description.setText((getDescription().substring(0, 80) + "..."));
-                        more.setText("mehr...");
-                        shortText = true;
+            if (description.length() > 80) {
+                more.setVisibility(View.VISIBLE);
+                more.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        TextView description = view.findViewById(R.id.event_description);
+                        if (shortText) {
+                            description.setText(getDescription());
+                            more.setText("weniger...");
+                            shortText = false;
+                        } else {
+                            description.setText((getDescription().substring(0, 80) + "..."));
+                            more.setText("mehr...");
+                            shortText = true;
+                        }
+
                     }
-
-                }
-            });
+                });
+            }
         }
         return view;
     }
@@ -87,11 +92,14 @@ public class EventMainFragment extends Fragment {
         String[] data = this.data.getGeneralInformations();
         this.what = data[0];
         this.who = data[1];
-        this.when = data[2];
+        this.when = Party.parseDate(data[2]);
         this.where = data[3];
         this.description = data[4];
 
         setUpDescription(view);
+        for(ExpandableFragment fragment : fragments) {
+            fragment.receiveData();
+        }
     }
 
     public String getDescription(){
@@ -128,6 +136,7 @@ public class EventMainFragment extends Fragment {
         arguments.putInt(Keys.EXTRA_ID, id);
         ExpandableFragment fragment = new ExpandableFragment();
         fragment.setArguments(arguments);
+        fragments.add(fragment);
 
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.add(R.id.eventBody, fragment);

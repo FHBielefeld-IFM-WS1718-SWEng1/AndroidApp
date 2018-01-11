@@ -2,10 +2,12 @@ package partyplaner.partyplaner.Veranstaltung.Fragmente;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import partyplaner.partyplaner.Keys;
@@ -15,11 +17,15 @@ import partyplaner.partyplaner.R;
  * Created by malte on 17.11.2017.
  */
 
-public class Task extends Fragment {
+public class TaskFragment extends Fragment {
+
+    private View view;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.event_fragment_task, container, false);
+        this.view = view;
 
         Bundle arguments = getArguments();
         String name = arguments.getString(Keys.EXTRA_NAME);
@@ -38,7 +44,6 @@ public class Task extends Fragment {
         nameText.setText(name);
         taskText.setText(task);
         statusBox.setChecked(status);
-
         return view;
     }
 }

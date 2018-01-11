@@ -1,6 +1,7 @@
 package partyplaner.partyplaner.Veranstaltung;
 
 import partyplaner.data.party.Guest;
+import partyplaner.data.party.Party;
 import partyplaner.data.party.Task;
 
 /**
@@ -11,9 +12,5 @@ public interface IEventDataManager {
 
     public String[] getGeneralInformations();
 
-    public Guest[] getGuests();
-
-    public Task[] getTasks();
-
-    public boolean isOwner();
+    public Party getParty();
 }
