@@ -41,22 +41,27 @@ public class AllContacts extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_all_contacts, container, false);
         contactHolder = view.findViewById(R.id.layout_all_single_contacts);
+        contactList = data.getContacts();
         updateContacts();
         return view;
     }
     private void updateContacts() {
         if(contactHolder != null){
             contactHolder.removeAllViews();
-            for(User user: contactList){
-                addContact(user);
+            if(contactList == null){
+
+            }else {
+                for (User user : contactList) {
+                    addContact(user);
+                }
             }
         }
     }
     private void addContact(User user) {
         Bundle args = new Bundle();
         args.putString(Keys.EXTRA_NAME, user.getName());
-        //  args.putString(Keys.EXTRA_EMAIL, user.getEmail());
-        args.putString(Keys.EXTRA_PICTURE, null);
+        //args.putString(Keys.EXTRA_EMAIL, user.getEmail());
+        //args.putString(Keys.EXTRA_PICTURE, null);
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
