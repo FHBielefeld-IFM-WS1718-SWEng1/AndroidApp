@@ -86,6 +86,9 @@ public class AllContacts extends Fragment {
     private User searchContact(){
         EditText search = getView().findViewById(R.id.SearchText);
         String searched = search.getText().toString();
+        if(searched.equals("")){
+            updateContacts();
+        }
         for(User user: contactList){
             if(user.getName().equals(searched)){
                 LinearLayout searchedContact = getView().findViewById(R.id.layout_all_single_contacts);
