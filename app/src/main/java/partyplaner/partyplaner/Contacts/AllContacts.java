@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -43,8 +46,16 @@ public class AllContacts extends Fragment {
         contactHolder = view.findViewById(R.id.layout_all_single_contacts);
         contactList = data.getContacts();
         updateContacts();
+        ImageButton searchButton = view.findViewById(R.id.button_search);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchContact();
+            }
+        });
         return view;
     }
+
     private void updateContacts() {
         if(contactHolder != null){
             contactHolder.removeAllViews();
@@ -57,6 +68,7 @@ public class AllContacts extends Fragment {
             }
         }
     }
+
     private void addContact(User user) {
         Bundle args = new Bundle();
         args.putString(Keys.EXTRA_NAME, user.getName());
@@ -70,9 +82,26 @@ public class AllContacts extends Fragment {
         fragmentTransaction.add(R.id.layout_all_single_contacts, singleContact);
         fragmentTransaction.commit();
     }
-    private int getContactCount() {
-        return new Random().nextInt(6) + 2;
 
+    private User searchContact(){
+        EditText search = getView().findViewById(R.id.SearchText);
+        String searched = search.getText().toString();
+        for(User user: contactList){
+            if(user.getName().equals(searched)){
+                LinearLayout searchedContact = getView().findViewById(R.id.layout_all_single_contacts);
+                searchedContact.removeAllViews();
+                Bundle args = new Bundle();
+                args.putString(Keys.EXTRA_NAME, user.getName());
+
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                SingleContact singleContact = new SingleContact();
+                singleContact.setArguments(args);
+                fragmentTransaction.add(R.id.layout_all_single_contacts, singleContact);
+                fragmentTransaction.commit();
+            }
+        }
+        return null;
     }
 
 
