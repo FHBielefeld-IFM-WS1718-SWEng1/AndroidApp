@@ -68,10 +68,11 @@ public class MainActivity extends AppCompatActivity
         json = json.replaceAll(".*?\\[", "[");
         json = json.replaceAll("].", "]");
         parties = gson.fromJson(json, Party[].class);
-        String json2 = GeneralAPIRequestHandler.request("user/contact/?api=" + I.getMyself().getApiKey(), RouteType.GET, null);
-        json = json2.replaceAll(".*?\\[", "[");
-        json = json2.replaceAll("].", "]");
-        contactList = gson.fromJson(json, User[].class);
+        String json2 = GeneralAPIRequestHandler.request("/user/contact?api=" + I.getMyself().getApiKey(), RouteType.GET, null);
+        //Log.e("MainActivity", json2 + "");
+        json2 = json2.replaceAll(".*?\\[", "[");
+        json2 = json2.replaceAll("].", "]");
+        contactList = gson.fromJson(json2, User[].class);
     }
 
     @Override
@@ -126,9 +127,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.profile){
             setFragmentToContent(new ProfileFragment());
         } else if (id == R.id.contacts) {
+            Log.e("MainActivity", "Contact");
             AllContacts all_contacts = new AllContacts();
-            Bundle args = new Bundle();
-            args.putString(Keys.EXTRA_NAME, "");
             setFragmentToContent(new AllContacts());
         } else if (id == R.id.ownEvents) {
             OwnEventsFragment ownEvent = new OwnEventsFragment();
@@ -143,7 +143,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.impressum) {
             setFragmentToContent(new ImprintFragment());
         } else if (id == R.id.logout) {
-            logOut();
+            Log.e("MainActivity", "LogOut");
+            I.getMyself().logout();
         }
     }
 
