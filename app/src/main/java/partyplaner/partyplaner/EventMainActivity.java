@@ -58,6 +58,7 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
         apiHanlder.putExtra(Keys.EXTRA_REQUEST, "GET");
         String data = null;
         apiHanlder.putExtra(Keys.EXTRA_DATA, data);
+        apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_LOAD_PARTY);
         this.startService(apiHanlder);
 
         IntentFilter statusIntentFilter = new IntentFilter(Keys.EXTRA_SERVICE);
@@ -76,22 +77,30 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
         return party;
     }
 
-    public void receiveData(String json) {
-        json = json.replaceAll(",\"ersteller\":", ",\"owner\":");
-        json = json.replaceAll("User", "user");
+    public void receiveData(String json, String id) {
+        switch (id) {
+            case Keys.EXTRA_LOAD_PARTY:
+                json = json.replaceAll(",\"ersteller\":", ",\"owner\":");
+                json = json.replaceAll("User", "user");
 
-        if (json.contains("Error")) {
-            //TODO: Fehlerbhandlung
-        } else {
-            party = gson.fromJson(json, Party.class);
-            if (party != null) {
-                eventMainFragment.receiveData();
+                if (json.contains("Error")) {
+                    //TODO: Fehlerbhandlung
+                } else {
+                    party = gson.fromJson(json, Party.class);
+                    if (party != null) {
+                        eventMainFragment.receiveData();
 
-                LinearLayout eventHolder = findViewById(R.id.event_loading_indicator);
-                eventHolder.setVisibility(View.INVISIBLE);
-                ProgressBar progressBar = findViewById(R.id.progressBar);
-                progressBar.setVisibility(View.INVISIBLE);
-            }
+                        LinearLayout eventHolder = findViewById(R.id.event_loading_indicator);
+                        eventHolder.setVisibility(View.INVISIBLE);
+                        ProgressBar progressBar = findViewById(R.id.progressBar);
+                        progressBar.setVisibility(View.INVISIBLE);
+                    }
+                }
+                break;
+            case Keys.EXTRA_PUT_TASK:
+                Log.e("EventMainActivity", id);
+
+                break;
         }
     }
 }

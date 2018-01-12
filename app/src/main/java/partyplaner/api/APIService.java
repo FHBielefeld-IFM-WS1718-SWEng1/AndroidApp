@@ -36,9 +36,8 @@ public class APIService extends IntentService {
         String response = GeneralAPIRequestHandler.request(url, RouteType.stringToRoute(request), data);
 
         Intent localIntent = new Intent(Keys.EXTRA_SERVICE)
-                        // Puts the status into the Intent
-                        .putExtra(Keys.EXTRA_DATA, response);
-        // Broadcasts the Intent to receivers in this app.
+                        .putExtra(Keys.EXTRA_DATA, response)
+                .putExtra(Keys.EXTRA_ID, intent.getStringExtra(Keys.EXTRA_ID));
         LocalBroadcastManager.getInstance(this).sendBroadcast(localIntent);
     }
 }

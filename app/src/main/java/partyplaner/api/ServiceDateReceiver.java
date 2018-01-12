@@ -24,6 +24,6 @@ public class ServiceDateReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        main.receiveData(intent.getStringExtra(Keys.EXTRA_DATA));
+        main.receiveData(intent.getStringExtra(Keys.EXTRA_DATA), intent.getStringExtra(Keys.EXTRA_ID));
     }
 }

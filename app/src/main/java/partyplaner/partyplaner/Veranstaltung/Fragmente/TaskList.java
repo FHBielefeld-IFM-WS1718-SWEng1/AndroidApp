@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import partyplaner.data.party.Task;
+import partyplaner.data.party.Todo;
 import partyplaner.data.user.I;
 import partyplaner.data.user.User;
 import partyplaner.partyplaner.Keys;
@@ -30,6 +31,7 @@ public class TaskList extends Fragment implements IReceiveData{
     private IEventDataManager data;
     private Task[] tasks;
     private View view;
+    private boolean ersteller;
 
     @Override
     public void onAttach(Context context) {
@@ -45,7 +47,9 @@ public class TaskList extends Fragment implements IReceiveData{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.event_fragment_tasklist, container, false);
+        Log.e("TaskList", "OnCreate");
         this.view = view;
+        setTasksToFragments();
         return view;
     }
 
@@ -58,7 +62,9 @@ public class TaskList extends Fragment implements IReceiveData{
         } else {
             arguments.putBoolean(Keys.EXTRA_STATUS, false);
         }
-        arguments.putBoolean(Keys.EXTRA_OWNER, data.getParty().getOwner().getId() == I.getMyself().getId());
+        if (data.getParty() != null) {
+            arguments.putBoolean(Keys.EXTRA_OWNER, data.getParty().getOwner().getId() == I.getMyself().getId());
+        }
         TaskFragment taskFragment = new TaskFragment();
         taskFragment.setArguments(arguments);
         taskFragment.onCreate(null);
@@ -69,19 +75,27 @@ public class TaskList extends Fragment implements IReceiveData{
 
         LinearLayout linearLayout = view.findViewById(R.id.body_tasklist);
         linearLayout.refreshDrawableState();
+        view.refreshDrawableState();
     }
 
     @Override
     public void receiveData() {
-        LinearLayout linearLayout = view.findViewById(R.id.body_tasklist);
-        linearLayout.removeAllViewsInLayout();
-
         if (data.getParty() != null) {
             tasks = data.getParty().getTasks();
-            for(Task task : tasks) {
+            ersteller = data.getParty().getOwner().getId() == I.getMyself().getId();
+        }
+        setTasksToFragments();
+    }
+
+    private void setTasksToFragments() {
+        LinearLayout linearLayout = view.findViewById(R.id.body_tasklist);
+        linearLayout.removeAllViews();
+        if (tasks != null && data.getParty() != null) {
+            for (Task task : tasks) {
                 addTask(task);
             }
         }
+        linearLayout.removeAllViews();
     }
 
 }
