@@ -1,9 +1,5 @@
 package partyplaner.data.party;
 
-import android.media.Image;
-
-import java.util.GregorianCalendar;
-
 import partyplaner.data.user.User;
 
 /**
@@ -15,7 +11,7 @@ public class Guest extends User{
     private int status;
     private boolean admin;
     public Guest(int id, String email, String username,
-                String birthday, int gender, Image profilePicture,
+                String birthday, int gender, int profilePicture,
                  int status, boolean admin) {
         super(id, email, username, birthday, gender, profilePicture);
         this.status = status;
