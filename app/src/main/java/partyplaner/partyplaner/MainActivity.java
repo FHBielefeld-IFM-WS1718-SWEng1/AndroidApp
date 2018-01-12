@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import partyplaner.api.GeneralAPIRequestHandler;
 import partyplaner.api.RouteType;
 import partyplaner.data.party.Party;
+import partyplaner.data.user.User;
 import partyplaner.data.party.PartyList;
 import partyplaner.data.user.I;
 import partyplaner.partyplaner.ContactForm.ContactFragment;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity
 
     private static int currentTab = R.id.home;
     private Party[] parties;
+    private User[] contactList;
     private Gson gson;
 
     @Override
@@ -66,6 +68,10 @@ public class MainActivity extends AppCompatActivity
         json = json.replaceAll(".*?\\[", "[");
         json = json.replaceAll("].", "]");
         parties = gson.fromJson(json, Party[].class);
+        String json2 = GeneralAPIRequestHandler.request("user/contact/?api=" + I.getMyself().getApiKey(), RouteType.GET, null);
+        json = json2.replaceAll(".*?\\[", "[");
+        json = json2.replaceAll("].", "]");
+        contactList = gson.fromJson(json, User[].class);
     }
 
     @Override
@@ -169,5 +175,10 @@ public class MainActivity extends AppCompatActivity
             }
         }
         return ownParties.toArray(new Party[ownParties.size()]);
+    }
+
+    @Override
+    public User[] getContacts() {
+        return contactList;
     }
 }
