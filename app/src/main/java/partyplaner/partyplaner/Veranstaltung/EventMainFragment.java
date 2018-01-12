@@ -149,7 +149,7 @@ public class EventMainFragment extends Fragment {
         addFragment("Gallerie", 0);
         addFragment("Aufgaben", 1);
         if(true) {
-            addFragment("TODOFragment", 2);
+            addFragment("TODO", 2);
         }
         addFragment("Gäste", 6);
         addFragment("Abstimmungen", 3);

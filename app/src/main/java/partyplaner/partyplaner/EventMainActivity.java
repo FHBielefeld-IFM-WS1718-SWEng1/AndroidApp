@@ -97,8 +97,10 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
                     }
                 }
                 break;
+                //urbiatorbi.va
+                //ramen
             case Keys.EXTRA_PUT_TASK:
-                Log.e("EventMainActivity", id);
+                Log.e("EventMainActivity", json);
 
                 break;
         }

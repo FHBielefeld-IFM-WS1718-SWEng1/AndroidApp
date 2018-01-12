@@ -36,6 +36,7 @@ public class TODOFragment extends Fragment implements IReceiveData{
 
     private Todo[] todos;
     private View view;
+    private int partyId;
     private IEventDataManager data;
 
     @Override
@@ -85,15 +86,21 @@ public class TODOFragment extends Fragment implements IReceiveData{
 
     public void createTodo (String name) {
         Log.e("TODOFragment", name);
+        if(name != null) {
+            name = name.trim();
+            if (!name.equals("")) {
+                Intent apiHanlder = new Intent(getActivity(), APIService.class);
+                apiHanlder.putExtra(Keys.EXTRA_URL, "/party/todo?api=" + I.getMyself().getApiKey());
+                apiHanlder.putExtra(Keys.EXTRA_REQUEST, "POST");
+                String data = "{\"user_id\":" + I.getMyself().getId() + ",\"party_id\":" + partyId + ",\"text\":\"" + name + "\",\"status\":0" + "}";
+                Log.e("TODO", data);
+                apiHanlder.putExtra(Keys.EXTRA_DATA, data);
+                apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_PUT_TASK);
+                getActivity().startService(apiHanlder);
 
-        Intent apiHanlder = new Intent(getActivity(), APIService.class);
-        apiHanlder.putExtra(Keys.EXTRA_URL, "/party/241121?api=" + I.getMyself().getApiKey());
-        apiHanlder.putExtra(Keys.EXTRA_REQUEST, "GET");
-        String data = null;
-        apiHanlder.putExtra(Keys.EXTRA_DATA, data);
-        apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_PUT_TASK);
-        getActivity().startService(apiHanlder);
-
+                //TODO:Fragment erstellen
+            }
+        }
     }
 
     private void addTodo(Todo data) {
@@ -119,6 +126,7 @@ public class TODOFragment extends Fragment implements IReceiveData{
     public void receiveData() {
         if (data.getParty() != null) {
             todos = data.getParty().getTodo();
+            partyId = data.getParty().getId();
         }
         setTasksToFragments();
     }
