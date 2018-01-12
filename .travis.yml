@@ -7,11 +7,11 @@ android:
   - platform-tools
   - tools
   - build-tools-26.0.2
-  - android-19
+  - android-26
   - extra-google-m2repository
   - extra-google-google_play_services
   - extra-android-m2repository
-  - sys-img-x86-android-19
+  - sys-img-x86-android-26
   licenses:
   - android-sdk-preview-license-.+
   - android-sdk-license-.+
@@ -20,7 +20,7 @@ android:
 before_script:
  - android list targets
  - jdk_switcher use oraclejdk8
- - echo no | android create avd --force -n test -t android-19 --abi x86 
+ - echo no | android create avd --force -n test -t android-26 --abi x86 
  - emulator -avd test -no-skin -no-audio -no-window &
  - android-wait-for-emulator
  - adb shell input keyevent 82 & 
