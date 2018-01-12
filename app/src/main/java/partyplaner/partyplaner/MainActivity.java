@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import partyplaner.api.GeneralAPIRequestHandler;
 import partyplaner.api.RouteType;
 import partyplaner.data.party.Party;
+import partyplaner.data.user.User;
 import partyplaner.data.party.PartyList;
 import partyplaner.data.user.I;
 import partyplaner.partyplaner.ContactForm.ContactFragment;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity
 
     private static int currentTab = R.id.home;
     private Party[] parties;
+    private User[] contactList;
     private Gson gson;
 
     @Override
@@ -69,6 +71,11 @@ public class MainActivity extends AppCompatActivity
         json = json.replaceAll(".*?\\[", "[");
         json = json.replaceAll("].", "]");
         parties = gson.fromJson(json, Party[].class);
+        String json2 = GeneralAPIRequestHandler.request("/user/contact?api=" + I.getMyself().getApiKey(), RouteType.GET, null);
+        //Log.e("MainActivity", json2 + "");
+        json2 = json2.replaceAll(".*?\\[", "[");
+        json2 = json2.replaceAll("].", "]");
+        contactList = gson.fromJson(json2, User[].class);
     }
 
     @Override
@@ -123,9 +130,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.profile){
             setFragmentToContent(new ProfileFragment());
         } else if (id == R.id.contacts) {
+            Log.e("MainActivity", "Contact");
             AllContacts all_contacts = new AllContacts();
-            Bundle args = new Bundle();
-            args.putString(Keys.EXTRA_NAME, "");
             setFragmentToContent(new AllContacts());
         } else if (id == R.id.ownEvents) {
             OwnEventsFragment ownEvent = new OwnEventsFragment();
@@ -140,7 +146,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.impressum) {
             setFragmentToContent(new ImprintFragment());
         } else if (id == R.id.logout) {
-            logOut();
+            Log.e("MainActivity", "LogOut");
+            I.getMyself().logout();
         }
     }
 
@@ -175,5 +182,10 @@ public class MainActivity extends AppCompatActivity
             }
         }
         return ownParties.toArray(new Party[ownParties.size()]);
+    }
+
+    @Override
+    public User[] getContacts() {
+        return contactList;
     }
 }

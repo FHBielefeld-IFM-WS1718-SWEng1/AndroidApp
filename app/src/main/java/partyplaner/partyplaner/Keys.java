@@ -37,4 +37,5 @@ public class Keys {
     public static final String EXTRA_SERVICE = "SERVICE_BRADCAST";
     public static final String EXTRA_LOAD_PARTY = "LOAD_PARTY";
     public static final String EXTRA_PUT_TASK = "PUT_TASK";
+    public static final String EXTRA_PICTURE = "PICTURE";
 }
