@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "partyplaner-1dbc5",
+  "private_key_id": "d8f030b91f7394937fa710ec81d9ba32a54021b4",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCuoha/LTbO+d/B\nKtD2ksqJZEOjTPLBQhyYLaKmm3H6iw8wOqGFz6BTB2mBd0nWF/L+z2RlVad4Uw3W\nLpJVCcHNAk/R2D8qnhT4JkVdXWubi1gF3EAXgQFsHH2EEYN65zhO0fczQl+hGDCh\noNf6Gbd59STht+J7TPob53D4/2cG7hXlcgbU/EQuEO3XTDZojfx4WaKk3EBp4ZB7\n/sufMs33ugtC65f2GiUU2Rc7QNFQFDMziMIZy3wJJpnvEhCTmDArUgN7TwI+M9fi\nPFKr6WlVsXqRjJsqjqpkYHxfkRCdVvtw88cPXG8G8dipTA1rP8Rbg8pyhr0344Vg\nmRjic2shAgMBAAECggEABgt1RxvNDGAI1zpgrlBJc3UFhFcLBhaAP+JAgYza5qW+\nmlhFNAkKTyVwCPu0khUVI63RF1LeL6OMVJAbH5dtXmfIlIZsNVDwf+BvQTqVGXa6\nzsUfcNDV2ESqMZKbnvr273+EE4GmJsDcGhQjtbQDLlUGeEuxqrvw4ltiBTRuAAba\nFtF9Qc6UI0kYNzLkEW1RUILD6hcrp1xKwBF1Ce4Dvr4rsKjguxFPOV3LXAtakcMi\nbER4F4lHJuSPtDJeJWp1MZPqO8lrW2viThnCeEgCB8D6lB2iaghBq8QaB0CNFWnl\nvo5XobFUcNZBItoCpNdGtNODWJeH1qVC6Q/j+1tUuwKBgQDVGIb2glxyVTKwV4B+\n+Mf21n7Io2ff9qX5LWZ9cNtWjr0xlvRP96DtOangdfFKkP54yAa82Q6nwSX9ze4h\nQ03YTK/aljLZVFvl4SWJNglmvVUNN0FKJW6NUc+hhED6JW3v9mNp3vWYBzyhCNmH\nkYDfuqFcUj4U+X0Fns55jxc6qwKBgQDRyxqQp/UVhBd0evzVIv334kh+Y0kvIZeN\nHCCsJC3cjQ2A0lPGKpfhZLCglfIvyFDIw1E6kugy4vpHhPKxjX/vQPhJF0EoiVRk\nqVdF0QD7y2yySxeD1xA8N2/emORHOTluvEoJkDczvh68KDBzIl+kdjPU+hkZTKol\ncMmofrcxYwKBgALHsiMPKlOXhvTD/3oolrtCqx7E+vryBdJNZFPooAPuEsvN01wj\nt+bAZNX30/EMGTXMLkJSdp17qJo6EIxAi4hx361zXjB1qElEea/jk5XSjISCnwhv\nmpSfZ50M06gvytJhnYRpEz0rgv/61JOvM0Y38hj5PbQaWSY0ny74ze3HAoGAYQlJ\ng0k8kjQjySut0EO8JrDSiSsRSayG9azh691cHRxc943RU+KVl5pEHDLe73z+6K12\n39ndbtQPoY771mY1m4t4jA4mhEJo95pgFJnkk5J290zGVqPeDYwywUoEpHDygKa0\ntBGxhsxUWQFZz5dBl8dYmBUKEOql9GVj0PyzbTMCgYB9DZCxguT2YqcwGKoeHLB9\nUAeH9sn8yzCg4ojb1n+hMDJSULHaMNE+pttVip3CMECVsLtLQw4THO9RhqEFTum9\n1o8spiGRkvikwJ0K+YRhpoCiqsnfj1bS/aFzZ7/7sEdiyYWQEr+nP6cre9CAoMSD\nmMadlKxnvK+dr7HQlqU3UQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "partyplaner-android-tests@partyplaner-1dbc5.iam.gserviceaccount.com",
+  "client_id": "102436053413212107747",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/partyplaner-android-tests%40partyplaner-1dbc5.iam.gserviceaccount.com"
+}
