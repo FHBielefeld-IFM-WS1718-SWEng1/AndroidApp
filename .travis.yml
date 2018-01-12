@@ -7,22 +7,35 @@ android:
   - platform-tools
   - tools
   - build-tools-26.0.2
+  - android-4
+  - android-10
+  - android 19
+  - android 23
+  - android 25
   - android-26
   - extra-google-m2repository
   - extra-google-google_play_services
   - extra-android-m2repository
   - sys-img-x86-android-26
+  - sys-img-armeabi-v7a-android-25
   licenses:
   - android-sdk-preview-license-.+
   - android-sdk-license-.+
   - google-gdk-license-.+
+ 
+env:
+    matrix:
+        - ANDROID_TARGET=android-4 ANDROID_ABI=armeabi
+        - ANDROID_TARGET=android-10 ANDROID_ABI=armeabi
+        - ANDROID_TARGET=android-19 ANDROID_ABI=armeabi-v7a
+        - ANDROID_TARGET=android-25 ANDROID_ABI=armeabi-v7a
   
 before_script:
  - android list targets
  - jdk_switcher use oraclejdk8
- - echo no | android create avd --force -n test -t android-26 --abi x86 
+ - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI 
  - emulator -avd test -no-skin -no-audio -no-window &
- - android-wait-for-emulator
+ - android-wait-for-device
  - adb shell input keyevent 82 & 
    
 
