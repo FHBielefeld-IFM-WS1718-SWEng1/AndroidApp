@@ -3,6 +3,7 @@ package partyplaner.partyplaner;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -26,6 +27,8 @@ import partyplaner.data.party.PartyList;
 import partyplaner.data.user.I;
 import partyplaner.partyplaner.ContactForm.ContactFragment;
 import partyplaner.partyplaner.Contacts.AllContacts;
+import partyplaner.partyplaner.LogIn.LogInActivity;
+import partyplaner.partyplaner.LogIn.RegisterActivity;
 import partyplaner.partyplaner.Profile.ProfileFragment;
 import partyplaner.partyplaner.home.HomeFragment;
 import partyplaner.partyplaner.ownEvents.OwnEventsFragment;
@@ -142,7 +145,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void logOut() {
-
+        if (I.getMyself().logout()) {
+            Intent intent = new Intent(this, LogInActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void setFragmentToContent(Fragment fragment) {
