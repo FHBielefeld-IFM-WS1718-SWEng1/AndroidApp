@@ -11,7 +11,7 @@ public class Guest extends User{
     private int status;
     private boolean admin;
     public Guest(int id, String email, String username,
-                String birthday, int gender, int profilePicture,
+                String birthday, int gender, String profilePicture,
                  int status, boolean admin) {
         super(id, email, username, birthday, gender, profilePicture);
         this.status = status;
