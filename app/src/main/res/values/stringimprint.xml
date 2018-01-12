@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="AdressText">FH-Bielefeld</string>
-    <string name="AdressText2">Campus Minden</string>
-    <string name="StreetText">Artilleriestraße 9</string>
-    <string name="CityText">32427 Minden</string>
-    <string name="ContactText">Ansprechpartner: T-Rex</string>
-    <string name="TelText">Telefonnummer: 5607641061</string>
-    <string name="EMailText">E-Mail Adresse: arme@zukurz.de</string>
-    <string name="VersionText">Versionsnummer: Dionysos 0.2.3.2</string>
-    <string name="DescriptionText">Diese App ist während eines Projekts im Fach Software Engineering entstanden.</string>
+    <string name="AdressText">Andre Matutat</string>
+    <string name="StreetText">Limbreede 10</string>
+    <string name="CityText">32289 Rödinghausen</string>
+    <string name="ContactText">Ansprechpartner: Andre Matutat</string>
+    <string name="TelText">Telefonnummer: 015161418956</string>
+    <string name="EMailText">E-Mail Adresse: AMatutat@fh-bielefeld.de</string>
+    <string name="VersionText">Versionsnummer: 0.2.3.2</string>
+    <string name="DescriptionText">Diese App ist während eines Projekts im Fach Software Engineering entstanden.\n\n
+        Disclaimer – rechtliche Hinweise\n\n
+§ 1 Warnhinweis zu Inhalten\n
+Die kostenlosen und frei zugänglichen Inhalte dieser Webseite wurden mit größtmöglicher Sorgfalt erstellt. Der Anbieter dieser Webseite übernimmt jedoch keine Gewähr für die Richtigkeit und Aktualität der bereitgestellten kostenlosen und frei zugänglichen journalistischen Ratgeber und Nachrichten. Namentlich gekennzeichnete Beiträge geben die Meinung des jeweiligen Autors und nicht immer die Meinung des Anbieters wieder. Allein durch den Aufruf der kostenlosen und frei zugänglichen Inhalte kommt keinerlei Vertragsverhältnis zwischen dem Nutzer und dem Anbieter zustande, insoweit fehlt es am Rechtsbindungswillen des Anbieters.\n\n
+§ 2 Externe Links \n
+Diese Website enthält Verknüpfungen zu Websites Dritter ("externe Links"). Diese Websites unterliegen der Haftung der jeweiligen Betreiber. Der Anbieter hat bei der erstmaligen Verknüpfung der externen Links die fremden Inhalte daraufhin überprüft, ob etwaige Rechtsverstöße bestehen. Zu dem Zeitpunkt waren keine Rechtsverstöße ersichtlich. Der Anbieter hat keinerlei Einfluss auf die aktuelle und zukünftige Gestaltung und auf die Inhalte der verknüpften Seiten. Das Setzen von externen Links bedeutet nicht, dass sich der Anbieter die hinter dem Verweis oder Link liegenden Inhalte zu Eigen macht. Eine ständige Kontrolle der externen Links ist für den Anbieter ohne konkrete Hinweise auf Rechtsverstöße nicht zumutbar. Bei Kenntnis von Rechtsverstößen werden jedoch derartige externe Links unverzüglich gelöscht.\n\n
+§ 3 Urheber- und Leistungsschutzrechte\n
+Die auf dieser Website veröffentlichten Inhalte unterliegen dem deutschen Urheber- und Leistungsschutzrecht. Jede vom deutschen Urheber- und Leistungsschutzrecht nicht zugelassene Verwertung bedarf der vorherigen schriftlichen Zustimmung des Anbieters oder jeweiligen Rechteinhabers. Dies gilt insbesondere für Vervielfältigung, Bearbeitung, Übersetzung, Einspeicherung, Verarbeitung bzw. Wiedergabe von Inhalten in Datenbanken oder anderen elektronischen Medien und Systemen. Inhalte und Rechte Dritter sind dabei als solche gekennzeichnet. Die unerlaubte Vervielfältigung oder Weitergabe einzelner Inhalte oder kompletter Seiten ist nicht gestattet und strafbar. Lediglich die Herstellung von Kopien und Downloads für den persönlichen, privaten und nicht kommerziellen Gebrauch ist erlaubt.\n\n
+Die Darstellung dieser Website in fremden Frames ist nur mit schriftlicher Erlaubnis zulässig.\n\n
+§ 4 Besondere Nutzungsbedingungen\n
+Soweit besondere Bedingungen für einzelne Nutzungen dieser Website von den vorgenannten Paragraphen abweichen, wird an entsprechender Stelle ausdrücklich darauf hingewiesen. In diesem Falle gelten im jeweiligen Einzelfall die besonderen Nutzungsbedingungen.\n
+</string>
 </resources>
