@@ -2,6 +2,9 @@ package partyplaner.data.user;
 
 import android.media.Image;
 
+import partyplaner.api.APIConnectionHandler;
+import partyplaner.api.LoginHandler;
+
 /**
  * Die I Klasse erbt von der User Klasse und enhält so alle Informationen über den derzeitig
  * eingeloggten Benutzer sowie zusätzlich dessen ApiKey.
@@ -32,5 +35,9 @@ public class I extends User{
 
     public static I getMyself() {
         return myself;
+    }
+
+    public boolean logout() {
+        return LoginHandler.logout();
     }
 }

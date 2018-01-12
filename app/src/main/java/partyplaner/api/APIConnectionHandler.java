@@ -28,7 +28,7 @@ public class APIConnectionHandler {
         @Override
         protected Response doInBackground(String... arg0) {
             try {
-                return connect(arg0[0], arg0[1]);
+                return connect(arg0[0], RouteType.stringToRoute(arg0[1]), arg0[2]);
             } catch (IOException e) {
                 e.printStackTrace();
                 return null;
@@ -55,28 +55,38 @@ public class APIConnectionHandler {
 
     public I login(LoginData data) throws IOException {
         String postResponse = post(APIConnectionType.LOGIN.getRoute(), gson.toJson(data));
-        if (!postResponse.toLowerCase().contains("error")) {
+        if (postResponse != null && !postResponse.toLowerCase().contains("error")) {
             return gson.fromJson(postResponse, I.class);
         } else {
             return null;
         }
     }
 
-    public boolean register(RegistrationData data) throws IOException {
-        String postResponse = post(APIConnectionType.REGISTER.getRoute(), gson.toJson(data));
-        if (!postResponse.toLowerCase().contains("error")) {
+    public boolean logout() throws IOException {
+        String postResponse = delete(APIConnectionType.LOGOUT.getRoute() + "?api=" + I.getMyself().getApiKey(), null);
+        if (postResponse != null && !postResponse.toLowerCase().contains("error")) {
             return true;
         } else {
             return false;
         }
     }
 
-    private String post(String url, String data) throws IOException {
+    public boolean register(RegistrationData data) throws IOException {
+        String postResponse = post(APIConnectionType.REGISTER.getRoute(), gson.toJson(data));
+        if (postResponse != null && !postResponse.toLowerCase().contains("error")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
+    String get(String url) throws IOException {
         Connection conn = new Connection();
         try {
-            Response response= conn.execute(baseURL + url, data).get();
-            return  response.body().string();
+            Response response = conn.execute(baseURL + url, "GET", null).get();
+            if (response != null) {
+                return response.body().string();
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -85,19 +95,101 @@ public class APIConnectionHandler {
         return null;
     }
 
-    private Response connect(String url, String data) throws IOException {
+    String put(String url, String data) throws IOException {
+        Connection conn = new Connection();
+        try {
+            Response response = conn.execute(baseURL + url, "PUT", data).get();
+            if (response != null) {
+                return response.body().string();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    String post(String url, String data) throws IOException {
+
+        Connection conn = new Connection();
+        try {
+            Response response = conn.execute(baseURL + url, "POST", data).get();
+            if (response != null) {
+                return response.body().string();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    String delete(String url, String data) throws IOException {
+        Connection conn = new Connection();
+        try {
+            Response response = conn.execute(baseURL + url, "DELETE", data).get();
+            if (response != null) {
+                return response.body().string();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private Response connect(String url, RouteType route,  String data) throws IOException {
         OkHttpClient client = new OkHttpClient();
+        Request request = null;
 
         MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(mediaType, data);
-        Request request = new Request.Builder()
-                .url(url)
-                .post(body)
-                .addHeader("Content-Type", "application/json")
-                .addHeader("Cache-Control", "no-cache")
-                .build();
+        switch (route) {
+            case GET:
+                request = new Request.Builder()
+                        .url(url)
+                        .get()
+                        .addHeader("Content-Type", "application/json")
+                        .addHeader("Cache-Control", "no-cache")
+                        .build();
+                break;
+            case PUT:
+                RequestBody body = RequestBody.create(mediaType, data);
+                request = new Request.Builder()
+                        .url(url)
+                        .put(body)
+                        .addHeader("Content-Type", "application/json")
+                        .addHeader("Cache-Control", "no-cache")
+                        .build();
+                break;
+            case POST:
+                body = RequestBody.create(mediaType, data);
+                request = new Request.Builder()
+                        .url(url)
+                        .post(body)
+                        .addHeader("Content-Type", "application/json")
+                        .addHeader("Cache-Control", "no-cache")
+                        .build();
+                break;
+            case DELETE:
+                body = RequestBody.create(mediaType, data);
+                request = new Request.Builder()
+                        .url(url)
+                        .post(body)
+                        .addHeader("Content-Type", "application/json")
+                        .addHeader("Cache-Control", "no-cache")
+                        .build();
+                break;
+            default:
+                break;
+        }
 
-        Response response = client.newCall(request).execute();
-        return response;
+        if (request != null) {
+            Response response = client.newCall(request).execute();
+            return response;
+        }
+        return null;
     }
 }
