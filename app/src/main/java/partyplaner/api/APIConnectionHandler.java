@@ -143,48 +143,38 @@ public class APIConnectionHandler {
 
     private Response connect(String url, RouteType route,  String data) throws IOException {
         OkHttpClient client = new OkHttpClient();
-        Request request = null;
+        Request.Builder builder = new Request.Builder()
+                .url(url);
+        Request request;
 
         MediaType mediaType = MediaType.parse("application/json");
         switch (route) {
             case GET:
-                request = new Request.Builder()
-                        .url(url)
-                        .get()
-                        .addHeader("Content-Type", "application/json")
-                        .addHeader("Cache-Control", "no-cache")
-                        .build();
+                builder.get();
                 break;
             case PUT:
                 RequestBody body = RequestBody.create(mediaType, data);
-                request = new Request.Builder()
-                        .url(url)
-                        .put(body)
-                        .addHeader("Content-Type", "application/json")
-                        .addHeader("Cache-Control", "no-cache")
-                        .build();
+                builder.put(body);
                 break;
             case POST:
                 body = RequestBody.create(mediaType, data);
-                request = new Request.Builder()
-                        .url(url)
-                        .post(body)
-                        .addHeader("Content-Type", "application/json")
-                        .addHeader("Cache-Control", "no-cache")
-                        .build();
+                builder.post(body);
                 break;
             case DELETE:
-                body = RequestBody.create(mediaType, data);
-                request = new Request.Builder()
-                        .url(url)
-                        .post(body)
-                        .addHeader("Content-Type", "application/json")
-                        .addHeader("Cache-Control", "no-cache")
-                        .build();
+                if (data == null) {
+                    builder.delete();
+                } else {
+                    body = RequestBody.create(mediaType, data);
+                    builder.delete(body);
+                }
                 break;
             default:
                 break;
         }
+
+        request = builder.addHeader("Content-Type", "application/json")
+                .addHeader("Cache-Control", "no-cache")
+                .build();
 
         if (request != null) {
             Response response = client.newCall(request).execute();
