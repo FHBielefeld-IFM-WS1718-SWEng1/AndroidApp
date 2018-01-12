@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "969000060495",
+    "firebase_url": "https://partyplaner-1dbc5.firebaseio.com",
+    "project_id": "partyplaner-1dbc5",
+    "storage_bucket": "partyplaner-1dbc5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969000060495:android:90e97ecfd9a0ac0f",
+        "android_client_info": {
+          "package_name": "partyplaner.partyplaner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "969000060495-lmolq1r9kgfkln9vnfa34cikustj1uj8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWNTzs5I9Jzmm2Z2XPMxlKwlmI95KHTLs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
