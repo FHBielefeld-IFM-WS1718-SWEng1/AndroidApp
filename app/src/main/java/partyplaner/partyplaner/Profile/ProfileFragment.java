@@ -89,8 +89,11 @@ public class ProfileFragment extends Fragment {
     }
 
     private String formatDate(String date) {
-        String[] part = date.split("-");
-        return part[2] + "." + part[1] + "." + part[0];
+        if (date != null) {
+            String[] part = date.split("-");
+            return part[2] + "." + part[1] + "." + part[0];
+        }
+        return "Nicht angegeben";
     }
 
     //TODO hochladen des Images
