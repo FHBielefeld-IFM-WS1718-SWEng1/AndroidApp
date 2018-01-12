@@ -121,17 +121,6 @@ public class KontaktformularTest {
                                 1),
                         isDisplayed()));
         appCompatImageButton.perform(click());
-        /*
-        ViewInteraction appCompatImageButton = onView(
-                allOf(withContentDescription("Open navigation drawer"),
-                        childAtPosition(
-                                allOf(withId(R.id.toolbar),
-                                        childAtPosition(
-                                                withClassName(is("android.support.design.widget.AppBarLayout")),
-                                                0)),
-                                1),
-                        isDisplayed()));
-        appCompatImageButton.perform(click());*/
 
         ViewInteraction navigationMenuItemView = onView(
                 allOf(childAtPosition(

@@ -106,7 +106,7 @@ public class RegistryTest {
                         isDisplayed()));
         button.check(matches(isDisplayed()));
     }
-
+/*
     @Test
     public void registryRegistryLabelExistsWithTextTest() {
         ViewInteraction textView = onView(
@@ -119,7 +119,7 @@ public class RegistryTest {
                                 0),
                         isDisplayed()));
         textView.check(matches(isDisplayed()));
-    }
+    }*/
 
     @Test
     public void registryUserNameTextAreaWorksTest() {
