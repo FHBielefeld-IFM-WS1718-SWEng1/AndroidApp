@@ -161,8 +161,12 @@ public class APIConnectionHandler {
                 builder.post(body);
                 break;
             case DELETE:
-                body = RequestBody.create(mediaType, data);
-                builder.post(body);
+                if (data == null) {
+                    builder.delete();
+                } else {
+                    body = RequestBody.create(mediaType, data);
+                    builder.delete(body);
+                }
                 break;
             default:
                 break;
