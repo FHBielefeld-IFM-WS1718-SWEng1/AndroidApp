@@ -66,6 +66,13 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        Bitmap bitmap = null;
+
+        profile.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
+                (int)((double)bitmap.getWidth() / ((double)bitmap.getHeight() / 1024.0)),
+                1024,
+                false));
+
         return view;
     }
 

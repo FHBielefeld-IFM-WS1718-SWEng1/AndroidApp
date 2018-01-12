@@ -143,9 +143,9 @@ public class APIConnectionHandler {
 
     private Response connect(String url, RouteType route,  String data) throws IOException {
         OkHttpClient client = new OkHttpClient();
-        Request request = null;
         Request.Builder builder = new Request.Builder()
                 .url(url);
+        Request request;
 
         MediaType mediaType = MediaType.parse("application/json");
         switch (route) {
@@ -161,12 +161,17 @@ public class APIConnectionHandler {
                 builder.post(body);
                 break;
             case DELETE:
-                body = RequestBody.create(mediaType, data);
-                builder.post(body);
+                if (data == null) {
+                    builder.delete();
+                } else {
+                    body = RequestBody.create(mediaType, data);
+                    builder.delete(body);
+                }
                 break;
             default:
                 break;
         }
+
         request = builder.addHeader("Content-Type", "application/json")
                 .addHeader("Cache-Control", "no-cache")
                 .build();
