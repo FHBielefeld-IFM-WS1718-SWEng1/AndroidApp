@@ -1,6 +1,10 @@
 package partyplaner.partyplaner.LogIn;
 
-
+/**
+ * Tests auf die Existenz in
+ * Profil
+ *
+ */
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -13,6 +17,8 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.hamcrest.core.IsInstanceOf;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,13 +41,13 @@ import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class ProfilAllTest {
+public class ProfilTest {
 
     @Rule
     public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
-    @Test
-    public void profilAllTest() {
+    @Before
+    public void login() {
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.username),
                         childAtPosition(
@@ -129,6 +135,10 @@ public class ProfilAllTest {
                         isDisplayed()));
         navigationMenuItemView.perform(click());
 
+    }
+
+    @Test
+    public void testNameTest() {
         ViewInteraction textView = onView(
                 allOf(withId(R.id.FirstNameText), withText("Name :"),
                         childAtPosition(
@@ -139,6 +149,9 @@ public class ProfilAllTest {
                         isDisplayed()));
         textView.check(matches(isDisplayed()));
 
+    }
+    @Test
+    public void gebDatumAllTest() {
         ViewInteraction textView3 = onView(
                 allOf(withId(R.id.BirthdateText), withText("Geb-Datum :"),
                         childAtPosition(
@@ -149,6 +162,9 @@ public class ProfilAllTest {
                         isDisplayed()));
         textView3.check(matches(isDisplayed()));
 
+    }
+    @Test
+    public void emilTest() {
         ViewInteraction textView4 = onView(
                 allOf(withId(R.id.EmailText), withText("E-Mail :"),
                         childAtPosition(
@@ -159,6 +175,9 @@ public class ProfilAllTest {
                         isDisplayed()));
         textView4.check(matches(isDisplayed()));
 
+    }
+    @Test
+    public void futureEventsTest() {
         ViewInteraction textView5 = onView(
                 allOf(withId(R.id.ZukünftigeVeranstaltung), withText("Zukünftige Veranstaltung"),
                         childAtPosition(
@@ -169,6 +188,9 @@ public class ProfilAllTest {
                         isDisplayed()));
         textView5.check(matches(isDisplayed()));
 
+    }
+    @Test
+    public void vergangeneEventsTest() {
         ViewInteraction textView6 = onView(
                 allOf(withId(R.id.VergangeneVeranstaltung), withText("Vergangene Veranstaltung"),
                         childAtPosition(

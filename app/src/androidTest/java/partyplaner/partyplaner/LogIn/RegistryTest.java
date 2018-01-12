@@ -12,6 +12,8 @@ import android.view.ViewParent;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.IsInstanceOf;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,11 +22,10 @@ import partyplaner.partyplaner.R;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static android.support.test.espresso.action.ViewActions.pressImeActionButton;
-import static android.support.test.espresso.action.ViewActions.replaceText;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
+import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
@@ -32,13 +33,13 @@ import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class LogInRegisterTest {
+public class RegistryTest {
 
     @Rule
     public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
-    @Test
-    public void logInRegisterTest() {
+    @Before
+    public void Registry() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.signInRegister), withText("Registrieren"),
                         childAtPosition(
@@ -49,116 +50,105 @@ public class LogInRegisterTest {
                                 4),
                         isDisplayed()));
         appCompatButton.perform(click());
-
-        ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.regName),
-                        childAtPosition(
-                                allOf(withId(R.id.fragment),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                1)),
-                                1),
-                        isDisplayed()));
-        appCompatEditText.perform(click());
-
-        ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.regName),
-                        childAtPosition(
-                                allOf(withId(R.id.fragment),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                1)),
-                                1),
-                        isDisplayed()));
-        appCompatEditText2.perform(replaceText("Mister Hallo"), closeSoftKeyboard());
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(50);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        ViewInteraction appCompatEditText3 = onView(
+    }
+    @Test
+    public void registryEMailTextAreaExistsTest() {
+        ViewInteraction editText = onView(
                 allOf(withId(R.id.regEmail),
                         childAtPosition(
                                 allOf(withId(R.id.fragment),
                                         childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
+                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
                                                 1)),
                                 2),
                         isDisplayed()));
-        appCompatEditText3.perform(replaceText("EmailValidiererNichtAktiv"), closeSoftKeyboard());
+        editText.check(matches(isDisplayed()));
+    }
 
-        ViewInteraction appCompatEditText4 = onView(
+    @Test
+    public void registryPassword2TextAreaExistsTest() {
+        ViewInteraction editText = onView(
+                allOf(withId(R.id.regPassWdg),
+                        childAtPosition(
+                                allOf(withId(R.id.fragment),
+                                        childAtPosition(
+                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                                1)),
+                                4),
+                        isDisplayed()));
+        editText.check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void registryPasswordTextAreaExistsTest() {
+        ViewInteraction editText = onView(
                 allOf(withId(R.id.regPass),
                         childAtPosition(
                                 allOf(withId(R.id.fragment),
                                         childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
+                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
                                                 1)),
                                 3),
                         isDisplayed()));
-        appCompatEditText4.perform(replaceText("geheim"), closeSoftKeyboard());
+        editText.check(matches(isDisplayed()));
+    }
 
-        ViewInteraction appCompatEditText5 = onView(
-                allOf(withId(R.id.regPass), withText("geheim"),
+    @Test
+    public void registryRegistryButtonExistsTest() {
+        ViewInteraction button = onView(
+                allOf(withId(R.id.regSave),
                         childAtPosition(
                                 allOf(withId(R.id.fragment),
                                         childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                1)),
-                                3),
-                        isDisplayed()));
-        appCompatEditText5.perform(pressImeActionButton());
-
-        ViewInteraction appCompatEditText6 = onView(
-                allOf(withId(R.id.regPassWdg),
-                        childAtPosition(
-                                allOf(withId(R.id.fragment),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                1)),
-                                4),
-                        isDisplayed()));
-        appCompatEditText6.perform(click());
-
-        ViewInteraction appCompatEditText7 = onView(
-                allOf(withId(R.id.regPassWdg),
-                        childAtPosition(
-                                allOf(withId(R.id.fragment),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                1)),
-                                4),
-                        isDisplayed()));
-        appCompatEditText7.perform(replaceText("géheim"), closeSoftKeyboard());
-
-        ViewInteraction appCompatEditText8 = onView(
-                allOf(withId(R.id.regPassWdg), withText("géheim"),
-                        childAtPosition(
-                                allOf(withId(R.id.fragment),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                1)),
-                                4),
-                        isDisplayed()));
-        appCompatEditText8.perform(pressImeActionButton());
-
-        ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.regSave), withText("Registrieren"),
-                        childAtPosition(
-                                allOf(withId(R.id.fragment),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
+                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
                                                 1)),
                                 5),
                         isDisplayed()));
-        appCompatButton2.perform(click());
-
+        button.check(matches(isDisplayed()));
     }
+
+    @Test
+    public void registryRegistryLabelExistsWithTextTest() {
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.textView),
+                        childAtPosition(
+                                allOf(withId(R.id.fragment),
+                                        childAtPosition(
+                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                                1)),
+                                0),
+                        isDisplayed()));
+        textView.check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void registryUserNameTextAreaWorksTest() {
+        ViewInteraction editText = onView(
+                allOf(withId(R.id.regName),
+                        childAtPosition(
+                                allOf(withId(R.id.fragment),
+                                        childAtPosition(
+                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                                1)),
+                                1),
+                        isDisplayed()));
+        editText.check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void registryPaplaLogoExistsTest() {
+        ViewInteraction imageView = onView(
+                allOf(withId(R.id.imageView2), withContentDescription("Papla Logo"),
+                        childAtPosition(
+                                allOf(withId(R.id.logo),
+                                        childAtPosition(
+                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                                0)),
+                                0),
+                        isDisplayed()));
+        imageView.check(matches(isDisplayed()));
+    }
+
 
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {

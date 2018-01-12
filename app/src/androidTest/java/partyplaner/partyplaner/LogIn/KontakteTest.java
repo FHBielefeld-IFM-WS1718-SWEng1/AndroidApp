@@ -1,5 +1,9 @@
 package partyplaner.partyplaner.LogIn;
-
+/**
+ * Tests auf die Existenz in
+ * Kontakte
+ *
+ */
 
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
@@ -23,8 +27,10 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.pressImeActionButton;
 import static android.support.test.espresso.action.ViewActions.replaceText;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
+import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
@@ -32,13 +38,17 @@ import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class LogInUsernamePasswordTest {
+public class KontakteTest {
 
     @Rule
     public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
     @Test
-    public void logInUsernamePasswordTest() {
+    public void kontakteTest() {
+
+        /**
+         * Login
+         */
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.username),
                         childAtPosition(
@@ -49,7 +59,7 @@ public class LogInUsernamePasswordTest {
                                 1),
                         isDisplayed()));
         appCompatEditText.perform(click());
-// Benutzername ist als Beispiel "testvom@test.de" und wird in das Feld geschrieben
+
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.username),
                         childAtPosition(
@@ -60,7 +70,7 @@ public class LogInUsernamePasswordTest {
                                 1),
                         isDisplayed()));
         appCompatEditText2.perform(replaceText("testvom@test.de"), closeSoftKeyboard());
-//Passwort wird in das Passwort Feld geschrieben
+
         ViewInteraction appCompatEditText3 = onView(
                 allOf(withId(R.id.password),
                         childAtPosition(
@@ -70,9 +80,19 @@ public class LogInUsernamePasswordTest {
                                                 1)),
                                 2),
                         isDisplayed()));
-        appCompatEditText3.perform(replaceText("geheim"), closeSoftKeyboard());
+        appCompatEditText3.perform(replaceText("test"), closeSoftKeyboard());
 
-//Anmelden über den Button
+        ViewInteraction appCompatEditText4 = onView(
+                allOf(withId(R.id.password), withText("test"),
+                        childAtPosition(
+                                allOf(withId(R.id.fragment4),
+                                        childAtPosition(
+                                                withClassName(is("android.widget.LinearLayout")),
+                                                1)),
+                                2),
+                        isDisplayed()));
+        appCompatEditText4.perform(pressImeActionButton());
+
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.btn_login), withText("Anmelden"),
                         childAtPosition(
@@ -83,6 +103,58 @@ public class LogInUsernamePasswordTest {
                                 3),
                         isDisplayed()));
         appCompatButton.perform(click());
+
+
+        /**
+         * Zu Kontakte navigieren
+         */
+        ViewInteraction appCompatImageButton = onView(
+                allOf(withContentDescription("Open navigation drawer"),
+                        childAtPosition(
+                                allOf(withId(R.id.toolbar),
+                                        childAtPosition(
+                                                withClassName(is("android.support.design.widget.AppBarLayout")),
+                                                0)),
+                                1),
+                        isDisplayed()));
+        appCompatImageButton.perform(click());
+
+        ViewInteraction navigationMenuItemView = onView(
+                allOf(childAtPosition(
+                        allOf(withId(R.id.design_navigation_view),
+                                childAtPosition(
+                                        withId(R.id.nav_view),
+                                        0)),
+                        4),
+                        isDisplayed()));
+        navigationMenuItemView.perform(click());
+
+
+        /**
+         * Auf der Kontakt Seite Existenz testen
+         * Search Button
+         * TextInput
+         */
+        ViewInteraction imageButton = onView(
+                allOf(withId(R.id.button_search),
+                        childAtPosition(
+                                allOf(withId(R.id.button_search_layout),
+                                        childAtPosition(
+                                                withId(R.id.main_layout),
+                                                0)),
+                                0),
+                        isDisplayed()));
+        imageButton.check(matches(isDisplayed()));
+
+        ViewInteraction textInputLayout = onView(
+                allOf(childAtPosition(
+                        allOf(withId(R.id.search_contact_layout),
+                                childAtPosition(
+                                        withId(R.id.button_search_layout),
+                                        1)),
+                        0),
+                        isDisplayed()));
+        textInputLayout.check(matches(isDisplayed()));
 
     }
 

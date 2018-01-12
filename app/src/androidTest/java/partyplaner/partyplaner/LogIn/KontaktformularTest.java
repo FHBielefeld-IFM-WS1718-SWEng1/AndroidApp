@@ -1,6 +1,10 @@
 package partyplaner.partyplaner.LogIn;
 
-
+/**
+ * Tests auf die Existenz in
+ * Kontaktformular
+ *
+ */
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -117,6 +121,17 @@ public class KontaktformularTest {
                                 1),
                         isDisplayed()));
         appCompatImageButton.perform(click());
+        /*
+        ViewInteraction appCompatImageButton = onView(
+                allOf(withContentDescription("Open navigation drawer"),
+                        childAtPosition(
+                                allOf(withId(R.id.toolbar),
+                                        childAtPosition(
+                                                withClassName(is("android.support.design.widget.AppBarLayout")),
+                                                0)),
+                                1),
+                        isDisplayed()));
+        appCompatImageButton.perform(click());*/
 
         ViewInteraction navigationMenuItemView = onView(
                 allOf(childAtPosition(
