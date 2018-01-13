@@ -40,5 +40,7 @@
             android:parentActivityName=".MainActivity"></activity>
         <service android:name="partyplaner.api.APIService"
             android:exported="false" />
+        <activity android:name=".Veranstaltung.EditEventActivity"></activity>
     </application>
+
 </manifest>
