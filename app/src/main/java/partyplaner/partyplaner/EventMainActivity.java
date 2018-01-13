@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -53,6 +54,12 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
 
         gson = new Gson();
 
+        getData();
+    }
+
+    private void getData() {
+        startLoading();
+
         Intent apiHanlder = new Intent(this, APIService.class);
         apiHanlder.putExtra(Keys.EXTRA_URL, "/party/241121?api=" + I.getMyself().getApiKey());
         apiHanlder.putExtra(Keys.EXTRA_REQUEST, "GET");
@@ -83,26 +90,51 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
                 json = json.replaceAll(",\"ersteller\":", ",\"owner\":");
                 json = json.replaceAll("User", "user");
 
-                if (json.contains("Error")) {
-                    //TODO: Fehlerbhandlung
+                if (json.contains("3rror")) {
+                    Toast.makeText(this, "Daten konnten nicht geladen werden!", Toast.LENGTH_SHORT).show();
                 } else {
                     party = gson.fromJson(json, Party.class);
                     if (party != null) {
                         eventMainFragment.receiveData();
-
-                        LinearLayout eventHolder = findViewById(R.id.event_loading_indicator);
-                        eventHolder.setVisibility(View.INVISIBLE);
-                        ProgressBar progressBar = findViewById(R.id.progressBar);
-                        progressBar.setVisibility(View.INVISIBLE);
+                        endLoading();
                     }
                 }
                 break;
                 //urbiatorbi.va
-                //ramen
+                //armen
             case Keys.EXTRA_PUT_TASK:
-                Log.e("EventMainActivity", json);
+                endLoading();
+                if(json.contains("error")) {
+                    Toast.makeText(this, "Erstellen fehlgeschlagen!", Toast.LENGTH_SHORT).show();
+                } else {
+                    getData();
+                }
+                break;
 
+            case Keys.EXTRA_DELETE_TASK:
+                endLoading();
+                if(json.contains("error")) {
+                    Toast.makeText(this, "Löschen fehlgeschlagen!", Toast.LENGTH_SHORT).show();
+                } else {
+                    getData();
+                }
                 break;
         }
+    }
+
+    private void endLoading() {
+        LinearLayout eventHolder = findViewById(R.id.event_loading_indicator);
+        eventHolder.setVisibility(View.INVISIBLE);
+        ProgressBar progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void startLoading() {
+        ProgressBar progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+        LinearLayout eventHolder = findViewById(R.id.event_loading_indicator);
+        eventHolder.setVisibility(View.VISIBLE);
+
     }
 }

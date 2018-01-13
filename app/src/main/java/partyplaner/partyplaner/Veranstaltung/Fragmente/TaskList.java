@@ -32,6 +32,7 @@ public class TaskList extends Fragment implements IReceiveData{
     private Task[] tasks;
     private View view;
     private boolean ersteller;
+    private List<Fragment> fragments = new ArrayList<>();
 
     @Override
     public void onAttach(Context context) {
@@ -69,6 +70,7 @@ public class TaskList extends Fragment implements IReceiveData{
         taskFragment.setArguments(arguments);
         taskFragment.onCreate(null);
 
+        fragments.add(taskFragment);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.add(R.id.body_tasklist, taskFragment);
         transaction.commit();
@@ -88,14 +90,17 @@ public class TaskList extends Fragment implements IReceiveData{
     }
 
     private void setTasksToFragments() {
-        LinearLayout linearLayout = view.findViewById(R.id.body_tasklist);
-        linearLayout.removeAllViews();
+        for (Fragment f : fragments) {
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.remove(f);
+            transaction.commit();
+        }
+        fragments.clear();
         if (tasks != null && data.getParty() != null) {
             for (Task task : tasks) {
                 addTask(task);
             }
         }
-        linearLayout.removeAllViews();
     }
 
 }

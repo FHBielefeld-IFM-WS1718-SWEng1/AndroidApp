@@ -19,6 +19,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import partyplaner.api.APIService;
 import partyplaner.api.ServiceDateReceiver;
 import partyplaner.data.party.Todo;
@@ -38,6 +41,7 @@ public class TODOFragment extends Fragment implements IReceiveData{
     private View view;
     private int partyId;
     private IEventDataManager data;
+    private List<Fragment> fragments = new ArrayList<>();
 
     @Override
     public void onAttach(Context context) {
@@ -97,8 +101,8 @@ public class TODOFragment extends Fragment implements IReceiveData{
                 apiHanlder.putExtra(Keys.EXTRA_DATA, data);
                 apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_PUT_TASK);
                 getActivity().startService(apiHanlder);
+                this.data.startLoading();
 
-                //TODO:Fragment erstellen
             }
         }
     }
@@ -107,6 +111,8 @@ public class TODOFragment extends Fragment implements IReceiveData{
         Bundle arguments = new Bundle();
         SingleTODO todo = new SingleTODO();
         arguments.putString(Keys.EXTRA_NAME, data.getText());
+        arguments.putInt(Keys.EXTRA_PARTYID, partyId);
+        arguments.putInt(Keys.EXTRA_ID, data.getId());
         if(data.getStatus() == 1) {
             arguments.putBoolean(Keys.EXTRA_STATUS, true);
         } else {
@@ -117,6 +123,7 @@ public class TODOFragment extends Fragment implements IReceiveData{
         }
         todo.setArguments(arguments);
 
+        fragments.add(todo);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.add(R.id.body_todo, todo);
         transaction.commit();
@@ -132,13 +139,17 @@ public class TODOFragment extends Fragment implements IReceiveData{
     }
 
     private void setTasksToFragments() {
-        LinearLayout linearLayout = view.findViewById(R.id.body_todo);
-        linearLayout.removeAllViewsInLayout();
+        for (Fragment f : fragments) {
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.remove(f);
+            transaction.commit();
+        }
+        fragments.clear();
         if (todos != null && data.getParty() != null) {
             for (Todo todo : todos) {
                 addTodo(todo);
             }
         }
-        linearLayout.removeAllViews();
+
     }
 }

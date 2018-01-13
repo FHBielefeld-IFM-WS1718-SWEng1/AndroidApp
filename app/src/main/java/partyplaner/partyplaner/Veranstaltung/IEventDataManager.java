@@ -13,4 +13,6 @@ public interface IEventDataManager {
     public String[] getGeneralInformations();
 
     public Party getParty();
+
+    public void startLoading();
 }

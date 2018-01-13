@@ -8,6 +8,7 @@ import partyplaner.data.user.User;
 
 public class Task {
 
+    private int id;
     private String text;
     private User user;
     private int status;
@@ -28,5 +29,9 @@ public class Task {
 
     public int isDone() {
         return status;
+    }
+
+    public int getId() {
+        return id;
     }
 }

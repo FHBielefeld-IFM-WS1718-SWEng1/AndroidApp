@@ -111,7 +111,6 @@ public class APIConnectionHandler {
     }
 
     String post(String url, String data) throws IOException {
-        Log.e("APIConnectionHandler", data);
         Connection conn = new Connection();
         try {
             Response response = conn.execute(baseURL + url, "POST", data).get();

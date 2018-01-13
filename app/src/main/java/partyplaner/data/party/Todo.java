@@ -5,6 +5,8 @@ package partyplaner.data.party;
  */
 
 public class Todo {
+
+    private int id;
     private String text;
     private int status;
 
@@ -19,5 +21,9 @@ public class Todo {
 
     public int getStatus() {
         return status;
+    }
+
+    public int getId() {
+        return id;
     }
 }
