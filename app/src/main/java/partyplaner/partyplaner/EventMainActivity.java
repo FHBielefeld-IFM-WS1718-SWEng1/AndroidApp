@@ -42,6 +42,7 @@ import partyplaner.partyplaner.Veranstaltung.IEventDataManager;
 
 public class EventMainActivity extends AppCompatActivity implements IEventDataManager{
 
+    private int id;
     private Party party;
     private Gson gson;
     private EventMainFragment eventMainFragment;
@@ -51,17 +52,22 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_main);
         eventMainFragment = (EventMainFragment)getFragmentManager().findFragmentById(R.id.event_fragment);
+        id = getIntent().getIntExtra(Keys.EXTRA_PARTYID, 0);
 
         gson = new Gson();
 
-        getData();
+        if(id != 0) {
+            getData();
+        } else {
+            startLoading();
+        }
     }
 
     private void getData() {
         startLoading();
 
         Intent apiHanlder = new Intent(this, APIService.class);
-        apiHanlder.putExtra(Keys.EXTRA_URL, "/party/241121?api=" + I.getMyself().getApiKey());
+        apiHanlder.putExtra(Keys.EXTRA_URL, "/party/" + id + "?api=" + I.getMyself().getApiKey());
         apiHanlder.putExtra(Keys.EXTRA_REQUEST, "GET");
         String data = null;
         apiHanlder.putExtra(Keys.EXTRA_DATA, data);
@@ -85,6 +91,7 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
     }
 
     public void receiveData(String json, String id) {
+        Log.e(this.getClass().getName(), json);
         switch (id) {
             case Keys.EXTRA_LOAD_PARTY:
                 json = json.replaceAll(",\"ersteller\":", ",\"owner\":");
@@ -94,7 +101,6 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
                     Toast.makeText(this, "Daten konnten nicht geladen werden!", Toast.LENGTH_SHORT).show();
                 } else {
                     party = gson.fromJson(json, Party.class);
-                    Log.e(this.getClass().getName(), "party laden");
                     if (party != null) {
                         Log.e(this.getClass().getName(), "party geladen");
                         endLoading();
@@ -121,6 +127,7 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
                     getData();
                 }
                 break;
+
         }
     }
 

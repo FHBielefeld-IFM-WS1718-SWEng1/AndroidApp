@@ -5,6 +5,12 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <Button
+        android:id="@+id/invite_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gast einladen" />
+
     <TabHost
         android:id="@+id/tabhost"
         android:layout_width="match_parent"

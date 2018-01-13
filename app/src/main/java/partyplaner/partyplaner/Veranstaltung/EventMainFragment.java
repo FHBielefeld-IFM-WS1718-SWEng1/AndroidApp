@@ -121,10 +121,12 @@ public class EventMainFragment extends Fragment {
         eventWho.setText(who);
         eventWhere.setText(where);
         eventWhen.setText(when);
-        if(description.length() <= 80) {
-            eventDescription.setText(description);
-        } else {
-            eventDescription.setText(description.substring(0, 80) + "...");
+        if (description != null) {
+            if (description.length() <= 80) {
+                eventDescription.setText(description);
+            } else {
+                eventDescription.setText(description.substring(0, 80) + "...");
+            }
         }
     }
 

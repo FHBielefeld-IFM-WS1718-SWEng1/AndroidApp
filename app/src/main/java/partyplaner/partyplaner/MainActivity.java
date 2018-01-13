@@ -3,6 +3,7 @@ package partyplaner.partyplaner;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -27,6 +28,7 @@ import partyplaner.data.user.I;
 import partyplaner.partyplaner.ContactForm.ContactFragment;
 import partyplaner.partyplaner.Contacts.AllContacts;
 import partyplaner.partyplaner.Profile.ProfileFragment;
+import partyplaner.partyplaner.Veranstaltung.EditEventActivity;
 import partyplaner.partyplaner.home.HomeFragment;
 import partyplaner.partyplaner.ownEvents.OwnEventsFragment;
 import partyplaner.partyplaner.Imprint.ImprintFragment;
@@ -92,8 +94,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         switch (id) {
-            case R.id.action_settings:
-
+            case R.id.action_add_event:
+                Intent intent = new Intent(this, EditEventActivity.class);
+                startActivity(intent);
                 break;
         }
 
@@ -137,6 +140,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.impressum) {
             setFragmentToContent(new ImprintFragment());
         } else if (id == R.id.logout) {
+            currentTab = R.id.home;
             logOut();
         }
     }

@@ -46,6 +46,7 @@ public class OwnEventFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), EventMainActivity.class);
                 intent.putExtra(Keys.EXTRA_OWNER, true);
+                intent.putExtra(Keys.EXTRA_PARTYID, id);
                 startActivity(intent);
             }
         });

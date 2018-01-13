@@ -69,6 +69,7 @@ public class OwnEventsFragment extends Fragment {
         args.putString(Keys.EXTRA_PARTY, party.getName());
         args.putString(Keys.EXTRA_WHEN, party.getStartDate());
         args.putString(Keys.EXTRA_DESCRIPTION, party.getDescription());
+        args.putInt(Keys.EXTRA_PARTYID, party.getId());
         OwnEventFragment partyHomeFragment = new OwnEventFragment();
         partyHomeFragment.setArguments(args);
 
