@@ -90,13 +90,15 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
                 json = json.replaceAll(",\"ersteller\":", ",\"owner\":");
                 json = json.replaceAll("User", "user");
 
-                if (json.contains("3rror")) {
+                if (json.contains("error")) {
                     Toast.makeText(this, "Daten konnten nicht geladen werden!", Toast.LENGTH_SHORT).show();
                 } else {
                     party = gson.fromJson(json, Party.class);
+                    Log.e(this.getClass().getName(), "party laden");
                     if (party != null) {
-                        eventMainFragment.receiveData();
+                        Log.e(this.getClass().getName(), "party geladen");
                         endLoading();
+                        eventMainFragment.receiveData();
                     }
                 }
                 break;

@@ -127,6 +127,7 @@ public class APIConnectionHandler {
 
     String delete(String url, String data) throws IOException {
         Connection conn = new Connection();
+        Log.e("SingleTODO", data);
         try {
             Response response = conn.execute(baseURL + url, "DELETE", data).get();
             if (response != null) {
@@ -161,7 +162,7 @@ public class APIConnectionHandler {
                 break;
             case DELETE:
                 body = RequestBody.create(mediaType, data);
-                builder.post(body);
+                builder.delete(body);
                 break;
             default:
                 break;

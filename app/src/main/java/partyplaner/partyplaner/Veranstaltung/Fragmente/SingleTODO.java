@@ -98,7 +98,7 @@ public class SingleTODO extends Fragment {
         apiHanlder.putExtra(Keys.EXTRA_URL, "/party/todo?api=" + I.getMyself().getApiKey());
         apiHanlder.putExtra(Keys.EXTRA_REQUEST, "DELETE");
         String data = "{\"id\":" + id + "}";
-        Log.e("SingleTODO", data);
+        Log.e("SingleTodo", data);
         apiHanlder.putExtra(Keys.EXTRA_DATA, data);
         apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_DELETE_TASK);
         getActivity().startService(apiHanlder);

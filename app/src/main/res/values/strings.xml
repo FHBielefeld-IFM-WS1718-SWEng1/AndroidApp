@@ -52,4 +52,5 @@
     <string name="poll_question_hint">Frage hier eingeben...</string>
     <string name="poll_plus">+</string>
     <string name="poll_send">Senden</string>
+    <string name="add_event">Veranstaltung ertstellen</string>
 </resources>
