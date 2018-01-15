@@ -16,14 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import partyplaner.data.party.Party;
-import partyplaner.partyplaner.IFragmentDataManeger;
 import partyplaner.partyplaner.Keys;
 import partyplaner.partyplaner.R;
-import partyplaner.partyplaner.Veranstaltung.Fragmente.EventHeaders;
 import partyplaner.partyplaner.Veranstaltung.Fragmente.ExpandableFragment;
-import partyplaner.partyplaner.Veranstaltung.Fragmente.Gallery;
-import partyplaner.partyplaner.Veranstaltung.Fragmente.IReceiveData;
-import partyplaner.partyplaner.Veranstaltung.Fragmente.TaskList;
 
 /**
  * Fragment for the detailed event view.

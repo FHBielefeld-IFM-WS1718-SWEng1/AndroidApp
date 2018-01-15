@@ -79,6 +79,7 @@ public class ExpandableFragment extends Fragment {
 
     public void receiveData() {
         fragment.receiveData();
+        //TODO: reexpandGroup();
     }
 
     private void setFragment(View view, int id) {
@@ -89,6 +90,17 @@ public class ExpandableFragment extends Fragment {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.add(this.id, EventHeaders.values()[id].getFragment());
         transaction.commit();
+    }
+
+    public void reexpandGroup() {
+        LinearLayout body = getView().findViewById(id);
+        LinearLayout back = getView().findViewById(R.id.expand_back);
+        ImageView arrow = getView().findViewById(R.id.arrow);
+        recalculateHeight();
+
+        if (body.getLayoutParams().height > 0) {
+            body.getLayoutParams().height = height;
+        }
     }
 
     /**
@@ -128,7 +140,6 @@ public class ExpandableFragment extends Fragment {
             LinearLayout back = fragment.findViewById(R.id.expand_back);
             ImageView arrow = fragment.findViewById(R.id.arrow);
 
-
             ExpandableAnimator anim = new ExpandableAnimator(body, height, 0, arrow, 0, -90);
             anim.setDuration(300);
             back.startAnimation(anim);
@@ -137,6 +148,7 @@ public class ExpandableFragment extends Fragment {
         }
     }
 
+    @Deprecated
     private void quickCollapseGroup(View fragment) {
         if (fragment != null) {
             LinearLayout body = fragment.findViewById(id);

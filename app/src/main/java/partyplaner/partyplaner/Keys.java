@@ -41,4 +41,5 @@ public class Keys {
     public static final String EXTRA_SERVICE_TYPE = "SREVICE_TYPE";
     public static final String EXTRA_MAIN_ACTIVITY = "MAIN_ACTIVITY";
     public static final String EXTRA_GET_PARTIES = "GET_PARTIES";
+    public static final String EXTRA_POST_TASK = "POST_TASK";
 }

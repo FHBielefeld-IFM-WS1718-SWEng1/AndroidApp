@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,6 +34,7 @@ public class SingleTODO extends Fragment {
 
     private  int id;
     private int partyId;
+    private String text;
 
     private IEventDataManager data;
 
@@ -52,7 +54,7 @@ public class SingleTODO extends Fragment {
         View view = inflater.inflate(R.layout.event_fragment_single_todo, container, false);
 
         Bundle arguments = getArguments();
-        String name = arguments.getString(Keys.EXTRA_NAME);
+        text = arguments.getString(Keys.EXTRA_NAME);
         boolean status = arguments.getBoolean(Keys.EXTRA_STATUS);
         boolean owner = arguments.getBoolean(Keys.EXTRA_OWNER);
         partyId = arguments.getInt(Keys.EXTRA_PARTYID);
@@ -63,9 +65,34 @@ public class SingleTODO extends Fragment {
         ImageView button = view.findViewById(R.id.todo_delete);
 
         Log.e("SingleTodo", String.valueOf(owner));
-        textName.setText(name);
+        textName.setText(text);
         textStatus.setChecked(status);
 
+        setDeleteButton(owner, textStatus, button);
+
+        textStatus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                updateTODOStaus(isChecked);
+            }
+        });
+        return view;
+    }
+
+    private void updateTODOStaus(boolean isChecked) {
+        Intent apiHanlder = new Intent(getActivity(), APIService.class);
+        apiHanlder.putExtra(Keys.EXTRA_URL, "/party/todo?api=" + I.getMyself().getApiKey());
+        apiHanlder.putExtra(Keys.EXTRA_REQUEST, "PUT");
+        int status = (isChecked) ? 1 : 0;
+        String data = "{\"user_id\":" + I.getMyself().getId() + ",\"party_id\":" + partyId +",\"text\":\"" + text + "\",\"status\":" + status + "}";
+        Log.e("SingleTodo", data);
+        apiHanlder.putExtra(Keys.EXTRA_DATA, data);
+        apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_POST_TASK);
+        apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_SERVICE);
+        getActivity().startService(apiHanlder);
+    }
+
+    private void setDeleteButton(boolean owner, CheckBox textStatus, ImageView button) {
         if (!owner) {
             button.setVisibility(View.INVISIBLE);
         } else {
@@ -90,7 +117,6 @@ public class SingleTODO extends Fragment {
             });
             textStatus.setClickable(true);
         }
-        return view;
     }
 
     private void deleteTodo() {

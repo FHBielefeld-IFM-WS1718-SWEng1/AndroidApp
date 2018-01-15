@@ -16,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -59,6 +61,12 @@ public class TODOFragment extends Fragment implements IReceiveData{
         View view = inflater.inflate(R.layout.event_fragment_todo, container, false);
         this.view = view;
         setTasksToFragments();
+        setAddButton(inflater, view);
+
+        return view;
+    }
+
+    private void setAddButton(final LayoutInflater inflater, View view) {
         Button button = view.findViewById(R.id.add_todo);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +93,6 @@ public class TODOFragment extends Fragment implements IReceiveData{
                 dialog.show();
             }
         });
-        return view;
     }
 
     public void createTodo (String name) {

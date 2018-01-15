@@ -130,6 +130,9 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
                     getData();
                 }
                 break;
+            case Keys.EXTRA_POST_TASK:
+                Log.e(getClass().getName(), json);
+                break;
 
         }
     }
