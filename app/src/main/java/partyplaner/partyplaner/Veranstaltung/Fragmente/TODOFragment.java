@@ -100,6 +100,7 @@ public class TODOFragment extends Fragment implements IReceiveData{
                 Log.e("TODO", data);
                 apiHanlder.putExtra(Keys.EXTRA_DATA, data);
                 apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_PUT_TASK);
+                apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_SERVICE);
                 getActivity().startService(apiHanlder);
                 this.data.startLoading();
 

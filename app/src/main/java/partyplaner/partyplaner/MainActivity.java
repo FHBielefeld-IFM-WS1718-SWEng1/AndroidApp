@@ -4,8 +4,10 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,13 +17,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
+import partyplaner.api.APIService;
 import partyplaner.api.GeneralAPIRequestHandler;
 import partyplaner.api.RouteType;
+import partyplaner.api.ServiceDateReceiver;
 import partyplaner.data.party.Party;
 import partyplaner.data.party.PartyList;
 import partyplaner.data.user.I;
@@ -29,14 +34,17 @@ import partyplaner.partyplaner.ContactForm.ContactFragment;
 import partyplaner.partyplaner.Contacts.AllContacts;
 import partyplaner.partyplaner.Profile.ProfileFragment;
 import partyplaner.partyplaner.Veranstaltung.EditEventActivity;
+import partyplaner.partyplaner.Veranstaltung.Fragmente.IReceiveData;
+import partyplaner.partyplaner.Veranstaltung.IServiceReceiver;
 import partyplaner.partyplaner.home.HomeFragment;
 import partyplaner.partyplaner.ownEvents.OwnEventsFragment;
 import partyplaner.partyplaner.Imprint.ImprintFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, IFragmentDataManeger {
+        implements NavigationView.OnNavigationItemSelectedListener, IFragmentDataManeger, IServiceReceiver {
 
     private static int currentTab = R.id.home;
+    private IReceiveData currentTabReceiver;
     private Party[] parties;
     private Gson gson;
 
@@ -64,10 +72,21 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void loadData() {
-        String json = GeneralAPIRequestHandler.request("/party?api=" + I.getMyself().getApiKey(), RouteType.GET, null);
-        json = json.replaceAll(".*?\\[", "[");
-        json = json.replaceAll("].", "]");
-        parties = gson.fromJson(json, Party[].class);
+        startLoading();
+
+        parties = null;
+        Intent apiHanlder = new Intent(this, APIService.class);
+        apiHanlder.putExtra(Keys.EXTRA_URL, "/party?api=" + I.getMyself().getApiKey());
+        apiHanlder.putExtra(Keys.EXTRA_REQUEST, "GET");
+        String data = null;
+        apiHanlder.putExtra(Keys.EXTRA_DATA, data);
+        apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_GET_PARTIES);
+        apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_MAIN_ACTIVITY);
+        this.startService(apiHanlder);
+
+        IntentFilter statusIntentFilter = new IntentFilter(Keys.EXTRA_MAIN_ACTIVITY);
+        ServiceDateReceiver serviceDateReceiver = new ServiceDateReceiver(this);
+        LocalBroadcastManager.getInstance(this).registerReceiver(serviceDateReceiver, statusIntentFilter);
     }
 
     @Override
@@ -116,30 +135,39 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    //receive DATA Speichern
     private void setActiveFragment(int id) {
         currentTab = id;
         if (id == R.id.home) {
-            setFragmentToContent(new HomeFragment());
+            HomeFragment fragment = new HomeFragment();
+            currentTabReceiver = fragment;
+            setFragmentToContent(fragment);
         } else if (id == R.id.profile){
             setFragmentToContent(new ProfileFragment());
+            currentTabReceiver = null;
         } else if (id == R.id.contacts) {
             AllContacts all_contacts = new AllContacts();
             Bundle args = new Bundle();
             args.putString(Keys.EXTRA_NAME, "");
+            currentTabReceiver = null;
             setFragmentToContent(new AllContacts());
         } else if (id == R.id.ownEvents) {
             OwnEventsFragment ownEvent = new OwnEventsFragment();
             Bundle args = new Bundle();
             args.putSerializable(Keys.EXTRA_PARTYLIST, new PartyList());
             ownEvent.setArguments(args);
+            currentTabReceiver = ownEvent;
             setFragmentToContent(ownEvent);
         } else if (id == R.id.help) {
 
         } else if (id == R.id.contactFormular) {
+            currentTabReceiver = null;
             setFragmentToContent(new ContactFragment());
         } else if (id == R.id.impressum) {
+            currentTabReceiver = null;
             setFragmentToContent(new ImprintFragment());
         } else if (id == R.id.logout) {
+            currentTabReceiver = null;
             currentTab = R.id.home;
             logOut();
         }
@@ -173,5 +201,36 @@ public class MainActivity extends AppCompatActivity
             }
         }
         return ownParties.toArray(new Party[ownParties.size()]);
+    }
+
+    @Override
+    public boolean partyReceived() {
+        if (parties == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public void receiveData(String json, String id) {
+        if (!json.contains("error")) {
+            json = json.replaceAll(".*?\\[", "[");
+            json = json.replaceAll("].", "]");
+            parties = gson.fromJson(json, Party[].class);
+
+            if (currentTabReceiver != null) {
+                currentTabReceiver.receiveData();
+            }
+            endLoading();
+        } else {
+            Toast.makeText(this, "Daten konnten nicht geladen werden!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void endLoading() {
+    }
+
+    private void startLoading() {
     }
 }

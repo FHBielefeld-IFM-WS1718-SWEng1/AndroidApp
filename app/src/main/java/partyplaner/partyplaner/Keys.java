@@ -38,5 +38,7 @@ public class Keys {
     public static final String EXTRA_LOAD_PARTY = "LOAD_PARTY";
     public static final String EXTRA_PUT_TASK = "PUT_TASK";
     public static final String EXTRA_DELETE_TASK = "DELETE_TASK";
-    public static final String EXTRA_POST_PARTY = "POST_PARTY";
+    public static final String EXTRA_SERVICE_TYPE = "SREVICE_TYPE";
+    public static final String EXTRA_MAIN_ACTIVITY = "MAIN_ACTIVITY";
+    public static final String EXTRA_GET_PARTIES = "GET_PARTIES";
 }

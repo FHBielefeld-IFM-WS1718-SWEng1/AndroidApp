@@ -1,6 +1,5 @@
 package partyplaner.partyplaner.Veranstaltung;
 
-import partyplaner.api.APIService;
 import partyplaner.api.GeneralAPIRequestHandler;
 import partyplaner.api.RouteType;
 import partyplaner.api.ServiceDateReceiver;

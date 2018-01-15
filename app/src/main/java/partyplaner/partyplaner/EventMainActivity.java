@@ -39,8 +39,9 @@ import partyplaner.data.party.Task;
 import partyplaner.data.user.I;
 import partyplaner.partyplaner.Veranstaltung.EventMainFragment;
 import partyplaner.partyplaner.Veranstaltung.IEventDataManager;
+import partyplaner.partyplaner.Veranstaltung.IServiceReceiver;
 
-public class EventMainActivity extends AppCompatActivity implements IEventDataManager{
+public class EventMainActivity extends AppCompatActivity implements IEventDataManager, IServiceReceiver{
 
     private int id;
     private Party party;
@@ -72,6 +73,7 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
         String data = null;
         apiHanlder.putExtra(Keys.EXTRA_DATA, data);
         apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_LOAD_PARTY);
+        apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_SERVICE);
         this.startService(apiHanlder);
 
         IntentFilter statusIntentFilter = new IntentFilter(Keys.EXTRA_SERVICE);
@@ -90,6 +92,7 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
         return party;
     }
 
+    @Override
     public void receiveData(String json, String id) {
         Log.e(this.getClass().getName(), json);
         switch (id) {

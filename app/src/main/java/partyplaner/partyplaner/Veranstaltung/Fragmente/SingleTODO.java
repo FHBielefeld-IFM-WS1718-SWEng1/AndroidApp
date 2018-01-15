@@ -101,6 +101,7 @@ public class SingleTODO extends Fragment {
         Log.e("SingleTodo", data);
         apiHanlder.putExtra(Keys.EXTRA_DATA, data);
         apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_DELETE_TASK);
+        apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_SERVICE);
         getActivity().startService(apiHanlder);
         this.data.startLoading();
     }

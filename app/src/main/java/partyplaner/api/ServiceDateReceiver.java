@@ -6,6 +6,7 @@ import android.content.Intent;
 
 import partyplaner.partyplaner.EventMainActivity;
 import partyplaner.partyplaner.Keys;
+import partyplaner.partyplaner.Veranstaltung.IServiceReceiver;
 
 /**
  * Created by malte on 10.01.2018.
@@ -13,12 +14,12 @@ import partyplaner.partyplaner.Keys;
 
 public class ServiceDateReceiver extends BroadcastReceiver {
 
-    private EventMainActivity main;
+    private IServiceReceiver main;
 
     public ServiceDateReceiver() {
     }
 
-    public ServiceDateReceiver(EventMainActivity eventMainActivity) {
+    public ServiceDateReceiver(IServiceReceiver eventMainActivity) {
         main = eventMainActivity;
     }
 

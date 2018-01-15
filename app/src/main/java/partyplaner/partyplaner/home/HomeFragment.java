@@ -21,13 +21,14 @@ import partyplaner.data.user.I;
 import partyplaner.partyplaner.IFragmentDataManeger;
 import partyplaner.partyplaner.Keys;
 import partyplaner.partyplaner.R;
+import partyplaner.partyplaner.Veranstaltung.Fragmente.IReceiveData;
 import partyplaner.partyplaner.ownEvents.OwnEventFragment;
 
 /**
  * Created by André on 10.11.2017.
  */
 
-public class HomeFragment extends Fragment{
+public class HomeFragment extends Fragment implements IReceiveData{
 
     private IFragmentDataManeger data;
     private LinearLayout partyHolder;
@@ -52,8 +53,10 @@ public class HomeFragment extends Fragment{
         if (savedInstanceState == null) {
             partyHolder = view.findViewById(R.id.party_list);
 
-            parties = data.getParties();
-            updateParties();
+            if (data.partyReceived()) {
+                parties = data.getParties();
+                updateParties();
+            }
         }
 
         return view;
@@ -63,7 +66,7 @@ public class HomeFragment extends Fragment{
         if(partyHolder != null)
             partyHolder.removeAllViewsInLayout();
 
-        for (Party party: parties) {
+        for (Party party : parties) {
             addParty(party);
         }
     }
@@ -76,18 +79,26 @@ public class HomeFragment extends Fragment{
         args.putString(Keys.EXTRA_DESCRIPTION, party.getDescription());
         args.putInt(Keys.EXTRA_USERID, party.getUserID());
 
-
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        if (party.isErsteller()) {
-            OwnEventFragment ownEventFragment = new OwnEventFragment();
-            ownEventFragment.setArguments(args);
-            fragmentTransaction.add(R.id.party_list, ownEventFragment);
-        } else {
-            PartyHomeFragment partyHomeFragment = new PartyHomeFragment();
-            partyHomeFragment.setArguments(args);
-            fragmentTransaction.add(R.id.party_list, partyHomeFragment);
+        if (getFragmentManager() != null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            if (party.isErsteller()) {
+                OwnEventFragment ownEventFragment = new OwnEventFragment();
+                ownEventFragment.setArguments(args);
+                fragmentTransaction.add(R.id.party_list, ownEventFragment);
+            } else {
+                PartyHomeFragment partyHomeFragment = new PartyHomeFragment();
+                partyHomeFragment.setArguments(args);
+                fragmentTransaction.add(R.id.party_list, partyHomeFragment);
+            }
+            fragmentTransaction.commit();
         }
-        fragmentTransaction.commit();
+
+    }
+
+    @Override
+    public void receiveData() {
+        parties = data.getParties();
+        updateParties();
     }
 }

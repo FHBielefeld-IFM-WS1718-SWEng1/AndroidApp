@@ -10,4 +10,5 @@ public interface IFragmentDataManeger {
 
     public Party[] getParties();
     public Party[] getOwnParties();
+    public boolean partyReceived();
  }

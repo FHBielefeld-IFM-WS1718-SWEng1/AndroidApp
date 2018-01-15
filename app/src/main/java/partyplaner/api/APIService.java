@@ -32,10 +32,11 @@ public class APIService extends IntentService {
         String url = intent.getStringExtra(Keys.EXTRA_URL);
         String request = intent.getStringExtra(Keys.EXTRA_REQUEST);
         String data = intent.getStringExtra(Keys.EXTRA_DATA);
+        String type = intent.getStringExtra(Keys.EXTRA_SERVICE_TYPE);
 
         String response = GeneralAPIRequestHandler.request(url, RouteType.stringToRoute(request), data);
 
-        Intent localIntent = new Intent(Keys.EXTRA_SERVICE)
+        Intent localIntent = new Intent(type)
                         .putExtra(Keys.EXTRA_DATA, response)
                 .putExtra(Keys.EXTRA_ID, intent.getStringExtra(Keys.EXTRA_ID));
         LocalBroadcastManager.getInstance(this).sendBroadcast(localIntent);

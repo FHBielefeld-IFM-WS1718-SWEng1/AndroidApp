@@ -17,13 +17,14 @@ import partyplaner.data.party.Party;
 import partyplaner.partyplaner.IFragmentDataManeger;
 import partyplaner.partyplaner.Keys;
 import partyplaner.partyplaner.R;
+import partyplaner.partyplaner.Veranstaltung.Fragmente.IReceiveData;
 import partyplaner.partyplaner.home.PartyHomeFragment;
 
 /**
  * Created by André on 17.11.2017.
  */
 
-public class OwnEventsFragment extends Fragment {
+public class OwnEventsFragment extends Fragment implements IReceiveData{
 
     private LinearLayout partyHolder;
     private Party[] parties;
@@ -47,15 +48,21 @@ public class OwnEventsFragment extends Fragment {
         if (savedInstanceState == null) {
             partyHolder = view.findViewById(R.id.ownEvent_list);
 
-            parties = data.getOwnParties();
-            updateParties();
+            if (data.partyReceived()) {
+                parties = data.getOwnParties();
+                updateParties();
+            }
         }
 
         return view;
     }
 
     private void updateParties() {
-        partyHolder.removeAllViewsInLayout();
+        /*for (Fragment f : fragments) {
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.remove(f);
+            transaction.commit();
+        }*/
 
         Log.e("OwnEvents", parties.length + "");
 
@@ -73,10 +80,18 @@ public class OwnEventsFragment extends Fragment {
         OwnEventFragment partyHomeFragment = new OwnEventFragment();
         partyHomeFragment.setArguments(args);
 
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.ownEvent_list, partyHomeFragment);
-        fragmentTransaction.commit();
+
+        if (getFragmentManager() != null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.ownEvent_list, partyHomeFragment);
+            fragmentTransaction.commit();
+        }
     }
 
+    @Override
+    public void receiveData() {
+        parties = data.getOwnParties();
+        updateParties();
+    }
 }
