@@ -21,15 +21,16 @@ public class SingleGuestPending extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.event_fragment_single_guest_pending, container, false);
 
-        Bundle args = getArguments();
-        TextView name = view.findViewById(R.id.name_pending);
-        name.setText(args.getString(Keys.EXTRA_NAME));
+        if (savedInstanceState == null) {
+            Bundle args = getArguments();
+            TextView name = view.findViewById(R.id.name_pending);
+            name.setText(args.getString(Keys.EXTRA_NAME));
 
-        ImageView delete = view.findViewById(R.id.delete_pending);
-        if (args.getBoolean(Keys.EXTRA_OWNER)) {
-            delete.setVisibility(View.VISIBLE);
+            ImageView delete = view.findViewById(R.id.delete_pending);
+            if (args.getBoolean(Keys.EXTRA_OWNER)) {
+                delete.setVisibility(View.VISIBLE);
+            }
         }
-
         return view;
     }
 }

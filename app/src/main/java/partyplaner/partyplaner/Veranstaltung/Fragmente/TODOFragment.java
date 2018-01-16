@@ -60,8 +60,10 @@ public class TODOFragment extends Fragment implements IReceiveData{
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.event_fragment_todo, container, false);
         this.view = view;
-        setTasksToFragments();
-        setAddButton(inflater, view);
+        if (savedInstanceState == null) {
+            setTasksToFragments();
+            setAddButton(inflater, view);
+        }
 
         return view;
     }

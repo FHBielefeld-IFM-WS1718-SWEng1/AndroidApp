@@ -54,30 +54,32 @@ public class TaskFragment extends Fragment {
         View view = inflater.inflate(R.layout.event_fragment_task, container, false);
         this.view = view;
 
-        Bundle arguments = getArguments();
-        user = arguments.getString(Keys.EXTRA_NAME);
-        task = arguments.getString(Keys.EXTRA_TASK);
-        isChecked = arguments.getBoolean(Keys.EXTRA_STATUS);
-        boolean owner = arguments.getBoolean(Keys.EXTRA_OWNER);
-        id = arguments.getInt(Keys.EXTRA_ID);
+        if (savedInstanceState == null) {
+            Bundle arguments = getArguments();
+            user = arguments.getString(Keys.EXTRA_NAME);
+            task = arguments.getString(Keys.EXTRA_TASK);
+            isChecked = arguments.getBoolean(Keys.EXTRA_STATUS);
+            boolean owner = arguments.getBoolean(Keys.EXTRA_OWNER);
+            id = arguments.getInt(Keys.EXTRA_ID);
 
-        TextView nameText = view.findViewById(R.id.name_tasklist);
-        TextView taskText = view.findViewById(R.id.task_tasklist);
-        CheckBox statusBox = view.findViewById(R.id.status_tasklist);
-        ImageView delete = view.findViewById(R.id.deleteButtonTask);
-        ImageView edit = view.findViewById(R.id.editButtonTask);
-        setDeleteEditButton(inflater, owner, statusBox, delete, edit);
+            TextView nameText = view.findViewById(R.id.name_tasklist);
+            TextView taskText = view.findViewById(R.id.task_tasklist);
+            CheckBox statusBox = view.findViewById(R.id.status_tasklist);
+            ImageView delete = view.findViewById(R.id.deleteButtonTask);
+            ImageView edit = view.findViewById(R.id.editButtonTask);
+            setDeleteEditButton(inflater, owner, statusBox, delete, edit);
 
-        nameText.setText(user);
-        taskText.setText(task);
-        statusBox.setChecked(isChecked);
+            nameText.setText(user);
+            taskText.setText(task);
+            statusBox.setChecked(isChecked);
 
-        statusBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                updateTask("", "", isChecked);
-            }
-        });
+            statusBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    updateTask("", "", isChecked);
+                }
+            });
+        }
 
         return view;
     }

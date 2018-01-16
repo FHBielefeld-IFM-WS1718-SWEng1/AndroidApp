@@ -24,16 +24,18 @@ public class Poll extends Fragment implements IReceiveData {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.event_fragment_poll, container, false);
 
-        Button createPoll = view.findViewById(R.id.create_poll);
-        createPoll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        if (savedInstanceState == null) {
+            Button createPoll = view.findViewById(R.id.create_poll);
+            createPoll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
                 /*Intent intent = new Intent(getActivity(), CreatePoll.class);
                 startActivity(intent);*/
-            }
-        });
-        testSetup(view);
-        testSetup(view);
+                }
+            });
+            testSetup(view);
+            testSetup(view);
+        }
         return view;
     }
 

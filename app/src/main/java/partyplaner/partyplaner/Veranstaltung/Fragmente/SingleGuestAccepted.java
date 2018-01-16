@@ -22,14 +22,16 @@ public class SingleGuestAccepted extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.event_fragment_single_guest_accepted, container, false);
 
-        Bundle args = getArguments();
-        TextView name = view.findViewById(R.id.name_accepted);
-        name.setText(args.getString(Keys.EXTRA_NAME));
+        if (savedInstanceState == null) {
+            Bundle args = getArguments();
+            TextView name = view.findViewById(R.id.name_accepted);
+            name.setText(args.getString(Keys.EXTRA_NAME));
 
-        CheckBox admin = view.findViewById(R.id.admin_status);
-        if (args.getBoolean(Keys.EXTRA_OWNER)) {
-            admin.setVisibility(View.VISIBLE);
-            admin.setChecked(args.getBoolean(Keys.EXTRA_ADMIN));
+            CheckBox admin = view.findViewById(R.id.admin_status);
+            if (args.getBoolean(Keys.EXTRA_OWNER)) {
+                admin.setVisibility(View.VISIBLE);
+                admin.setChecked(args.getBoolean(Keys.EXTRA_ADMIN));
+            }
         }
         return view;
     }

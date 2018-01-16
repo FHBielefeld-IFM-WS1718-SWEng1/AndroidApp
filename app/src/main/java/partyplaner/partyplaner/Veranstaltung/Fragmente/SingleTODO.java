@@ -53,29 +53,31 @@ public class SingleTODO extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.event_fragment_single_todo, container, false);
 
-        Bundle arguments = getArguments();
-        text = arguments.getString(Keys.EXTRA_NAME);
-        boolean status = arguments.getBoolean(Keys.EXTRA_STATUS);
-        boolean owner = arguments.getBoolean(Keys.EXTRA_OWNER);
-        partyId = arguments.getInt(Keys.EXTRA_PARTYID);
-        id = arguments.getInt(Keys.EXTRA_ID);
+        if (savedInstanceState == null) {
+            Bundle arguments = getArguments();
+            text = arguments.getString(Keys.EXTRA_NAME);
+            boolean status = arguments.getBoolean(Keys.EXTRA_STATUS);
+            boolean owner = arguments.getBoolean(Keys.EXTRA_OWNER);
+            partyId = arguments.getInt(Keys.EXTRA_PARTYID);
+            id = arguments.getInt(Keys.EXTRA_ID);
 
-        TextView textName = view.findViewById(R.id.todo_name);
-        CheckBox textStatus = view.findViewById(R.id.todo_status);
-        ImageView button = view.findViewById(R.id.todo_delete);
+            TextView textName = view.findViewById(R.id.todo_name);
+            CheckBox textStatus = view.findViewById(R.id.todo_status);
+            ImageView button = view.findViewById(R.id.todo_delete);
 
-        Log.e("SingleTodo", String.valueOf(owner));
-        textName.setText(text);
-        textStatus.setChecked(status);
+            Log.e("SingleTodo", String.valueOf(owner));
+            textName.setText(text);
+            textStatus.setChecked(status);
 
-        setDeleteButton(owner, textStatus, button);
+            setDeleteButton(owner, textStatus, button);
 
-        textStatus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                updateTODOStaus(isChecked);
-            }
-        });
+            textStatus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    updateTODOStaus(isChecked);
+                }
+            });
+        }
         return view;
     }
 

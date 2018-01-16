@@ -38,34 +38,37 @@ public class ExpandableFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.event_expandable_fragment, container, false);
-        expandend = true;
 
-        Bundle arguments = getArguments();
-        String title = arguments.getString(Keys.EXTRA_NAME);
-        TextView text = view.findViewById(R.id.expandableTitle);
-        text.setText(title);
+        if (savedInstanceState == null) {
+            expandend = true;
 
-        id = View.generateViewId();
-        LinearLayout body = view.findViewById(R.id.body);
-        body.setId(id);
+            Bundle arguments = getArguments();
+            String title = arguments.getString(Keys.EXTRA_NAME);
+            TextView text = view.findViewById(R.id.expandableTitle);
+            text.setText(title);
 
-        int id = arguments.getInt(Keys.EXTRA_ID);
-        setFragment(view, id);
+            id = View.generateViewId();
+            LinearLayout body = view.findViewById(R.id.body);
+            body.setId(id);
 
-        RelativeLayout head = view.findViewById(R.id.head);
-        head.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (expandend) {
-                    collapseGroup();
-                } else {
-                    expandGroup();
+            int id = arguments.getInt(Keys.EXTRA_ID);
+            setFragment(view, id);
+
+            RelativeLayout head = view.findViewById(R.id.head);
+            head.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (expandend) {
+                        collapseGroup();
+                    } else {
+                        expandGroup();
+                    }
                 }
-            }
-        });
+            });
 
-        //expandGroup();
-        quickCollapseGroup(view);
+            //expandGroup();
+            quickCollapseGroup(view);
+        }
         this.view = view;
         return view;
     }
@@ -148,7 +151,6 @@ public class ExpandableFragment extends Fragment {
         }
     }
 
-    @Deprecated
     private void quickCollapseGroup(View fragment) {
         if (fragment != null) {
             LinearLayout body = fragment.findViewById(id);

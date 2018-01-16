@@ -20,10 +20,11 @@ public class SingleGuestDenied extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.event_fragment_single_guest_denied, container, false);
 
-        Bundle args = getArguments();
-        TextView name = view.findViewById(R.id.name_denied);
-        name.setText(args.getString(Keys.EXTRA_NAME));
-
+        if (savedInstanceState == null) {
+            Bundle args = getArguments();
+            TextView name = view.findViewById(R.id.name_denied);
+            name.setText(args.getString(Keys.EXTRA_NAME));
+        }
         return view;
     }
 }

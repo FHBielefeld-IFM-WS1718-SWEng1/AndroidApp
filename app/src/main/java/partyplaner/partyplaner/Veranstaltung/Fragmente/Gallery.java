@@ -27,10 +27,10 @@ public class Gallery extends Fragment implements IReceiveData{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.event_fragment_gallery, container, false);
-
-        setTestSetUp();
-        initImages(view);
-
+        if (savedInstanceState == null) {
+            setTestSetUp();
+            initImages(view);
+        }
         return view;
     }
 

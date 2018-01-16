@@ -40,33 +40,35 @@ public class EditEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_event);
 
-        final TextView when = findViewById(R.id.event_when);
-        when.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    pickDateTime();
-                    when.clearFocus();
+        if (savedInstanceState == null) {
+            final TextView when = findViewById(R.id.event_when);
+            when.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (hasFocus) {
+                        pickDateTime();
+                        when.clearFocus();
+                    }
                 }
-            }
-        });
-        when.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pickDateTime();
-            }
-        });
+            });
+            when.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    pickDateTime();
+                }
+            });
 
-        Button button = findViewById(R.id.create_party_button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createUser();
-            }
-        });
-
-
+            Button button = findViewById(R.id.create_party_button);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    createUser();
+                }
+            });
+        }
     }
+
+
 
     public void createUser(){
         TextView what = findViewById(R.id.event_who);

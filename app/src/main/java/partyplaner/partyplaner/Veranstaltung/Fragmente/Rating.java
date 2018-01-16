@@ -25,16 +25,17 @@ public class Rating extends Fragment implements IReceiveData {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.event_fragment_rating, container, false);
 
-        TextView showRates = view.findViewById(R.id.numRates);
-        showRates.setText(numRates + " haben abgestimmt");
+        if (savedInstanceState == null) {
+            TextView showRates = view.findViewById(R.id.numRates);
+            showRates.setText(numRates + " haben abgestimmt");
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        double width = displayMetrics.widthPixels - 16;
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+            double width = displayMetrics.widthPixels - 16;
 
-        LinearLayout posRating = view.findViewById(R.id.posRating);
-        posRating.setLayoutParams(new LinearLayout.LayoutParams((int)(width * rating), ViewGroup.LayoutParams.MATCH_PARENT));
-
+            LinearLayout posRating = view.findViewById(R.id.posRating);
+            posRating.setLayoutParams(new LinearLayout.LayoutParams((int) (width * rating), ViewGroup.LayoutParams.MATCH_PARENT));
+        }
         return view;
     }
 

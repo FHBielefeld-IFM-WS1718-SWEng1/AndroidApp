@@ -31,13 +31,15 @@ public class CommentBody extends Fragment implements IReceiveData {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.event_fragment_comment, container, false);
-        ImageView send = view.findViewById(R.id.send_first_comment);
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendComment(view);
-            }
-        });
+        if (savedInstanceState == null) {
+            ImageView send = view.findViewById(R.id.send_first_comment);
+            send.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    sendComment(view);
+                }
+            });
+        }
         return view;
     }
 

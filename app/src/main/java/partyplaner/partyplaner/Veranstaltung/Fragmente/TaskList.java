@@ -58,8 +58,10 @@ public class TaskList extends Fragment implements IReceiveData{
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.event_fragment_tasklist, container, false);
         this.view = view;
-        setTasksToFragments();
-        setAddButton(inflater, view);
+        if (savedInstanceState == null) {
+            setTasksToFragments();
+            setAddButton(inflater, view);
+        }
         return view;
     }
 

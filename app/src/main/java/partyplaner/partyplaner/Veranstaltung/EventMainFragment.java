@@ -53,6 +53,7 @@ public class EventMainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_event_main, container, false);
         this.view = view;
+
         if(savedInstanceState == null) {
             setUpDescription(view);
             setUpExpandableView(view);

@@ -32,11 +32,12 @@ public class GuestList extends Fragment implements IReceiveData {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.event_fragment_guestlist, container, false);
-
-        initTabhost(view);
-        setUpTestLists();
-        setLists();
-        setEmptyList(view);
+        if (savedInstanceState == null) {
+            initTabhost(view);
+            setUpTestLists();
+            setLists();
+            setEmptyList(view);
+        }
         return view;
     }
 
