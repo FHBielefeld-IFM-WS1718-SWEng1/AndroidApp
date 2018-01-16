@@ -75,7 +75,7 @@ public class TODOFragment extends Fragment implements IReceiveData{
                 final View dialogView = inflater.inflate(R.layout.single_input_dialog, null);
                 builder.setView(dialogView);
                 EditText input = null;
-                builder.setMessage("Aufgabenname eingeben")
+                builder.setMessage("Todo eingeben")
                         .setPositiveButton("Einfügen", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

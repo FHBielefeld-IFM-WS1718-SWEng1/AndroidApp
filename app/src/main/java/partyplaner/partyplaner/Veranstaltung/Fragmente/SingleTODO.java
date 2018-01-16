@@ -81,7 +81,7 @@ public class SingleTODO extends Fragment {
 
     private void updateTODOStaus(boolean isChecked) {
         Intent apiHanlder = new Intent(getActivity(), APIService.class);
-        apiHanlder.putExtra(Keys.EXTRA_URL, "/party/todo?api=" + I.getMyself().getApiKey());
+        apiHanlder.putExtra(Keys.EXTRA_URL, "/party/todo/" + id + "?api=" + I.getMyself().getApiKey());
         apiHanlder.putExtra(Keys.EXTRA_REQUEST, "PUT");
         int status = (isChecked) ? 1 : 0;
         String data = "{\"user_id\":" + I.getMyself().getId() + ",\"party_id\":" + partyId +",\"text\":\"" + text + "\",\"status\":" + status + "}";
@@ -121,7 +121,7 @@ public class SingleTODO extends Fragment {
 
     private void deleteTodo() {
         Intent apiHanlder = new Intent(getActivity(), APIService.class);
-        apiHanlder.putExtra(Keys.EXTRA_URL, "/party/todo?api=" + I.getMyself().getApiKey());
+        apiHanlder.putExtra(Keys.EXTRA_URL, "/party/todo/" + id + "?api=" + I.getMyself().getApiKey());
         apiHanlder.putExtra(Keys.EXTRA_REQUEST, "DELETE");
         String data = "{\"id\":" + id + "}";
         Log.e("SingleTodo", data);
