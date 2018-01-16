@@ -53,11 +53,16 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_main);
         eventMainFragment = (EventMainFragment)getFragmentManager().findFragmentById(R.id.event_fragment);
-        id = getIntent().getIntExtra(Keys.EXTRA_PARTYID, 0);
+        id = getIntent().getIntExtra(Keys.EXTRA_PARTYID, -1);
 
         gson = new Gson();
 
-        if(id != 0) {
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(id != -1) {
             getData();
         } else {
             startLoading();
@@ -99,7 +104,6 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
             case Keys.EXTRA_LOAD_PARTY:
                 json = json.replaceAll(",\"ersteller\":", ",\"owner\":");
                 json = json.replaceAll("User", "user");
-
                 if (json.contains("error")) {
                     Toast.makeText(this, "Daten konnten nicht geladen werden!", Toast.LENGTH_SHORT).show();
                 } else {
@@ -111,8 +115,6 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
                     }
                 }
                 break;
-                //urbiatorbi.va
-                //armen
             case Keys.EXTRA_PUT_TASK:
                 endLoading();
                 if(json.contains("error")) {
@@ -121,7 +123,6 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
                     getData();
                 }
                 break;
-
             case Keys.EXTRA_DELETE_TASK:
                 endLoading();
                 if(json.contains("error")) {
@@ -133,7 +134,6 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
             case Keys.EXTRA_POST_TASK:
                 Log.e(getClass().getName(), json);
                 break;
-
         }
     }
 

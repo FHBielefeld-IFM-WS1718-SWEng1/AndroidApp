@@ -144,8 +144,8 @@ public class TaskFragment extends Fragment {
             user = data.getParty().getOwner();
         }
         for (Guest guest : data.getParty().getGuests()) {
-            if (guest.getName().equals(newName)) {
-                user = guest;
+            if (guest.getUser().getName().equals(newName)) {
+                user = guest.getUser();
             }
         }
         Log.e("SingleTodo", newName + ", " + newTask);

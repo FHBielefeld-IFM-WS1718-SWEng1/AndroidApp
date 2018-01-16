@@ -102,8 +102,8 @@ public class TaskList extends Fragment implements IReceiveData{
             us = data.getParty().getOwner();
         }
         for (Guest guest : data.getParty().getGuests()) {
-            if (guest.getName().equals(name)) {
-                us = guest;
+            if (guest.getUser().getName().equals(name)) {
+                us = guest.getUser();
             }
         }
 
