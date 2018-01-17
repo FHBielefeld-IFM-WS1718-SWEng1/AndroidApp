@@ -77,4 +77,9 @@ public class Gallery extends Fragment implements IReceiveData{
     public void receiveData() {
 
     }
+
+    @Override
+    public void setExpandable(ExpandableFragment fragment) {
+
+    }
 }

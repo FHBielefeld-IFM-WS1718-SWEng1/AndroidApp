@@ -63,4 +63,9 @@ public class Poll extends Fragment implements IReceiveData {
 
     }
 
+    @Override
+    public void setExpandable(ExpandableFragment fragment) {
+
+    }
+
 }

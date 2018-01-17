@@ -38,7 +38,7 @@ public class ExpandableFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.event_expandable_fragment, container, false);
-
+        this.view = view;
         if (savedInstanceState == null) {
             expandend = true;
 
@@ -89,6 +89,7 @@ public class ExpandableFragment extends Fragment {
         LinearLayout body = view.findViewById(this.id);
         body.removeAllViews();
         fragment = (IReceiveData) EventHeaders.values()[id].getFragment();
+        fragment.setExpandable(this);
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.add(this.id, EventHeaders.values()[id].getFragment());
@@ -96,13 +97,16 @@ public class ExpandableFragment extends Fragment {
     }
 
     public void reexpandGroup() {
-        LinearLayout body = getView().findViewById(id);
-        LinearLayout back = getView().findViewById(R.id.expand_back);
-        ImageView arrow = getView().findViewById(R.id.arrow);
-        recalculateHeight();
+        if (view != null) {
+            LinearLayout body = view.findViewById(id);
+            LinearLayout back = view.findViewById(R.id.expand_back);
+            recalculateHeight();
 
-        if (body.getLayoutParams().height > 0) {
-            body.getLayoutParams().height = height;
+            if (body.getLayoutParams().height > 0) {
+                body.getLayoutParams().height = this.height;
+            }
+            body.refreshDrawableState();
+            back.refreshDrawableState();
         }
     }
 

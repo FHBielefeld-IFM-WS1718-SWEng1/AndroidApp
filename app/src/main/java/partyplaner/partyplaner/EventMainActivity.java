@@ -47,22 +47,29 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
     private Party party;
     private Gson gson;
     private EventMainFragment eventMainFragment;
+    private ServiceDateReceiver serviceDateReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_main);
-        eventMainFragment = (EventMainFragment)getFragmentManager().findFragmentById(R.id.event_fragment);
-        id = getIntent().getIntExtra(Keys.EXTRA_PARTYID, -1);
+        if (savedInstanceState == null) {
+            eventMainFragment = (EventMainFragment) getFragmentManager().findFragmentById(R.id.event_fragment);
+            id = getIntent().getIntExtra(Keys.EXTRA_PARTYID, -1);
 
-        gson = new Gson();
+            gson = new Gson();
 
+
+        }
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
-        if(id != -1) {
+        IntentFilter statusIntentFilter = new IntentFilter(Keys.EXTRA_SERVICE);
+        serviceDateReceiver = new ServiceDateReceiver(this);
+        LocalBroadcastManager.getInstance(this).registerReceiver(serviceDateReceiver, statusIntentFilter);
+        if (id != -1) {
             getData();
         } else {
             startLoading();
@@ -80,10 +87,6 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
         apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_LOAD_PARTY);
         apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_SERVICE);
         this.startService(apiHanlder);
-
-        IntentFilter statusIntentFilter = new IntentFilter(Keys.EXTRA_SERVICE);
-        ServiceDateReceiver serviceDateReceiver = new ServiceDateReceiver(this);
-        LocalBroadcastManager.getInstance(this).registerReceiver(serviceDateReceiver, statusIntentFilter);
     }
 
     @Override
@@ -99,7 +102,7 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
 
     @Override
     public void receiveData(String json, String id) {
-        Log.e(this.getClass().getName(), json);
+        Log.e(this.getClass().getName(), id);
         switch (id) {
             case Keys.EXTRA_LOAD_PARTY:
                 json = json.replaceAll(",\"ersteller\":", ",\"owner\":");
@@ -151,5 +154,11 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
         LinearLayout eventHolder = findViewById(R.id.event_loading_indicator);
         eventHolder.setVisibility(View.VISIBLE);
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(serviceDateReceiver);
     }
 }

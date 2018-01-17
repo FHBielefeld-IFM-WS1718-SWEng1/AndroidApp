@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity
     private IReceiveData currentTabReceiver;
     private Party[] parties;
     private Gson gson;
+    private ServiceDateReceiver serviceDateReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +69,19 @@ public class MainActivity extends AppCompatActivity
         navigationView.setCheckedItem(currentTab);
 
         gson = new Gson();
-        loadData();
 
         setActiveFragment(currentTab);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadData();
+
+        IntentFilter statusIntentFilter = new IntentFilter(Keys.EXTRA_MAIN_ACTIVITY);
+        serviceDateReceiver = new ServiceDateReceiver(this);
+        LocalBroadcastManager.getInstance(this).registerReceiver(serviceDateReceiver, statusIntentFilter);
+
     }
 
     private void loadData() {
@@ -85,10 +96,6 @@ public class MainActivity extends AppCompatActivity
         apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_GET_PARTIES);
         apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_MAIN_ACTIVITY);
         this.startService(apiHanlder);
-
-        IntentFilter statusIntentFilter = new IntentFilter(Keys.EXTRA_MAIN_ACTIVITY);
-        ServiceDateReceiver serviceDateReceiver = new ServiceDateReceiver(this);
-        LocalBroadcastManager.getInstance(this).registerReceiver(serviceDateReceiver, statusIntentFilter);
     }
 
     @Override
@@ -122,6 +129,12 @@ public class MainActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(serviceDateReceiver);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -216,6 +229,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void receiveData(String json, String id) {
+        Log.e(getClass().getName(), id);
         if (!json.contains("error")) {
             json = json.replaceAll(".*?\\[", "[");
             json = json.replaceAll("].", "]");

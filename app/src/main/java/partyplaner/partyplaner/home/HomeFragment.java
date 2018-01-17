@@ -21,6 +21,7 @@ import partyplaner.data.user.I;
 import partyplaner.partyplaner.IFragmentDataManeger;
 import partyplaner.partyplaner.Keys;
 import partyplaner.partyplaner.R;
+import partyplaner.partyplaner.Veranstaltung.Fragmente.ExpandableFragment;
 import partyplaner.partyplaner.Veranstaltung.Fragmente.IReceiveData;
 import partyplaner.partyplaner.ownEvents.OwnEventFragment;
 
@@ -100,5 +101,10 @@ public class HomeFragment extends Fragment implements IReceiveData{
     public void receiveData() {
         parties = data.getParties();
         updateParties();
+    }
+
+    @Override
+    public void setExpandable(ExpandableFragment fragment) {
+
     }
 }

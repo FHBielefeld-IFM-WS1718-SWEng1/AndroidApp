@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import partyplaner.api.APIService;
-import partyplaner.api.ServiceDateReceiver;
 import partyplaner.data.party.Todo;
 import partyplaner.data.user.I;
 import partyplaner.partyplaner.EventMainActivity;
@@ -44,6 +43,7 @@ public class TODOFragment extends Fragment implements IReceiveData{
     private int partyId;
     private IEventDataManager data;
     private List<Fragment> fragments = new ArrayList<>();
+    private ExpandableFragment expandableFragment;
 
     @Override
     public void onAttach(Context context) {
@@ -120,6 +120,7 @@ public class TODOFragment extends Fragment implements IReceiveData{
     private void addTodo(Todo data) {
         Bundle arguments = new Bundle();
         SingleTODO todo = new SingleTODO();
+        todo.setExpandableFragment(expandableFragment);
         arguments.putString(Keys.EXTRA_NAME, data.getText());
         arguments.putInt(Keys.EXTRA_PARTYID, partyId);
         arguments.putInt(Keys.EXTRA_ID, data.getId());
@@ -148,6 +149,11 @@ public class TODOFragment extends Fragment implements IReceiveData{
         setTasksToFragments();
     }
 
+    @Override
+    public void setExpandable(ExpandableFragment fragment) {
+        this.expandableFragment = fragment;
+    }
+
     private void setTasksToFragments() {
         for (Fragment f : fragments) {
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -160,6 +166,5 @@ public class TODOFragment extends Fragment implements IReceiveData{
                 addTodo(todo);
             }
         }
-
     }
 }

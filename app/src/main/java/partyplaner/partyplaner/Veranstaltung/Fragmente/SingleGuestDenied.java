@@ -15,6 +15,9 @@ import partyplaner.partyplaner.R;
  */
 
 public class SingleGuestDenied extends Fragment {
+
+    private ExpandableFragment expandableFragment;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -26,5 +29,15 @@ public class SingleGuestDenied extends Fragment {
             name.setText(args.getString(Keys.EXTRA_NAME));
         }
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        expandableFragment.reexpandGroup();
+    }
+
+    public void setExpandable(ExpandableFragment expandableFragment) {
+        this.expandableFragment = expandableFragment;
     }
 }

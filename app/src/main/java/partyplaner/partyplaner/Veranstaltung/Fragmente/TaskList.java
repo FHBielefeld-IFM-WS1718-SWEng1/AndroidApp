@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -41,6 +40,7 @@ public class TaskList extends Fragment implements IReceiveData{
     private View view;
     private int partyId;
     private boolean ersteller;
+    private ExpandableFragment expandableFragment;
     private List<Fragment> fragments = new ArrayList<>();
 
     @Override
@@ -137,6 +137,7 @@ public class TaskList extends Fragment implements IReceiveData{
         TaskFragment taskFragment = new TaskFragment();
         taskFragment.setArguments(arguments);
         taskFragment.onCreate(null);
+        taskFragment.setExpandable(expandableFragment);
 
         fragments.add(taskFragment);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -156,6 +157,11 @@ public class TaskList extends Fragment implements IReceiveData{
             partyId = data.getParty().getId();
         }
         setTasksToFragments();
+    }
+
+    @Override
+    public void setExpandable(ExpandableFragment fragment) {
+        expandableFragment = fragment;
     }
 
     private void setTasksToFragments() {

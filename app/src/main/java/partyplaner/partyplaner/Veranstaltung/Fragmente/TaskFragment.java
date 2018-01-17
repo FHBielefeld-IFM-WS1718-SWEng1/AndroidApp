@@ -37,6 +37,7 @@ public class TaskFragment extends Fragment {
     private View view;
     private IEventDataManager data;
     private boolean isChecked;
+    private ExpandableFragment expandableFragment;
 
     @Override
     public void onAttach(Context context) {
@@ -82,6 +83,12 @@ public class TaskFragment extends Fragment {
         }
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        expandableFragment.reexpandGroup();
     }
 
     private void setDeleteEditButton(final LayoutInflater inflater, boolean owner, CheckBox statusBox, ImageView delete, ImageView edit) {
@@ -181,5 +188,9 @@ public class TaskFragment extends Fragment {
         getActivity().startService(apiHanlder);
         this.data.startLoading();
 
+    }
+
+    public void setExpandable(ExpandableFragment expandableFragment) {
+        this.expandableFragment = expandableFragment;
     }
 }

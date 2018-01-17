@@ -17,6 +17,9 @@ import partyplaner.partyplaner.R;
  */
 
 public class SingleGuestAccepted extends Fragment {
+
+    private ExpandableFragment expandableFragment;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,5 +37,15 @@ public class SingleGuestAccepted extends Fragment {
             }
         }
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        expandableFragment.reexpandGroup();
+    }
+
+    public void setExpandable(ExpandableFragment expandableFragment) {
+        this.expandableFragment = expandableFragment;
     }
 }

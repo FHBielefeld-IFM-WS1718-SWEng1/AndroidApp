@@ -43,6 +43,7 @@ public class GuestList extends Fragment implements IReceiveData {
     private ArrayList<Fragment> pendingFragments = new ArrayList<>();
 
     private IEventDataManager data;
+    private ExpandableFragment expandableFragment;
 
     @Override
     public void onAttach(Context context) {
@@ -60,7 +61,6 @@ public class GuestList extends Fragment implements IReceiveData {
         View view = inflater.inflate(R.layout.event_fragment_guestlist, container, false);
         if (savedInstanceState == null) {
             initTabhost(view);
-            setLists();
             setEmptyList(view);
             Button add = view.findViewById(R.id.invite_user);
             add.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +71,7 @@ public class GuestList extends Fragment implements IReceiveData {
                     startActivity(intent);
                 }
             });
+            setLists();
         }
         return view;
     }
@@ -110,6 +111,12 @@ public class GuestList extends Fragment implements IReceiveData {
         tabHost.addTab(tabZusagen);
         tabHost.addTab(tabAbsagen);
         tabHost.addTab(tabAusstehend);
+        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                expandableFragment.reexpandGroup();
+            }
+        });
 
         tabHost.setCurrentTab(0);
     }
@@ -122,18 +129,19 @@ public class GuestList extends Fragment implements IReceiveData {
 
     private void setPendingList() {
         for (Fragment f : pendingFragments) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.remove(f);
-        transaction.commit();
-    }
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.remove(f);
+            transaction.commit();
+        }
         for (Guest guests : pending) {
             Bundle args = new Bundle();
             args.putString(Keys.EXTRA_NAME, guests.getUser().getName());
             args.putBoolean(Keys.EXTRA_OWNER, true);
 
             SingleGuestPending fragment = new SingleGuestPending();
+            fragment.setExpandable(expandableFragment);
             pendingFragments.add(fragment);
-            addGuest(R.id.ausstehend,fragment, args);
+            addGuest(R.id.ausstehend, fragment, args);
         }
     }
 
@@ -148,6 +156,7 @@ public class GuestList extends Fragment implements IReceiveData {
             args.putString(Keys.EXTRA_NAME, guests.getUser().getName());
 
             SingleGuestDenied fragment = new SingleGuestDenied();
+            fragment.setExpandable(expandableFragment);
             deniedFragments.add(fragment);
             addGuest(R.id.absagen, fragment, args);
         }
@@ -166,6 +175,7 @@ public class GuestList extends Fragment implements IReceiveData {
             args.putBoolean(Keys.EXTRA_ADMIN, false);
 
             SingleGuestAccepted fragment = new SingleGuestAccepted();
+            fragment.setExpandable(expandableFragment);
             acceptedFragments.add(fragment);
             addGuest(R.id.zusagen, fragment, args);
         }
@@ -176,11 +186,17 @@ public class GuestList extends Fragment implements IReceiveData {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.add(layout, fragment);
         transaction.commit();
+        if (getView() != null) {
+            getView().findViewById(layout).refreshDrawableState();
+        }
     }
 
     @Override
     public void receiveData() {
         if (data.getParty() != null) {
+            pending.clear();
+            accepted.clear();
+            denied.clear();
             Guest[] guests = data.getParty().getGuests();
             for (Guest guest : guests) {
                 if (guest.getInviteState() == 0) {
@@ -191,7 +207,14 @@ public class GuestList extends Fragment implements IReceiveData {
                     denied.add(guest);
                 }
             }
+            setEmptyList(getView());
+            setLists();
         }
+    }
+
+    @Override
+    public void setExpandable(ExpandableFragment fragment) {
+        expandableFragment = fragment;
     }
 
     /*

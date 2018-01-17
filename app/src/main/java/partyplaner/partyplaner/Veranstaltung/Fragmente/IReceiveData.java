@@ -8,4 +8,5 @@ public interface IReceiveData {
 
     public void receiveData();
 
+    public void setExpandable(ExpandableFragment fragment);
 }

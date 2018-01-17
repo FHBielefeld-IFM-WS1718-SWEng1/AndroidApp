@@ -35,7 +35,7 @@ public class SingleTODO extends Fragment {
     private  int id;
     private int partyId;
     private String text;
-
+    private ExpandableFragment expandableFragment;
     private IEventDataManager data;
 
     @Override
@@ -79,6 +79,12 @@ public class SingleTODO extends Fragment {
             });
         }
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        expandableFragment.reexpandGroup();
     }
 
     private void updateTODOStaus(boolean isChecked) {
@@ -132,5 +138,9 @@ public class SingleTODO extends Fragment {
         apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_SERVICE);
         getActivity().startService(apiHanlder);
         this.data.startLoading();
+    }
+
+    public void setExpandableFragment(ExpandableFragment expandableFragment) {
+        this.expandableFragment = expandableFragment;
     }
 }
