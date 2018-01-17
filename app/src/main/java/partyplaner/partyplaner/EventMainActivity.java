@@ -103,6 +103,7 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
     @Override
     public void receiveData(String json, String id) {
         Log.e(this.getClass().getName(), id);
+        Log.e(this.getClass().getName(), json);
         switch (id) {
             case Keys.EXTRA_LOAD_PARTY:
                 json = json.replaceAll(",\"ersteller\":", ",\"owner\":");

@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Random;
 
 import partyplaner.data.party.Guest;
+import partyplaner.data.party.Party;
+import partyplaner.data.user.I;
 import partyplaner.partyplaner.Keys;
 import partyplaner.partyplaner.R;
 import partyplaner.partyplaner.Veranstaltung.IEventDataManager;
@@ -44,6 +46,7 @@ public class GuestList extends Fragment implements IReceiveData {
 
     private IEventDataManager data;
     private ExpandableFragment expandableFragment;
+    private Party party;
 
     @Override
     public void onAttach(Context context) {
@@ -78,17 +81,25 @@ public class GuestList extends Fragment implements IReceiveData {
 
     private void setEmptyList(View view) {
         TextView empty;
+        empty = view.findViewById(R.id.empty_list_accepted);
         if (accepted.size() > 0) {
-            empty = view.findViewById(R.id.empty_list_accepted);
             empty.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0));
+        } else {
+            empty.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
+
+        empty = view.findViewById(R.id.empty_list_denied);
         if (denied.size() > 0) {
-            empty = view.findViewById(R.id.empty_list_denied);
             empty.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0));
+        } else {
+            empty.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
+
+        empty = view.findViewById(R.id.empty_list_pending);
         if (pending.size() > 0) {
-            empty = view.findViewById(R.id.empty_list_pending);
             empty.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0));
+        } else {
+            empty.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
     }
 
@@ -136,7 +147,8 @@ public class GuestList extends Fragment implements IReceiveData {
         for (Guest guests : pending) {
             Bundle args = new Bundle();
             args.putString(Keys.EXTRA_NAME, guests.getUser().getName());
-            args.putBoolean(Keys.EXTRA_OWNER, true);
+            args.putBoolean(Keys.EXTRA_OWNER, party.getId() == I.getMyself().getId());
+            args.putBoolean(Keys.EXTRA_I_AM_GUEST, guests.getUser().getId() == I.getMyself().getId()); //<--
 
             SingleGuestPending fragment = new SingleGuestPending();
             fragment.setExpandable(expandableFragment);
@@ -154,6 +166,7 @@ public class GuestList extends Fragment implements IReceiveData {
         for (Guest guests : denied) {
             Bundle args = new Bundle();
             args.putString(Keys.EXTRA_NAME, guests.getUser().getName());
+            args.putBoolean(Keys.EXTRA_I_AM_GUEST, guests.getUser().getId() == I.getMyself().getId());//<--
 
             SingleGuestDenied fragment = new SingleGuestDenied();
             fragment.setExpandable(expandableFragment);
@@ -171,7 +184,8 @@ public class GuestList extends Fragment implements IReceiveData {
         for (Guest guests : accepted) {
             Bundle args = new Bundle();
             args.putString(Keys.EXTRA_NAME, guests.getUser().getName());
-            args.putBoolean(Keys.EXTRA_OWNER, true);
+            args.putBoolean(Keys.EXTRA_OWNER, party.getId() == I.getMyself().getId());
+            args.putBoolean(Keys.EXTRA_I_AM_GUEST, guests.getUser().getId() == I.getMyself().getId());//<--
             args.putBoolean(Keys.EXTRA_ADMIN, false);
 
             SingleGuestAccepted fragment = new SingleGuestAccepted();
@@ -197,6 +211,7 @@ public class GuestList extends Fragment implements IReceiveData {
             pending.clear();
             accepted.clear();
             denied.clear();
+            party = data.getParty();
             Guest[] guests = data.getParty().getGuests();
             for (Guest guest : guests) {
                 if (guest.getInviteState() == 0) {
@@ -207,8 +222,8 @@ public class GuestList extends Fragment implements IReceiveData {
                     denied.add(guest);
                 }
             }
-            setEmptyList(getView());
             setLists();
+            setEmptyList(getView());
         }
     }
 

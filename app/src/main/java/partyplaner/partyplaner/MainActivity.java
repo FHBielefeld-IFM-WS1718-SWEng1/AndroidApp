@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void receiveData(String json, String id) {
         Log.e(getClass().getName(), id);
-        if (!json.contains("error")) {
+        if (json != null && !json.contains("error")) {
             json = json.replaceAll(".*?\\[", "[");
             json = json.replaceAll("].", "]");
             parties = gson.fromJson(json, Party[].class);
