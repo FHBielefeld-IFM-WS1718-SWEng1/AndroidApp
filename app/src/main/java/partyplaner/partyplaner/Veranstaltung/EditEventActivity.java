@@ -21,9 +21,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -35,37 +37,101 @@ import java.util.Arrays;
 public class EditEventActivity extends AppCompatActivity {
 
     private String date = "";
+    private boolean edit;
+    private int partyId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_event);
+        edit = getIntent().getBooleanExtra(Keys.EXTRA_EDIT_PARTY, false);
+        if (edit) {
+            setText();
+        }
 
-        if (savedInstanceState == null) {
-            final TextView when = findViewById(R.id.event_when);
-            when.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                @Override
-                public void onFocusChange(View v, boolean hasFocus) {
-                    if (hasFocus) {
-                        pickDateTime();
-                        when.clearFocus();
-                    }
-                }
-            });
-            when.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        final TextView when = findViewById(R.id.event_when);
+        when.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
                     pickDateTime();
+                    when.clearFocus();
                 }
-            });
+            }
+        });
+        when.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pickDateTime();
+            }
+        });
 
-            Button button = findViewById(R.id.create_party_button);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        Button button = findViewById(R.id.create_party_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (edit) {
+                    editUser();
+                } else {
                     createUser();
                 }
-            });
+            }
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        finish();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
+    private void setText() {
+        String name = getIntent().getStringExtra(Keys.EXTRA_NAME);
+        String where = getIntent().getStringExtra(Keys.EXTRA_WHERE);
+        String when = getIntent().getStringExtra(Keys.EXTRA_WHEN);
+        String description = getIntent().getStringExtra(Keys.EXTRA_DESCRIPTION);
+        partyId = getIntent().getIntExtra(Keys.EXTRA_PARTYID, -1);
+
+        EditText nameText = findViewById(R.id.event_who);
+        EditText whereText = findViewById(R.id.event_where);
+        EditText whenText = findViewById(R.id.event_when);
+        EditText descriptionText = findViewById(R.id.event_description);
+
+        nameText.setText(name);
+        whereText.setText(where);
+        whenText.setText(Party.parseDate(when).replace(",", "").replace("Uhr", ""));
+        descriptionText.setText(description);
+    }
+
+    private void editUser() {
+        TextView what = findViewById(R.id.event_who);
+        TextView where = findViewById(R.id.event_where);
+        TextView description = findViewById(R.id.event_description);
+
+        String whatText = what.getText().toString().trim();
+        String whereText = where.getText().toString().trim();
+        String descriptionText = description.getText().toString().trim();
+
+        if (!whatText.equals("") && !whereText.equals("") && !descriptionText.equals("") && !date.equals("") && partyId >= 0) {
+            String dateTime = formatDate();
+            String url = "/party/" + partyId + "?api=" + I.getMyself().getApiKey();
+            String data = "{\"id\":" + partyId + ",\"name\":\"" + whatText + "\",\"description\":\"" + descriptionText +
+                    "\",\"startDate\":\"" + dateTime + "\",\"endDate\":null,\"location\":\"" + whereText + "\"}";
+
+            Log.e(EditEventActivity.class.getName(), data);
+            String answer = GeneralAPIRequestHandler.request(url, RouteType.PUT, data);
+            Log.e(EditEventActivity.class.getName(), answer);
+            if (!answer.contains("error")) {
+                finish();
+            } else {
+                Toast.makeText(this, "Fehler beim Updaten!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -73,9 +139,11 @@ public class EditEventActivity extends AppCompatActivity {
         TextView what = findViewById(R.id.event_who);
         TextView where = findViewById(R.id.event_where);
         TextView description = findViewById(R.id.event_description);
+
         String whatText = what.getText().toString().trim();
         String whereText = where.getText().toString().trim();
         String descriptionText = description.getText().toString().trim();
+
         if (!whatText.equals("") && !whereText.equals("") && !descriptionText.equals("") && !date.equals("")) {
             String dateTime = formatDate();
             String url = "/party?api=" + I.getMyself().getApiKey();
@@ -91,6 +159,8 @@ public class EditEventActivity extends AppCompatActivity {
                 Party party = gson.fromJson(answer, Party.class);
                 intent.putExtra(Keys.EXTRA_PARTYID, party.getId());
                 startActivity(intent);
+            } else {
+                Toast.makeText(this, "Fehler beim Erstellen!", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -132,6 +202,7 @@ public class EditEventActivity extends AppCompatActivity {
     }
 
     private void pickTime() {
+        final DecimalFormat formatter = new DecimalFormat("00");
         AlertDialog.Builder pickDate = new AlertDialog.Builder(this);
         final View dialogView = getLayoutInflater().inflate(R.layout.dialog_time_picker, null);
         final TimePicker timePicker = dialogView.findViewById(R.id.timePicker);
@@ -141,7 +212,7 @@ public class EditEventActivity extends AppCompatActivity {
                 .setPositiveButton("Bestätigen", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        setDate(getDate() + " " + timePicker.getCurrentHour() + ":" + timePicker.getCurrentMinute());
+                        setDate(getDate() + " " + formatter.format(timePicker.getCurrentHour()) + ":" + formatter.format(timePicker.getCurrentMinute()));
                         setTime();
                         dialog.cancel();
                     }

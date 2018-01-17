@@ -45,4 +45,5 @@ public class Keys {
     public static final String EXTRA_SERVICE_INVITE = "SERVICE_INVITE";
     public static final String EXTRA_ADD_USERS = "ADD_USERS";
     public static final String EXTRA_I_AM_GUEST = "I_AM_GUEST";
+    public static final String EXTRA_EDIT_PARTY = "EDIT_PARTY";
 }

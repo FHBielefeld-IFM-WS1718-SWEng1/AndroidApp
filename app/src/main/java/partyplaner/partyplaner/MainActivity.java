@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity
         switch (id) {
             case R.id.action_add_event:
                 Intent intent = new Intent(this, EditEventActivity.class);
+                intent.putExtra(Keys.EXTRA_EDIT_PARTY, false);
                 startActivity(intent);
                 break;
         }

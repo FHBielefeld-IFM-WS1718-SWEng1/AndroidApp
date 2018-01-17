@@ -12,6 +12,8 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -37,6 +39,7 @@ import partyplaner.data.party.Guest;
 import partyplaner.data.party.Party;
 import partyplaner.data.party.Task;
 import partyplaner.data.user.I;
+import partyplaner.partyplaner.Veranstaltung.EditEventActivity;
 import partyplaner.partyplaner.Veranstaltung.EventMainFragment;
 import partyplaner.partyplaner.Veranstaltung.IEventDataManager;
 import partyplaner.partyplaner.Veranstaltung.IServiceReceiver;
@@ -93,6 +96,36 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
     public String[] getGeneralInformations() {
         String[] infos = {party.getName(), party.getOwner().getName(), party.getStartDate(), party.getLocation(), party.getDescription()};
         return infos;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.event, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.action_edit_event:
+                Intent intent = new Intent(this, EditEventActivity.class);
+                intent.putExtra(Keys.EXTRA_EDIT_PARTY, true);
+                intent.putExtra(Keys.EXTRA_NAME, party.getName());
+                intent.putExtra(Keys.EXTRA_WHERE, party.getLocation());
+                intent.putExtra(Keys.EXTRA_WHEN, party.getStartDate());
+                intent.putExtra(Keys.EXTRA_DESCRIPTION, party.getDescription());
+                intent.putExtra(Keys.EXTRA_PARTYID, party.getId());
+                startActivity(intent);
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

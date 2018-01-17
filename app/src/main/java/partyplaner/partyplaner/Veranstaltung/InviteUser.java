@@ -77,7 +77,6 @@ public class InviteUser extends AppCompatActivity implements IServiceReceiver{
     public boolean onOptionsItemSelected(MenuItem item){
         finish();
         return true;
-
     }
 
     @Override
