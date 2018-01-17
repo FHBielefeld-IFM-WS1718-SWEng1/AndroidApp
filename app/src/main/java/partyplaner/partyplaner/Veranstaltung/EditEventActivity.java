@@ -133,6 +133,8 @@ public class EditEventActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Fehler beim Updaten!", Toast.LENGTH_SHORT).show();
             }
+        } else {
+            Toast.makeText(this, "Bitte alle Felder ausfüllen!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -163,6 +165,8 @@ public class EditEventActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Fehler beim Erstellen!", Toast.LENGTH_SHORT).show();
             }
+        } else {
+            Toast.makeText(this, "Bitte alle Felder ausfüllen!", Toast.LENGTH_SHORT).show();
         }
     }
 

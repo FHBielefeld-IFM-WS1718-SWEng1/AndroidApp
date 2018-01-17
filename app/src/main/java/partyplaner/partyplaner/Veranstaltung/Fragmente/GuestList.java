@@ -75,6 +75,7 @@ public class GuestList extends Fragment implements IReceiveData {
                 }
             });
             setLists();
+            setAddButton();
         }
         return view;
     }
@@ -225,6 +226,18 @@ public class GuestList extends Fragment implements IReceiveData {
             }
             setLists();
             setEmptyList(getView());
+            setAddButton();
+        }
+    }
+
+    private void setAddButton() {
+        if (getView() != null) {
+            Button add = getView().findViewById(R.id.invite_user);
+            if (party != null && party.getOwner().getId() != I.getMyself().getId()) {
+                add.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0));
+            } else {
+                add.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            }
         }
     }
 
