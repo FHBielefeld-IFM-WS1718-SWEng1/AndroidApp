@@ -1,6 +1,9 @@
 package partyplaner.partyplaner.ownEvents;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +15,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import partyplaner.api.APIService;
 import partyplaner.api.GeneralAPIRequestHandler;
 import partyplaner.api.RouteType;
 import partyplaner.data.party.Party;
@@ -22,6 +26,7 @@ import partyplaner.partyplaner.Keys;
 import partyplaner.partyplaner.MainActivity;
 import partyplaner.partyplaner.R;
 import partyplaner.partyplaner.Veranstaltung.EventMainFragment;
+import partyplaner.partyplaner.Veranstaltung.IEventDataManager;
 
 /**
  * Created by André on 17.11.2017.
@@ -30,6 +35,17 @@ import partyplaner.partyplaner.Veranstaltung.EventMainFragment;
 public class OwnEventFragment extends Fragment {
 
     private int id;
+    private MainActivity data;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            data = (MainActivity) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement OnArticleSelectedListener");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,9 +66,42 @@ public class OwnEventFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        background.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Willst du die Party wirklich löschen?")
+                        .setPositiveButton("LÖSCHEN", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                deleteParty();
+                                dialog.cancel();
+                            }
+                        })
+                        .setNegativeButton("ABBRECHEN", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        }).create().show();
+
+                return true;
+            }
+        });
         return view;
     }
 
+    private void deleteParty() {
+        Intent apiHanlder = new Intent(getActivity(), APIService.class);
+        apiHanlder.putExtra(Keys.EXTRA_URL, "/party/" + id + "?api=" + I.getMyself().getApiKey());
+        apiHanlder.putExtra(Keys.EXTRA_REQUEST, "DELETE");
+        String data = "{\"id\":" + id + "}";
+        apiHanlder.putExtra(Keys.EXTRA_DATA, data);
+        apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_DELETE_PARTIES);
+        apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_MAIN_ACTIVITY);
+        getActivity().startService(apiHanlder);
+        this.data.startLoading();
+    }
 
     private void setText(View view, Bundle args) {
         TextView name = view.findViewById(R.id.textPartyname);

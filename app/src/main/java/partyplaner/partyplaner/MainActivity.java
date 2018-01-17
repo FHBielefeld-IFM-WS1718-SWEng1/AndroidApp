@@ -231,17 +231,29 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void receiveData(String json, String id) {
         Log.e(getClass().getName(), id);
-        if (json != null && !json.contains("error")) {
-            json = json.replaceAll(".*?\\[", "[");
-            json = json.replaceAll("].", "]");
-            parties = gson.fromJson(json, Party[].class);
+        Log.e(getClass().getName(), json);
+        switch (id) {
+            case Keys.EXTRA_GET_PARTIES:
+                if (json != null && !json.contains("error")) {
+                    json = json.replaceAll(".*?\\[", "[");
+                    json = json.replaceAll("].", "]");
+                    parties = gson.fromJson(json, Party[].class);
 
-            if (currentTabReceiver != null) {
-                currentTabReceiver.receiveData();
-            }
-            endLoading();
-        } else {
-            Toast.makeText(this, "Daten konnten nicht geladen werden!", Toast.LENGTH_SHORT).show();
+                    if (currentTabReceiver != null) {
+                        currentTabReceiver.receiveData();
+                    }
+                    endLoading();
+                } else {
+                    Toast.makeText(this, "Daten konnten nicht geladen werden!", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case Keys.EXTRA_DELETE_PARTIES:
+                if (json != null && !json.contains("error")){
+                    Toast.makeText(this, "Party erfolgreich gelöscht!", Toast.LENGTH_SHORT).show();
+                    loadData();
+                } else {
+                    Toast.makeText(this, "Party konnte nicht gelöscht werden!", Toast.LENGTH_SHORT).show();
+                }
         }
     }
 
@@ -250,7 +262,7 @@ public class MainActivity extends AppCompatActivity
         lr.setVisibility(View.INVISIBLE);
     }
 
-    private void startLoading() {
+    public void startLoading() {
         RelativeLayout lr = findViewById(R.id.loading);
         lr.setVisibility(View.VISIBLE);
     }
