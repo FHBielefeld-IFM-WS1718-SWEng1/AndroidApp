@@ -63,7 +63,11 @@ public class OwnEventFragment extends Fragment {
         when.setText("Wann? " + date);
 
         TextView description = view.findViewById(R.id.textDescription);
-        description.setText(args.getString(Keys.EXTRA_DESCRIPTION));
+        String descript = args.getString(Keys.EXTRA_DESCRIPTION);
+        if (descript != null && descript.length() > 80) {
+            descript = descript.substring(0, 80) + "...";
+        }
+        description.setText(descript);
     }
 
 }
