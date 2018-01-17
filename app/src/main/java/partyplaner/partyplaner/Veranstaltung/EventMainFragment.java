@@ -58,28 +58,8 @@ public class EventMainFragment extends Fragment {
             setUpDescription(view);
             setUpExpandableView(view);
 
-            final Button more = view.findViewById(R.id.button_more);
+            Button more = view.findViewById(R.id.button_more);
             more.setVisibility(View.INVISIBLE);
-
-            if (description.length() > 80) {
-                more.setVisibility(View.VISIBLE);
-                more.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        TextView description = view.findViewById(R.id.event_description);
-                        if (shortText) {
-                            description.setText(getDescription());
-                            more.setText("weniger...");
-                            shortText = false;
-                        } else {
-                            description.setText((getDescription().substring(0, 80) + "..."));
-                            more.setText("mehr...");
-                            shortText = true;
-                        }
-
-                    }
-                });
-            }
         }
         return view;
     }
@@ -106,12 +86,13 @@ public class EventMainFragment extends Fragment {
         shortText = bool;
     }
 
-    private void setUpDescription(View view) {
+    private void setUpDescription(final View view) {
         TextView eventWhat = view.findViewById(R.id.event_what);
         TextView eventWho = view.findViewById(R.id.event_who);
         TextView eventWhere = view.findViewById(R.id.event_where);
         TextView eventWhen = view.findViewById(R.id.event_when);
         TextView eventDescription = view.findViewById(R.id.event_description);
+        final Button more = view.findViewById(R.id.button_more);
 
         eventWhat.setText(what);
         eventWho.setText(who);
@@ -122,6 +103,23 @@ public class EventMainFragment extends Fragment {
                 eventDescription.setText(description);
             } else {
                 eventDescription.setText(description.substring(0, 80) + "...");
+                more.setVisibility(View.VISIBLE);
+                more.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        TextView description = view.findViewById(R.id.event_description);
+                        if (shortText) {
+                            description.setText(getDescription());
+                            more.setText("weniger...");
+                            shortText = false;
+                        } else {
+                            description.setText((getDescription().substring(0, 80) + "..."));
+                            more.setText("mehr...");
+                            shortText = true;
+                        }
+
+                    }
+                });
             }
         }
     }

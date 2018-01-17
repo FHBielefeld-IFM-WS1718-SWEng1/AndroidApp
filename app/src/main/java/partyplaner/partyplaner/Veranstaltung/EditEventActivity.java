@@ -103,9 +103,10 @@ public class EditEventActivity extends AppCompatActivity {
         EditText whenText = findViewById(R.id.event_when);
         EditText descriptionText = findViewById(R.id.event_description);
 
+        date = Party.parseDate(when).replace(",", "").replace("Uhr", "");
         nameText.setText(name);
         whereText.setText(where);
-        whenText.setText(Party.parseDate(when).replace(",", "").replace("Uhr", ""));
+        whenText.setText(date);
         descriptionText.setText(description);
     }
 
