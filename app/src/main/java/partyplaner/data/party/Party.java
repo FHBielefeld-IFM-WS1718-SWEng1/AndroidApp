@@ -127,4 +127,17 @@ public class Party implements Serializable{
 
         return date[2] + "." + date[1] + "." + date[0] + ", " + timeDate[1].substring(0, 5) + "Uhr";
     }
+
+    public int[] getStartDateArray() {
+        String[] timeDate = this.startDate.split("T");
+        String[] date = timeDate[0].split("-");
+        String[] time = timeDate[1].replace("Z", "").split(":");
+        int[] dateData = new int[5];
+        dateData[0] = Integer.parseInt(date[0]);
+        dateData[1] = Integer.parseInt(date[1]);
+        dateData[2] = Integer.parseInt(date[2]);
+        dateData[3] = Integer.parseInt(time[0]);
+        dateData[4] = Integer.parseInt(time[1]);
+        return dateData;
+    }
 }

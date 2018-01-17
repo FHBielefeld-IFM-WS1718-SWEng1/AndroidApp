@@ -24,6 +24,8 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 
 import partyplaner.api.APIService;
 import partyplaner.api.GeneralAPIRequestHandler;
@@ -238,7 +240,7 @@ public class MainActivity extends AppCompatActivity
                     json = json.replaceAll(".*?\\[", "[");
                     json = json.replaceAll("].", "]");
                     parties = gson.fromJson(json, Party[].class);
-
+                    sortParties();
                     if (currentTabReceiver != null) {
                         currentTabReceiver.receiveData();
                     }
@@ -255,6 +257,23 @@ public class MainActivity extends AppCompatActivity
                     Toast.makeText(this, "Party konnte nicht gelöscht werden!", Toast.LENGTH_SHORT).show();
                 }
         }
+    }
+
+    private void sortParties() {
+        Log.e(getClass().getName(), "sort()");
+        Arrays.sort(parties, new Comparator<Party>() {
+            @Override
+            public int compare(Party p1, Party p2) {
+                int[] p1Date = p1.getStartDateArray();
+                int[] p2Date = p2.getStartDateArray();
+                for (int i = 0; i < p1Date.length - 1; i++) {
+                    if (Integer.compare(p1Date[i], p2Date[i]) != 0) {
+                        return Integer.compare(p1Date[i], p2Date[i]);
+                    }
+                }
+                return Integer.compare(p1Date[4], p2Date[4]);
+            }
+        });
     }
 
     private void endLoading() {
