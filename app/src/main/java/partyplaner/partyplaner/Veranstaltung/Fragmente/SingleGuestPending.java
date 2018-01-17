@@ -1,7 +1,9 @@
 package partyplaner.partyplaner.Veranstaltung.Fragmente;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import partyplaner.api.APIService;
-import partyplaner.data.party.Party;
 import partyplaner.data.user.I;
 import partyplaner.partyplaner.Keys;
 import partyplaner.partyplaner.R;
@@ -27,6 +28,7 @@ public class SingleGuestPending extends Fragment {
 
     private ExpandableFragment expandableFragment;
     private IEventDataManager data;
+    private int guestID;
 
     @Override
     public void onAttach(Context context) {
@@ -39,7 +41,7 @@ public class SingleGuestPending extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.event_fragment_single_guest_pending, container, false);
 
@@ -49,10 +51,32 @@ public class SingleGuestPending extends Fragment {
             ImageView accept = view.findViewById(R.id.pending_accept_invite);
             ImageView denied = view.findViewById(R.id.pending_deny_invite);
             ImageView delete = view.findViewById(R.id.delete_pending);
-            name.setText(args.getString(Keys.EXTRA_NAME));
+            guestID = args.getInt(Keys.EXTRA_ID);
 
+            name.setText(args.getString(Keys.EXTRA_NAME));
             if (args.getBoolean(Keys.EXTRA_OWNER)) {
                 delete.setVisibility(View.VISIBLE);
+                delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        View dialogView = inflater.inflate(R.layout.single_input_dialog, null);
+                        builder.setMessage("Willst du die Einladung wirklich löschen?")
+                                .setPositiveButton("LÖSCHEN", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        deleteInvitation();
+                                        dialog.cancel();
+                                    }
+                                })
+                                .setNegativeButton("ABBRECHEN", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                }).create().show();
+                    }
+                });
             } else {
                 delete.setLayoutParams(new LinearLayout.LayoutParams(0,0));
             }
@@ -77,6 +101,19 @@ public class SingleGuestPending extends Fragment {
         return view;
     }
 
+    private void deleteInvitation() {
+        Intent apiHanlder = new Intent(getActivity(), APIService.class);
+        apiHanlder.putExtra(Keys.EXTRA_URL, "/party/guest?api=" + I.getMyself().getApiKey());
+        apiHanlder.putExtra(Keys.EXTRA_REQUEST, "DELETE");
+        String data = "{\"id\":" + guestID + "}";
+        Log.e(getClass().getName(), data);
+        apiHanlder.putExtra(Keys.EXTRA_DATA, data);
+        apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_DELETE_TASK);
+        apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_SERVICE);
+        getActivity().startService(apiHanlder);
+        this.data.startLoading();
+    }
+
     private void updateUserStatus(int status) {
         Intent apiHanlder = new Intent(getActivity(), APIService.class);
         apiHanlder.putExtra(Keys.EXTRA_URL, "/party/guest?api=" + I.getMyself().getApiKey());
@@ -88,6 +125,7 @@ public class SingleGuestPending extends Fragment {
         apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_PUT_TASK);
         apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_SERVICE);
         getActivity().startService(apiHanlder);
+        this.data.startLoading();
     }
 
     @Override

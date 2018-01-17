@@ -29,4 +29,8 @@ public class Guest{
     public User getUser() {
         return user;
     }
+
+    public int getId() {
+        return id;
+    }
 }

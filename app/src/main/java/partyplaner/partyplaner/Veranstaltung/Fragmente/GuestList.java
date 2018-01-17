@@ -147,8 +147,9 @@ public class GuestList extends Fragment implements IReceiveData {
         for (Guest guests : pending) {
             Bundle args = new Bundle();
             args.putString(Keys.EXTRA_NAME, guests.getUser().getName());
-            args.putBoolean(Keys.EXTRA_OWNER, party.getId() == I.getMyself().getId());
-            args.putBoolean(Keys.EXTRA_I_AM_GUEST, guests.getUser().getId() == I.getMyself().getId()); //<--
+            args.putBoolean(Keys.EXTRA_OWNER, party.getOwner().getId() == I.getMyself().getId());
+            args.putBoolean(Keys.EXTRA_I_AM_GUEST, guests.getUser().getId() == I.getMyself().getId());
+            args.putInt(Keys.EXTRA_ID, guests.getId());
 
             SingleGuestPending fragment = new SingleGuestPending();
             fragment.setExpandable(expandableFragment);
@@ -166,7 +167,7 @@ public class GuestList extends Fragment implements IReceiveData {
         for (Guest guests : denied) {
             Bundle args = new Bundle();
             args.putString(Keys.EXTRA_NAME, guests.getUser().getName());
-            args.putBoolean(Keys.EXTRA_I_AM_GUEST, guests.getUser().getId() == I.getMyself().getId());//<--
+            args.putBoolean(Keys.EXTRA_I_AM_GUEST, guests.getUser().getId() == I.getMyself().getId());
 
             SingleGuestDenied fragment = new SingleGuestDenied();
             fragment.setExpandable(expandableFragment);
@@ -185,7 +186,7 @@ public class GuestList extends Fragment implements IReceiveData {
             Bundle args = new Bundle();
             args.putString(Keys.EXTRA_NAME, guests.getUser().getName());
             args.putBoolean(Keys.EXTRA_OWNER, party.getId() == I.getMyself().getId());
-            args.putBoolean(Keys.EXTRA_I_AM_GUEST, guests.getUser().getId() == I.getMyself().getId());//<--
+            args.putBoolean(Keys.EXTRA_I_AM_GUEST, guests.getUser().getId() == I.getMyself().getId());
             args.putBoolean(Keys.EXTRA_ADMIN, false);
 
             SingleGuestAccepted fragment = new SingleGuestAccepted();
