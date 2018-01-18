@@ -3,26 +3,22 @@ package partyplaner.partyplaner.Profile;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 
 import partyplaner.data.user.Gender;
 import partyplaner.data.user.I;
+import partyplaner.data.user.User;
 import partyplaner.partyplaner.R;
 
 /**
@@ -37,16 +33,6 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-
-        I profil = I.getMyself();
-        TextView nameText = view.findViewById(R.id.NameTextView);
-        nameText.setText(profil.getName());
-        TextView adressText = view.findViewById(R.id.GenderTextView);
-        adressText.setText(Gender.getGenderNameByID(profil.getGender()));
-        TextView birthdateText = view.findViewById(R.id.BirthdateTextView);
-        birthdateText.setText(formatDate(profil.getBirthdate()));
-        TextView emailText = view.findViewById(R.id.EmailTextView);
-        emailText.setText(profil.getEmail());
 
         profile = view.findViewById(R.id.profile_picture);
         profile.setOnLongClickListener(new View.OnLongClickListener() {
@@ -70,6 +56,24 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        setUpView(getView());
+    }
+
+    private void setUpView(View view) {
+        I profil = I.getMyself();
+        TextView nameText = view.findViewById(R.id.NameTextView);
+        nameText.setText(profil.getName());
+        TextView adressText = view.findViewById(R.id.GenderTextView);
+        adressText.setText(Gender.getGenderNameByID(profil.getGender()));
+        TextView birthdateText = view.findViewById(R.id.BirthdateTextView);
+        birthdateText.setText(User.formatDate(profil.getBirthdate()));
+        TextView emailText = view.findViewById(R.id.EmailTextView);
+        emailText.setText(profil.getEmail());
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK) {
@@ -88,13 +92,6 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-    private String formatDate(String date) {
-        if (date != null) {
-            String[] part = date.split("-");
-            return part[2] + "." + part[1] + "." + part[0];
-        }
-        return "Nicht angegeben";
-    }
 
     //TODO hochladen des Images
     //Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();

@@ -36,6 +36,7 @@ import partyplaner.data.party.PartyList;
 import partyplaner.data.user.I;
 import partyplaner.partyplaner.ContactForm.ContactFragment;
 import partyplaner.partyplaner.Contacts.AllContacts;
+import partyplaner.partyplaner.Profile.EditProfileActivity;
 import partyplaner.partyplaner.Profile.ProfileFragment;
 import partyplaner.partyplaner.Veranstaltung.EditEventActivity;
 import partyplaner.partyplaner.Veranstaltung.Fragmente.IReceiveData;
@@ -128,6 +129,10 @@ public class MainActivity extends AppCompatActivity
                 Intent intent = new Intent(this, EditEventActivity.class);
                 intent.putExtra(Keys.EXTRA_EDIT_PARTY, false);
                 startActivity(intent);
+                break;
+            case R.id.action_edit_profile:
+                Intent editProfileIntent = new Intent(this, EditProfileActivity.class);
+                startActivity(editProfileIntent);
                 break;
         }
 

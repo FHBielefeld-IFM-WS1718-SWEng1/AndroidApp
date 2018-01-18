@@ -47,4 +47,7 @@ public class Keys {
     public static final String EXTRA_I_AM_GUEST = "I_AM_GUEST";
     public static final String EXTRA_EDIT_PARTY = "EDIT_PARTY";
     public static final String EXTRA_DELETE_PARTIES = "DELETE_PARTY";
+    public static final String EXTRA_EDIT_PROFILE = "EDIT_PROFILE";
+    public static final String EXTRA_PUT_PROFILE = "PUT_PROFILE";
+    public static final String EXTRA_RELOAD_USER = "RELOAD_USER";
 }

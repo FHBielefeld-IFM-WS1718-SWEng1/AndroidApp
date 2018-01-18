@@ -185,6 +185,7 @@ public class EditEventActivity extends AppCompatActivity {
     }
 
     public void pickDateTime() {
+        final DecimalFormat formatter = new DecimalFormat("00");
         AlertDialog.Builder pickDate = new AlertDialog.Builder(this);
         final View dialogView = getLayoutInflater().inflate(R.layout.dialog_date_picker, null);
         final DatePicker datePicker = dialogView.findViewById(R.id.datePicker);
@@ -193,7 +194,7 @@ public class EditEventActivity extends AppCompatActivity {
                 .setPositiveButton("Bestätigen", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                setDate(datePicker.getDayOfMonth() + "." + (datePicker.getMonth() + 1) + "." + datePicker.getYear());
+                setDate(formatter.format(datePicker.getDayOfMonth()) + "." + formatter.format(datePicker.getMonth() + 1) + "." + datePicker.getYear());
                 pickTime();
                 dialog.cancel();
             }

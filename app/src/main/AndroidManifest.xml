@@ -52,7 +52,8 @@
         <activity android:name=".Veranstaltung.InviteUser"
             android:parentActivityName=".EventMainActivity"></activity>
 
-        <activity android:name=".Profile.EditProfileActivity"></activity>
+        <activity android:name=".Profile.EditProfileActivity"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>
