@@ -48,8 +48,11 @@
         <activity
             android:name=".Veranstaltung.EditEventActivity"
             android:parentActivityName=".MainActivity" />
+
         <activity android:name=".Veranstaltung.InviteUser"
             android:parentActivityName=".EventMainActivity"></activity>
+
+        <activity android:name=".Profile.EditProfileActivity"></activity>
     </application>
 
 </manifest>
