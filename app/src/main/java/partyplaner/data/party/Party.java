@@ -31,7 +31,8 @@ public class Party implements Serializable{
 
     //TODOFragment: ToDo-/Kostenliste
     private List<Comment> comments;
-    private Rating rating;
+    private Rating[] rating;
+    private int ratingAverage;
     private Poll[] polls;
     private Guest[] guests;
     private Task[] tasks;
@@ -39,7 +40,7 @@ public class Party implements Serializable{
 
     public Party(String name, String description, User organizer, String location,
                  GregorianCalendar dateAndTime, List<Image> gallery, Guest[] guests,
-                 List<Comment> comments, Rating rating, Poll[] polls, Task[] tasks) {
+                 List<Comment> comments, Rating[] rating, Poll[] polls, Task[] tasks) {
         this.name = name;
         this.description = description;
         this.organizer = organizer;
@@ -89,7 +90,7 @@ public class Party implements Serializable{
         return comments;
     }
 
-    public Rating getRating() {
+    public Rating[] getRating() {
         return rating;
     }
 
@@ -139,5 +140,9 @@ public class Party implements Serializable{
         dateData[3] = Integer.parseInt(time[0]);
         dateData[4] = Integer.parseInt(time[1]);
         return dateData;
+    }
+
+    public int getAverageRating() {
+        return ratingAverage;
     }
 }

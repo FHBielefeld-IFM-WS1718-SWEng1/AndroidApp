@@ -155,6 +155,7 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
                 endLoading();
                 if(json.contains("error")) {
                     Toast.makeText(this, "Erstellen fehlgeschlagen!", Toast.LENGTH_SHORT).show();
+                    Log.e(getClass().getName(), json);
                 } else {
                     getData();
                 }
