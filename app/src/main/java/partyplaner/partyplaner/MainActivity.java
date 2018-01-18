@@ -238,7 +238,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void receiveData(String json, String id) {
         Log.e(getClass().getName(), id);
-        Log.e(getClass().getName(), json);
         switch (id) {
             case Keys.EXTRA_GET_PARTIES:
                 if (json != null && !json.contains("error")) {

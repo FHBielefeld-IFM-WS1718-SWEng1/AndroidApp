@@ -21,7 +21,6 @@
 
                 <ImageView
                     android:id="@+id/imageView9"
-                    tools:ignore="ContentDescription"
                     android:layout_width="140dp"
                     android:layout_height="140dp"
                     android:layout_marginEnd="8dp"
@@ -30,7 +29,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@color/black" />
+                    app:srcCompat="@drawable/manu_avatar"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/NameText"

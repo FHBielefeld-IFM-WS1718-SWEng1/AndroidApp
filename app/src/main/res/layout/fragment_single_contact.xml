@@ -11,7 +11,8 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_weight="0"
-        app:srcCompat="@android:drawable/btn_dialog"
+        android:padding="4dp"
+        app:srcCompat="@drawable/manu_avatar"
         tools:ignore="ContentDescription" />
 
     <TextView
