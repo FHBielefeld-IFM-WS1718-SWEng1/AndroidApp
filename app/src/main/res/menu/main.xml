@@ -6,4 +6,7 @@
         android:orderInCategory="100"
         android:title="@string/add_event"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_edit_profile"
+        android:title="Profil bearbeiten" />
 </menu>
