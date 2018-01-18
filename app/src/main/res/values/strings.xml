@@ -39,7 +39,6 @@
     <string name="admin">Admin</string>
     <string name="emptyList">Liste leer</string>
     <string name="kontakt_suchen">Kontakt suchen</string>
-    <string name="horst_teesofa">Horst Teesofa</string>
     <string name="kontakte_durchsuchen">Kontakte durchsuchen</string>
     <string name="todo">TODO</string>
 
@@ -61,4 +60,11 @@
     <string name="editProfileGender">Gender:</string>
     <string name="editProfileE_Mail">E-Mail:</string>
     <string name="editProfileGeb_Datum">Geb-Datum:</string>
+
+    <string-array name="gender_array">
+        <item>keine Angabe</item>
+        <item>männlich</item>
+        <item>weiblich</item>
+        <item>andere</item>
+    </string-array>
 </resources>

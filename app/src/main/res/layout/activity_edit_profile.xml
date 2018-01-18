@@ -37,7 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:text="@string/editProfileName"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
@@ -61,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="7dp"
+                    android:layout_marginTop="8dp"
                     android:text="@string/editProfileGeb_Datum"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
@@ -86,15 +86,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/profildaten_bearbeiten"
+                    android:layout_marginTop="16dp"
+                    android:text="Speichern"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/EmailTextEdit" />
 
                 <EditText
                     android:id="@+id/EditFirstName"
-                    android:layout_width="242dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:ems="10"
@@ -102,44 +102,46 @@
                     android:labelFor="@+id/EditFirstName"
                     android:text="@string/horst_teesofa"
                     android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/GenderTextEdit"
-                    app:layout_constraintEnd_toEndOf="parent" />
-
-                <EditText
-                    android:id="@+id/EditGender"
-                    android:layout_width="242dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:labelFor="@+id/EditGender"
-                    android:text="@string/non_binary"
-                    app:layout_constraintBottom_toTopOf="@+id/BirthdateTextEdit"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintBaseline_toBaselineOf="@+id/NameText"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/EditBirthdate" />
 
                 <EditText
                     android:id="@+id/EditBirthdate"
-                    android:layout_width="242dp"
+                    android:layout_width="0dp"
                     android:layout_height="46dp"
                     android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
                     android:ems="10"
                     android:inputType="date"
                     android:labelFor="@+id/EditBirthdate"
                     android:text="@string/_01_01_2018"
-                    app:layout_constraintBottom_toTopOf="@+id/EmailTextEdit"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintBaseline_toBaselineOf="@+id/BirthdateTextEdit"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/BirthdateTextEdit" />
 
                 <EditText
                     android:id="@+id/EditEmail"
-                    android:layout_width="242dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
                     android:layout_marginEnd="8dp"
                     android:ems="10"
                     android:inputType="textEmailAddress"
                     android:labelFor="@+id/EditEmail"
                     android:text="@string/horstteesofa_web_de"
-                    app:layout_constraintBottom_toTopOf="@+id/EditProfileButton"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintBaseline_toBaselineOf="@+id/EmailTextEdit"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/EditBirthdate" />
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:entries="@array/gender_array"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/GenderTextEdit"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/EditBirthdate" />
             </android.support.constraint.ConstraintLayout>
         </LinearLayout>
 
