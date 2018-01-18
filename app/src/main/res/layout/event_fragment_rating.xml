@@ -11,7 +11,7 @@
         android:id="@+id/add_rating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Party bewerten" />
 
     <RatingBar
         android:id="@+id/rating_bar"

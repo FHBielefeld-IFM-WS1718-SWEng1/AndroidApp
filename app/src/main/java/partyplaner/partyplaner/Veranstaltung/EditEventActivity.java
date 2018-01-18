@@ -1,5 +1,6 @@
 package partyplaner.partyplaner.Veranstaltung;
 
+import partyplaner.api.APIService;
 import partyplaner.api.GeneralAPIRequestHandler;
 import partyplaner.api.RouteType;
 import partyplaner.api.ServiceDateReceiver;
@@ -8,6 +9,7 @@ import partyplaner.data.user.I;
 import partyplaner.partyplaner.EventMainActivity;
 import partyplaner.partyplaner.Keys;
 import partyplaner.partyplaner.R;
+import partyplaner.partyplaner.Veranstaltung.Fragmente.IReceiveData;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -34,18 +36,22 @@ import java.sql.Time;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 
-public class EditEventActivity extends AppCompatActivity {
+public class EditEventActivity extends AppCompatActivity implements IServiceReceiver{
 
     private String date = "";
     private boolean edit;
     private int partyId;
+    private ServiceDateReceiver serviceDateReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_event);
         edit = getIntent().getBooleanExtra(Keys.EXTRA_EDIT_PARTY, false);
+
+        Button button = findViewById(R.id.create_party_button);
         if (edit) {
+            button.setText("Bestätigen");
             setText();
         }
 
@@ -66,7 +72,6 @@ public class EditEventActivity extends AppCompatActivity {
             }
         });
 
-        Button button = findViewById(R.id.create_party_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +85,14 @@ public class EditEventActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        IntentFilter statusIntentFilter = new IntentFilter(Keys.EXTRA_EDIT_PARTY_SERVICE);
+        serviceDateReceiver = new ServiceDateReceiver(this);
+        LocalBroadcastManager.getInstance(this).registerReceiver(serviceDateReceiver, statusIntentFilter);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item){
         finish();
         return true;
@@ -89,6 +102,12 @@ public class EditEventActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(serviceDateReceiver);
     }
 
     private void setText() {
@@ -125,17 +144,20 @@ public class EditEventActivity extends AppCompatActivity {
             String data = "{\"id\":" + partyId + ",\"name\":\"" + whatText + "\",\"description\":\"" + descriptionText +
                     "\",\"startDate\":\"" + dateTime + "\",\"endDate\":null,\"location\":\"" + whereText + "\"}";
 
-            Log.e(EditEventActivity.class.getName(), data);
-            String answer = GeneralAPIRequestHandler.request(url, RouteType.PUT, data);
-            Log.e(EditEventActivity.class.getName(), answer);
-            if (!answer.contains("error")) {
-                finish();
-            } else {
-                Toast.makeText(this, "Fehler beim Updaten!", Toast.LENGTH_SHORT).show();
-            }
+            startNewService(url, "PUT", data, Keys.EXTRA_EDIT_PARTY);
         } else {
             Toast.makeText(this, "Bitte alle Felder ausfüllen!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void startNewService(String url, String put, String data, String extraEditParty) {
+        Intent apiHanlder = new Intent(this, APIService.class);
+        apiHanlder.putExtra(Keys.EXTRA_URL, url);
+        apiHanlder.putExtra(Keys.EXTRA_REQUEST, put);
+        apiHanlder.putExtra(Keys.EXTRA_DATA, data);
+        apiHanlder.putExtra(Keys.EXTRA_ID, extraEditParty);
+        apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_EDIT_PARTY_SERVICE);
+        this.startService(apiHanlder);
     }
 
     public void createUser(){
@@ -153,18 +175,8 @@ public class EditEventActivity extends AppCompatActivity {
             String data = "{\"id\":0,\"name\":\"" + whatText + "\",\"description\":\"" + descriptionText +
                     "\",\"startDate\":\"" + dateTime + "\",\"endDate\":null,\"location\":\"" + whereText + "\"}";
 
-            Log.e(EditEventActivity.class.getName(), data);
-            String answer = GeneralAPIRequestHandler.request(url, RouteType.POST, data);
-            Log.e(EditEventActivity.class.getName(), answer);
-            if (!answer.contains("error")) {
-                Intent intent = new Intent(this, EventMainActivity.class);
-                Gson gson = new Gson();
-                Party party = gson.fromJson(answer, Party.class);
-                intent.putExtra(Keys.EXTRA_PARTYID, party.getId());
-                startActivity(intent);
-            } else {
-                Toast.makeText(this, "Fehler beim Erstellen!", Toast.LENGTH_SHORT).show();
-            }
+            startNewService(url, "POST", data, Keys.EXTRA_CREATE_PARTY);
+
         } else {
             Toast.makeText(this, "Bitte alle Felder ausfüllen!", Toast.LENGTH_SHORT).show();
         }
@@ -242,5 +254,32 @@ public class EditEventActivity extends AppCompatActivity {
 
     private void setDate(String date) {
         this.date = date;
+    }
+
+    @Override
+    public void receiveData(String json, String id) {
+        if (json != null) {
+            switch (id) {
+                case Keys.EXTRA_EDIT_PARTY:
+                    if (!json.contains("error")) {
+                        finish();
+                    } else {
+                        Toast.makeText(this, "Fehler beim Updaten!", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case  Keys.EXTRA_CREATE_PARTY:
+                    if (!json.contains("error")) {
+                        Intent intent = new Intent(this, EventMainActivity.class);
+                        Gson gson = new Gson();
+                        Party party = gson.fromJson(json, Party.class);
+                        intent.putExtra(Keys.EXTRA_PARTYID, party.getId());
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(this, "Fehler beim Erstellen!", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+            }
+        }
+
     }
 }
