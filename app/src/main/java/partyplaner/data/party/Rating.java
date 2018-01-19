@@ -10,31 +10,25 @@ import partyplaner.data.user.User;
 
 public class Rating {
 
-    private int positiveRating;
-    private List<User> ratedUsers;
+    private int rating;
+    private int user_id;
+    private int party_id;
 
-    public Rating(int positiveRating, List<User> ratedUsers) {
-        this.positiveRating = positiveRating;
-        this.ratedUsers = ratedUsers;
+    public Rating(int rating, List<User> ratedUsers) {
+        this.rating = rating;
     }
 
-    public int getPositiveRating() {
-        return positiveRating;
+    public int getRating() {
+        return rating;
     }
 
-    public int getNegativeRating() {
-        return ratedUsers.size() - positiveRating;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public int getVoteCount() {
-        return ratedUsers.size();
+    public int getParty_id() {
+        return party_id;
     }
 
-    public float getPerventageRating() {
-        return positiveRating / getVoteCount();
-    }
 
-    public boolean hasRated(User user) {
-        return ratedUsers.contains(user);
-    }
 }

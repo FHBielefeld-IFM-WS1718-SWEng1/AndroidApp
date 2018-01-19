@@ -19,7 +19,7 @@ public class I extends User{
 
     private String key;
 
-    private I(int id, String email, String name, String birthdate, int gender, Image profilePicture, String apiKey) {
+    private I(int id, String email, String name, String birthdate, int gender, String profilePicture, String apiKey) {
         super(id, email, name, birthdate, gender, profilePicture);
         this.key = apiKey;
     }
@@ -27,7 +27,6 @@ public class I extends User{
     public String getApiKey() {
         return key;
     }
-
 
     static void setMyself(I i) {
         myself = i;

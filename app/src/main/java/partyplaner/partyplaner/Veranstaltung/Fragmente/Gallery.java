@@ -19,7 +19,7 @@ import partyplaner.partyplaner.R;
  * @since 16.11.17
  */
 
-public class Gallery extends Fragment {
+public class Gallery extends Fragment implements IReceiveData{
 
     List<Integer> imageRes = new ArrayList<>();
 
@@ -27,10 +27,10 @@ public class Gallery extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.event_fragment_gallery, container, false);
-
-        setTestSetUp();
-        initImages(view);
-
+        if (savedInstanceState == null) {
+            setTestSetUp();
+            initImages(view);
+        }
         return view;
     }
 
@@ -71,5 +71,15 @@ public class Gallery extends Fragment {
         imageRes.add(R.drawable.ic_launcher_background);
         imageRes.add(R.drawable.ic_launcher_background);
         imageRes.add(R.drawable.ic_launcher_background);
+    }
+
+    @Override
+    public void receiveData() {
+
+    }
+
+    @Override
+    public void setExpandable(ExpandableFragment fragment) {
+
     }
 }

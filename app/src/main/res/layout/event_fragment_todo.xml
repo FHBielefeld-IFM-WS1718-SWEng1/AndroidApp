@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/body_todo"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingTop="8dp"
-    android:paddingBottom="0dp"
+    android:paddingBottom="8dp"
+    android:paddingEnd="8dp"
     android:paddingStart="8dp"
-    android:paddingEnd="8dp">
+    android:paddingTop="8dp">
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/add_todo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Hinzufügen" />
 
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -37,7 +36,7 @@
                 android:paddingLeft="32dip"
                 android:paddingRight="8dip"
                 android:paddingTop="3dip"
-                android:text="Kosten"
+                android:text="Status"
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
         </TableRow>
@@ -48,5 +47,11 @@
         android:layout_height="2dp"
         android:background="@color/black"
         android:orientation="horizontal"></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/body_todo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"></LinearLayout>
 
 </LinearLayout>

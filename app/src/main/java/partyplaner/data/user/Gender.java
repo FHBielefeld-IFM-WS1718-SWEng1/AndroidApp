@@ -5,11 +5,12 @@ package partyplaner.data.user;
  */
 
 public enum Gender {
+
+    NULL("Nicht angegeben"),
     MALE("Männlich"),
     FEMALE("Weiblich"),
-    DIFFERENT("Anders"),
-    KAMPFHUBSCHRAUBER("Helisexuell"),
-    NULL("Nicht angegeben");
+    DIFFERENT("Andere"),
+    KAMPFHUBSCHRAUBER("Helisexuell");
 
     private String name;
 

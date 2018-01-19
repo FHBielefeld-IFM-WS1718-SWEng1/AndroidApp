@@ -3,25 +3,27 @@ package partyplaner.partyplaner.Profile;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.io.BufferedInputStream;
+import com.google.gson.Gson;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 
+import okhttp3.Route;
+import partyplaner.api.GeneralAPIRequestHandler;
+import partyplaner.api.RouteType;
+import partyplaner.data.Base64Image;
+import partyplaner.data.PaPlaImage;
+import partyplaner.data.user.Gender;
 import partyplaner.data.user.I;
+import partyplaner.data.user.User;
 import partyplaner.partyplaner.R;
 
 /**
@@ -36,16 +38,6 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-
-        I profil = I.getMyself();
-        TextView nameText = view.findViewById(R.id.NameTextView);
-        nameText.setText(profil.getName());
-        TextView adressText = view.findViewById(R.id.GenderTextView);
-        adressText.setText(profil.getGender() + "");
-        TextView birthdateText = view.findViewById(R.id.BirthdateTextView);
-        birthdateText.setText(profil.getBirthdate());
-        TextView emailText = view.findViewById(R.id.EmailTextView);
-        emailText.setText(profil.getEmail());
 
         profile = view.findViewById(R.id.profile_picture);
         profile.setOnLongClickListener(new View.OnLongClickListener() {
@@ -65,7 +57,36 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        //TODO:
+        /*Base64Image b64img = new Gson().fromJson(GeneralAPIRequestHandler.request("/images/" + profil.getProfilePicture() + "?api=" + profil.getApiKey(), RouteType.GET, null), Base64Image.class);
+        if (b64img != null && b64img.getData() != null) {
+            PaPlaImage img = new PaPlaImage(b64img.getData());
+            Bitmap bitmap = img.convertToBitmap();
+
+            profile.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
+                    (int) ((double) bitmap.getWidth() / ((double) bitmap.getHeight() / 1024.0)),
+                    1024,
+                    false));
+        }*/
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setUpView(getView());
+    }
+
+    private void setUpView(View view) {
+        I profil = I.getMyself();
+        TextView nameText = view.findViewById(R.id.NameTextView);
+        nameText.setText(profil.getName());
+        TextView adressText = view.findViewById(R.id.GenderTextView);
+        adressText.setText(Gender.getGenderNameByID(profil.getGender()));
+        TextView birthdateText = view.findViewById(R.id.BirthdateTextView);
+        birthdateText.setText(User.formatDate(profil.getBirthdate()));
+        TextView emailText = view.findViewById(R.id.EmailTextView);
+        emailText.setText(profil.getEmail());
     }
 
     @Override
@@ -86,6 +107,7 @@ public class ProfileFragment extends Fragment {
             }
         }
     }
+
 
     //TODO hochladen des Images
     //Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();

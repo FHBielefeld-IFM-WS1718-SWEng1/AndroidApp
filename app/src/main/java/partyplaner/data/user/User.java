@@ -1,7 +1,5 @@
 package partyplaner.data.user;
-
-import android.media.Image;
-
+import android.util.Log;
 /**
  * Ein User Objekt beinhaltet alle Informationen, die man über einen
  * Benutzer wissen sollte.
@@ -17,10 +15,10 @@ public class User {
     private String name;
     private String birthdate;
     private Integer gender;
-    private Image profilePicture;
+    private int profilePicture;
 
     public User(int id, String email, String username,
-                String birthday, int gender, Image profilePicture) {
+                String birthday, int gender, int profilePicture) {
         this.id = id;
         this.email = email;
         this.name = username;
@@ -51,10 +49,21 @@ public class User {
         return gender;
     }
 
-    public Image getProfilePicture() {
+    public int getProfilePicture() {
         return profilePicture;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public void setGender(Integer gender) {
+        this.gender = gender;
+    }
 
     /**
      * Erstellt einen User, der für Tests verwendet werden kann, ohne mit der Server API Nutzerdaten
@@ -67,6 +76,16 @@ public class User {
     public static User createTestUser() {
 
         return new User(0, "tsm@fh-bielefeld.de", "henkershelfer",
-                "17.7.1954", 1, null);
+                "17.7.1954", 1, 0);
+    }
+
+
+    public static String formatDate(String date) {
+        if (date != null) {
+            Log.e("User", date);
+            String[] part = date.split("-");
+            return part[2] + "." + part[1] + "." + part[0];
+        }
+        return "";
     }
 }

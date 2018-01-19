@@ -4,6 +4,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,39 +32,43 @@ public class ExpandableFragment extends Fragment {
     private int id;
     private int height;
     private View view;
+    private IReceiveData fragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.event_expandable_fragment, container, false);
-        expandend = true;
+        this.view = view;
+        if (savedInstanceState == null) {
+            expandend = true;
 
-        Bundle arguments = getArguments();
-        String title = arguments.getString(Keys.EXTRA_NAME);
-        TextView text = view.findViewById(R.id.expandableTitle);
-        text.setText(title);
+            Bundle arguments = getArguments();
+            String title = arguments.getString(Keys.EXTRA_NAME);
+            TextView text = view.findViewById(R.id.expandableTitle);
+            text.setText(title);
 
-        id = View.generateViewId();
-        LinearLayout body = view.findViewById(R.id.body);
-        body.setId(id);
+            id = View.generateViewId();
+            LinearLayout body = view.findViewById(R.id.body);
+            body.setId(id);
 
-        int id = arguments.getInt(Keys.EXTRA_ID);
-        setFragment(view, id);
+            int id = arguments.getInt(Keys.EXTRA_ID);
+            setFragment(view, id);
 
-        RelativeLayout head = view.findViewById(R.id.head);
-        head.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (expandend) {
-                    collapseGroup();
-                } else {
-                    expandGroup();
+            RelativeLayout head = view.findViewById(R.id.head);
+            head.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (expandend) {
+                        collapseGroup();
+                    } else {
+                        expandGroup();
+                    }
                 }
-            }
-        });
+            });
 
-        //expandGroup();
-        quickCollapseGroup(view);
+            //expandGroup();
+            quickCollapseGroup(view);
+        }
         this.view = view;
         return view;
     }
@@ -71,19 +76,38 @@ public class ExpandableFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        LinearLayout body = view.findViewById(id);
-        body.measure(0,0);
-        height = body.getMeasuredHeight();
+        recalculateHeight();
 
+    }
+
+    public void receiveData() {
+        fragment.receiveData();
+        //TODO: reexpandGroup();
     }
 
     private void setFragment(View view, int id) {
         LinearLayout body = view.findViewById(this.id);
         body.removeAllViews();
+        fragment = (IReceiveData) EventHeaders.values()[id].getFragment();
+        fragment.setExpandable(this);
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.add(this.id, EventHeaders.values()[id].getFragment());
         transaction.commit();
+    }
+
+    public void reexpandGroup() {
+        if (view != null) {
+            LinearLayout body = view.findViewById(id);
+            LinearLayout back = view.findViewById(R.id.expand_back);
+            recalculateHeight();
+
+            if (body.getLayoutParams().height > 0) {
+                body.getLayoutParams().height = this.height;
+            }
+            body.refreshDrawableState();
+            back.refreshDrawableState();
+        }
     }
 
     /**
@@ -99,6 +123,7 @@ public class ExpandableFragment extends Fragment {
             LinearLayout body = fragment.findViewById(id);
             LinearLayout back = fragment.findViewById(R.id.expand_back);
             ImageView arrow = fragment.findViewById(R.id.arrow);
+            recalculateHeight();
 
             ExpandableAnimator anim = new ExpandableAnimator(body, 0, height, arrow, -90, 0);
             anim.setDuration(300);
@@ -122,7 +147,6 @@ public class ExpandableFragment extends Fragment {
             LinearLayout back = fragment.findViewById(R.id.expand_back);
             ImageView arrow = fragment.findViewById(R.id.arrow);
 
-
             ExpandableAnimator anim = new ExpandableAnimator(body, height, 0, arrow, 0, -90);
             anim.setDuration(300);
             back.startAnimation(anim);
@@ -144,4 +168,10 @@ public class ExpandableFragment extends Fragment {
         }
     }
 
+    private void recalculateHeight() {
+        LinearLayout body = view.findViewById(id);
+        body.measure(0,0);
+        height = body.getMeasuredHeight();
+
+    }
 }
