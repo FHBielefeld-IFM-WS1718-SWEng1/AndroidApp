@@ -32,7 +32,7 @@ import partyplaner.partyplaner.R;
 
 public class ProfileFragment extends Fragment {
     private final static int PICK_IMAGE = 42;
-    ImageView profile;
+    private ImageView profile;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

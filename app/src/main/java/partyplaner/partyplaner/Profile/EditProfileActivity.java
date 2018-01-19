@@ -1,8 +1,12 @@
 package partyplaner.partyplaner.Profile;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -20,11 +25,14 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 
 import partyplaner.api.APIService;
 import partyplaner.api.ServiceDateReceiver;
+import partyplaner.data.PaPlaImage;
 import partyplaner.data.party.Party;
 import partyplaner.data.user.Gender;
 import partyplaner.data.user.I;
@@ -40,6 +48,12 @@ public class EditProfileActivity extends AppCompatActivity implements IServiceRe
     private String name;
     private String birthdate;
     private int gender;
+    private Bitmap imageBitmap;
+    private Uri pic;
+
+    private final static int PICK_IMAGE = 42;
+    private ImageView profile;
+    private boolean imageChanged = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,9 +123,53 @@ public class EditProfileActivity extends AppCompatActivity implements IServiceRe
                 saveEdit();
             }
         });
+
+        profile = findViewById(R.id.edit_profile_picture);
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                getIntent.setType("image/*");
+
+                Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                pickIntent.setType("image/*");
+
+                Intent chooserIntent = Intent.createChooser(getIntent, "Select Image");
+                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
+
+                startActivityForResult(chooserIntent, PICK_IMAGE);
+            }
+        });
     }
 
     private void saveEdit() {
+        EditText nameText = findViewById(R.id.edit_profile_name);
+        EditText birthdateText = findViewById(R.id.edit_profile_birthdate);
+
+        name = nameText.getText().toString().trim();
+        birthdate = birthdateText.getText().toString().trim();
+
+        if (imageChanged && !name.equals("") && !birthdate.equals("")) {
+            Log.e(getClass().getName(), "SaveEdit3");
+            PaPlaImage imagePapla = new PaPlaImage(imageBitmap);
+            Intent apiHandler = new Intent(this, APIService.class);
+            apiHandler.putExtra(Keys.EXTRA_URL, "/image?api=" + I.getMyself().getApiKey());
+            apiHandler.putExtra(Keys.EXTRA_REQUEST, "POST");
+            Log.e(getClass().getName(), imagePapla.convertToBase64());
+            String data = null;
+            apiHandler.putExtra(Keys.EXTRA_DATA, data);
+            apiHandler.putExtra(Keys.EXTRA_ID, Keys.EXTRA_UPLOAD_PROFILE_PICTURE);
+            apiHandler.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_EDIT_PROFILE);
+            apiHandler.setData(pic);
+            Log.e(getClass().getName(), "Kurz vor dem Service starten");
+            this.startService(apiHandler);
+        } else {
+            saveProfileData();
+        }
+    }
+
+    public void saveProfileData() {
+        Log.e(getClass().getName(), "SaveProfileData");
         EditText nameText = findViewById(R.id.edit_profile_name);
         EditText birthdateText = findViewById(R.id.edit_profile_birthdate);
         Spinner genderText = findViewById(R.id.edit_profile_gender);
@@ -119,17 +177,20 @@ public class EditProfileActivity extends AppCompatActivity implements IServiceRe
         name = nameText.getText().toString().trim();
         birthdate = birthdateText.getText().toString().trim();
         gender = genderText.getSelectedItemPosition();
+        String profilePicID = I.getMyself().getProfilePicture();
 
         if (!name.equals("") && !birthdate.equals("")) {
-            Intent apiHanlder = new Intent(this, APIService.class);
-            apiHanlder.putExtra(Keys.EXTRA_URL, "/user/" + I.getMyself().getId() + "?api=" + I.getMyself().getApiKey());
-            apiHanlder.putExtra(Keys.EXTRA_REQUEST, "PUT");
-            String data = "{\"name\":\"" + name + "\",\"gender\":" + gender + ",\"birthdate\":\"" + formatDate() + "\"}";
-            apiHanlder.putExtra(Keys.EXTRA_DATA, data);
-            apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_PUT_PROFILE);
-            apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_EDIT_PROFILE);
-            this.startService(apiHanlder);
+            Intent apiHandler = new Intent(this, APIService.class);
+            apiHandler.putExtra(Keys.EXTRA_URL, "/user/" + I.getMyself().getId() + "?api=" + I.getMyself().getApiKey());
+            apiHandler.putExtra(Keys.EXTRA_REQUEST, "PUT");
+            String data = "{\"name\":\"" + name + "\",\"gender\":" + gender + ",\"birthdate\":\"" + formatDate() +  "\",\"profilepicture\":\"" + profilePicID + "\"}";
+            apiHandler.putExtra(Keys.EXTRA_DATA, data);
+            apiHandler.putExtra(Keys.EXTRA_ID, Keys.EXTRA_PUT_PROFILE);
+            apiHandler.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_EDIT_PROFILE);
+            Log.e(getClass().getName(), "Kurz vor dem Service starten: SaveProfileData");
+            this.startService(apiHandler);
         }
+
     }
 
     public void pickDateTime() {
@@ -171,21 +232,61 @@ public class EditProfileActivity extends AppCompatActivity implements IServiceRe
 
     @Override
     public void receiveData(String json, String id) {
-        Log.e(getClass().getName(), json);
-        if (json != null) {
-            if (!json.contains("error")) {
-                Gson gson = new Gson();
-                User i = gson.fromJson(json, User.class);
-                I.getMyself().setName(i.getName());
-                I.getMyself().setGender(i.getGender());
-                Log.e(getClass().getName(), i.getBirthdate().substring(0, 10));
-                I.getMyself().setBirthdate(i.getBirthdate().substring(0, 10));
-                finish();
+        Log.e(getClass().getName(), "ReceiveData1");
+        if (id.equals(Keys.EXTRA_UPLOAD_PROFILE_PICTURE)) {
+            if (json != null) {
+                Log.e(getClass().getName(), json);
+                if (!json.contains("error")) {
+                    Log.e(getClass().getName(), "ReceiveData2");
+                    Gson gson = new Gson();
+                    User i = gson.fromJson(json, User.class);
+                    I.getMyself().setProfilePicture(i.getProfilePicture());
+                    finish();
+                } else {
+                    Toast.makeText(this, "Bearbeiten fehgeschlagen!", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 Toast.makeText(this, "Bearbeiten fehgeschlagen!", Toast.LENGTH_SHORT).show();
             }
-        } else {
-            Toast.makeText(this, "Bearbeiten fehgeschlagen!", Toast.LENGTH_SHORT).show();
+            saveProfileData();
+        } else if (id.equals(Keys.EXTRA_PUT_PROFILE)) {
+            if (json != null) {
+                Log.e(getClass().getName(), json);
+                if (!json.contains("error")) {
+                    Gson gson = new Gson();
+                    User i = gson.fromJson(json, User.class);
+                    I.getMyself().setName(i.getName());
+                    I.getMyself().setGender(i.getGender());
+                    I.getMyself().setBirthdate(i.getBirthdate().substring(0, 10));
+                    finish();
+                } else {
+                    Toast.makeText(this, "Bearbeiten fehgeschlagen!", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(this, "Bearbeiten fehgeschlagen!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK) {
+            final Uri imageUri = data.getData();
+            pic = imageUri;
+            final InputStream imageStream;
+            try {
+                imageStream = getContentResolver().openInputStream(imageUri);
+                imageBitmap = BitmapFactory.decodeStream(imageStream);
+
+                int height = 1024;
+                int width = (int)((double)imageBitmap.getWidth() / ((double)imageBitmap.getHeight() / 1024.0));
+
+                profile.setImageBitmap(Bitmap.createScaledBitmap(imageBitmap, width, height, false));
+                imageChanged = true;
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

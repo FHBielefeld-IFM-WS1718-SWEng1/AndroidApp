@@ -15,16 +15,16 @@ public class User {
     private String name;
     private String birthdate;
     private Integer gender;
-    private int profilePicture;
+    private String profilepicture;
 
     public User(int id, String email, String username,
-                String birthday, int gender, int profilePicture) {
+                String birthday, int gender, String profilepicture) {
         this.id = id;
         this.email = email;
         this.name = username;
         this.birthdate = birthday;
         this.gender = gender;
-        this.profilePicture = profilePicture;
+        this.profilepicture = profilepicture;
     }
 
     public int getId() {
@@ -49,8 +49,8 @@ public class User {
         return gender;
     }
 
-    public int getProfilePicture() {
-        return profilePicture;
+    public String getProfilePicture() {
+        return profilepicture;
     }
 
     public void setName(String name) {
@@ -65,6 +65,10 @@ public class User {
         this.gender = gender;
     }
 
+    public void setProfilePicture(String id) {
+        this.profilepicture = id;
+    }
+
     /**
      * Erstellt einen User, der für Tests verwendet werden kann, ohne mit der Server API Nutzerdaten
      * abzufragen.
@@ -76,7 +80,7 @@ public class User {
     public static User createTestUser() {
 
         return new User(0, "tsm@fh-bielefeld.de", "henkershelfer",
-                "17.7.1954", 1, 0);
+                "17.7.1954", 1, "");
     }
 
 
