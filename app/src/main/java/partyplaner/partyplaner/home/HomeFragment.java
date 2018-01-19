@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import partyplaner.api.GeneralAPIRequestHandler;
@@ -33,6 +35,7 @@ public class HomeFragment extends Fragment implements IReceiveData{
 
     private IFragmentDataManeger data;
     private LinearLayout partyHolder;
+    private List<Fragment> fragments = new ArrayList<>();
     private Party[] parties;
 
     @Override
@@ -64,9 +67,12 @@ public class HomeFragment extends Fragment implements IReceiveData{
     }
 
     private void updateParties() {
-        if(partyHolder != null)
-            partyHolder.removeAllViewsInLayout();
-
+        for (Fragment f : fragments) {
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.remove(f);
+            transaction.commit();
+        }
+        fragments.clear();
         for (Party party : parties) {
             addParty(party);
         }
@@ -87,10 +93,12 @@ public class HomeFragment extends Fragment implements IReceiveData{
                 OwnEventFragment ownEventFragment = new OwnEventFragment();
                 ownEventFragment.setArguments(args);
                 fragmentTransaction.add(R.id.party_list, ownEventFragment);
+                fragments.add(ownEventFragment);
             } else {
                 PartyHomeFragment partyHomeFragment = new PartyHomeFragment();
                 partyHomeFragment.setArguments(args);
                 fragmentTransaction.add(R.id.party_list, partyHomeFragment);
+                fragments.add(partyHomeFragment);
             }
             fragmentTransaction.commit();
         }

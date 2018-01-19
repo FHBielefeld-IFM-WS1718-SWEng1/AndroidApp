@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import partyplaner.data.party.Party;
@@ -30,6 +32,7 @@ public class OwnEventsFragment extends Fragment implements IReceiveData{
     private LinearLayout partyHolder;
     private Party[] parties;
     private IFragmentDataManeger data;
+    private List<Fragment> fragments = new ArrayList<>();
 
     @Override
     public void onAttach(Context context) {
@@ -59,12 +62,12 @@ public class OwnEventsFragment extends Fragment implements IReceiveData{
     }
 
     private void updateParties() {
-        /*for (Fragment f : fragments) {
+        for (Fragment f : fragments) {
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
             transaction.remove(f);
             transaction.commit();
-        }*/
-
+        }
+        fragments.clear();
         Log.e("OwnEvents", parties.length + "");
 
         for (Party party: parties) {
@@ -87,6 +90,7 @@ public class OwnEventsFragment extends Fragment implements IReceiveData{
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.ownEvent_list, partyHomeFragment);
             fragmentTransaction.commit();
+            fragments.add(partyHomeFragment);
         }
     }
 
