@@ -171,9 +171,6 @@ public class APIConnectionHandler {
             default:
                 break;
         }
-        request = builder.addHeader("Content-Type", "application/json")
-                .addHeader("Cache-Control", "no-cache")
-                .build();
 
         request = builder.addHeader("Content-Type", "application/json")
                 .addHeader("Cache-Control", "no-cache")

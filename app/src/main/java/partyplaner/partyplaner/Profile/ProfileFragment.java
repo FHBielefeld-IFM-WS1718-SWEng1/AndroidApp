@@ -12,10 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import com.google.gson.Gson;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+import okhttp3.Route;
+import partyplaner.api.GeneralAPIRequestHandler;
+import partyplaner.api.RouteType;
+import partyplaner.data.Base64Image;
+import partyplaner.data.PaPlaImage;
 import partyplaner.data.user.Gender;
 import partyplaner.data.user.I;
 import partyplaner.data.user.User;
@@ -52,6 +57,17 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        //TODO:
+        /*Base64Image b64img = new Gson().fromJson(GeneralAPIRequestHandler.request("/images/" + profil.getProfilePicture() + "?api=" + profil.getApiKey(), RouteType.GET, null), Base64Image.class);
+        if (b64img != null && b64img.getData() != null) {
+            PaPlaImage img = new PaPlaImage(b64img.getData());
+            Bitmap bitmap = img.convertToBitmap();
+
+            profile.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
+                    (int) ((double) bitmap.getWidth() / ((double) bitmap.getHeight() / 1024.0)),
+                    1024,
+                    false));
+        }*/
         return view;
     }
 

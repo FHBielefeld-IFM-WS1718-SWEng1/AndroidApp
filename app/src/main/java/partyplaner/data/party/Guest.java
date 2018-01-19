@@ -1,9 +1,5 @@
 package partyplaner.data.party;
 
-import android.media.Image;
-
-import java.util.GregorianCalendar;
-
 import partyplaner.data.user.User;
 
 /**
@@ -14,6 +10,7 @@ public class Guest{
 
     private int id;
     private int status;
+
     //TODO: manuelles Parsen
     private User user;
 
