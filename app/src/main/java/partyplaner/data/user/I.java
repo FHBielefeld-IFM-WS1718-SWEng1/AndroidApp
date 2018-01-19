@@ -28,7 +28,6 @@ public class I extends User{
         return key;
     }
 
-
     static void setMyself(I i) {
         myself = i;
     }

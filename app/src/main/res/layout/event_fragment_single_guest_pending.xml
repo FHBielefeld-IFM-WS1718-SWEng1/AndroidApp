@@ -18,11 +18,34 @@
         android:textColor="@android:color/black" />
 
     <ImageView
+        android:id="@+id/pending_accept_invite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/check" />
+
+    <LinearLayout
+        android:layout_width="15dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0"
+        android:orientation="horizontal"></LinearLayout>
+
+    <ImageView
+        android:id="@+id/pending_deny_invite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:padding="2dp"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/cross" />
+
+    <ImageView
         android:id="@+id/delete_pending"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_weight="0"
-        android:padding="4dp"
+        android:padding="6dp"
         android:visibility="invisible"
         app:srcCompat="@drawable/delete_icon" />
 </LinearLayout>

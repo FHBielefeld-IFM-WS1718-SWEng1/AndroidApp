@@ -31,30 +31,32 @@ public class SinglePoll extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.event_fragment_single_poll, container, false);
-        Bundle arg = getArguments();
+        if (savedInstanceState == null) {
+            Bundle arg = getArguments();
 
-        testPoll();
+            testPoll();
 
-        if(arg.getBoolean(Keys.EXTRA_OWNER)) {
-            LinearLayout body = view.findViewById(R.id.single_poll);
-            ImageView delete = new ImageView(getActivity());
-            delete.setImageResource(R.drawable.delete_icon);
-            delete.setLayoutParams(new LinearLayout.LayoutParams(64, 64));
-            body.addView(delete);
-        }
-
-        TextView name = view.findViewById(R.id.poll_name);
-        name.setText(arg.getString(Keys.EXTRA_NAME));
-
-        ImageView goToPoll = view.findViewById(R.id.go_to_poll);
-        goToPoll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), partyplaner.partyplaner.poll.Poll.class);
-                intent.putExtra(Keys.EXTRA_POLL, poll);
-                startActivity(intent);
+            if (arg.getBoolean(Keys.EXTRA_OWNER)) {
+                LinearLayout body = view.findViewById(R.id.single_poll);
+                ImageView delete = new ImageView(getActivity());
+                delete.setImageResource(R.drawable.delete_icon);
+                delete.setLayoutParams(new LinearLayout.LayoutParams(64, 64));
+                body.addView(delete);
             }
-        });
+
+            TextView name = view.findViewById(R.id.poll_name);
+            name.setText(arg.getString(Keys.EXTRA_NAME));
+
+            ImageView goToPoll = view.findViewById(R.id.go_to_poll);
+            goToPoll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getActivity(), partyplaner.partyplaner.poll.Poll.class);
+                    intent.putExtra(Keys.EXTRA_POLL, poll);
+                    startActivity(intent);
+                }
+            });
+        }
         return view;
     }
 

@@ -18,22 +18,24 @@ import partyplaner.partyplaner.poll.CreatePoll;
  * Created by malte on 24.11.2017.
  */
 
-public class Poll extends Fragment {
+public class Poll extends Fragment implements IReceiveData {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.event_fragment_poll, container, false);
 
-        Button createPoll = view.findViewById(R.id.create_poll);
-        createPoll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        if (savedInstanceState == null) {
+            Button createPoll = view.findViewById(R.id.create_poll);
+            createPoll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
                 /*Intent intent = new Intent(getActivity(), CreatePoll.class);
                 startActivity(intent);*/
-            }
-        });
-        testSetup(view);
-        testSetup(view);
+                }
+            });
+            testSetup(view);
+            testSetup(view);
+        }
         return view;
     }
 
@@ -55,4 +57,15 @@ public class Poll extends Fragment {
         transaction.add(R.id.body_poll, fragment);
         transaction.commit();
     }
+
+    @Override
+    public void receiveData() {
+
+    }
+
+    @Override
+    public void setExpandable(ExpandableFragment fragment) {
+
+    }
+
 }

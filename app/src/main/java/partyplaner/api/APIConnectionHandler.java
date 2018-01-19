@@ -111,7 +111,6 @@ public class APIConnectionHandler {
     }
 
     String post(String url, String data) throws IOException {
-
         Connection conn = new Connection();
         try {
             Response response = conn.execute(baseURL + url, "POST", data).get();
@@ -143,9 +142,10 @@ public class APIConnectionHandler {
 
     private Response connect(String url, RouteType route,  String data) throws IOException {
         OkHttpClient client = new OkHttpClient();
+
+        Request request = null;
         Request.Builder builder = new Request.Builder()
                 .url(url);
-        Request request;
 
         MediaType mediaType = MediaType.parse("application/json");
         switch (route) {
@@ -171,6 +171,9 @@ public class APIConnectionHandler {
             default:
                 break;
         }
+        request = builder.addHeader("Content-Type", "application/json")
+                .addHeader("Cache-Control", "no-cache")
+                .build();
 
         request = builder.addHeader("Content-Type", "application/json")
                 .addHeader("Cache-Control", "no-cache")

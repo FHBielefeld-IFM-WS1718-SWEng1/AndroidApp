@@ -30,32 +30,35 @@ public class Comment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.event_fragment_single_comment, container, false);
-        bodyId = View.generateViewId();
-        authorId = View.generateViewId();
-        textId = View.generateViewId();
-        commentId = View.generateViewId();
 
-        LinearLayout body = view.findViewById(R.id.body_single_comment);
-        TextView author = view.findViewById(R.id.comment_author);
-        TextView text = view.findViewById(R.id.comment_text);
-        EditText comment = view.findViewById(R.id.comment_input);
+        if (savedInstanceState == null) {
+            bodyId = View.generateViewId();
+            authorId = View.generateViewId();
+            textId = View.generateViewId();
+            commentId = View.generateViewId();
 
-        body.setId(bodyId);
-        author.setId(authorId);
-        text.setId(textId);
-        comment.setId(commentId);
+            LinearLayout body = view.findViewById(R.id.body_single_comment);
+            TextView author = view.findViewById(R.id.comment_author);
+            TextView text = view.findViewById(R.id.comment_text);
+            EditText comment = view.findViewById(R.id.comment_input);
 
-        Bundle args = getArguments();
-        text.setText(args.getString(Keys.EXTRA_COMMENT));
-        author.setText(args.getString(Keys.EXTRA_NAME));
+            body.setId(bodyId);
+            author.setId(authorId);
+            text.setId(textId);
+            comment.setId(commentId);
 
-        ImageView send = view.findViewById(R.id.send_comment);
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendComment(view);
-            }
-        });
+            Bundle args = getArguments();
+            text.setText(args.getString(Keys.EXTRA_COMMENT));
+            author.setText(args.getString(Keys.EXTRA_NAME));
+
+            ImageView send = view.findViewById(R.id.send_comment);
+            send.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    sendComment(view);
+                }
+            });
+        }
 
         return view;
     }

@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="partyplaner.partyplaner">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon_72"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/icon_72"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LogIn.LogInActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,16 +32,46 @@
         </activity>
         <activity
             android:name=".LogIn.RegisterActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".poll.CreatePoll"
             android:label="@string/poll_label_create"
-            android:parentActivityName=".MainActivity" />
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".EventMainActivity" />
         <activity
             android:name=".poll.Poll"
             android:label="@string/poll_label_poll"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".EventMainActivity" />
+        <activity
+            android:name=".EventMainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".EventMainActivity"
+
+        <service
+            android:name="partyplaner.api.APIService"
+            android:exported="false" />
+
+        <activity
+            android:name=".Veranstaltung.EditEventActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity" />
+
+        <activity android:name=".Veranstaltung.InviteUser"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".EventMainActivity"></activity>
+
+        <activity android:name=".Profile.EditProfileActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity"></activity>
     </application>
+
 </manifest>

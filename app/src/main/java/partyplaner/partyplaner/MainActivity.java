@@ -4,8 +4,10 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,23 +16,46 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+
+import partyplaner.api.APIService;
+import partyplaner.api.GeneralAPIRequestHandler;
+import partyplaner.api.RouteType;
+import partyplaner.api.ServiceDateReceiver;
+import partyplaner.data.party.Party;
 import partyplaner.data.party.PartyList;
 import partyplaner.data.user.I;
 import partyplaner.partyplaner.ContactForm.ContactFragment;
 import partyplaner.partyplaner.Contacts.AllContacts;
 import partyplaner.partyplaner.LogIn.LogInActivity;
 import partyplaner.partyplaner.LogIn.RegisterActivity;
+import partyplaner.partyplaner.Profile.EditProfileActivity;
 import partyplaner.partyplaner.Profile.ProfileFragment;
+import partyplaner.partyplaner.Veranstaltung.EditEventActivity;
+import partyplaner.partyplaner.Veranstaltung.Fragmente.IReceiveData;
+import partyplaner.partyplaner.Veranstaltung.IServiceReceiver;
 import partyplaner.partyplaner.home.HomeFragment;
 import partyplaner.partyplaner.ownEvents.OwnEventsFragment;
 import partyplaner.partyplaner.Imprint.ImprintFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, IFragmentDataManeger, IServiceReceiver {
 
     private static int currentTab = R.id.home;
+    private IReceiveData currentTabReceiver;
+    private Party[] parties;
+    private Gson gson;
+    private ServiceDateReceiver serviceDateReceiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,12 +73,39 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(currentTab);
 
+        gson = new Gson();
+
         setActiveFragment(currentTab);
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        loadData();
+
+        IntentFilter statusIntentFilter = new IntentFilter(Keys.EXTRA_MAIN_ACTIVITY);
+        serviceDateReceiver = new ServiceDateReceiver(this);
+        LocalBroadcastManager.getInstance(this).registerReceiver(serviceDateReceiver, statusIntentFilter);
+
+    }
+
+    private void loadData() {
+        startLoading();
+
+        parties = null;
+        Intent apiHanlder = new Intent(this, APIService.class);
+        apiHanlder.putExtra(Keys.EXTRA_URL, "/party?api=" + I.getMyself().getApiKey());
+        apiHanlder.putExtra(Keys.EXTRA_REQUEST, "GET");
+        String data = null;
+        apiHanlder.putExtra(Keys.EXTRA_DATA, data);
+        apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_GET_PARTIES);
+        apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_MAIN_ACTIVITY);
+        this.startService(apiHanlder);
+    }
+
+    @Override
     public void onBackPressed() {
-        //TODO Bei zurück zum vorherigen Menüpunkt gehen
+        //TODOFragment Bei zurück zum vorherigen Menüpunkt gehen
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -75,12 +127,24 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         switch (id) {
-            case R.id.action_settings:
-
+            case R.id.action_add_event:
+                Intent intent = new Intent(this, EditEventActivity.class);
+                intent.putExtra(Keys.EXTRA_EDIT_PARTY, false);
+                startActivity(intent);
+                break;
+            case R.id.action_edit_profile:
+                Intent editProfileIntent = new Intent(this, EditProfileActivity.class);
+                startActivity(editProfileIntent);
                 break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(serviceDateReceiver);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -96,30 +160,40 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    //receive DATA Speichern
     private void setActiveFragment(int id) {
         currentTab = id;
         if (id == R.id.home) {
-            setFragmentToContent(new HomeFragment());
+            HomeFragment fragment = new HomeFragment();
+            currentTabReceiver = fragment;
+            setFragmentToContent(fragment);
         } else if (id == R.id.profile){
             setFragmentToContent(new ProfileFragment());
+            currentTabReceiver = null;
         } else if (id == R.id.contacts) {
             AllContacts all_contacts = new AllContacts();
             Bundle args = new Bundle();
             args.putString(Keys.EXTRA_NAME, "");
+            currentTabReceiver = null;
             setFragmentToContent(new AllContacts());
         } else if (id == R.id.ownEvents) {
             OwnEventsFragment ownEvent = new OwnEventsFragment();
             Bundle args = new Bundle();
             args.putSerializable(Keys.EXTRA_PARTYLIST, new PartyList());
             ownEvent.setArguments(args);
+            currentTabReceiver = ownEvent;
             setFragmentToContent(ownEvent);
         } else if (id == R.id.help) {
 
         } else if (id == R.id.contactFormular) {
+            currentTabReceiver = null;
             setFragmentToContent(new ContactFragment());
         } else if (id == R.id.impressum) {
+            currentTabReceiver = null;
             setFragmentToContent(new ImprintFragment());
         } else if (id == R.id.logout) {
+            currentTabReceiver = null;
+            currentTab = R.id.home;
             logOut();
         }
     }
@@ -139,5 +213,89 @@ public class MainActivity extends AppCompatActivity
         transaction.replace(R.id.content, fragment);
 
         transaction.commit();
+    }
+
+    @Override
+    public Party[] getParties() {
+        return parties;
+    }
+
+    @Override
+    public Party[] getOwnParties() {
+        ArrayList<Party> ownParties = new ArrayList<>();
+        for (Party party : parties) {
+            if (party.isErsteller()) {
+                ownParties.add(party);
+            }
+        }
+        return ownParties.toArray(new Party[ownParties.size()]);
+    }
+
+    @Override
+    public boolean partyReceived() {
+        if (parties == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public void receiveData(String json, String id) {
+        Log.e(getClass().getName(), id);
+        if (json != null) {
+            switch (id) {
+                case Keys.EXTRA_GET_PARTIES:
+                    if (json != null && !json.contains("error")) {
+                        json = json.replaceAll(".*?\\[", "[");
+                        json = json.replaceAll("].", "]");
+                        parties = gson.fromJson(json, Party[].class);
+                        sortParties();
+                        if (currentTabReceiver != null) {
+                            currentTabReceiver.receiveData();
+                        }
+                        endLoading();
+                    } else {
+                        Toast.makeText(this, "Daten konnten nicht geladen werden!", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case Keys.EXTRA_DELETE_PARTIES:
+                    if (json != null && !json.contains("error")) {
+                        Toast.makeText(this, "Party erfolgreich gelöscht!", Toast.LENGTH_SHORT).show();
+                        loadData();
+                    } else {
+                        Toast.makeText(this, "Party konnte nicht gelöscht werden!", Toast.LENGTH_SHORT).show();
+                    }
+            }
+        }else {
+            Toast.makeText(this, "Daten konnten nicht geladen werden!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void sortParties() {
+        Log.e(getClass().getName(), "sort()");
+        Arrays.sort(parties, new Comparator<Party>() {
+            @Override
+            public int compare(Party p1, Party p2) {
+                int[] p1Date = p1.getStartDateArray();
+                int[] p2Date = p2.getStartDateArray();
+                for (int i = 0; i < p1Date.length - 1; i++) {
+                    if (Integer.compare(p1Date[i], p2Date[i]) != 0) {
+                        return Integer.compare(p1Date[i], p2Date[i]);
+                    }
+                }
+                return Integer.compare(p1Date[4], p2Date[4]);
+            }
+        });
+    }
+
+    private void endLoading() {
+        RelativeLayout lr = findViewById(R.id.loading);
+        lr.setVisibility(View.INVISIBLE);
+    }
+
+    public void startLoading() {
+        RelativeLayout lr = findViewById(R.id.loading);
+        lr.setVisibility(View.VISIBLE);
     }
 }

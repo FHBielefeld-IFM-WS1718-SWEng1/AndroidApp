@@ -15,11 +15,13 @@
         android:paddingTop="8dp"
         android:textColor="@android:color/black" />
 
-    <CheckBox
-        android:id="@+id/admin_status"
+    <ImageView
+        android:id="@+id/accepted_deny_invite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:text="@string/admin"
-        android:visibility="visible" />
+        android:padding="2dp"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/cross" />
+
 </LinearLayout>

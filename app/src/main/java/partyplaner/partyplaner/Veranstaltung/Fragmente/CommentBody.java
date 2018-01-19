@@ -19,7 +19,7 @@ import partyplaner.partyplaner.R;
  * Created by malte on 27.11.2017.
  */
 
-public class CommentBody extends Fragment {
+public class CommentBody extends Fragment implements IReceiveData {
 
     public static final Pattern VALID_COMMENT = Pattern.compile("[ ]*");
     public static boolean validateComment(String comment) {
@@ -31,13 +31,15 @@ public class CommentBody extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.event_fragment_comment, container, false);
-        ImageView send = view.findViewById(R.id.send_first_comment);
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendComment(view);
-            }
-        });
+        if (savedInstanceState == null) {
+            ImageView send = view.findViewById(R.id.send_first_comment);
+            send.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    sendComment(view);
+                }
+            });
+        }
         return view;
     }
 
@@ -58,5 +60,15 @@ public class CommentBody extends Fragment {
             transaction.add(R.id.body_comment, fragment);
             transaction.commit();
         }
+    }
+
+    @Override
+    public void receiveData() {
+
+    }
+
+    @Override
+    public void setExpandable(ExpandableFragment fragment) {
+
     }
 }

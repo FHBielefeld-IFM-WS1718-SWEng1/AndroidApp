@@ -10,23 +10,27 @@ import partyplaner.data.user.User;
  * Created by André on 26.11.2017.
  */
 
-public class Guest extends User{
+public class Guest{
 
-    private InviteState inviteState;
-    private boolean admin;
-    public Guest(int id, String email, String username,
-                String birthday, int gender, Image profilePicture,
-                 InviteState inviteState, boolean admin) {
-        super(id, email, username, birthday, gender, profilePicture);
-        this.inviteState = inviteState;
-        this.admin = admin;
+    private int id;
+    private int status;
+    //TODO: manuelles Parsen
+    private User user;
+
+    public Guest(int status, User user) {
+        this.status = status;
+        this.user = user;
     }
 
-    public InviteState getInviteState() {
-        return inviteState;
+    public int getInviteState() {
+        return status;
     }
 
-    public boolean isAdmin() {
-        return admin;
+    public User getUser() {
+        return user;
+    }
+
+    public int getId() {
+        return id;
     }
 }
