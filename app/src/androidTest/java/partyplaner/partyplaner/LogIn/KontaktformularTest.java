@@ -121,7 +121,7 @@ public class KontaktformularTest {
                                 1),
                         isDisplayed()));
         appCompatImageButton.perform(click());
-
+/*
         ViewInteraction navigationMenuItemView = onView(
                 allOf(childAtPosition(
                         allOf(withId(R.id.design_navigation_view),
@@ -131,7 +131,7 @@ public class KontaktformularTest {
                         8),
                         isDisplayed()));
         navigationMenuItemView.perform(click());
-
+*/
         ViewInteraction textView = onView(
                 allOf(withId(R.id.betreffText), withText("Betreff :"),
                         childAtPosition(

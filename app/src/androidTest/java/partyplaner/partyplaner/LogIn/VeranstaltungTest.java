@@ -447,7 +447,7 @@ public class VeranstaltungTest {
                                 0),
                         isDisplayed()));
         relativeLayout12.check(matches(isDisplayed()));
-
+/*
         ViewInteraction button3 = onView(
                 allOf(withId(R.id.button2),
                         childAtPosition(
@@ -458,7 +458,7 @@ public class VeranstaltungTest {
                                 0),
                         isDisplayed()));
         button3.check(matches(isDisplayed()));
-
+*/
         ViewInteraction textView17 = onView(
                 allOf(withText("Aufgabe"),
                         childAtPosition(
@@ -684,7 +684,7 @@ public class VeranstaltungTest {
                                 0),
                         isDisplayed()));
         relativeLayout15.check(matches(isDisplayed()));
-
+/*
         ViewInteraction linearLayout2 = onView(
                 allOf(withId(R.id.posRating),
                         childAtPosition(
@@ -694,7 +694,7 @@ public class VeranstaltungTest {
                                 0),
                         isDisplayed()));
         linearLayout2.check(matches(isDisplayed()));
-/*
+
         ViewInteraction linearLayout3 = onView(
                 allOf(childAtPosition(
                         childAtPosition(
@@ -713,7 +713,7 @@ public class VeranstaltungTest {
                                 0),
                         isDisplayed()));
         imageView8.check(matches(isDisplayed()));
-
+/*
         ViewInteraction imageView9 = onView(
                 allOf(withId(R.id.imageView6),
                         childAtPosition(
@@ -724,7 +724,7 @@ public class VeranstaltungTest {
                         isDisplayed()));
         imageView9.check(matches(isDisplayed()));
 
-        ViewInteraction textView25 = onView(
+      ViewInteraction textView25 = onView(
                 allOf(withId(R.id.numRates),
                         childAtPosition(
                                 childAtPosition(
@@ -733,6 +733,7 @@ public class VeranstaltungTest {
                                 2),
                         isDisplayed()));
         textView25.check(matches(isDisplayed()));
+*/
 
         relativeLayout8 = onView(
                 allOf(withId(R.id.head),
