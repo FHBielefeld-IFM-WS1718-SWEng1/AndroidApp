@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.AlertDialogLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -105,6 +106,7 @@ public class AllContacts extends Fragment implements IReceiveData{
         singleContact.setArguments(args);
         fragmentTransaction.add(R.id.layout_all_single_contacts, singleContact);
         fragmentTransaction.commit();
+        fragments.add(singleContact);
     }
 
     private User searchContact(){
@@ -133,6 +135,7 @@ public class AllContacts extends Fragment implements IReceiveData{
     }
 
     private void addNewContact(LayoutInflater inflater){
+        Log.e("AllContacts", "addNewContact anfang");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         final View dialogView = inflater.inflate(R.layout.single_input_dialog, null);
         builder.setView(dialogView);
@@ -151,9 +154,11 @@ public class AllContacts extends Fragment implements IReceiveData{
                 dialogInterface.cancel();
             }
         }).create().show();
+        Log.e("AllContacts", "addNewContact ende");
     }
 
     private void startAddContactService(String string){
+        Log.e("AllContacts", "startService anfang");
         ((ISetName) data).setName(string);
         Intent apiHanlder = new Intent(getActivity(), APIService.class);
         apiHanlder.putExtra(Keys.EXTRA_URL, "/user?api=" + I.getMyself().getApiKey());
@@ -163,13 +168,16 @@ public class AllContacts extends Fragment implements IReceiveData{
         apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_GET_USERS);
         apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_MAIN_ACTIVITY);
         getActivity().startService(apiHanlder);
+        Log.e("AllContacts", "startService ende");
     }
 
 
     @Override
     public void receiveData() {
         contactList = data.getContacts();
-        updateContacts();
+        if(contactList != null) {
+            updateContacts();
+        }
     }
 
     @Override

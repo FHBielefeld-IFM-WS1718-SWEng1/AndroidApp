@@ -305,6 +305,7 @@ public class MainActivity extends AppCompatActivity
                     }
                     break;
                 case Keys.EXTRA_POST_CONTACT:
+                    Log.e("MainActivity", json);
                     if(json != null && !json.contains("error")){
                         loadData();
                     }else{
@@ -321,13 +322,13 @@ public class MainActivity extends AppCompatActivity
         int placeholder = -1;
         for (int i = 0; i < user.length; i++) {
             if (user[i].getName().equals(addName)) {
-                placeholder = i;
+                placeholder = user[i].getId();
             }
         }
         boolean alreadyAContact = false;
         if(placeholder >= 0){
             for(int i = 0; i<contactList.length; i++){
-                if(user[i].getName().equals(addName)){
+                if(contactList[i].getName().equals(addName)){
                     alreadyAContact = true;
                 }
             }
@@ -335,7 +336,7 @@ public class MainActivity extends AppCompatActivity
                 Intent apiHanlder = new Intent(this, APIService.class);
                 apiHanlder.putExtra(Keys.EXTRA_URL, "/user/contact?api=" + I.getMyself().getApiKey());
                 apiHanlder.putExtra(Keys.EXTRA_REQUEST, "POST");
-                String data = "{\"id\":"+placeholder+"}";
+                String data = "{\"userid\":"+placeholder+"}";
                 apiHanlder.putExtra(Keys.EXTRA_DATA, data);
                 apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_POST_CONTACT);
                 apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_MAIN_ACTIVITY);
