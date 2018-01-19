@@ -49,6 +49,7 @@ public class EditProfileActivity extends AppCompatActivity implements IServiceRe
     private String birthdate;
     private int gender;
     private Bitmap imageBitmap;
+    private Uri pic;
 
     private final static int PICK_IMAGE = 42;
     private ImageView profile;
@@ -142,23 +143,24 @@ public class EditProfileActivity extends AppCompatActivity implements IServiceRe
     }
 
     private void saveEdit() {
-        Log.e(getClass().getName(), "SaveEdit1");
         EditText nameText = findViewById(R.id.edit_profile_name);
         EditText birthdateText = findViewById(R.id.edit_profile_birthdate);
+
         name = nameText.getText().toString().trim();
         birthdate = birthdateText.getText().toString().trim();
-        Log.e(getClass().getName(), "SaveEdit2");
+
         if (imageChanged && !name.equals("") && !birthdate.equals("")) {
             Log.e(getClass().getName(), "SaveEdit3");
             PaPlaImage imagePapla = new PaPlaImage(imageBitmap);
             Intent apiHandler = new Intent(this, APIService.class);
-            apiHandler.putExtra(Keys.EXTRA_URL, "/image/" + I.getMyself().getId() + "?api=" + I.getMyself().getApiKey());
+            apiHandler.putExtra(Keys.EXTRA_URL, "/image?api=" + I.getMyself().getApiKey());
             apiHandler.putExtra(Keys.EXTRA_REQUEST, "POST");
-            Log.e(getClass().getName(), "SaveEdit4");
-            String data = "{\"data\":\"" + imagePapla.convertToBase64() + "\"}";
+            Log.e(getClass().getName(), imagePapla.convertToBase64());
+            String data = null;
             apiHandler.putExtra(Keys.EXTRA_DATA, data);
             apiHandler.putExtra(Keys.EXTRA_ID, Keys.EXTRA_UPLOAD_PROFILE_PICTURE);
             apiHandler.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_EDIT_PROFILE);
+            apiHandler.setData(pic);
             Log.e(getClass().getName(), "Kurz vor dem Service starten");
             this.startService(apiHandler);
         } else {
@@ -175,13 +177,13 @@ public class EditProfileActivity extends AppCompatActivity implements IServiceRe
         name = nameText.getText().toString().trim();
         birthdate = birthdateText.getText().toString().trim();
         gender = genderText.getSelectedItemPosition();
-        int profilePicID = I.getMyself().getProfilePicture();
+        String profilePicID = I.getMyself().getProfilePicture();
 
         if (!name.equals("") && !birthdate.equals("")) {
             Intent apiHandler = new Intent(this, APIService.class);
             apiHandler.putExtra(Keys.EXTRA_URL, "/user/" + I.getMyself().getId() + "?api=" + I.getMyself().getApiKey());
             apiHandler.putExtra(Keys.EXTRA_REQUEST, "PUT");
-            String data = "{\"name\":\"" + name + "\",\"gender\":" + gender + ",\"birthdate\":\"" + formatDate() +  ",\"profilepicture\":\"" + profilePicID + "\"}";
+            String data = "{\"name\":\"" + name + "\",\"gender\":" + gender + ",\"birthdate\":\"" + formatDate() +  "\",\"profilepicture\":\"" + profilePicID + "\"}";
             apiHandler.putExtra(Keys.EXTRA_DATA, data);
             apiHandler.putExtra(Keys.EXTRA_ID, Keys.EXTRA_PUT_PROFILE);
             apiHandler.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_EDIT_PROFILE);
@@ -233,6 +235,7 @@ public class EditProfileActivity extends AppCompatActivity implements IServiceRe
         Log.e(getClass().getName(), "ReceiveData1");
         if (id.equals(Keys.EXTRA_UPLOAD_PROFILE_PICTURE)) {
             if (json != null) {
+                Log.e(getClass().getName(), json);
                 if (!json.contains("error")) {
                     Log.e(getClass().getName(), "ReceiveData2");
                     Gson gson = new Gson();
@@ -248,6 +251,7 @@ public class EditProfileActivity extends AppCompatActivity implements IServiceRe
             saveProfileData();
         } else if (id.equals(Keys.EXTRA_PUT_PROFILE)) {
             if (json != null) {
+                Log.e(getClass().getName(), json);
                 if (!json.contains("error")) {
                     Gson gson = new Gson();
                     User i = gson.fromJson(json, User.class);
@@ -269,10 +273,12 @@ public class EditProfileActivity extends AppCompatActivity implements IServiceRe
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK) {
             final Uri imageUri = data.getData();
+            pic = imageUri;
             final InputStream imageStream;
             try {
                 imageStream = getContentResolver().openInputStream(imageUri);
                 imageBitmap = BitmapFactory.decodeStream(imageStream);
+
                 int height = 1024;
                 int width = (int)((double)imageBitmap.getWidth() / ((double)imageBitmap.getHeight() / 1024.0));
 
