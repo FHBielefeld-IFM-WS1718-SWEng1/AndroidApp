@@ -54,4 +54,5 @@ public class Keys {
     public static final String EXTRA_CREATE_PARTY = "CREATE_PARTY";
     public static final String EXTRA_PICTURE = "PICTURE";
     public static final String EXTRA_GET_CONTACTS = "GET_CONTACTS";
+    public static final String EXTRA_GET_USERS = "USERS";
 }
