@@ -280,7 +280,9 @@ public class MainActivity extends AppCompatActivity
                     } else {
                         Toast.makeText(this, "Party konnte nicht gelöscht werden!", Toast.LENGTH_SHORT).show();
                     }
+                    break;
                 case Keys.EXTRA_GET_CONTACTS:
+                    Log.e(getClass().getName(), json);
                     if (!json.contains("error")) {
                         json = json.replaceAll(".*?\\[", "[");
                         json = json.replaceAll("].", "]");
