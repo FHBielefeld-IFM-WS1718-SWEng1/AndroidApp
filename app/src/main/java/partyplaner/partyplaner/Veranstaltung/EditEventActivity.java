@@ -143,7 +143,7 @@ public class EditEventActivity extends AppCompatActivity implements IServiceRece
             String url = "/party/" + partyId + "?api=" + I.getMyself().getApiKey();
             String data = "{\"id\":" + partyId + ",\"name\":\"" + whatText + "\",\"description\":\"" + descriptionText +
                     "\",\"startDate\":\"" + dateTime + "\",\"endDate\":null,\"location\":\"" + whereText + "\"}";
-
+            Log.e(getClass().getName(), data);
             startNewService(url, "PUT", data, Keys.EXTRA_EDIT_PARTY);
         } else {
             Toast.makeText(this, "Bitte alle Felder ausfüllen!", Toast.LENGTH_SHORT).show();
@@ -175,6 +175,7 @@ public class EditEventActivity extends AppCompatActivity implements IServiceRece
             String data = "{\"id\":0,\"name\":\"" + whatText + "\",\"description\":\"" + descriptionText +
                     "\",\"startDate\":\"" + dateTime + "\",\"endDate\":null,\"location\":\"" + whereText + "\"}";
 
+            Log.e(getClass().getName(), data);
             startNewService(url, "POST", data, Keys.EXTRA_CREATE_PARTY);
 
         } else {

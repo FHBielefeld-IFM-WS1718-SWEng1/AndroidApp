@@ -35,7 +35,8 @@
                     android:id="@+id/SearchText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/kontakte_durchsuchen" />
+                    android:hint="@string/kontakte_durchsuchen"
+                    android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
     </LinearLayout>
@@ -49,5 +50,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
+
+        <Button
+            android:id="@+id/button_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kontakt hinzufügen" />
     </ScrollView>
 </LinearLayout>
