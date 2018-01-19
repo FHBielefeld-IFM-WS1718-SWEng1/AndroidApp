@@ -1,8 +1,5 @@
 package partyplaner.data.user;
 
-import android.media.Image;
-
-import partyplaner.api.APIConnectionHandler;
 import partyplaner.api.LoginHandler;
 
 /**
