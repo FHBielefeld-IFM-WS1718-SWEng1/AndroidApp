@@ -174,31 +174,34 @@ public class InviteUser extends AppCompatActivity implements IServiceReceiver{
     @Override
     public void receiveData(String json, String id) {
         Log.e(getClass().getName(), json);
-        switch (id) {
-            case Keys.EXTRA_ADD_USERS:
-                if (json.contains("error")) {
-                    Toast.makeText(this, "User konnten nicht geladen werden!", Toast.LENGTH_SHORT).show();
-                } else {
-                    json = json.replaceAll(".*?\\[", "[");
-                    json = json.replaceAll("].", "]");
-                    allUser = gson.fromJson(json, User[].class);
-                    Log.e(getClass().getName(), allUser.length + "");
-                    endLoading();
-                    addTextEdit();
-                    Log.e(getClass().getName(), "service receiverd");
-                }
-                break;
-            case Keys.EXTRA_LOAD_PARTY:
-                if(json.contains("error")) {
-                    Toast.makeText(this, "Fehler beim erstellen!", Toast.LENGTH_SHORT).show();
-                } else {
-                    count--;
-                    if (count == 0) {
-                        finish();
+        if (json != null) {
+            switch (id) {
+                case Keys.EXTRA_ADD_USERS:
+                    if (json.contains("error")) {
+                        Toast.makeText(this, "User konnten nicht geladen werden!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        json = json.replaceAll(".*?\\[", "[");
+                        json = json.replaceAll("].", "]");
+                        allUser = gson.fromJson(json, User[].class);
+                        Log.e(getClass().getName(), allUser.length + "");
+                        endLoading();
+                        addTextEdit();
+                        Log.e(getClass().getName(), "service receiverd");
                     }
-                }
-                break;
-
+                    break;
+                case Keys.EXTRA_LOAD_PARTY:
+                    if (json.contains("error")) {
+                        Toast.makeText(this, "Fehler beim Erstellen!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        count--;
+                        if (count == 0) {
+                            finish();
+                        }
+                    }
+                    break;
+            }
+        }else {
+            Toast.makeText(this, "Fehler beim Laden!", Toast.LENGTH_SHORT).show();
         }
     }
 

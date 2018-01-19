@@ -184,6 +184,8 @@ public class EditProfileActivity extends AppCompatActivity implements IServiceRe
             } else {
                 Toast.makeText(this, "Bearbeiten fehgeschlagen!", Toast.LENGTH_SHORT).show();
             }
+        } else {
+            Toast.makeText(this, "Bearbeiten fehgeschlagen!", Toast.LENGTH_SHORT).show();
         }
     }
 }

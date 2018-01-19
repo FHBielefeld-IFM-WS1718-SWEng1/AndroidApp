@@ -197,7 +197,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void logOut() {
-
+        I.getMyself().logout();
     }
 
     public void setFragmentToContent(Fragment fragment) {
@@ -238,28 +238,32 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void receiveData(String json, String id) {
         Log.e(getClass().getName(), id);
-        switch (id) {
-            case Keys.EXTRA_GET_PARTIES:
-                if (json != null && !json.contains("error")) {
-                    json = json.replaceAll(".*?\\[", "[");
-                    json = json.replaceAll("].", "]");
-                    parties = gson.fromJson(json, Party[].class);
-                    sortParties();
-                    if (currentTabReceiver != null) {
-                        currentTabReceiver.receiveData();
+        if (json != null) {
+            switch (id) {
+                case Keys.EXTRA_GET_PARTIES:
+                    if (json != null && !json.contains("error")) {
+                        json = json.replaceAll(".*?\\[", "[");
+                        json = json.replaceAll("].", "]");
+                        parties = gson.fromJson(json, Party[].class);
+                        sortParties();
+                        if (currentTabReceiver != null) {
+                            currentTabReceiver.receiveData();
+                        }
+                        endLoading();
+                    } else {
+                        Toast.makeText(this, "Daten konnten nicht geladen werden!", Toast.LENGTH_SHORT).show();
                     }
-                    endLoading();
-                } else {
-                    Toast.makeText(this, "Daten konnten nicht geladen werden!", Toast.LENGTH_SHORT).show();
-                }
-                break;
-            case Keys.EXTRA_DELETE_PARTIES:
-                if (json != null && !json.contains("error")){
-                    Toast.makeText(this, "Party erfolgreich gelöscht!", Toast.LENGTH_SHORT).show();
-                    loadData();
-                } else {
-                    Toast.makeText(this, "Party konnte nicht gelöscht werden!", Toast.LENGTH_SHORT).show();
-                }
+                    break;
+                case Keys.EXTRA_DELETE_PARTIES:
+                    if (json != null && !json.contains("error")) {
+                        Toast.makeText(this, "Party erfolgreich gelöscht!", Toast.LENGTH_SHORT).show();
+                        loadData();
+                    } else {
+                        Toast.makeText(this, "Party konnte nicht gelöscht werden!", Toast.LENGTH_SHORT).show();
+                    }
+            }
+        }else {
+            Toast.makeText(this, "Daten konnten nicht geladen werden!", Toast.LENGTH_SHORT).show();
         }
     }
 

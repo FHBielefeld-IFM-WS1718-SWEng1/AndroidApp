@@ -16,9 +16,13 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LogIn.LogInActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,17 +32,25 @@
         </activity>
         <activity
             android:name=".LogIn.RegisterActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".poll.CreatePoll"
             android:label="@string/poll_label_create"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".EventMainActivity" />
         <activity
             android:name=".poll.Poll"
             android:label="@string/poll_label_poll"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".EventMainActivity" />
         <activity
             android:name=".EventMainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity" />
 
         <service
@@ -47,12 +59,18 @@
 
         <activity
             android:name=".Veranstaltung.EditEventActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity" />
 
         <activity android:name=".Veranstaltung.InviteUser"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".EventMainActivity"></activity>
 
         <activity android:name=".Profile.EditProfileActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity"></activity>
     </application>
 

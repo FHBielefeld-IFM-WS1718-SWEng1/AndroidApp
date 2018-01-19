@@ -136,41 +136,45 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
     @Override
     public void receiveData(String json, String id) {
         Log.e(this.getClass().getName(), id);
-        switch (id) {
-            case Keys.EXTRA_LOAD_PARTY:
-                json = json.replaceAll(",\"ersteller\":", ",\"owner\":");
-                json = json.replaceAll("User", "user");
-                if (json.contains("error")) {
-                    Toast.makeText(this, "Daten konnten nicht geladen werden!", Toast.LENGTH_SHORT).show();
-                } else {
-                    party = gson.fromJson(json, Party.class);
-                    if (party != null) {
-                        Log.e(this.getClass().getName(), "party geladen");
-                        endLoading();
-                        eventMainFragment.receiveData();
+        if (json != null) {
+            switch (id) {
+                case Keys.EXTRA_LOAD_PARTY:
+                    json = json.replaceAll(",\"ersteller\":", ",\"owner\":");
+                    json = json.replaceAll("User", "user");
+                    if (json.contains("error")) {
+                        Toast.makeText(this, "Daten konnten nicht geladen werden!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        party = gson.fromJson(json, Party.class);
+                        if (party != null) {
+                            Log.e(this.getClass().getName(), "party geladen");
+                            endLoading();
+                            eventMainFragment.receiveData();
+                        }
                     }
-                }
-                break;
-            case Keys.EXTRA_PUT_TASK:
-                endLoading();
-                if(json.contains("error")) {
-                    Toast.makeText(this, "Erstellen fehlgeschlagen!", Toast.LENGTH_SHORT).show();
+                    break;
+                case Keys.EXTRA_PUT_TASK:
+                    endLoading();
+                    if (json.contains("error")) {
+                        Toast.makeText(this, "Erstellen fehlgeschlagen!", Toast.LENGTH_SHORT).show();
+                        Log.e(getClass().getName(), json);
+                    } else {
+                        getData();
+                    }
+                    break;
+                case Keys.EXTRA_DELETE_TASK:
+                    endLoading();
+                    if (json.contains("error")) {
+                        Toast.makeText(this, "Löschen fehlgeschlagen!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        getData();
+                    }
+                    break;
+                case Keys.EXTRA_POST_TASK:
                     Log.e(getClass().getName(), json);
-                } else {
-                    getData();
-                }
-                break;
-            case Keys.EXTRA_DELETE_TASK:
-                endLoading();
-                if(json.contains("error")) {
-                    Toast.makeText(this, "Löschen fehlgeschlagen!", Toast.LENGTH_SHORT).show();
-                } else {
-                    getData();
-                }
-                break;
-            case Keys.EXTRA_POST_TASK:
-                Log.e(getClass().getName(), json);
-                break;
+                    break;
+            }
+        }else {
+            Toast.makeText(this, "Laden fehlgeschlagen!", Toast.LENGTH_SHORT).show();
         }
     }
 
