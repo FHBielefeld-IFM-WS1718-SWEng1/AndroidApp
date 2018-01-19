@@ -106,20 +106,7 @@ public class RegistryTest {
                         isDisplayed()));
         button.check(matches(isDisplayed()));
     }
-/*
-    @Test
-    public void registryRegistryLabelExistsWithTextTest() {
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.textView),
-                        childAtPosition(
-                                allOf(withId(R.id.fragment),
-                                        childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                                1)),
-                                0),
-                        isDisplayed()));
-        textView.check(matches(isDisplayed()));
-    }*/
+
 
     @Test
     public void registryUserNameTextAreaWorksTest() {

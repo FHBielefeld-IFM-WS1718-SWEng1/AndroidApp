@@ -233,16 +233,6 @@ public class VeranstaltungTest {
                         isDisplayed()));
         textView9.check(matches(isDisplayed()));
 
-        ViewInteraction button = onView(
-                allOf(withId(R.id.button_more),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class),
-                                        0),
-                                2),
-                        isDisplayed()));
-        button.check(matches(isDisplayed()));
-
 //Gallerie öffnen
         ViewInteraction relativeLayout3 = onView(
                 allOf(withId(R.id.head),
@@ -264,18 +254,7 @@ public class VeranstaltungTest {
                                 1),
                         isDisplayed()));
         textView10.check(matches(isDisplayed()));
-/*
-        ViewInteraction imageView2 = onView(
-                allOf(withId(R.id.arrow), withContentDescription("arrow"),
-                        childAtPosition(
-                                allOf(withId(R.id.head),
-                                        childAtPosition(
-                                                withId(R.id.expand_back),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        imageView2.check(matches(isDisplayed()));
-*/
+
         ViewInteraction relativeLayout10 = onView(
                 allOf(withId(R.id.head),
                         childAtPosition(
@@ -318,18 +297,7 @@ public class VeranstaltungTest {
                                                 1)),
                                 0)));
         relativeLayout4.perform(scrollTo(), click());
-/*
-        ViewInteraction imageView3 = onView(
-                allOf(withId(R.id.arrow), withContentDescription("arrow"),
-                        childAtPosition(
-                                allOf(withId(R.id.head),
-                                        childAtPosition(
-                                                withId(R.id.expand_back),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        imageView3.check(matches(isDisplayed()));
-*/
+
         ViewInteraction textView11 = onView(
                 allOf(withId(R.id.expandableTitle), withText("Aufgaben"),
                         childAtPosition(
@@ -362,17 +330,7 @@ public class VeranstaltungTest {
                                 0),
                         isDisplayed()));
         relativeLayout11.check(matches(isDisplayed()));
-/*
-        ViewInteraction textView13 = onView(
-                allOf(withText("Aufgabe"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.TableLayout.class),
-                                        0),
-                                0),
-                        isDisplayed()));
-        textView13.check(matches(isDisplayed()));
-*/
+
         ViewInteraction textView14 = onView(
                 allOf(withText("Name"),
                         childAtPosition(
@@ -414,18 +372,7 @@ public class VeranstaltungTest {
                                                 2)),
                                 0)));
         relativeLayout5.perform(scrollTo(), click());
-/*
-        ViewInteraction imageView4 = onView(
-                allOf(withId(R.id.arrow), withContentDescription("arrow"),
-                        childAtPosition(
-                                allOf(withId(R.id.head),
-                                        childAtPosition(
-                                                withId(R.id.expand_back),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        imageView4.check(matches(isDisplayed()));
-*/
+
         ViewInteraction textView16 = onView(
                 allOf(withId(R.id.expandableTitle), withText("TODO"),
                         childAtPosition(
@@ -447,18 +394,7 @@ public class VeranstaltungTest {
                                 0),
                         isDisplayed()));
         relativeLayout12.check(matches(isDisplayed()));
-/*
-        ViewInteraction button3 = onView(
-                allOf(withId(R.id.button2),
-                        childAtPosition(
-                                allOf(withId(R.id.body_todo),
-                                        childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        button3.check(matches(isDisplayed()));
-*/
+
         ViewInteraction textView17 = onView(
                 allOf(withText("Aufgabe"),
                         childAtPosition(
@@ -468,16 +404,6 @@ public class VeranstaltungTest {
                                 0),
                         isDisplayed()));
         textView17.check(matches(isDisplayed()));
-
-        ViewInteraction textView18 = onView(
-                allOf(withText("Kosten"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.TableLayout.class),
-                                        0),
-                                1),
-                        isDisplayed()));
-        textView18.check(matches(isDisplayed()));
 
         relativeLayout5 = onView(
                 allOf(withId(R.id.head),
@@ -500,18 +426,7 @@ public class VeranstaltungTest {
                                                 3)),
                                 0)));
         relativeLayout6.perform(scrollTo(), click());
-/*
-        ViewInteraction imageView5 = onView(
-                allOf(withId(R.id.arrow), withContentDescription("arrow"),
-                        childAtPosition(
-                                allOf(withId(R.id.head),
-                                        childAtPosition(
-                                                withId(R.id.expand_back),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        imageView5.check(matches(isDisplayed()));
-*/
+
         ViewInteraction textView19 = onView(
                 allOf(withId(R.id.expandableTitle), withText("Gäste"),
                         childAtPosition(
@@ -533,37 +448,7 @@ public class VeranstaltungTest {
                                 0),
                         isDisplayed()));
         relativeLayout13.check(matches(isDisplayed()));
-/*
-        ViewInteraction textView20 = onView(
-                allOf(withId(android.R.id.title), withText("ZUSAGEN"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.tabs),
-                                        0),
-                                0),
-                        isDisplayed()));
-        textView20.check(matches(isDisplayed()));
 
-        ViewInteraction textView21 = onView(
-                allOf(withId(android.R.id.title),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.tabs),
-                                        1),
-                                0),
-                        isDisplayed()));
-        textView21.check(matches(isDisplayed()));
-
-        ViewInteraction textView22 = onView(
-                allOf(withId(android.R.id.title), withText("AUSSTEHEND"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.tabs),
-                                        2),
-                                0),
-                        isDisplayed()));
-        textView22.check(matches(isDisplayed()));
-*/
         relativeLayout6 = onView(
                 allOf(withId(R.id.head),
                         childAtPosition(
@@ -585,18 +470,7 @@ public class VeranstaltungTest {
                                                 4)),
                                 0)));
         relativeLayout7.perform(scrollTo(), click());
-/*
-        ViewInteraction imageView6 = onView(
-                allOf(withId(R.id.arrow), withContentDescription("arrow"),
-                        childAtPosition(
-                                allOf(withId(R.id.head),
-                                        childAtPosition(
-                                                withId(R.id.expand_back),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        imageView6.check(matches(isDisplayed()));
-*/
+
         ViewInteraction textView23 = onView(
                 allOf(withId(R.id.expandableTitle), withText("Abstimmungen"),
                         childAtPosition(
@@ -651,18 +525,7 @@ public class VeranstaltungTest {
                                                 5)),
                                 0)));
         relativeLayout8.perform(scrollTo(), click());
-/*
-        ViewInteraction imageView7 = onView(
-                allOf(withId(R.id.arrow), withContentDescription("arrow"),
-                        childAtPosition(
-                                allOf(withId(R.id.head),
-                                        childAtPosition(
-                                                withId(R.id.expand_back),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        imageView7.check(matches(isDisplayed()));
-*/
+
         ViewInteraction textView24 = onView(
                 allOf(withId(R.id.expandableTitle), withText("Bewertungen"),
                         childAtPosition(
@@ -684,56 +547,6 @@ public class VeranstaltungTest {
                                 0),
                         isDisplayed()));
         relativeLayout15.check(matches(isDisplayed()));
-/*
-        ViewInteraction linearLayout2 = onView(
-                allOf(withId(R.id.posRating),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                        0),
-                                0),
-                        isDisplayed()));
-        linearLayout2.check(matches(isDisplayed()));
-
-        ViewInteraction linearLayout3 = onView(
-                allOf(childAtPosition(
-                        childAtPosition(
-                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                0),
-                        1),
-                        isDisplayed()));
-        linearLayout3.check(matches(isDisplayed()));
-*/
-        ViewInteraction imageView8 = onView(
-                allOf(withId(R.id.profile_picture),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                        1),
-                                0),
-                        isDisplayed()));
-        imageView8.check(matches(isDisplayed()));
-/*
-        ViewInteraction imageView9 = onView(
-                allOf(withId(R.id.imageView6),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                        1),
-                                1),
-                        isDisplayed()));
-        imageView9.check(matches(isDisplayed()));
-
-      ViewInteraction textView25 = onView(
-                allOf(withId(R.id.numRates),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                        0),
-                                2),
-                        isDisplayed()));
-        textView25.check(matches(isDisplayed()));
-*/
 
         relativeLayout8 = onView(
                 allOf(withId(R.id.head),
@@ -756,18 +569,7 @@ public class VeranstaltungTest {
                                                 6)),
                                 0)));
         relativeLayout9.perform(scrollTo(), click());
-/*
-        ViewInteraction imageView10 = onView(
-                allOf(withId(R.id.arrow), withContentDescription("arrow"),
-                        childAtPosition(
-                                allOf(withId(R.id.head),
-                                        childAtPosition(
-                                                withId(R.id.expand_back),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        imageView10.check(matches(isDisplayed()));
-*/
+
         ViewInteraction textView26 = onView(
                 allOf(withId(R.id.expandableTitle), withText("Kommentare"),
                         childAtPosition(
