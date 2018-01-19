@@ -51,16 +51,17 @@ public class APIService extends IntentService {
                 imageStream = getContentResolver().openInputStream(image);
                 Bitmap imageBitmap = BitmapFactory.decodeStream(imageStream);
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
                 byte[] byteArray = byteArrayOutputStream .toByteArray();
 
                 imageString = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                Log.e(getClass().getName(), "Array Größe " + byteArray.length + " String Größe " + imageString.length() + " " + url);
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+            data = "{\"data\":\"" + imageString.replaceAll("\n", "") + "\"}";
         }
-        data = "{\"data\":\"" + imageString.replaceAll("\n", "") + "\"}";
-        Log.e(getClass().getName(), data);
         String response = GeneralAPIRequestHandler.request(url, RouteType.stringToRoute(request), data);
 
         Intent localIntent = new Intent(type)

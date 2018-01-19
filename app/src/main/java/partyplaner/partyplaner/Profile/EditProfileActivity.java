@@ -151,24 +151,21 @@ public class EditProfileActivity extends AppCompatActivity implements IServiceRe
 
         if (imageChanged && !name.equals("") && !birthdate.equals("")) {
             Log.e(getClass().getName(), "SaveEdit3");
-            PaPlaImage imagePapla = new PaPlaImage(imageBitmap);
             Intent apiHandler = new Intent(this, APIService.class);
             apiHandler.putExtra(Keys.EXTRA_URL, "/image?api=" + I.getMyself().getApiKey());
             apiHandler.putExtra(Keys.EXTRA_REQUEST, "POST");
-            Log.e(getClass().getName(), imagePapla.convertToBase64());
             String data = null;
             apiHandler.putExtra(Keys.EXTRA_DATA, data);
             apiHandler.putExtra(Keys.EXTRA_ID, Keys.EXTRA_UPLOAD_PROFILE_PICTURE);
             apiHandler.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_EDIT_PROFILE);
             apiHandler.setData(pic);
-            Log.e(getClass().getName(), "Kurz vor dem Service starten");
             this.startService(apiHandler);
         } else {
-            saveProfileData();
+            saveProfileData(I.getMyself().getProfilePicture());
         }
     }
 
-    public void saveProfileData() {
+    public void saveProfileData(String filename) {
         Log.e(getClass().getName(), "SaveProfileData");
         EditText nameText = findViewById(R.id.edit_profile_name);
         EditText birthdateText = findViewById(R.id.edit_profile_birthdate);
@@ -177,13 +174,12 @@ public class EditProfileActivity extends AppCompatActivity implements IServiceRe
         name = nameText.getText().toString().trim();
         birthdate = birthdateText.getText().toString().trim();
         gender = genderText.getSelectedItemPosition();
-        String profilePicID = I.getMyself().getProfilePicture();
 
         if (!name.equals("") && !birthdate.equals("")) {
             Intent apiHandler = new Intent(this, APIService.class);
             apiHandler.putExtra(Keys.EXTRA_URL, "/user/" + I.getMyself().getId() + "?api=" + I.getMyself().getApiKey());
             apiHandler.putExtra(Keys.EXTRA_REQUEST, "PUT");
-            String data = "{\"name\":\"" + name + "\",\"gender\":" + gender + ",\"birthdate\":\"" + formatDate() +  "\",\"profilepicture\":\"" + profilePicID + "\"}";
+            String data = "{\"name\":\"" + name + "\",\"gender\":" + gender + ",\"birthdate\":\"" + formatDate() +  "\",\"profilePicture\":\"" + filename + "\"}";
             apiHandler.putExtra(Keys.EXTRA_DATA, data);
             apiHandler.putExtra(Keys.EXTRA_ID, Keys.EXTRA_PUT_PROFILE);
             apiHandler.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_EDIT_PROFILE);
@@ -232,23 +228,22 @@ public class EditProfileActivity extends AppCompatActivity implements IServiceRe
 
     @Override
     public void receiveData(String json, String id) {
-        Log.e(getClass().getName(), "ReceiveData1");
         if (id.equals(Keys.EXTRA_UPLOAD_PROFILE_PICTURE)) {
             if (json != null) {
-                Log.e(getClass().getName(), json);
+                Log.e(getClass().getName(), id + ":" + json);
                 if (!json.contains("error")) {
-                    Log.e(getClass().getName(), "ReceiveData2");
                     Gson gson = new Gson();
-                    User i = gson.fromJson(json, User.class);
-                    I.getMyself().setProfilePicture(i.getProfilePicture());
-                    finish();
+                    String filename = json.replace("{\"filename\":\"", "").replace("\"}", "");
+                    Log.e(getClass().getName(), "Filename:" + filename);
+                    //TODO: RAUS!
+                    I.getMyself().setProfilePicture(filename);
+                    saveProfileData(filename);
                 } else {
-                    Toast.makeText(this, "Bearbeiten fehgeschlagen!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Bild setzen fehgeschlagen!", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(this, "Bearbeiten fehgeschlagen!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Bild setzen fehgeschlagen!", Toast.LENGTH_SHORT).show();
             }
-            saveProfileData();
         } else if (id.equals(Keys.EXTRA_PUT_PROFILE)) {
             if (json != null) {
                 Log.e(getClass().getName(), json);
@@ -258,6 +253,7 @@ public class EditProfileActivity extends AppCompatActivity implements IServiceRe
                     I.getMyself().setName(i.getName());
                     I.getMyself().setGender(i.getGender());
                     I.getMyself().setBirthdate(i.getBirthdate().substring(0, 10));
+                    I.getMyself().setProfilePicture(i.getProfilePicture());
                     finish();
                 } else {
                     Toast.makeText(this, "Bearbeiten fehgeschlagen!", Toast.LENGTH_SHORT).show();

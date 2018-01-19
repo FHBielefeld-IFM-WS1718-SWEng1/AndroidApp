@@ -1,4 +1,7 @@
 package partyplaner.data.user;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.util.Log;
 /**
  * Ein User Objekt beinhaltet alle Informationen, die man über einen
@@ -16,6 +19,7 @@ public class User {
     private String birthdate;
     private Integer gender;
     private String profilepicture;
+    private Bitmap image;
 
     public User(int id, String email, String username,
                 String birthday, int gender, String profilepicture) {
@@ -91,5 +95,14 @@ public class User {
             return part[2] + "." + part[1] + "." + part[0];
         }
         return "";
+    }
+
+    public void setImage(String image) {
+        byte[] decoded = Base64.decode(image, Base64.DEFAULT);
+        this.image = BitmapFactory.decodeByteArray(decoded, 0, decoded.length);
+    }
+
+    public Bitmap getImage() {
+        return image;
     }
 }

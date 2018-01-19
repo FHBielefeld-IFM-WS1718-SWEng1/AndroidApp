@@ -105,7 +105,6 @@ public class MainActivity extends AppCompatActivity
         apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_MAIN_ACTIVITY);
         this.startService(apiHanlder);
 
-        //TODO: IN Service
         contactList = null;
         apiHanlder = new Intent(this, APIService.class);
         apiHanlder.putExtra(Keys.EXTRA_URL, "/user/contact?api=" + I.getMyself().getApiKey());
@@ -115,9 +114,15 @@ public class MainActivity extends AppCompatActivity
         apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_GET_CONTACTS);
         apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_MAIN_ACTIVITY);
         this.startService(apiHanlder);
-        String json2 = GeneralAPIRequestHandler.request("/user/contact?api=" + I.getMyself().getApiKey(), RouteType.GET, null);
-        //Log.e("MainActivity", json2 + "");
 
+        apiHanlder = new Intent(this, APIService.class);
+        apiHanlder.putExtra(Keys.EXTRA_URL, "/image/" + I.getMyself().getProfilePicture() + "?api=" + I.getMyself().getApiKey());
+        apiHanlder.putExtra(Keys.EXTRA_REQUEST, "GET");
+        data = null;
+        apiHanlder.putExtra(Keys.EXTRA_DATA, data);
+        apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_GET_PROFILEPICTURE);
+        apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_MAIN_ACTIVITY);
+        this.startService(apiHanlder);
     }
 
     @Override
@@ -185,8 +190,9 @@ public class MainActivity extends AppCompatActivity
             currentTabReceiver = fragment;
             setFragmentToContent(fragment);
         } else if (id == R.id.profile){
-            setFragmentToContent(new ProfileFragment());
-            currentTabReceiver = null;
+            ProfileFragment profileFragment = new ProfileFragment();
+            setFragmentToContent(profileFragment);
+            currentTabReceiver = profileFragment;
         } else if (id == R.id.contacts) {
             AllContacts contacts = new AllContacts();
             currentTabReceiver = contacts;
@@ -310,6 +316,22 @@ public class MainActivity extends AppCompatActivity
                         loadData();
                     }else{
                         Toast.makeText(this, "Hinzufügen fehlgeschlagen",Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case Keys.EXTRA_GET_PROFILEPICTURE:
+                    Log.e("MainActivity", json);
+                    if(json != null && !json.contains("error")){
+                        Log.e("MainActivity", "Enter Get Profile Picture");
+                        json = json.replaceAll("\\{\"data\":\"", "");
+                        json = json.replaceAll("\"\\}", "");
+                        Log.e("MainActivity", json);
+                        I.getMyself().setImage(json);
+                        Log.e("MainActivity", "setImage");
+                        if (currentTabReceiver != null) {
+                            currentTabReceiver.receiveData();
+                        }
+                    }else{
+                        Toast.makeText(this, "Bild konnte nicht geladen werden!",Toast.LENGTH_SHORT).show();
                     }
                     break;
             }

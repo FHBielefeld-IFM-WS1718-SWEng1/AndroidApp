@@ -45,6 +45,7 @@ public class SingleContact extends Fragment {
                         dialogInterface.cancel();
                     }
                 });
+                return true;
             }
         });
 
