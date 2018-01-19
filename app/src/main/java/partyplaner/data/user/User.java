@@ -65,6 +65,10 @@ public class User {
         this.gender = gender;
     }
 
+    public void setProfilePicture(int id) {
+        this.profilePicture = id;
+    }
+
     /**
      * Erstellt einen User, der für Tests verwendet werden kann, ohne mit der Server API Nutzerdaten
      * abzufragen.

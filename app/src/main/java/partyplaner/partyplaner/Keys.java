@@ -53,4 +53,5 @@ public class Keys {
     public static final String EXTRA_EDIT_PARTY_SERVICE = "EDIT_PARTY_SERVICE";
     public static final String EXTRA_CREATE_PARTY = "CREATE_PARTY";
     public static final String EXTRA_PICTURE = "PICTURE";
+    public static final String EXTRA_UPLOAD_PROFILE_PICTURE = "UPLOAD_PROFILE_PICTURE";
 }
