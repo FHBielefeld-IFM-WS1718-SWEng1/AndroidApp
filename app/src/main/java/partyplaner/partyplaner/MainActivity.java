@@ -44,6 +44,7 @@ import partyplaner.partyplaner.Profile.ProfileFragment;
 import partyplaner.partyplaner.Veranstaltung.EditEventActivity;
 import partyplaner.partyplaner.Veranstaltung.Fragmente.IReceiveData;
 import partyplaner.partyplaner.Veranstaltung.IServiceReceiver;
+import partyplaner.partyplaner.help.HelpFragment;
 import partyplaner.partyplaner.home.HomeFragment;
 import partyplaner.partyplaner.ownEvents.OwnEventsFragment;
 import partyplaner.partyplaner.Imprint.ImprintFragment;
@@ -199,7 +200,8 @@ public class MainActivity extends AppCompatActivity
             currentTabReceiver = ownEvent;
             setFragmentToContent(ownEvent);
         } else if (id == R.id.help) {
-
+            currentTabReceiver = null;
+            setFragmentToContent(new HelpFragment());
         } else if (id == R.id.contactFormular) {
             currentTabReceiver = null;
             setFragmentToContent(new ContactFragment());
