@@ -12,21 +12,27 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import partyplaner.partyplaner.IFragmentDataManeger;
 import partyplaner.partyplaner.Keys;
 import partyplaner.partyplaner.R;
 import partyplaner.data.user.User;
+import partyplaner.partyplaner.Veranstaltung.Fragmente.ExpandableFragment;
+import partyplaner.partyplaner.Veranstaltung.Fragmente.IReceiveData;
 
 /**
  * Created by micha on 24.11.2017.
  */
 
-public class AllContacts extends Fragment {
+public class AllContacts extends Fragment implements IReceiveData{
 
     private LinearLayout contactHolder;
     private IFragmentDataManeger data;
+    private List<Fragment> fragments = new ArrayList<>();
     private User[] contactList;
 
     @Override
@@ -58,13 +64,14 @@ public class AllContacts extends Fragment {
 
     private void updateContacts() {
         if(contactHolder != null){
-            contactHolder.removeAllViews();
-            if(contactList == null){
-
-            }else {
-                for (User user : contactList) {
-                    addContact(user);
-                }
+            for (Fragment f : fragments) {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.remove(f);
+                transaction.commit();
+            }
+            fragments.clear();
+            for (User user : contactList) {
+                addContact(user);
             }
         }
     }
@@ -102,10 +109,21 @@ public class AllContacts extends Fragment {
                 singleContact.setArguments(args);
                 fragmentTransaction.add(R.id.layout_all_single_contacts, singleContact);
                 fragmentTransaction.commit();
+                fragments.add(singleContact);
             }
         }
         return null;
     }
 
 
+    @Override
+    public void receiveData() {
+        contactList = data.getContacts();
+        updateContacts();
+    }
+
+    @Override
+    public void setExpandable(ExpandableFragment fragment) {
+
+    }
 }

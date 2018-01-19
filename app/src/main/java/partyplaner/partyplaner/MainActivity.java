@@ -105,11 +105,18 @@ public class MainActivity extends AppCompatActivity
         this.startService(apiHanlder);
 
         //TODO: IN Service
+        contactList = null;
+        apiHanlder = new Intent(this, APIService.class);
+        apiHanlder.putExtra(Keys.EXTRA_URL, "/user/contact?api=" + I.getMyself().getApiKey());
+        apiHanlder.putExtra(Keys.EXTRA_REQUEST, "GET");
+        data = null;
+        apiHanlder.putExtra(Keys.EXTRA_DATA, data);
+        apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_GET_CONTACTS);
+        apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_MAIN_ACTIVITY);
+        this.startService(apiHanlder);
         String json2 = GeneralAPIRequestHandler.request("/user/contact?api=" + I.getMyself().getApiKey(), RouteType.GET, null);
         //Log.e("MainActivity", json2 + "");
-        json2 = json2.replaceAll(".*?\\[", "[");
-        json2 = json2.replaceAll("].", "]");
-        contactList = gson.fromJson(json2, User[].class);
+
     }
 
     @Override
@@ -180,8 +187,9 @@ public class MainActivity extends AppCompatActivity
             setFragmentToContent(new ProfileFragment());
             currentTabReceiver = null;
         } else if (id == R.id.contacts) {
-            currentTabReceiver = null;
-            setFragmentToContent(new AllContacts());
+            AllContacts contacts = new AllContacts();
+            currentTabReceiver = contacts;
+            setFragmentToContent(contacts);
         } else if (id == R.id.ownEvents) {
             OwnEventsFragment ownEvent = new OwnEventsFragment();
             Bundle args = new Bundle();
@@ -272,6 +280,18 @@ public class MainActivity extends AppCompatActivity
                     } else {
                         Toast.makeText(this, "Party konnte nicht gelöscht werden!", Toast.LENGTH_SHORT).show();
                     }
+                case Keys.EXTRA_GET_CONTACTS:
+                    if (!json.contains("error")) {
+                        json = json.replaceAll(".*?\\[", "[");
+                        json = json.replaceAll("].", "]");
+                        contactList = gson.fromJson(json, User[].class);
+                        if (currentTabReceiver != null) {
+                            currentTabReceiver.receiveData();
+                        }
+                    } else {
+                        Toast.makeText(this, "Kontakte konnten nicht geladen werden!", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
             }
         }else {
             Toast.makeText(this, "Daten konnten nicht geladen werden!", Toast.LENGTH_SHORT).show();
