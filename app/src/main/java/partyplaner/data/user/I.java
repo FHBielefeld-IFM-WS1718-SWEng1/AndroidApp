@@ -1,8 +1,5 @@
 package partyplaner.data.user;
 
-import android.media.Image;
-
-import partyplaner.api.APIConnectionHandler;
 import partyplaner.api.LoginHandler;
 
 /**
@@ -19,7 +16,7 @@ public class I extends User{
 
     private String key;
 
-    private I(int id, String email, String name, String birthdate, int gender, String profilePicture, String apiKey) {
+    private I(int id, String email, String name, String birthdate, int gender, int profilePicture, String apiKey) {
         super(id, email, name, birthdate, gender, profilePicture);
         this.key = apiKey;
     }
