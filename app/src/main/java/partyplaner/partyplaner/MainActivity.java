@@ -292,6 +292,18 @@ public class MainActivity extends AppCompatActivity
                         Toast.makeText(this, "Kontakte konnten nicht geladen werden!", Toast.LENGTH_SHORT).show();
                     }
                     break;
+                case Keys.EXTRA_GET_USERS:
+                    if(json != null && !json.contains("error")){
+                        json = json.replaceAll(".*?\\[", "[");
+                        json = json.replaceAll("].", "]");
+                        User[] user = gson.fromJson(json, User[].class);
+                        for (int i = 0; i < user.length; i++) {
+                            if (user[i].getName().equals(name)) {
+                                return user[i].getId();
+                            }
+                        }
+
+                    }
             }
         }else {
             Toast.makeText(this, "Daten konnten nicht geladen werden!", Toast.LENGTH_SHORT).show();
