@@ -1,7 +1,5 @@
 package partyplaner.data.user;
 
-import android.media.Image;
-
 /**
  * Ein User Objekt beinhaltet alle Informationen, die man über einen
  * Benutzer wissen sollte.
