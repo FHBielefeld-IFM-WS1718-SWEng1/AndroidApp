@@ -292,6 +292,7 @@ public class MainActivity extends AppCompatActivity
                         Toast.makeText(this, "Kontakte konnten nicht geladen werden!", Toast.LENGTH_SHORT).show();
                     }
                     break;
+                     break;
                 case Keys.EXTRA_GET_USERS:
                     if(json != null && !json.contains("error")){
                         json = json.replaceAll(".*?\\[", "[");

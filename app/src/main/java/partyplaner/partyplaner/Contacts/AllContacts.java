@@ -171,5 +171,6 @@ public class AllContacts extends Fragment implements IReceiveData{
     @Override
     public void setExpandable(ExpandableFragment fragment) {
 
+
     }
 }
