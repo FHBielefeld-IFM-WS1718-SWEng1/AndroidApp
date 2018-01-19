@@ -17,10 +17,10 @@ public class User {
     private String name;
     private String birthdate;
     private Integer gender;
-    private String profilePicture;
+    private int profilePicture;
 
     public User(int id, String email, String username,
-                String birthday, int gender, String profilePicture) {
+                String birthday, int gender, int profilePicture) {
         this.id = id;
         this.email = email;
         this.name = username;
@@ -51,7 +51,7 @@ public class User {
         return gender;
     }
 
-    public String getProfilePicture() {
+    public int getProfilePicture() {
         return profilePicture;
     }
 
@@ -67,6 +67,6 @@ public class User {
     public static User createTestUser() {
 
         return new User(0, "tsm@fh-bielefeld.de", "henkershelfer",
-                "17.7.1954", 1, null);
+                "17.7.1954", 1, 0);
     }
 }
