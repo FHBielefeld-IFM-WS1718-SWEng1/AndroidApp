@@ -32,6 +32,7 @@ import partyplaner.api.GeneralAPIRequestHandler;
 import partyplaner.api.RouteType;
 import partyplaner.api.ServiceDateReceiver;
 import partyplaner.data.party.Party;
+import partyplaner.data.user.User;
 import partyplaner.data.party.PartyList;
 import partyplaner.data.user.I;
 import partyplaner.partyplaner.ContactForm.ContactFragment;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity
     private static int currentTab = R.id.home;
     private IReceiveData currentTabReceiver;
     private Party[] parties;
+    private User[] contactList;
     private Gson gson;
     private ServiceDateReceiver serviceDateReceiver;
 
@@ -101,6 +103,13 @@ public class MainActivity extends AppCompatActivity
         apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_GET_PARTIES);
         apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_MAIN_ACTIVITY);
         this.startService(apiHanlder);
+
+        //TODO: IN Service
+        String json2 = GeneralAPIRequestHandler.request("/user/contact?api=" + I.getMyself().getApiKey(), RouteType.GET, null);
+        //Log.e("MainActivity", json2 + "");
+        json2 = json2.replaceAll(".*?\\[", "[");
+        json2 = json2.replaceAll("].", "]");
+        contactList = gson.fromJson(json2, User[].class);
     }
 
     @Override
@@ -171,9 +180,6 @@ public class MainActivity extends AppCompatActivity
             setFragmentToContent(new ProfileFragment());
             currentTabReceiver = null;
         } else if (id == R.id.contacts) {
-            AllContacts all_contacts = new AllContacts();
-            Bundle args = new Bundle();
-            args.putString(Keys.EXTRA_NAME, "");
             currentTabReceiver = null;
             setFragmentToContent(new AllContacts());
         } else if (id == R.id.ownEvents) {
@@ -194,7 +200,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.logout) {
             currentTabReceiver = null;
             currentTab = R.id.home;
-            logOut();
+            I.getMyself().logout();
         }
     }
 
@@ -297,5 +303,9 @@ public class MainActivity extends AppCompatActivity
     public void startLoading() {
         RelativeLayout lr = findViewById(R.id.loading);
         lr.setVisibility(View.VISIBLE);
+    }
+
+    public User[] getContacts() {
+        return contactList;
     }
 }

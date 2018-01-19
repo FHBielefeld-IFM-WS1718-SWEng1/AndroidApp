@@ -52,4 +52,5 @@ public class Keys {
     public static final String EXTRA_RELOAD_USER = "RELOAD_USER";
     public static final String EXTRA_EDIT_PARTY_SERVICE = "EDIT_PARTY_SERVICE";
     public static final String EXTRA_CREATE_PARTY = "CREATE_PARTY";
+    public static final String EXTRA_PICTURE = "PICTURE";
 }
