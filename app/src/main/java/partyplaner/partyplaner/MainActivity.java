@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.logout) {
             currentTabReceiver = null;
             currentTab = R.id.home;
-            I.getMyself().logout();
+            logOut();
         }
     }
 
