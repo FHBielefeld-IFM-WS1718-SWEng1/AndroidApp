@@ -37,6 +37,9 @@ import partyplaner.partyplaner.Veranstaltung.Fragmente.IReceiveData;
 
 public class AllContacts extends Fragment implements IReceiveData{
 
+    public interface ISetName{
+        public void setName(String name);
+    }
     private LinearLayout contactHolder;
     private IFragmentDataManeger data;
     private List<Fragment> fragments = new ArrayList<>();
@@ -151,6 +154,7 @@ public class AllContacts extends Fragment implements IReceiveData{
     }
 
     private void startAddContactService(String string){
+        ((ISetName) data).setName(string);
         Intent apiHanlder = new Intent(getActivity(), APIService.class);
         apiHanlder.putExtra(Keys.EXTRA_URL, "/user?api=" + I.getMyself().getApiKey());
         apiHanlder.putExtra(Keys.EXTRA_REQUEST, "GET");

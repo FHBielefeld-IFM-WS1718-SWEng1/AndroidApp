@@ -1,5 +1,7 @@
 package partyplaner.partyplaner;
 
+import android.renderscript.ScriptIntrinsicYuvToRGB;
+
 /**
  * Class for all key for the arguments.
  * @author Malte
@@ -55,4 +57,5 @@ public class Keys {
     public static final String EXTRA_PICTURE = "PICTURE";
     public static final String EXTRA_GET_CONTACTS = "GET_CONTACTS";
     public static final String EXTRA_GET_USERS = "USERS";
+    public static final String EXTRA_POST_CONTACT = "POST_CONTACT";
 }

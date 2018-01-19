@@ -49,7 +49,7 @@ import partyplaner.partyplaner.ownEvents.OwnEventsFragment;
 import partyplaner.partyplaner.Imprint.ImprintFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, IFragmentDataManeger, IServiceReceiver {
+        implements NavigationView.OnNavigationItemSelectedListener, IFragmentDataManeger, IServiceReceiver, AllContacts.ISetName {
 
     private static int currentTab = R.id.home;
     private IReceiveData currentTabReceiver;
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity
     private User[] contactList;
     private Gson gson;
     private ServiceDateReceiver serviceDateReceiver;
+    private String addName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -294,22 +295,52 @@ public class MainActivity extends AppCompatActivity
                         Toast.makeText(this, "Kontakte konnten nicht geladen werden!", Toast.LENGTH_SHORT).show();
                     }
                     break;
-                     break;
                 case Keys.EXTRA_GET_USERS:
                     if(json != null && !json.contains("error")){
                         json = json.replaceAll(".*?\\[", "[");
                         json = json.replaceAll("].", "]");
                         User[] user = gson.fromJson(json, User[].class);
-                        for (int i = 0; i < user.length; i++) {
-                            if (user[i].getName().equals(name)) {
-                                return user[i].getId();
-                            }
-                        }
+                        checkUserName(user);
 
                     }
+                    break;
+                case Keys.EXTRA_POST_CONTACT:
+                    if(json != null && !json.contains("error")){
+                        loadData();
+                    }else{
+                        Toast.makeText(this, "Hinzufügen fehlgeschlagen",Toast.LENGTH_SHORT).show();
+                    }
+                    break;
             }
         }else {
             Toast.makeText(this, "Daten konnten nicht geladen werden!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void checkUserName(User[] user) {
+        int placeholder = -1;
+        for (int i = 0; i < user.length; i++) {
+            if (user[i].getName().equals(addName)) {
+                placeholder = i;
+            }
+        }
+        boolean alreadyAContact = false;
+        if(placeholder >= 0){
+            for(int i = 0; i<contactList.length; i++){
+                if(user[i].getName().equals(addName)){
+                    alreadyAContact = true;
+                }
+            }
+            if(alreadyAContact!=true){
+                Intent apiHanlder = new Intent(this, APIService.class);
+                apiHanlder.putExtra(Keys.EXTRA_URL, "/user/contact?api=" + I.getMyself().getApiKey());
+                apiHanlder.putExtra(Keys.EXTRA_REQUEST, "POST");
+                String data = "{\"id\":"+placeholder+"}";
+                apiHanlder.putExtra(Keys.EXTRA_DATA, data);
+                apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_POST_CONTACT);
+                apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_MAIN_ACTIVITY);
+                this.startService(apiHanlder);
+            }
         }
     }
 
@@ -342,5 +373,10 @@ public class MainActivity extends AppCompatActivity
 
     public User[] getContacts() {
         return contactList;
+    }
+
+    @Override
+    public void setName(String name) {
+        addName = name;
     }
 }
