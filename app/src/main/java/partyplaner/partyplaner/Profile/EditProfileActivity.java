@@ -186,6 +186,8 @@ public class EditProfileActivity extends AppCompatActivity implements IServiceRe
             apiHandler.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_EDIT_PROFILE);
             Log.e(getClass().getName(), "Kurz vor dem Service starten: SaveProfileData");
             this.startService(apiHandler);
+        } else {
+            Toast.makeText(this, "Alle Felder ausfüllen!", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -257,8 +259,10 @@ public class EditProfileActivity extends AppCompatActivity implements IServiceRe
                 } else {
                     Toast.makeText(this, "Bearbeiten fehgeschlagen!", Toast.LENGTH_SHORT).show();
                 }
-            } else {
+            } else if (!json.contains("too large")){
                 Toast.makeText(this, "Bearbeiten fehgeschlagen!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Bild zu groß!", Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -1,8 +1,10 @@
 package partyplaner.partyplaner;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -178,7 +180,7 @@ public class MainActivity extends AppCompatActivity
             HomeFragment fragment = new HomeFragment();
             currentTabReceiver = fragment;
             setFragmentToContent(fragment);
-        } else if (id == R.id.profile){
+        } else if (id == R.id.profile) {
             ProfileFragment profileFragment = new ProfileFragment();
             setFragmentToContent(profileFragment);
             currentTabReceiver = profileFragment;
@@ -201,10 +203,41 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.impressum) {
             currentTabReceiver = null;
             setFragmentToContent(new ImprintFragment());
+        } else if (id == R.id.loeschen) {
+            currentTabReceiver = null;
+            currentTab = R.id.home;
+            deleteUserDialog();
         } else if (id == R.id.logout) {
             currentTabReceiver = null;
             currentTab = R.id.home;
             logOut();
+        }
+    }
+
+    private void deleteUserDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setMessage("Willst du dein Profil wirklich löschen? " +
+                        "Dieser Vorgang lässt sich nicht mehr Rückgängig machen!")
+                .setPositiveButton("JA", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteUser();
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton("NEIN", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        builder.create().show();
+    }
+
+    private void deleteUser() {
+        if (I.getMyself().delete()) {
+            Intent intent = new Intent(this, LogInActivity.class);
+            startActivity(intent);
         }
     }
 
