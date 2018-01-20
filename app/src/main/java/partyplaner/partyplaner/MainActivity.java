@@ -94,33 +94,22 @@ public class MainActivity extends AppCompatActivity
 
     private void loadData() {
         startLoading();
-
         parties = null;
-        Intent apiHanlder = new Intent(this, APIService.class);
-        apiHanlder.putExtra(Keys.EXTRA_URL, "/party?api=" + I.getMyself().getApiKey());
-        apiHanlder.putExtra(Keys.EXTRA_REQUEST, "GET");
-        String data = null;
-        apiHanlder.putExtra(Keys.EXTRA_DATA, data);
-        apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_GET_PARTIES);
-        apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_MAIN_ACTIVITY);
-        this.startService(apiHanlder);
+        startService("/party?api=" + I.getMyself().getApiKey(), "GET", null, Keys.EXTRA_GET_PARTIES, -1);
 
         contactList = null;
-        apiHanlder = new Intent(this, APIService.class);
-        apiHanlder.putExtra(Keys.EXTRA_URL, "/user/contact?api=" + I.getMyself().getApiKey());
-        apiHanlder.putExtra(Keys.EXTRA_REQUEST, "GET");
-        data = null;
-        apiHanlder.putExtra(Keys.EXTRA_DATA, data);
-        apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_GET_CONTACTS);
-        apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_MAIN_ACTIVITY);
-        this.startService(apiHanlder);
+        startService("/user/contact?api=" + I.getMyself().getApiKey(), "GET", null, Keys.EXTRA_GET_CONTACTS, -1);
 
-        apiHanlder = new Intent(this, APIService.class);
-        apiHanlder.putExtra(Keys.EXTRA_URL, "/image/" + I.getMyself().getProfilePicture() + "?api=" + I.getMyself().getApiKey());
-        apiHanlder.putExtra(Keys.EXTRA_REQUEST, "GET");
-        data = null;
+        startService("/image/" + I.getMyself().getProfilePicture() + "?api=" + I.getMyself().getApiKey(),
+                "GET", null, Keys.EXTRA_GET_PROFILEPICTURE, -1);
+    }
+
+    private void startService(String url, String request, String data, String id, int objectId) {
+        Intent apiHanlder = new Intent(this, APIService.class);
+        apiHanlder.putExtra(Keys.EXTRA_URL, url);
+        apiHanlder.putExtra(Keys.EXTRA_REQUEST, request);
         apiHanlder.putExtra(Keys.EXTRA_DATA, data);
-        apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_GET_PROFILEPICTURE);
+        apiHanlder.putExtra(Keys.EXTRA_ID, id);
         apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_MAIN_ACTIVITY);
         this.startService(apiHanlder);
     }

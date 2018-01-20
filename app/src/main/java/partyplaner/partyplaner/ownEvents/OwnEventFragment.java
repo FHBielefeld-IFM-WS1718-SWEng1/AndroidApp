@@ -5,11 +5,17 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,6 +24,7 @@ import com.google.gson.Gson;
 import partyplaner.api.APIService;
 import partyplaner.api.GeneralAPIRequestHandler;
 import partyplaner.api.RouteType;
+import partyplaner.api.ServiceDateReceiver;
 import partyplaner.data.party.Party;
 import partyplaner.data.user.I;
 import partyplaner.data.user.User;
@@ -27,15 +34,18 @@ import partyplaner.partyplaner.MainActivity;
 import partyplaner.partyplaner.R;
 import partyplaner.partyplaner.Veranstaltung.EventMainFragment;
 import partyplaner.partyplaner.Veranstaltung.IEventDataManager;
+import partyplaner.partyplaner.Veranstaltung.IServiceReceiver;
 
 /**
  * Created by André on 17.11.2017.
  */
 
-public class OwnEventFragment extends Fragment {
+public class OwnEventFragment extends Fragment implements IServiceReceiver{
 
     private int id;
+    private String imageFilename;
     private MainActivity data;
+    private ServiceDateReceiver serviceDateReceiver;
 
     @Override
     public void onAttach(Context context) {
@@ -54,7 +64,10 @@ public class OwnEventFragment extends Fragment {
 
         Bundle args = getArguments();
         id = args.getInt(Keys.EXTRA_PARTYID);
+        imageFilename = args.getString(Keys.EXTRA_FILENAME);
         setText(view, args);
+
+        loadImage();
 
         LinearLayout background = view.findViewById(R.id.own_events_back);
         background.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +104,26 @@ public class OwnEventFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        IntentFilter statusIntentFilter = new IntentFilter(Keys.EXTRA_LOAD_OWN_EVENT_IMAGE + id);
+        serviceDateReceiver = new ServiceDateReceiver(this);
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(serviceDateReceiver, statusIntentFilter);
+
+    }
+
+    private void loadImage() {
+        Intent apiHanlder = new Intent(getActivity(), APIService.class);
+        apiHanlder.putExtra(Keys.EXTRA_URL, "/image/" + I.getMyself().getProfilePicture() + "?api=" + I.getMyself().getApiKey());
+        apiHanlder.putExtra(Keys.EXTRA_REQUEST, "GET");
+        String data = null;
+        apiHanlder.putExtra(Keys.EXTRA_DATA, data);
+        apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_GET_PROFILEPICTURE);
+        apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_LOAD_OWN_EVENT_IMAGE + id);
+        getActivity().startService(apiHanlder);
+    }
+
     private void deleteParty() {
         Intent apiHanlder = new Intent(getActivity(), APIService.class);
         apiHanlder.putExtra(Keys.EXTRA_URL, "/party/" + id + "?api=" + I.getMyself().getApiKey());
@@ -119,4 +152,24 @@ public class OwnEventFragment extends Fragment {
         description.setText(descript);
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(serviceDateReceiver);
+    }
+
+    @Override
+    public void receiveData(String json, String id) {
+        if (json != null && !json.contains("error")) {
+            json = json.replaceAll("\\{\"data\":\"", "");
+            json = json.replaceAll("\"\\}", "");
+            Gson gson = new Gson();
+            if (getActivity() != null) {
+                byte[] decoded = Base64.decode(json, Base64.DEFAULT);
+                Bitmap image = BitmapFactory.decodeByteArray(decoded, 0, decoded.length);
+                ImageView imageView = getView().findViewById(R.id.imageParty);
+                imageView.setImageBitmap(image);
+            }
+        }
+    }
 }

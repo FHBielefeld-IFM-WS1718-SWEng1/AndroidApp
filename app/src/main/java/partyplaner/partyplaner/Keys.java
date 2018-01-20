@@ -61,4 +61,7 @@ public class Keys {
     public static final String EXTRA_UPLOAD_PROFILE_PICTURE = "UPLOAD_PROFILE_PICTURE";
     public static final String EXTRA_GET_PROFILEPICTURE = "GET_PROFILEPICTURE";
     public static final String EXTRA_PARTY_PICTURE = "PARTY_PIC";
+    public static final String EXTRA_FILENAME = "FILENAME";
+    public static final String EXTRA_LOAD_OWN_EVENT_IMAGE = "LOAD_OWN_EVENT_IMAGE";
+    public static final String EXTRA_LOAD_HOME_EVENT_IMAGE = "LOAD_HOME_EVENT_IMAGE";
 }
