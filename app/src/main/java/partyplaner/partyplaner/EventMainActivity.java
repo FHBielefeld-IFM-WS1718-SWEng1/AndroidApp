@@ -94,7 +94,7 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
 
     @Override
     public String[] getGeneralInformations() {
-        String[] infos = {party.getName(), party.getOwner().getName(), party.getStartDate(), party.getLocation(), party.getDescription()};
+        String[] infos = {party.getName(), party.getOwner().getName(), party.getStartDate(), party.getLocation(), party.getDescription(), party.getPicture()};
         return infos;
     }
 
