@@ -23,6 +23,7 @@ public class Party implements Serializable{
     private String location;
     private int user_id;
     private boolean ersteller;
+    private String picture;
 
     private User organizer;
     private GregorianCalendar dateAndTime;
@@ -144,5 +145,9 @@ public class Party implements Serializable{
 
     public int getAverageRating() {
         return ratingAverage;
+    }
+
+    public String getPicture() {
+        return picture;
     }
 }

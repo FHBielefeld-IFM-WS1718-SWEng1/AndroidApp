@@ -121,6 +121,7 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
                 intent.putExtra(Keys.EXTRA_WHEN, party.getStartDate());
                 intent.putExtra(Keys.EXTRA_DESCRIPTION, party.getDescription());
                 intent.putExtra(Keys.EXTRA_PARTYID, party.getId());
+                intent.putExtra(Keys.EXTRA_PARTY_PICTURE, party.getPicture());
                 startActivity(intent);
                 break;
         }

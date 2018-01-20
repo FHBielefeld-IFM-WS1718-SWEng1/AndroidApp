@@ -60,4 +60,5 @@ public class Keys {
     public static final String EXTRA_POST_CONTACT = "POST_CONTACT";
     public static final String EXTRA_UPLOAD_PROFILE_PICTURE = "UPLOAD_PROFILE_PICTURE";
     public static final String EXTRA_GET_PROFILEPICTURE = "GET_PROFILEPICTURE";
+    public static final String EXTRA_PARTY_PICTURE = "PARTY_PIC";
 }
