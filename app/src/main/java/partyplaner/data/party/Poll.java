@@ -12,17 +12,19 @@ import partyplaner.data.user.User;
 
 public class Poll implements Serializable {
 
-    private String question;
+    private int id;
+    private String abstimmungsname;
+    private int party_id;
     private List<PollOption> pollOptions;
 
     public Poll(String question, List<PollOption> pollOptions) {
-        this.question = question;
+        this.abstimmungsname = question;
         if((this.pollOptions = pollOptions) == null)
             this.pollOptions = new ArrayList<>();
     }
 
     public String getQuestion() {
-        return question;
+        return abstimmungsname;
     }
 
     public List<PollOption> getPollOptions() {
@@ -45,6 +47,10 @@ public class Poll implements Serializable {
         for (PollOption current : pollOptions)
             optionTitles.add(current.getName());
         return optionTitles;
+    }
+
+    public int getId() {
+        return id;
     }
 
     /*public List<User> getVotedUsers() {

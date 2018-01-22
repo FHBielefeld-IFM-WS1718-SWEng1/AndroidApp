@@ -214,7 +214,9 @@ public class EventMainFragment extends Fragment implements IServiceReceiver{
                 imageView.setImageBitmap(image);
             }
         } else {
-            Toast.makeText(getActivity(), "Bild konnte nicht geladen werden!", Toast.LENGTH_SHORT).show();
+            if (getActivity() != null) {
+                Toast.makeText(getActivity(), "Bild konnte nicht geladen werden!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

@@ -2,6 +2,7 @@ package partyplaner.partyplaner.Veranstaltung.Fragmente;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 
 import partyplaner.partyplaner.Keys;
 import partyplaner.partyplaner.R;
+import partyplaner.partyplaner.Veranstaltung.IEventDataManager;
 import partyplaner.partyplaner.poll.CreatePoll;
 
 /**
@@ -19,6 +21,19 @@ import partyplaner.partyplaner.poll.CreatePoll;
  */
 
 public class Poll extends Fragment implements IReceiveData {
+
+    private IEventDataManager data;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            data = (IEventDataManager) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement OnArticleSelectedListener");
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -29,8 +44,9 @@ public class Poll extends Fragment implements IReceiveData {
             createPoll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                /*Intent intent = new Intent(getActivity(), CreatePoll.class);
-                startActivity(intent);*/
+                Intent intent = new Intent(getActivity(), CreatePoll.class);
+                intent.putExtra(Keys.EXTRA_EDIT_PARTY, data.getParty().getId());
+                startActivity(intent);
                 }
             });
             testSetup(view);

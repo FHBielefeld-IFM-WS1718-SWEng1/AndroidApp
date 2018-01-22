@@ -3,6 +3,7 @@ package partyplaner.partyplaner.poll;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -63,6 +64,17 @@ public class Poll extends AppCompatActivity {
         pieChart.setDrawHoleEnabled(false);
         pieChart.setDescription("");
         pieChart.getLegend().setTextSize(18);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        finish();
+        return true;
     }
 
     private void setOptions() {

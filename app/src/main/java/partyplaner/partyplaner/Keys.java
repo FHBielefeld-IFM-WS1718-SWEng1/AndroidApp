@@ -65,4 +65,6 @@ public class Keys {
     public static final String EXTRA_LOAD_OWN_EVENT_IMAGE = "LOAD_OWN_EVENT_IMAGE";
     public static final String EXTRA_LOAD_HOME_EVENT_IMAGE = "LOAD_HOME_EVENT_IMAGE";
     public static final String EXTRA_IMAGE_IMAGE = "IMAGE_IMAGE";
+    public static final String EXTRA_CREATE_POLL = "CREATE_POLL";
+    public static final String EXTRA_POLL_CHOICE = "POLL_CHOICE";
 }
