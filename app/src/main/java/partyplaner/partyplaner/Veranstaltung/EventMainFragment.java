@@ -202,7 +202,6 @@ public class EventMainFragment extends Fragment implements IServiceReceiver{
 
     @Override
     public void receiveData(String json, String id) {
-        Log.e(getClass().getName(), json);
         if (json != null && !json.contains("error")) {
             json = json.replaceAll("\\{\"data\":\"", "");
             json = json.replaceAll("\"\\}", "");

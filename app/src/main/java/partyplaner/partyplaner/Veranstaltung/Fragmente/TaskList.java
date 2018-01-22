@@ -170,6 +170,7 @@ public class TaskList extends Fragment implements IReceiveData{
             transaction.remove(f);
             transaction.commit();
         }
+
         fragments.clear();
         if (tasks != null && data.getParty() != null) {
             for (Task task : tasks) {

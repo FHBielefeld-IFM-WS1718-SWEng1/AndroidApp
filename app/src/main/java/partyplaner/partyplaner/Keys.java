@@ -69,4 +69,5 @@ public class Keys {
     public static final String EXTRA_POLL_CHOICE = "POLL_CHOICE";
     public static final String EXTRA_SHOW_CONTACT = "SHOW_CONTACT";
     public static final String EXTRA_LOAD_CONTACT_IMAGE = "CONTACT_IMAGE";
+    public static final String EXTRA_SERVICE_POLL = "SERVICE_POLL";
 }

@@ -11,24 +11,25 @@ import partyplaner.data.user.User;
 
 public class PollOption implements Serializable{
 
-    private String name;
-    private int votedUsers;
+    private int id;
+    private String text;
+    private int votes;
+    private UserChoices[] userChoices;
 
-    public PollOption(String name, int votedUsers) {
-        this.name= name;
-        this.votedUsers = votedUsers;
+    public PollOption(String text, int votes) {
+        this.text = text;
+        this.votes = votes;
     }
 
-    public String getName() {
-        return name;
+    public String getText() {
+        return text;
     }
 
-    public int getVotedUsers() {
-        return votedUsers;
+    public int getVotes() {
+        return votes;
     }
 
-    public boolean hasVoted(User user) {
-        //TODO Datenbank abfragen ob user Abgestimmt hat
-        return false;
+    public UserChoices[] getUserChoices() {
+        return userChoices;
     }
 }

@@ -3,6 +3,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 import android.util.Log;
+
+import java.io.Serializable;
+
 /**
  * Ein User Objekt beinhaltet alle Informationen, die man über einen
  * Benutzer wissen sollte.
@@ -11,7 +14,7 @@ import android.util.Log;
  * @since 24.11.2017
  */
 
-public class User {
+public class User implements Serializable{
 
     private int id;
     private String email;

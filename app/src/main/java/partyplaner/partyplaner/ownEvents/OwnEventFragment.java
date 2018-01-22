@@ -117,7 +117,6 @@ public class OwnEventFragment extends Fragment implements IServiceReceiver{
         if (imageFilename != null && !imageFilename.equals("")) {
             Intent apiHanlder = new Intent(getActivity(), APIService.class);
             apiHanlder.putExtra(Keys.EXTRA_URL, "/image/" + imageFilename + "?api=" + I.getMyself().getApiKey());
-            Log.e(getClass().getName(), imageFilename);
             apiHanlder.putExtra(Keys.EXTRA_REQUEST, "GET");
             String data = null;
             apiHanlder.putExtra(Keys.EXTRA_DATA, data);
@@ -163,7 +162,6 @@ public class OwnEventFragment extends Fragment implements IServiceReceiver{
 
     @Override
     public void receiveData(String json, String id) {
-        Log.e(getClass().getName(), json);
         if (json != null && !json.contains("error")) {
             json = json.replaceAll("\\{\"data\":\"", "");
             json = json.replaceAll("\"\\}", "");

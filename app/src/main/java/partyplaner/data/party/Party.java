@@ -38,6 +38,7 @@ public class Party implements Serializable{
     private Guest[] guests;
     private Task[] tasks;
     private Todo[] todo;
+    private Poll[] votings;
 
     public Party(String name, String description, User organizer, String location,
                  GregorianCalendar dateAndTime, List<Image> gallery, Guest[] guests,
@@ -150,5 +151,9 @@ public class Party implements Serializable{
 
     public String getPicture() {
         return picture;
+    }
+
+    public Poll[] getVotings() {
+        return votings;
     }
 }
