@@ -14,12 +14,12 @@
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/manu_avatar"
             android:contentDescription="@string/todo"
             android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/manu_avatar" />
 
         <TextView
             android:id="@+id/FirstNameText"

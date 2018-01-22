@@ -101,7 +101,7 @@ public class AllContacts extends Fragment implements IReceiveData{
         Bundle args = new Bundle();
         args.putString(Keys.EXTRA_NAME, user.getName());
         args.putInt(Keys.EXTRA_USERID, user.getId());
-        //args.putString(Keys.EXTRA_EMAIL, user.getEmail());
+        args.putString(Keys.EXTRA_PICTURE, user.getProfilePicture());
         //args.putString(Keys.EXTRA_PICTURE, null);
 
         FragmentManager fragmentManager = getFragmentManager();

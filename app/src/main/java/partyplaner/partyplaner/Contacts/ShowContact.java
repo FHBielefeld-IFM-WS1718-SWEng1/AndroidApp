@@ -2,12 +2,16 @@ package partyplaner.partyplaner.Contacts;
 
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -89,6 +93,15 @@ public class ShowContact extends AppCompatActivity implements IServiceReceiver {
                         endLoading();
                     }
                     break;
+                case Keys.EXTRA_IMAGE_IMAGE:
+                    json = json.replaceAll("\\{\"data\":\"", "");
+                    json = json.replaceAll("\"\\}", "");
+                    Gson gson = new Gson();
+                    byte[] decoded = Base64.decode(json, Base64.DEFAULT);
+                    Bitmap image = BitmapFactory.decodeByteArray(decoded, 0, decoded.length);
+                    ImageView imageView = findViewById(R.id.profile_picture);
+                    imageView.setImageBitmap(image);
+                    break;
             }
         }
 
@@ -117,5 +130,13 @@ public class ShowContact extends AppCompatActivity implements IServiceReceiver {
     }
 
     private void loadImage() {
+        Intent apiHanlder = new Intent(this, APIService.class);
+        apiHanlder.putExtra(Keys.EXTRA_URL, "/image/" + user.getProfilePicture() + "?api=" + I.getMyself().getApiKey());
+        apiHanlder.putExtra(Keys.EXTRA_REQUEST, "GET");
+        String data = null;
+        apiHanlder.putExtra(Keys.EXTRA_DATA, data);
+        apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_IMAGE_IMAGE);
+        apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_SHOW_CONTACT);
+        this.startService(apiHanlder);
     }
 }
