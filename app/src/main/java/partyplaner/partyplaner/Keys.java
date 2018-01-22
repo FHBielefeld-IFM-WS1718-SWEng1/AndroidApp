@@ -75,4 +75,6 @@ public class Keys {
     public static final String EXTRA_POST_IMAGE = "PUT_IMAGE";
     public static final String EXTRA_CAPTION = "CPATION";
     public static final String EXTRA_GALLERY_IMAGE = "GALLERYIMAGE";
+    public static final String EXTRA_PUT_GALLERY = "PUT_GALLERY";
+    public static final String EXTRA_DELETE_GALLERY = "DELETE_GALLERY";
 }

@@ -201,6 +201,8 @@ public class Gallery extends Fragment implements IReceiveData, IServiceReceiver{
         args.putString(Keys.EXTRA_CAPTION, image.getText());
         args.putInt(Keys.EXTRA_ID, image.getId());
         args.putString(Keys.EXTRA_NAME, name);
+        args.putBoolean(Keys.EXTRA_OWNER, party.getOwner().getId() == I.getMyself().getId());
+        args.putInt(Keys.EXTRA_PARTYID, party.getId());
 
         SingleGalleryImage imageFragment = new SingleGalleryImage();
         imageFragment.setArguments(args);
