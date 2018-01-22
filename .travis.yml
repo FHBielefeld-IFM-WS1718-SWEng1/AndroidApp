@@ -1,5 +1,9 @@
 language: android
 
+before_install:
+ - chmod +x gradlew
+ - android list target
+
 android:
   components:
   - tools
@@ -23,7 +27,7 @@ android:
   - sys-img-armeabi-v7a-android-26
   licenses:
   - android-sdk-preview-license-.+
-  - android-sdk-license-.+
+  - 'android-sdk-license-.+'
   - google-gdk-license-.+
  
 env:
@@ -33,7 +37,7 @@ env:
         - ANDROID_TARGET=android-16 ANDROID_ABI=armeabi-v7a
         - ANDROID_TARGET=android-19 ANDROID_ABI=armeabi-v7a
         - ANDROID_TARGET=android-25 ANDROID_ABI=armeabi-v7a
-        - ANDROID_TARGET=android-26 ANDROID_ABI=armeabi-v7a-android-26
+        - ANDROID_TARGET=android-26 ANDROID_ABI=armeabi-v7a
   
 before_script:
  - android list targets
