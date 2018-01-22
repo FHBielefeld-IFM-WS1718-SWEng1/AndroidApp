@@ -1,4 +1,5 @@
 language: android
+jdk: oraclejdk8
 
 before_install:
  - chmod +x gradlew
@@ -11,6 +12,7 @@ android:
   - tools
   - build-tools-23.0.1
   - build-tools-25.0.2
+  - build-tools-26.0.1
   - build-tools-26.0.2
   - build-tools-26.1.1
   - android-4
@@ -32,18 +34,15 @@ android:
  
 env:
     matrix:
-        - ANDROID_TARGET=android-4 ANDROID_ABI=armeabi
-        - ANDROID_TARGET=android-10 ANDROID_ABI=armeabi
         - ANDROID_TARGET=android-16 ANDROID_ABI=armeabi-v7a
         - ANDROID_TARGET=android-19 ANDROID_ABI=armeabi-v7a
+		- ANDROID_TARGET=android-21 ANDROID_ABI=armeabi-v7a
         - ANDROID_TARGET=android-25 ANDROID_ABI=armeabi-v7a
         - ANDROID_TARGET=android-26 ANDROID_ABI=armeabi-v7a
   
 before_script:
- - android list targets
- - jdk_switcher use oraclejdk8
  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI 
- - emulator -avd test -no-audio -no-window &
+ - emulator -avd test -no-skin -no-audio -no-window &
  - android-wait-for-emulator
  - adb shell input keyevent 82 & 
    
