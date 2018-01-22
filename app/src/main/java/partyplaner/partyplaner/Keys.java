@@ -58,4 +58,5 @@ public class Keys {
     public static final String EXTRA_GET_CONTACTS = "GET_CONTACTS";
     public static final String EXTRA_GET_USERS = "USERS";
     public static final String EXTRA_POST_CONTACT = "POST_CONTACT";
+    public static final String EXTRA_SHOW_CONTACT = "SHOW_CONTACT";
 }

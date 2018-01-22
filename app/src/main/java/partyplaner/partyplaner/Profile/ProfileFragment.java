@@ -56,18 +56,6 @@ public class ProfileFragment extends Fragment {
                 return true;
             }
         });
-
-        //TODO:
-        /*Base64Image b64img = new Gson().fromJson(GeneralAPIRequestHandler.request("/images/" + profil.getProfilePicture() + "?api=" + profil.getApiKey(), RouteType.GET, null), Base64Image.class);
-        if (b64img != null && b64img.getData() != null) {
-            PaPlaImage img = new PaPlaImage(b64img.getData());
-            Bitmap bitmap = img.convertToBitmap();
-
-            profile.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
-                    (int) ((double) bitmap.getWidth() / ((double) bitmap.getHeight() / 1024.0)),
-                    1024,
-                    false));
-        }*/
         return view;
     }
 

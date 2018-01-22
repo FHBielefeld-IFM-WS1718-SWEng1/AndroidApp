@@ -334,7 +334,7 @@ public class MainActivity extends AppCompatActivity
                     alreadyAContact = true;
                 }
             }
-            if(alreadyAContact!=true){
+            if(!alreadyAContact){
                 Intent apiHanlder = new Intent(this, APIService.class);
                 apiHanlder.putExtra(Keys.EXTRA_URL, "/user/contact?api=" + I.getMyself().getApiKey());
                 apiHanlder.putExtra(Keys.EXTRA_REQUEST, "POST");

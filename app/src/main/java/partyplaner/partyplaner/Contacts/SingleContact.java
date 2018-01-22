@@ -33,6 +33,16 @@ public class SingleContact extends Fragment {
         name.setText(args.getString(Keys.EXTRA_NAME));
         userid = args.getInt(Keys.EXTRA_USERID);
         TextView singleContact = view.findViewById(R.id.contact_name);
+
+        singleContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ShowContact.class);
+                intent.putExtra(Keys.EXTRA_ID, userid);
+                getActivity().startActivity(intent);
+            }
+        });
+
         singleContact.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -61,7 +71,7 @@ public class SingleContact extends Fragment {
         Intent apiHanlder = new Intent(getActivity(), APIService.class);
         apiHanlder.putExtra(Keys.EXTRA_URL, "/user/contact?api=" + I.getMyself().getApiKey());
         apiHanlder.putExtra(Keys.EXTRA_REQUEST, "DELETE");
-        String data = "{\"userid\":"+userid+"}";
+        String data = "{\"userid\":" + userid + "}";
         Log.e("SingleContact", data);
         apiHanlder.putExtra(Keys.EXTRA_DATA, data);
         apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_DELETE_PARTIES);
