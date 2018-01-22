@@ -17,6 +17,7 @@ import java.util.List;
 
 import partyplaner.data.party.Party;
 import partyplaner.data.party.Task;
+import partyplaner.data.user.I;
 import partyplaner.partyplaner.Keys;
 import partyplaner.partyplaner.R;
 import partyplaner.partyplaner.Veranstaltung.IEventDataManager;
@@ -59,6 +60,9 @@ public class Poll extends Fragment implements IReceiveData {
                 startActivity(intent);
                 }
             });
+            if (party != null && party.getOwner().getId() != I.getMyself().getId()) {
+                createPoll.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0));
+            }
             update();
         }
         return view;
@@ -103,6 +107,10 @@ public class Poll extends Fragment implements IReceiveData {
             party = data.getParty();
             votings = party.getVotings();
             update();
+            if (getView() != null && party.getOwner().getId() != I.getMyself().getId()) {
+                Button button = getView().findViewById(R.id.create_poll);
+                button.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0));
+            }
         }
     }
 
