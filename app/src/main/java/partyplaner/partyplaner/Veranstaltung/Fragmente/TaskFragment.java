@@ -182,6 +182,7 @@ public class TaskFragment extends Fragment {
         apiHanlder.putExtra(Keys.EXTRA_URL, "/party/task?api=" + I.getMyself().getApiKey());
         apiHanlder.putExtra(Keys.EXTRA_REQUEST, "DELETE");
         String data = "{\"id\":" + id + "}";
+        Log.e(getClass().getName(), data);
         apiHanlder.putExtra(Keys.EXTRA_DATA, data);
         apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_DELETE_TASK);
         apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_SERVICE);

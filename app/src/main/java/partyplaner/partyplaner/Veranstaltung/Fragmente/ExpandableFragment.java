@@ -170,8 +170,9 @@ public class ExpandableFragment extends Fragment {
 
     private void recalculateHeight() {
         LinearLayout body = view.findViewById(id);
-        body.measure(0,0);
-        height = body.getMeasuredHeight();
-
+        if (body != null) {
+            body.measure(0, 0);
+            height = body.getMeasuredHeight();
+        }
     }
 }

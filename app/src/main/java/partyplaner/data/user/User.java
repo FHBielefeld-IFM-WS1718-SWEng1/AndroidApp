@@ -1,5 +1,11 @@
 package partyplaner.data.user;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.util.Log;
+
+import java.io.Serializable;
+
 /**
  * Ein User Objekt beinhaltet alle Informationen, die man über einen
  * Benutzer wissen sollte.
@@ -8,17 +14,18 @@ import android.util.Log;
  * @since 24.11.2017
  */
 
-public class User {
+public class User implements Serializable{
 
     private int id;
     private String email;
     private String name;
     private String birthdate;
     private Integer gender;
-    private int profilePicture;
+    private String profilePicture;
+    private Bitmap image;
 
     public User(int id, String email, String username,
-                String birthday, int gender, int profilePicture) {
+                String birthday, int gender, String profilePicture) {
         this.id = id;
         this.email = email;
         this.name = username;
@@ -49,7 +56,7 @@ public class User {
         return gender;
     }
 
-    public int getProfilePicture() {
+    public String getProfilePicture() {
         return profilePicture;
     }
 
@@ -65,6 +72,10 @@ public class User {
         this.gender = gender;
     }
 
+    public void setProfilePicture(String id) {
+        this.profilePicture = id;
+    }
+
     /**
      * Erstellt einen User, der für Tests verwendet werden kann, ohne mit der Server API Nutzerdaten
      * abzufragen.
@@ -76,7 +87,7 @@ public class User {
     public static User createTestUser() {
 
         return new User(0, "tsm@fh-bielefeld.de", "henkershelfer",
-                "17.7.1954", 1, 0);
+                "17.7.1954", 1, "");
     }
 
 
@@ -87,5 +98,14 @@ public class User {
             return part[2] + "." + part[1] + "." + part[0];
         }
         return "";
+    }
+
+    public void setImage(String image) {
+        byte[] decoded = Base64.decode(image, Base64.DEFAULT);
+        this.image = BitmapFactory.decodeByteArray(decoded, 0, decoded.length);
+    }
+
+    public Bitmap getImage() {
+        return image;
     }
 }

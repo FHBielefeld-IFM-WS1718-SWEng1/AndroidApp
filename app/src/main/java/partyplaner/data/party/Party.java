@@ -23,6 +23,7 @@ public class Party implements Serializable{
     private String location;
     private int user_id;
     private boolean ersteller;
+    private String picture;
 
     private User organizer;
     private GregorianCalendar dateAndTime;
@@ -37,10 +38,11 @@ public class Party implements Serializable{
     private Guest[] guests;
     private Task[] tasks;
     private Todo[] todo;
+    private Poll[] votings;
 
     public Party(String name, String description, User organizer, String location,
                  GregorianCalendar dateAndTime, List<Image> gallery, Guest[] guests,
-                 List<Comment> comments, Rating[] rating, Poll[] polls, Task[] tasks) {
+                 List<Comment> comments, Rating[] rating, Poll[] polls, Task[] tasks, String picture) {
         this.name = name;
         this.description = description;
         this.organizer = organizer;
@@ -52,6 +54,7 @@ public class Party implements Serializable{
         this.rating = rating;
         this.polls = polls;
         this.tasks = tasks;
+        this.picture = picture;
     }
 
     public int getId() {
@@ -144,5 +147,13 @@ public class Party implements Serializable{
 
     public int getAverageRating() {
         return ratingAverage;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public Poll[] getVotings() {
+        return votings;
     }
 }

@@ -1,6 +1,8 @@
 package partyplaner.data.user;
 
+import partyplaner.api.GeneralAPIRequestHandler;
 import partyplaner.api.LoginHandler;
+import partyplaner.api.RouteType;
 
 /**
  * Die I Klasse erbt von der User Klasse und enhält so alle Informationen über den derzeitig
@@ -16,7 +18,7 @@ public class I extends User{
 
     private String key;
 
-    private I(int id, String email, String name, String birthdate, int gender, int profilePicture, String apiKey) {
+    private I(int id, String email, String name, String birthdate, int gender, String profilePicture, String apiKey) {
         super(id, email, name, birthdate, gender, profilePicture);
         this.key = apiKey;
     }
@@ -35,5 +37,15 @@ public class I extends User{
 
     public boolean logout() {
         return LoginHandler.logout();
+    }
+
+    public boolean delete() {
+        String json = GeneralAPIRequestHandler.request("/user/" + I.getMyself().getId() + "?api=" + I.getMyself().getApiKey(),
+                RouteType.DELETE, null);
+        if (json.contains("error")) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

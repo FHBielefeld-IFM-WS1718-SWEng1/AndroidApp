@@ -41,6 +41,9 @@
                     android:id="@+id/impressum"
                     android:title="Impressum"/>
                 <item
+                    android:id="@+id/loeschen"
+                    android:title="Profil löschen" />
+                <item
 
                     android:id="@+id/logout"
                     android:title="Ausloggen" />

@@ -1,8 +1,10 @@
 package partyplaner.partyplaner;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -94,30 +96,24 @@ public class MainActivity extends AppCompatActivity
 
     private void loadData() {
         startLoading();
-
         parties = null;
-        Intent apiHanlder = new Intent(this, APIService.class);
-        apiHanlder.putExtra(Keys.EXTRA_URL, "/party?api=" + I.getMyself().getApiKey());
-        apiHanlder.putExtra(Keys.EXTRA_REQUEST, "GET");
-        String data = null;
-        apiHanlder.putExtra(Keys.EXTRA_DATA, data);
-        apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_GET_PARTIES);
-        apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_MAIN_ACTIVITY);
-        this.startService(apiHanlder);
+        startService("/party?api=" + I.getMyself().getApiKey(), "GET", null, Keys.EXTRA_GET_PARTIES, -1);
 
-        //TODO: IN Service
         contactList = null;
-        apiHanlder = new Intent(this, APIService.class);
-        apiHanlder.putExtra(Keys.EXTRA_URL, "/user/contact?api=" + I.getMyself().getApiKey());
-        apiHanlder.putExtra(Keys.EXTRA_REQUEST, "GET");
-        data = null;
+        startService("/user/contact?api=" + I.getMyself().getApiKey(), "GET", null, Keys.EXTRA_GET_CONTACTS, -1);
+
+        startService("/image/" + I.getMyself().getProfilePicture() + "?api=" + I.getMyself().getApiKey(),
+                "GET", null, Keys.EXTRA_GET_PROFILEPICTURE, -1);
+    }
+
+    private void startService(String url, String request, String data, String id, int objectId) {
+        Intent apiHanlder = new Intent(this, APIService.class);
+        apiHanlder.putExtra(Keys.EXTRA_URL, url);
+        apiHanlder.putExtra(Keys.EXTRA_REQUEST, request);
         apiHanlder.putExtra(Keys.EXTRA_DATA, data);
-        apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_GET_CONTACTS);
+        apiHanlder.putExtra(Keys.EXTRA_ID, id);
         apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_MAIN_ACTIVITY);
         this.startService(apiHanlder);
-        String json2 = GeneralAPIRequestHandler.request("/user/contact?api=" + I.getMyself().getApiKey(), RouteType.GET, null);
-        //Log.e("MainActivity", json2 + "");
-
     }
 
     @Override
@@ -184,9 +180,10 @@ public class MainActivity extends AppCompatActivity
             HomeFragment fragment = new HomeFragment();
             currentTabReceiver = fragment;
             setFragmentToContent(fragment);
-        } else if (id == R.id.profile){
-            setFragmentToContent(new ProfileFragment());
-            currentTabReceiver = null;
+        } else if (id == R.id.profile) {
+            ProfileFragment profileFragment = new ProfileFragment();
+            setFragmentToContent(profileFragment);
+            currentTabReceiver = profileFragment;
         } else if (id == R.id.contacts) {
             AllContacts contacts = new AllContacts();
             currentTabReceiver = contacts;
@@ -206,10 +203,41 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.impressum) {
             currentTabReceiver = null;
             setFragmentToContent(new ImprintFragment());
+        } else if (id == R.id.loeschen) {
+            currentTabReceiver = null;
+            currentTab = R.id.home;
+            deleteUserDialog();
         } else if (id == R.id.logout) {
             currentTabReceiver = null;
             currentTab = R.id.home;
             logOut();
+        }
+    }
+
+    private void deleteUserDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setMessage("Willst du dein Profil wirklich löschen? " +
+                        "Dieser Vorgang lässt sich nicht mehr Rückgängig machen!")
+                .setPositiveButton("JA", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteUser();
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton("NEIN", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        builder.create().show();
+    }
+
+    private void deleteUser() {
+        if (I.getMyself().delete()) {
+            Intent intent = new Intent(this, LogInActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -261,6 +289,7 @@ public class MainActivity extends AppCompatActivity
         if (json != null) {
             switch (id) {
                 case Keys.EXTRA_GET_PARTIES:
+                    Log.e("MainActivity", json);
                     if (json != null && !json.contains("error")) {
                         json = json.replaceAll(".*?\\[", "[");
                         json = json.replaceAll("].", "]");
@@ -275,9 +304,11 @@ public class MainActivity extends AppCompatActivity
                     }
                     break;
                 case Keys.EXTRA_DELETE_PARTIES:
+                    Log.e("MainActivity", json);
                     if (json != null && !json.contains("error")) {
-                        Toast.makeText(this, "Party erfolgreich gelöscht!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Erfolgreich gelöscht!", Toast.LENGTH_SHORT).show();
                         loadData();
+
                     } else {
                         Toast.makeText(this, "Party konnte nicht gelöscht werden!", Toast.LENGTH_SHORT).show();
                     }
@@ -305,10 +336,23 @@ public class MainActivity extends AppCompatActivity
                     }
                     break;
                 case Keys.EXTRA_POST_CONTACT:
+                    Log.e("MainActivity", json);
                     if(json != null && !json.contains("error")){
                         loadData();
                     }else{
                         Toast.makeText(this, "Hinzufügen fehlgeschlagen",Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case Keys.EXTRA_GET_PROFILEPICTURE:
+                    if(json != null && !json.contains("error")){
+                        json = json.replaceAll("\\{\"data\":\"", "");
+                        json = json.replaceAll("\"\\}", "");
+                        I.getMyself().setImage(json);
+                        if (currentTabReceiver != null) {
+                            currentTabReceiver.receiveData();
+                        }
+                    }else{
+                        Toast.makeText(this, "Bild konnte nicht geladen werden!",Toast.LENGTH_SHORT).show();
                     }
                     break;
             }
@@ -321,21 +365,21 @@ public class MainActivity extends AppCompatActivity
         int placeholder = -1;
         for (int i = 0; i < user.length; i++) {
             if (user[i].getName().equals(addName)) {
-                placeholder = i;
+                placeholder = user[i].getId();
             }
         }
         boolean alreadyAContact = false;
         if(placeholder >= 0){
             for(int i = 0; i<contactList.length; i++){
-                if(user[i].getName().equals(addName)){
+                if(contactList[i].getName().equals(addName)){
                     alreadyAContact = true;
                 }
             }
-            if(alreadyAContact!=true){
+            if(!alreadyAContact && !addName.equals(I.getMyself().getName().toLowerCase())){
                 Intent apiHanlder = new Intent(this, APIService.class);
                 apiHanlder.putExtra(Keys.EXTRA_URL, "/user/contact?api=" + I.getMyself().getApiKey());
                 apiHanlder.putExtra(Keys.EXTRA_REQUEST, "POST");
-                String data = "{\"id\":"+placeholder+"}";
+                String data = "{\"userid\":"+placeholder+"}";
                 apiHanlder.putExtra(Keys.EXTRA_DATA, data);
                 apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_POST_CONTACT);
                 apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_MAIN_ACTIVITY);

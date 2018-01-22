@@ -12,52 +12,41 @@ import partyplaner.data.user.User;
 
 public class Poll implements Serializable {
 
-    private String question;
-    private List<PollOption> pollOptions;
+    private int id;
+    private String name;
+    private PollOption[] choices;
 
-    public Poll(String question, List<PollOption> pollOptions) {
-        this.question = question;
-        if((this.pollOptions = pollOptions) == null)
-            this.pollOptions = new ArrayList<>();
+    public Poll(String question, PollOption[] choices) {
+        this.name = question;
+        this.choices = choices;
     }
 
     public String getQuestion() {
-        return question;
+        return name;
     }
 
-    public List<PollOption> getPollOptions() {
-        return pollOptions;
+    public PollOption[] getChoices() {
+        return choices;
     }
 
-    public boolean hasVoted(User user) {
-        return hasVotedFor(user) != null;
+    public int getId() {
+        return id;
     }
 
-    public PollOption hasVotedFor(User user) {
-        for (PollOption current : pollOptions)
-            if(current.hasVoted(user))
-                return current;
-        return null;
+    public int getChoiceIdByText(String name) {
+        for (PollOption pollOption : choices) {
+            if (name.equals(pollOption.getText())) {
+                return pollOption.getId();
+            }
+        }
+        return -1;
     }
 
-    public List<String> getOptionTitles() {
-        List<String> optionTitles = new ArrayList<>();
-        for (PollOption current : pollOptions)
-            optionTitles.add(current.getName());
-        return optionTitles;
+    public void addVoting(int myChoice) {
+        for(PollOption option : choices) {
+            if (option.getId() == myChoice) {
+                option.addVote();
+            }
+        }
     }
-
-    /*public List<User> getVotedUsers() {
-        List<User> votedUsers = new ArrayList<>();
-        for (PollOption current : pollOptions)
-            votedUsers.addAll(current.getVotedUsers());
-        return votedUsers;
-    }*/
-
-    /*public int getVoteCount() {
-        int count = 0;
-        for (PollOption current : pollOptions)
-            count += current.getVoteCount();
-        return count;
-    }*/
 }

@@ -5,7 +5,6 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +67,6 @@ public class OwnEventsFragment extends Fragment implements IReceiveData{
             transaction.commit();
         }
         fragments.clear();
-        Log.e("OwnEvents", parties.length + "");
 
         for (Party party: parties) {
             addParty(party);
@@ -81,6 +79,7 @@ public class OwnEventsFragment extends Fragment implements IReceiveData{
         args.putString(Keys.EXTRA_WHEN, party.getStartDate());
         args.putString(Keys.EXTRA_DESCRIPTION, party.getDescription());
         args.putInt(Keys.EXTRA_PARTYID, party.getId());
+        args.putString(Keys.EXTRA_FILENAME, party.getPicture());
         OwnEventFragment partyHomeFragment = new OwnEventFragment();
         partyHomeFragment.setArguments(args);
 

@@ -23,12 +23,12 @@
                     android:layout_width="140dp"
                     android:layout_height="140dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/manu_avatar"
                     android:contentDescription="@string/todo"
                     android:scaleType="fitCenter"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/manu_avatar" />
 
                 <TextView
                     android:id="@+id/FirstNameText"
@@ -47,7 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:text="@string/gender"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
@@ -59,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:text="@string/geb_datum"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
@@ -71,72 +71,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:text="@string/e_mail"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/BirthdateText" />
-
-                <ScrollView
-                    android:id="@+id/ZukünftigeVeranstaltungView"
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ZukünftigeVeranstaltung">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical" />
-
-                </ScrollView>
-
-                <TextView
-                    android:id="@+id/VergangeneVeranstaltung"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/vergangene_veranstaltung"
-                    android:textColor="@android:color/black"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ZukünftigeVeranstaltungView" />
-
-                <ScrollView
-                    android:id="@+id/VergangeneVeranstaltungView"
-                    android:layout_width="368dp"
-                    android:layout_height="120dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/VergangeneVeranstaltung">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical" />
-                </ScrollView>
-
-                <TextView
-                    android:id="@+id/ZukünftigeVeranstaltung"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/zukünftige_veranstaltung"
-                    android:textColor="@android:color/black"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/EmailTextView"></TextView>
 
                 <TextView
                     android:id="@+id/NameTextView"

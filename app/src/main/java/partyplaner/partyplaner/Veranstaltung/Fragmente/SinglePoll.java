@@ -25,7 +25,9 @@ import partyplaner.partyplaner.poll.*;
 
 public class SinglePoll extends Fragment {
 
-    private partyplaner.data.party.Poll poll;
+    private ExpandableFragment expandableFragment;
+    private int id;
+    private Poll poll;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,16 +35,8 @@ public class SinglePoll extends Fragment {
         View view = inflater.inflate(R.layout.event_fragment_single_poll, container, false);
         if (savedInstanceState == null) {
             Bundle arg = getArguments();
-
-            testPoll();
-
-            if (arg.getBoolean(Keys.EXTRA_OWNER)) {
-                LinearLayout body = view.findViewById(R.id.single_poll);
-                ImageView delete = new ImageView(getActivity());
-                delete.setImageResource(R.drawable.delete_icon);
-                delete.setLayoutParams(new LinearLayout.LayoutParams(64, 64));
-                body.addView(delete);
-            }
+            id = arg.getInt(Keys.EXTRA_ID);
+            this.poll = (Poll) arg.getSerializable(Keys.EXTRA_POLL);
 
             TextView name = view.findViewById(R.id.poll_name);
             name.setText(arg.getString(Keys.EXTRA_NAME));
@@ -60,12 +54,13 @@ public class SinglePoll extends Fragment {
         return view;
     }
 
-    private void testPoll() {
-        List<PollOption> options = new ArrayList<>();
-        options.add(new PollOption("Option1", 2));
-        options.add(new PollOption("Option2", 3));
-        options.add(new PollOption("Option3", 4));
-        options.add(new PollOption("Option4", 5));
-        this.poll = new Poll("Tim?", options);
+    @Override
+    public void onResume() {
+        super.onResume();
+        expandableFragment.reexpandGroup();
+    }
+
+    public void setExpandable(ExpandableFragment expandableFragment) {
+        this.expandableFragment = expandableFragment;
     }
 }

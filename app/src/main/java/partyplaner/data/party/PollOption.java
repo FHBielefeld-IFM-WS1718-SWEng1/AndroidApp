@@ -3,6 +3,7 @@ package partyplaner.data.party;
 import java.io.Serializable;
 import java.util.List;
 
+import partyplaner.data.user.I;
 import partyplaner.data.user.User;
 
 /**
@@ -11,24 +12,48 @@ import partyplaner.data.user.User;
 
 public class PollOption implements Serializable{
 
-    private String name;
-    private int votedUsers;
+    private int id;
+    private String text;
+    private int votes;
+    private UserChoices[] userChoices;
 
-    public PollOption(String name, int votedUsers) {
-        this.name= name;
-        this.votedUsers = votedUsers;
+    public PollOption(String text, int votes) {
+        this.text = text;
+        this.votes = votes;
     }
 
-    public String getName() {
-        return name;
+    public String getText() {
+        return text;
     }
 
-    public int getVotedUsers() {
-        return votedUsers;
+    public int getVotes() {
+        return votes;
     }
 
-    public boolean hasVoted(User user) {
-        //TODO Datenbank abfragen ob user Abgestimmt hat
+    public UserChoices[] getUserChoices() {
+        return userChoices;
+    }
+
+    public boolean isMyChoice() {
+        for (UserChoices userChoice : userChoices) {
+            if (userChoice.getUser().getId() == I.getMyself().getId()) {
+                return true;
+            }
+        }
         return false;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void addVote() {
+        votes++;
+        UserChoices[] placeholder = userChoices;
+        userChoices = new UserChoices[placeholder.length + 1];
+        for (int i = 0; i < placeholder.length; i++) {
+            userChoices[i] = placeholder[i];
+        }
+        userChoices[placeholder.length] = new UserChoices();
     }
 }

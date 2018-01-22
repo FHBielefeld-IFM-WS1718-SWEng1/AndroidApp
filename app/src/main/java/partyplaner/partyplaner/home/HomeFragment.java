@@ -84,6 +84,8 @@ public class HomeFragment extends Fragment implements IReceiveData{
         args.putInt(Keys.EXTRA_PARTYID, party.getId());
         args.putString(Keys.EXTRA_WHEN, party.getStartDate());
         args.putString(Keys.EXTRA_DESCRIPTION, party.getDescription());
+        args.putInt(Keys.EXTRA_PARTYID, party.getId());
+        args.putString(Keys.EXTRA_FILENAME, party.getPicture());
         args.putInt(Keys.EXTRA_USERID, party.getUserID());
 
         if (getFragmentManager() != null) {

@@ -25,14 +25,16 @@ import partyplaner.data.user.Gender;
 import partyplaner.data.user.I;
 import partyplaner.data.user.User;
 import partyplaner.partyplaner.R;
+import partyplaner.partyplaner.Veranstaltung.Fragmente.ExpandableFragment;
+import partyplaner.partyplaner.Veranstaltung.Fragmente.IReceiveData;
 
 /**
  * Created by Jan Augstein on 24.11.2017.
  */
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements IReceiveData {
     private final static int PICK_IMAGE = 42;
-    ImageView profile;
+    private ImageView profile;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,34 +42,7 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         profile = view.findViewById(R.id.profile_picture);
-        profile.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                getIntent.setType("image/*");
-
-                Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                pickIntent.setType("image/*");
-
-                Intent chooserIntent = Intent.createChooser(getIntent, "Select Image");
-                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
-
-                startActivityForResult(chooserIntent, PICK_IMAGE);
-                return true;
-            }
-        });
-
-        //TODO:
-        /*Base64Image b64img = new Gson().fromJson(GeneralAPIRequestHandler.request("/images/" + profil.getProfilePicture() + "?api=" + profil.getApiKey(), RouteType.GET, null), Base64Image.class);
-        if (b64img != null && b64img.getData() != null) {
-            PaPlaImage img = new PaPlaImage(b64img.getData());
-            Bitmap bitmap = img.convertToBitmap();
-
-            profile.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
-                    (int) ((double) bitmap.getWidth() / ((double) bitmap.getHeight() / 1024.0)),
-                    1024,
-                    false));
-        }*/
+        setImage();
         return view;
     }
 
@@ -108,7 +83,20 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    @Override
+    public void receiveData() {
+        if (profile != null) {
+            setImage();
+        }
+    }
 
-    //TODO hochladen des Images
-    //Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
+    private void setImage() {
+        profile.setImageResource(0);
+        profile.setImageBitmap(I.getMyself().getImage());
+    }
+
+    @Override
+    public void setExpandable(ExpandableFragment fragment) {
+
+    }
 }

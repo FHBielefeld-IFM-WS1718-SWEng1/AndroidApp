@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.AlertDialogLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +18,12 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
-import java.util.zip.Inflater;
 
 import partyplaner.api.APIService;
+import partyplaner.data.party.Party;
 import partyplaner.data.user.I;
 import partyplaner.partyplaner.IFragmentDataManeger;
 import partyplaner.partyplaner.Keys;
@@ -62,6 +63,7 @@ public class AllContacts extends Fragment implements IReceiveData{
         contactHolder = view.findViewById(R.id.layout_all_single_contacts);
         contactList = data.getContacts();
         updateContacts();
+
         ImageButton searchButton = view.findViewById(R.id.button_search);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,13 +82,15 @@ public class AllContacts extends Fragment implements IReceiveData{
     }
 
     private void updateContacts() {
-        if(contactHolder != null){
+        if(contactHolder != null && contactList != null){
             for (Fragment f : fragments) {
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.remove(f);
                 transaction.commit();
             }
             fragments.clear();
+
+            sortContacts();
             for (User user : contactList) {
                 addContact(user);
             }
@@ -96,43 +100,45 @@ public class AllContacts extends Fragment implements IReceiveData{
     private void addContact(User user) {
         Bundle args = new Bundle();
         args.putString(Keys.EXTRA_NAME, user.getName());
-        //args.putString(Keys.EXTRA_EMAIL, user.getEmail());
+        args.putInt(Keys.EXTRA_USERID, user.getId());
+        args.putString(Keys.EXTRA_PICTURE, user.getProfilePicture());
         //args.putString(Keys.EXTRA_PICTURE, null);
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
         SingleContact singleContact = new SingleContact();
         singleContact.setArguments(args);
+        fragments.add(singleContact);
+
         fragmentTransaction.add(R.id.layout_all_single_contacts, singleContact);
         fragmentTransaction.commit();
     }
 
     private User searchContact(){
         EditText search = getView().findViewById(R.id.SearchText);
-        String searched = search.getText().toString();
+        String searched = search.getText().toString().trim();
         if(searched.equals("")){
             updateContacts();
+        } else {
+            for (Fragment f : fragments) {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.remove(f);
+                transaction.commit();
+            }
         }
-        for(User user: contactList){
-            if(user.getName().equals(searched)){
-                LinearLayout searchedContact = getView().findViewById(R.id.layout_all_single_contacts);
-                searchedContact.removeAllViews();
-                Bundle args = new Bundle();
-                args.putString(Keys.EXTRA_NAME, user.getName());
+        fragments.clear();
 
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                SingleContact singleContact = new SingleContact();
-                singleContact.setArguments(args);
-                fragmentTransaction.add(R.id.layout_all_single_contacts, singleContact);
-                fragmentTransaction.commit();
-                fragments.add(singleContact);
+        for(User user: contactList){
+            if(user.getName().trim().equals(searched)){
+                addContact(user);
             }
         }
         return null;
     }
 
     private void addNewContact(LayoutInflater inflater){
+        Log.e("AllContacts", "addNewContact anfang");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         final View dialogView = inflater.inflate(R.layout.single_input_dialog, null);
         builder.setView(dialogView);
@@ -141,7 +147,7 @@ public class AllContacts extends Fragment implements IReceiveData{
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 EditText text = dialogView.findViewById(R.id.dialog_input);
-                startAddContactService(text.getText().toString());
+                startAddContactService(text.getText().toString().trim());
                 dialogInterface.cancel();
             }
         });
@@ -151,9 +157,11 @@ public class AllContacts extends Fragment implements IReceiveData{
                 dialogInterface.cancel();
             }
         }).create().show();
+        Log.e("AllContacts", "addNewContact ende");
     }
 
     private void startAddContactService(String string){
+        Log.e("AllContacts", "startService anfang");
         ((ISetName) data).setName(string);
         Intent apiHanlder = new Intent(getActivity(), APIService.class);
         apiHanlder.putExtra(Keys.EXTRA_URL, "/user?api=" + I.getMyself().getApiKey());
@@ -163,13 +171,27 @@ public class AllContacts extends Fragment implements IReceiveData{
         apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_GET_USERS);
         apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_MAIN_ACTIVITY);
         getActivity().startService(apiHanlder);
+        Log.e("AllContacts", "startService ende");
     }
 
 
     @Override
     public void receiveData() {
         contactList = data.getContacts();
-        updateContacts();
+        if(contactList != null) {
+            updateContacts();
+        }
+    }
+
+    private void sortContacts() {
+        if (contactList != null) {
+            Arrays.sort(contactList, new Comparator<User>() {
+                @Override
+                public int compare(User u1, User u2) {
+                    return u1.getName().trim().compareTo(u2.getName().trim());
+                }
+            });
+        }
     }
 
     @Override

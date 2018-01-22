@@ -58,4 +58,16 @@ public class Keys {
     public static final String EXTRA_GET_CONTACTS = "GET_CONTACTS";
     public static final String EXTRA_GET_USERS = "USERS";
     public static final String EXTRA_POST_CONTACT = "POST_CONTACT";
+    public static final String EXTRA_UPLOAD_PROFILE_PICTURE = "UPLOAD_PROFILE_PICTURE";
+    public static final String EXTRA_GET_PROFILEPICTURE = "GET_PROFILEPICTURE";
+    public static final String EXTRA_PARTY_PICTURE = "PARTY_PIC";
+    public static final String EXTRA_FILENAME = "FILENAME";
+    public static final String EXTRA_LOAD_OWN_EVENT_IMAGE = "LOAD_OWN_EVENT_IMAGE";
+    public static final String EXTRA_LOAD_HOME_EVENT_IMAGE = "LOAD_HOME_EVENT_IMAGE";
+    public static final String EXTRA_IMAGE_IMAGE = "IMAGE_IMAGE";
+    public static final String EXTRA_CREATE_POLL = "CREATE_POLL";
+    public static final String EXTRA_POLL_CHOICE = "POLL_CHOICE";
+    public static final String EXTRA_SHOW_CONTACT = "SHOW_CONTACT";
+    public static final String EXTRA_LOAD_CONTACT_IMAGE = "CONTACT_IMAGE";
+    public static final String EXTRA_SERVICE_POLL = "SERVICE_POLL";
 }

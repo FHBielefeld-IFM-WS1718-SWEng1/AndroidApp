@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 
+import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
 
 /**
@@ -29,7 +30,12 @@ public class PaPlaImage {
 
     public String convertToBase64() {
         if (bitmap != null) {
-            return new String(Base64.encode(convertFromBitmapToBytearray(bitmap), Base64.DEFAULT));
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+            byte[] byteArray = byteArrayOutputStream .toByteArray();
+
+            return Base64.encodeToString(byteArray, Base64.DEFAULT);
+            //return new String(Base64.encode(convertFromBitmapToBytearray(bitmap), Base64.DEFAULT));
         }
         return null;
     }

@@ -94,7 +94,7 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
 
     @Override
     public String[] getGeneralInformations() {
-        String[] infos = {party.getName(), party.getOwner().getName(), party.getStartDate(), party.getLocation(), party.getDescription()};
+        String[] infos = {party.getName(), party.getOwner().getName(), party.getStartDate(), party.getLocation(), party.getDescription(), party.getPicture()};
         return infos;
     }
 
@@ -121,6 +121,7 @@ public class EventMainActivity extends AppCompatActivity implements IEventDataMa
                 intent.putExtra(Keys.EXTRA_WHEN, party.getStartDate());
                 intent.putExtra(Keys.EXTRA_DESCRIPTION, party.getDescription());
                 intent.putExtra(Keys.EXTRA_PARTYID, party.getId());
+                intent.putExtra(Keys.EXTRA_PARTY_PICTURE, party.getPicture());
                 startActivity(intent);
                 break;
         }
