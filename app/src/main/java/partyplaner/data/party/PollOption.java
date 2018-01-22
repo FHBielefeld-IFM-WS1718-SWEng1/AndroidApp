@@ -3,6 +3,7 @@ package partyplaner.data.party;
 import java.io.Serializable;
 import java.util.List;
 
+import partyplaner.data.user.I;
 import partyplaner.data.user.User;
 
 /**
@@ -31,5 +32,28 @@ public class PollOption implements Serializable{
 
     public UserChoices[] getUserChoices() {
         return userChoices;
+    }
+
+    public boolean isMyChoice() {
+        for (UserChoices userChoice : userChoices) {
+            if (userChoice.getUser().getId() == I.getMyself().getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void addVote() {
+        votes++;
+        UserChoices[] placeholder = userChoices;
+        userChoices = new UserChoices[placeholder.length + 1];
+        for (int i = 0; i < placeholder.length; i++) {
+            userChoices[i] = placeholder[i];
+        }
+        userChoices[placeholder.length] = new UserChoices();
     }
 }

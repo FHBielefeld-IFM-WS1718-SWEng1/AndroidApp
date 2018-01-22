@@ -33,4 +33,20 @@ public class Poll implements Serializable {
         return id;
     }
 
+    public int getChoiceIdByText(String name) {
+        for (PollOption pollOption : choices) {
+            if (name.equals(pollOption.getText())) {
+                return pollOption.getId();
+            }
+        }
+        return -1;
+    }
+
+    public void addVoting(int myChoice) {
+        for(PollOption option : choices) {
+            if (option.getId() == myChoice) {
+                option.addVote();
+            }
+        }
+    }
 }
