@@ -67,4 +67,5 @@ public class Keys {
     public static final String EXTRA_IMAGE_IMAGE = "IMAGE_IMAGE";
     public static final String EXTRA_CREATE_POLL = "CREATE_POLL";
     public static final String EXTRA_POLL_CHOICE = "POLL_CHOICE";
+    public static final String EXTRA_SHOW_CONTACT = "SHOW_CONTACT";
 }

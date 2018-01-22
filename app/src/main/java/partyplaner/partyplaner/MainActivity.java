@@ -303,9 +303,11 @@ public class MainActivity extends AppCompatActivity
                     }
                     break;
                 case Keys.EXTRA_DELETE_PARTIES:
+                    Log.e("MainActivity", json);
                     if (json != null && !json.contains("error")) {
-                        Toast.makeText(this, "Party erfolgreich gelöscht!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Erfolgreich gelöscht!", Toast.LENGTH_SHORT).show();
                         loadData();
+
                     } else {
                         Toast.makeText(this, "Party konnte nicht gelöscht werden!", Toast.LENGTH_SHORT).show();
                     }
@@ -376,7 +378,7 @@ public class MainActivity extends AppCompatActivity
                     alreadyAContact = true;
                 }
             }
-            if(alreadyAContact!=true){
+            if(!alreadyAContact){
                 Intent apiHanlder = new Intent(this, APIService.class);
                 apiHanlder.putExtra(Keys.EXTRA_URL, "/user/contact?api=" + I.getMyself().getApiKey());
                 apiHanlder.putExtra(Keys.EXTRA_REQUEST, "POST");
