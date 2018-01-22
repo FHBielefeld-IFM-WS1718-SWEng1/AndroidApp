@@ -41,7 +41,7 @@ public class Party implements Serializable{
 
     public Party(String name, String description, User organizer, String location,
                  GregorianCalendar dateAndTime, List<Image> gallery, Guest[] guests,
-                 List<Comment> comments, Rating[] rating, Poll[] polls, Task[] tasks) {
+                 List<Comment> comments, Rating[] rating, Poll[] polls, Task[] tasks, String picture) {
         this.name = name;
         this.description = description;
         this.organizer = organizer;
@@ -53,6 +53,7 @@ public class Party implements Serializable{
         this.rating = rating;
         this.polls = polls;
         this.tasks = tasks;
+        this.picture = picture;
     }
 
     public int getId() {

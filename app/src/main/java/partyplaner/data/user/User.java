@@ -18,17 +18,17 @@ public class User {
     private String name;
     private String birthdate;
     private Integer gender;
-    private String profilepicture;
+    private String profilePicture;
     private Bitmap image;
 
     public User(int id, String email, String username,
-                String birthday, int gender, String profilepicture) {
+                String birthday, int gender, String profilePicture) {
         this.id = id;
         this.email = email;
         this.name = username;
         this.birthdate = birthday;
         this.gender = gender;
-        this.profilepicture = profilepicture;
+        this.profilePicture = profilePicture;
     }
 
     public int getId() {
@@ -54,7 +54,7 @@ public class User {
     }
 
     public String getProfilePicture() {
-        return profilepicture;
+        return profilePicture;
     }
 
     public void setName(String name) {
@@ -70,7 +70,7 @@ public class User {
     }
 
     public void setProfilePicture(String id) {
-        this.profilepicture = id;
+        this.profilePicture = id;
     }
 
     /**

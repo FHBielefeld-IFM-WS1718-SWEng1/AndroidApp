@@ -114,14 +114,17 @@ public class OwnEventFragment extends Fragment implements IServiceReceiver{
     }
 
     private void loadImage() {
-        Intent apiHanlder = new Intent(getActivity(), APIService.class);
-        apiHanlder.putExtra(Keys.EXTRA_URL, "/image/" + I.getMyself().getProfilePicture() + "?api=" + I.getMyself().getApiKey());
-        apiHanlder.putExtra(Keys.EXTRA_REQUEST, "GET");
-        String data = null;
-        apiHanlder.putExtra(Keys.EXTRA_DATA, data);
-        apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_GET_PROFILEPICTURE);
-        apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_LOAD_OWN_EVENT_IMAGE + id);
-        getActivity().startService(apiHanlder);
+        if (imageFilename != null && !imageFilename.equals("")) {
+            Intent apiHanlder = new Intent(getActivity(), APIService.class);
+            apiHanlder.putExtra(Keys.EXTRA_URL, "/image/" + imageFilename + "?api=" + I.getMyself().getApiKey());
+            Log.e(getClass().getName(), imageFilename);
+            apiHanlder.putExtra(Keys.EXTRA_REQUEST, "GET");
+            String data = null;
+            apiHanlder.putExtra(Keys.EXTRA_DATA, data);
+            apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_GET_PROFILEPICTURE);
+            apiHanlder.putExtra(Keys.EXTRA_SERVICE_TYPE, Keys.EXTRA_LOAD_OWN_EVENT_IMAGE + id);
+            getActivity().startService(apiHanlder);
+        }
     }
 
     private void deleteParty() {
@@ -160,6 +163,7 @@ public class OwnEventFragment extends Fragment implements IServiceReceiver{
 
     @Override
     public void receiveData(String json, String id) {
+        Log.e(getClass().getName(), json);
         if (json != null && !json.contains("error")) {
             json = json.replaceAll("\\{\"data\":\"", "");
             json = json.replaceAll("\"\\}", "");

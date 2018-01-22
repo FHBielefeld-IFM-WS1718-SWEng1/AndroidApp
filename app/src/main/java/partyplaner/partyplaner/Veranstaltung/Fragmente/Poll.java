@@ -22,6 +22,7 @@ import partyplaner.partyplaner.poll.CreatePoll;
 
 public class Poll extends Fragment implements IReceiveData {
 
+    private int partyid;
     private IEventDataManager data;
 
     @Override
@@ -45,7 +46,7 @@ public class Poll extends Fragment implements IReceiveData {
                 @Override
                 public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CreatePoll.class);
-                intent.putExtra(Keys.EXTRA_EDIT_PARTY, data.getParty().getId());
+                intent.putExtra(Keys.EXTRA_PARTYID, partyid);
                 startActivity(intent);
                 }
             });
@@ -76,7 +77,7 @@ public class Poll extends Fragment implements IReceiveData {
 
     @Override
     public void receiveData() {
-
+        partyid = data.getParty().getId();
     }
 
     @Override

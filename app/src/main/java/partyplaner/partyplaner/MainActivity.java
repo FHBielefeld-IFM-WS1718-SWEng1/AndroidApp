@@ -289,6 +289,7 @@ public class MainActivity extends AppCompatActivity
         if (json != null) {
             switch (id) {
                 case Keys.EXTRA_GET_PARTIES:
+                    Log.e("MainActivity", json);
                     if (json != null && !json.contains("error")) {
                         json = json.replaceAll(".*?\\[", "[");
                         json = json.replaceAll("].", "]");
@@ -343,14 +344,10 @@ public class MainActivity extends AppCompatActivity
                     }
                     break;
                 case Keys.EXTRA_GET_PROFILEPICTURE:
-                    Log.e("MainActivity", json);
                     if(json != null && !json.contains("error")){
-                        Log.e("MainActivity", "Enter Get Profile Picture");
                         json = json.replaceAll("\\{\"data\":\"", "");
                         json = json.replaceAll("\"\\}", "");
-                        Log.e("MainActivity", json);
                         I.getMyself().setImage(json);
-                        Log.e("MainActivity", "setImage");
                         if (currentTabReceiver != null) {
                             currentTabReceiver.receiveData();
                         }
@@ -378,7 +375,7 @@ public class MainActivity extends AppCompatActivity
                     alreadyAContact = true;
                 }
             }
-            if(!alreadyAContact){
+            if(!alreadyAContact && !addName.equals(I.getMyself().getName().toLowerCase())){
                 Intent apiHanlder = new Intent(this, APIService.class);
                 apiHanlder.putExtra(Keys.EXTRA_URL, "/user/contact?api=" + I.getMyself().getApiKey());
                 apiHanlder.putExtra(Keys.EXTRA_REQUEST, "POST");

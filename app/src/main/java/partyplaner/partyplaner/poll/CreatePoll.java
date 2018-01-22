@@ -85,7 +85,7 @@ public class CreatePoll extends AppCompatActivity implements IServiceReceiver{
         EditText nameEditText = findViewById(R.id.question);
         String name = nameEditText.getText().toString().trim();
         if (!name.equals("")) {
-            String data = "{\"abstimmungsname\":\"" + name + "\",\"party_id\":" + partyId + "}";
+            String data = "{\"name\":\"" + name + "\",\"party_id\":" + partyId + "}";
             Log.e(getClass().getName(), data);
             startService("/party/vote?api=" + I.getMyself().getApiKey(), "POST", data, Keys.EXTRA_CREATE_POLL);
         }
@@ -156,6 +156,7 @@ public class CreatePoll extends AppCompatActivity implements IServiceReceiver{
                     if (optionCount <= 0) {
                         finish();
                     }
+                    break;
             }
         }
     }

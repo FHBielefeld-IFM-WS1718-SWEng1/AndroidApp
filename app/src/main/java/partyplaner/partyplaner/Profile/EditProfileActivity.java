@@ -179,7 +179,7 @@ public class EditProfileActivity extends AppCompatActivity implements IServiceRe
             Intent apiHandler = new Intent(this, APIService.class);
             apiHandler.putExtra(Keys.EXTRA_URL, "/user/" + I.getMyself().getId() + "?api=" + I.getMyself().getApiKey());
             apiHandler.putExtra(Keys.EXTRA_REQUEST, "PUT");
-            String data = "{\"name\":\"" + name + "\",\"gender\":" + gender + ",\"birthdate\":\"" + formatDate() +  "\",\"profilepicture\":\"" + filename + "\"}";
+            String data = "{\"name\":\"" + name + "\",\"gender\":" + gender + ",\"birthdate\":\"" + formatDate() +  "\",\"profilePicture\":\"" + filename + "\"}";
             apiHandler.putExtra(Keys.EXTRA_DATA, data);
             Log.e(getClass().getName(), data);
             apiHandler.putExtra(Keys.EXTRA_ID, Keys.EXTRA_PUT_PROFILE);

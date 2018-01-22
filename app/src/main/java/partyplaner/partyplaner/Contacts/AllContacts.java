@@ -147,7 +147,7 @@ public class AllContacts extends Fragment implements IReceiveData{
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 EditText text = dialogView.findViewById(R.id.dialog_input);
-                startAddContactService(text.getText().toString());
+                startAddContactService(text.getText().toString().trim());
                 dialogInterface.cancel();
             }
         });

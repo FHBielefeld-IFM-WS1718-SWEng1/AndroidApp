@@ -83,7 +83,7 @@ public class PartyHomeFragment extends Fragment implements IServiceReceiver{
 
     private void loadImage() {
         Intent apiHanlder = new Intent(getActivity(), APIService.class);
-        apiHanlder.putExtra(Keys.EXTRA_URL, "/image/" + I.getMyself().getProfilePicture() + "?api=" + I.getMyself().getApiKey());
+        apiHanlder.putExtra(Keys.EXTRA_URL, "/image/" + imageFilename + "?api=" + I.getMyself().getApiKey());
         apiHanlder.putExtra(Keys.EXTRA_REQUEST, "GET");
         String data = null;
         apiHanlder.putExtra(Keys.EXTRA_DATA, data);
