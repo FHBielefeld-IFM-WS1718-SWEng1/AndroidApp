@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import partyplaner.data.user.User;
+import partyplaner.partyplaner.Veranstaltung.Fragmente.Gallery;
 
 /**
  * Created by André on 25.11.2017.
@@ -28,7 +29,7 @@ public class Party implements Serializable{
     private User organizer;
     private GregorianCalendar dateAndTime;
 
-    private List<Image> gallery;
+    private GalleryImage[] gallery;
 
     //TODOFragment: ToDo-/Kostenliste
     private List<Comment> comments;
@@ -41,7 +42,7 @@ public class Party implements Serializable{
     private Poll[] votings;
 
     public Party(String name, String description, User organizer, String location,
-                 GregorianCalendar dateAndTime, List<Image> gallery, Guest[] guests,
+                 GregorianCalendar dateAndTime, GalleryImage[] gallery, Guest[] guests,
                  List<Comment> comments, Rating[] rating, Poll[] polls, Task[] tasks, String picture) {
         this.name = name;
         this.description = description;
@@ -81,7 +82,7 @@ public class Party implements Serializable{
         return dateAndTime;
     }
 
-    public List<Image> getGallery() {
+    public GalleryImage[] getGallery() {
         return gallery;
     }
 

@@ -88,7 +88,9 @@ public class TaskFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        expandableFragment.reexpandGroup();
+        if (expandableFragment != null) {
+            expandableFragment.reexpandGroup();
+        }
     }
 
     private void setDeleteEditButton(final LayoutInflater inflater, boolean owner, CheckBox statusBox, ImageView delete, ImageView edit) {
