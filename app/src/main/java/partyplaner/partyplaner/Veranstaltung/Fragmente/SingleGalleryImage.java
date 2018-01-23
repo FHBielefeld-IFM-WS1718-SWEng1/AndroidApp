@@ -221,7 +221,6 @@ public class SingleGalleryImage extends Fragment implements IServiceReceiver {
 
     @Override
     public void receiveData(String json, String id) {
-        Log.e(getClass().getName(), id + ": " + json);
         if (json != null && !json.contains("error")) {
             switch (id)  {
                 case Keys.EXTRA_GET_PROFILEPICTURE:
