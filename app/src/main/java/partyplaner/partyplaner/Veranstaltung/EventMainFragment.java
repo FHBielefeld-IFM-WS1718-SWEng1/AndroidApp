@@ -48,8 +48,10 @@ public class EventMainFragment extends Fragment implements IServiceReceiver{
     private String when = "";
     private String description = "";
     private boolean shortText = true;
+    private Fragment todo;
     private List<ExpandableFragment> fragments = new ArrayList<>();
     private String imageFilename;
+    private Party party;
     private View view;
 
     List<ExpandableFragment> headers = new ArrayList<>();
@@ -97,11 +99,26 @@ public class EventMainFragment extends Fragment implements IServiceReceiver{
         this.where = data[3];
         this.description = data[4];
         this.imageFilename = data[5];
+        if (this.data.getParty() != null) {
+            party = this.data.getParty();
+        }
+
+        setTODO();
 
         loadImage();
         setUpDescription(view);
         for(ExpandableFragment fragment : fragments) {
             fragment.receiveData();
+        }
+    }
+
+    private void setTODO() {
+        if (todo != null && party != null && party.getOwner().getId() != I.getMyself().getId()) {
+            fragments.remove(todo);
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.remove(todo);
+            transaction.commit();
+            todo = null;
         }
     }
 
@@ -171,6 +188,9 @@ public class EventMainFragment extends Fragment implements IServiceReceiver{
         ExpandableFragment fragment = new ExpandableFragment();
         fragment.setArguments(arguments);
         fragments.add(fragment);
+        if (name.equals("TODO")) {
+            todo = fragment;
+        }
 
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.add(R.id.eventBody, fragment);
@@ -182,9 +202,7 @@ public class EventMainFragment extends Fragment implements IServiceReceiver{
 
         addFragment("Gallerie", 0);
         addFragment("Aufgaben", 1);
-        if(true) {
-            addFragment("TODO", 2);
-        }
+        addFragment("TODO", 2);
         addFragment("Gäste", 6);
         addFragment("Abstimmungen", 3);
         addFragment("Bewertungen", 5);
@@ -211,10 +229,6 @@ public class EventMainFragment extends Fragment implements IServiceReceiver{
                 Bitmap image = BitmapFactory.decodeByteArray(decoded, 0, decoded.length);
                 ImageView imageView = getView().findViewById(R.id.party_picture);
                 imageView.setImageBitmap(image);
-            }
-        } else {
-            if (getActivity() != null) {
-                Toast.makeText(getActivity(), "Bild konnte nicht geladen werden!", Toast.LENGTH_SHORT).show();
             }
         }
     }
