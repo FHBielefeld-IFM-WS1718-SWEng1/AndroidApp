@@ -15,4 +15,5 @@ android:
 script:
  - chmod +x ./gradlew
  - ./gradlew assemble
+ - ./gradlew build connectedCheck
  
