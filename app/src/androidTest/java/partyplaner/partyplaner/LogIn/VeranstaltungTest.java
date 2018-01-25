@@ -133,16 +133,6 @@ public class VeranstaltungTest {
                                 0)));
         linearLayout.perform(scrollTo(), click());
 
-        ViewInteraction imageView = onView(
-                allOf(withId(R.id.imageView7),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                        0),
-                                0),
-                        isDisplayed()));
-        imageView.check(matches(isDisplayed()));
-
         ViewInteraction textView = onView(
                 allOf(withText("Was?:"),
                         childAtPosition(

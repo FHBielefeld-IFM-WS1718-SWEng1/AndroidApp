@@ -129,23 +129,6 @@ public class KontakteTest {
                         isDisplayed()));
         navigationMenuItemView.perform(click());
 
-
-        /**
-         * Auf der Kontakt Seite Existenz testen
-         * Search Button
-         * TextInput
-         */
-        ViewInteraction imageButton = onView(
-                allOf(withId(R.id.button_search),
-                        childAtPosition(
-                                allOf(withId(R.id.button_search_layout),
-                                        childAtPosition(
-                                                withId(R.id.main_layout),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        imageButton.check(matches(isDisplayed()));
-
         ViewInteraction textInputLayout = onView(
                 allOf(childAtPosition(
                         allOf(withId(R.id.search_contact_layout),
