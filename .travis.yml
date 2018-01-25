@@ -8,10 +8,11 @@ android:
   - tools
   - build-tools-26.0.2
   - android-26
-
-before_install:
- - chmod +x gradlew
+ licenses:
+  - android-sdk-license-.+
+  - google-gdk-license-.+  
  
 script:
- - ./gradlew assembleRelease --stacktrace 
+ - chmod +x ./gradlew
+ - ./gradlew
  
