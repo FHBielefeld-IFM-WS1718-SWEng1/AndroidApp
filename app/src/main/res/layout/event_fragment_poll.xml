@@ -9,5 +9,6 @@
         android:id="@+id/create_poll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:text="Neue Abstimmung" />
 </LinearLayout>

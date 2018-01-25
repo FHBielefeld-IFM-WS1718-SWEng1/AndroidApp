@@ -84,7 +84,9 @@ public class SingleTODO extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        expandableFragment.reexpandGroup();
+        if (expandableFragment != null) {
+            expandableFragment.reexpandGroup();
+        }
     }
 
     private void updateTODOStaus(boolean isChecked) {

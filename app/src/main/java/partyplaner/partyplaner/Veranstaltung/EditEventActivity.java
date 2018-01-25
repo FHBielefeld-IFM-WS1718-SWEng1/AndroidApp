@@ -335,7 +335,6 @@ public class EditEventActivity extends AppCompatActivity implements IServiceRece
                     break;
                 case Keys.EXTRA_PUT_PROFILE:
                     if (!json.contains("error")) {
-                        Gson gson = new Gson();
                         String filename = json.replace("{\"filename\":\"", "").replace("\"}", "");
                         Log.e(getClass().getName(), "Filename:" + filename);
                         if (edit) {

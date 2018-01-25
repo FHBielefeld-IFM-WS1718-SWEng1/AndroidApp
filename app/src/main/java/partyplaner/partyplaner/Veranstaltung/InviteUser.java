@@ -113,7 +113,7 @@ public class InviteUser extends AppCompatActivity implements IServiceReceiver{
             String name = text.getText().toString();
             if (!name.trim().equals("")) {
                 int id = contains(name);
-                if (id >= 0) {
+                if (id >= 0 && id != I.getMyself().getId()) {
                     Log.e(getClass().getName(), id + "");
                     ids.add(id);
                 } else {

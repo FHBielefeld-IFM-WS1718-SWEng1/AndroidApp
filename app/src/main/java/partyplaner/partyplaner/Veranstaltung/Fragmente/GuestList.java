@@ -245,26 +245,4 @@ public class GuestList extends Fragment implements IReceiveData {
     public void setExpandable(ExpandableFragment fragment) {
         expandableFragment = fragment;
     }
-
-    /*
-    private void updateGuests(){
-        guestHolder.removeAllViews();
-        int guestCount = getGuestCount();
-
-        for(int i = 0; i<=guestCount; i++){
-            addGuest();
-        }
-
-    }
-
-    private void addGuest(){
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        //fragmentTransaction.add(R.id.guest_list, new SingleGuestAccepted());
-        fragmentTransaction.commit();
-    }
-
-    private int getGuestCount(){
-        return new Random().nextInt(6) + 2;
-    }*/
 }

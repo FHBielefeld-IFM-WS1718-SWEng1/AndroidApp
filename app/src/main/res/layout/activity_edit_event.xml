@@ -27,7 +27,8 @@
                     android:layout_height="120dp"
                     android:layout_weight="0"
                     android:contentDescription="@string/partypicture"
-                    app:srcCompat="@drawable/manu_avatar" />
+                    android:padding="8dp"
+                    app:srcCompat="@drawable/default_party" />
 
                 <LinearLayout
                     android:layout_width="65dp"

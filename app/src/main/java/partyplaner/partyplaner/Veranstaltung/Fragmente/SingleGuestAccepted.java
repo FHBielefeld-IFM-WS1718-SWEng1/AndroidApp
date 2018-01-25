@@ -79,7 +79,9 @@ public class SingleGuestAccepted extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        expandableFragment.reexpandGroup();
+        if (expandableFragment != null) {
+            expandableFragment.reexpandGroup();
+        }
     }
 
     public void setExpandable(ExpandableFragment expandableFragment) {

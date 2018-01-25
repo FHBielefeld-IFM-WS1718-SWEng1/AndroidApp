@@ -70,4 +70,11 @@ public class Keys {
     public static final String EXTRA_SHOW_CONTACT = "SHOW_CONTACT";
     public static final String EXTRA_LOAD_CONTACT_IMAGE = "CONTACT_IMAGE";
     public static final String EXTRA_SERVICE_POLL = "SERVICE_POLL";
+    public static final String EXTRA_GALLERY = "GALLERY";
+    public static final String EXTRA_POST_GALLERY = "POST_GALLERY";
+    public static final String EXTRA_POST_IMAGE = "PUT_IMAGE";
+    public static final String EXTRA_CAPTION = "CPATION";
+    public static final String EXTRA_GALLERY_IMAGE = "GALLERYIMAGE";
+    public static final String EXTRA_PUT_GALLERY = "PUT_GALLERY";
+    public static final String EXTRA_DELETE_GALLERY = "DELETE_GALLERY";
 }
