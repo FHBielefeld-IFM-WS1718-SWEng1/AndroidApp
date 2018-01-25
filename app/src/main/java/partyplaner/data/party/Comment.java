@@ -11,31 +11,47 @@ import partyplaner.data.user.User;
 
 public class Comment {
 
-    private User commentator;
-    private String commentContent;
-    private GregorianCalendar commentDateAndTime;
-    private List<Comment> answers;
+    private int id;
+    private int user_id;
+    private int party_id;
+    private String text;
+    private User user;
+    private Comment[] Answer;
 
-    public Comment(User commentator, String commentContent, GregorianCalendar commentDateAndTime, List<Comment> answers) {
-        this.commentator = commentator;
-        this.commentContent = commentContent;
-        this.commentDateAndTime = commentDateAndTime;
-        this.answers = answers;
+    public Comment(int id, int user_id, int party_id, String text, partyplaner.data.user.User user, Comment[] answer) {
+        this.id = id;
+        this.user_id = user_id;
+        this.party_id = party_id;
+        this.text = text;
+        user = user;
+        Answer = answer;
     }
 
-    public User getCommentator() {
-        return commentator;
+    public int getId() {
+        return id;
     }
 
-    public String getCommentContent() {
-        return commentContent;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public GregorianCalendar getCommentDateAndTime() {
-        return commentDateAndTime;
+    public int getParty_id() {
+        return party_id;
     }
 
-    public List<Comment> getAnswers() {
-        return  answers;
+    public String getText() {
+        return text;
+    }
+
+    public partyplaner.data.user.User getUser() {
+        return user;
+    }
+
+    public Comment[] getAnswer() {
+        return Answer;
+    }
+
+    public void setUser(partyplaner.data.user.User user) {
+        user = user;
     }
 }

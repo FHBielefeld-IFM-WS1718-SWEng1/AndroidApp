@@ -94,7 +94,7 @@ public class TaskFragment extends Fragment {
     }
 
     private void setDeleteEditButton(final LayoutInflater inflater, boolean owner, CheckBox statusBox, ImageView delete, ImageView edit) {
-        if (!owner) {
+        if (!owner && !user.equals(I.getMyself().getName())) {
             delete.setVisibility(View.INVISIBLE);
             edit.setVisibility(View.INVISIBLE);
         } else {
@@ -158,6 +158,11 @@ public class TaskFragment extends Fragment {
             }
         }
         Log.e("SingleTodo", newName + ", " + newTask);
+        TextView nameText = view.findViewById(R.id.name_tasklist);
+        TextView taskText = view.findViewById(R.id.task_tasklist);
+
+        nameText.setText(newName);
+        taskText.setText(newTask);
 
         if (user != null && !newTask.equals("")) {
             Intent apiHanlder = new Intent(getActivity(), APIService.class);
