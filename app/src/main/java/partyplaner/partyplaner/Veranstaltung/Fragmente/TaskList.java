@@ -106,6 +106,7 @@ public class TaskList extends Fragment implements IReceiveData{
                 us = guest.getUser();
             }
         }
+        int userid = (us != null) ? us.getId() : 0;
 
         if (us != null && !task.trim().equals("")) {
             Intent apiHanlder = new Intent(getActivity(), APIService.class);

@@ -109,7 +109,7 @@ public class PartyHomeFragment extends Fragment implements IServiceReceiver{
 
         TextView who = view.findViewById(R.id.textWho);
         User owner = getUser(args);
-        who.setText("Wer? " + owner.getName());
+        who.setText("Wer? " + args.getString(Keys.EXTRA_NAME));
     }
 
     private User getUser(Bundle args) {

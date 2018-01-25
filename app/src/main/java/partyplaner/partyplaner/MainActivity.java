@@ -294,7 +294,7 @@ public class MainActivity extends AppCompatActivity
                     Log.e("MainActivity", json);
                     if (json != null && !json.contains("error")) {
                         json = json.replaceAll(".*?\\[", "[");
-                        json = json.replaceAll("].", "]");
+                        json = json.replaceAll("].", "]").replace("user", "owner");
                         parties = gson.fromJson(json, Party[].class);
                         sortParties();
                         if (currentTabReceiver != null) {

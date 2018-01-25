@@ -28,7 +28,7 @@ public class Rating extends Fragment implements IReceiveData {
 
     private IEventDataManager data;
     private int partyId;
-    private int rating;
+    private float rating;
 
     @Override
     public void onAttach(Context context) {
@@ -104,6 +104,7 @@ public class Rating extends Fragment implements IReceiveData {
     private void setRatingBar() {
         if (getView() != null) {
             RatingBar ratingBar = getView().findViewById(R.id.rating_bar);
+            ratingBar.setClickable(false);
             ratingBar.setRating(((float)rating) / 2.0f);
         }
 

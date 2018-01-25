@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import partyplaner.data.user.User;
 import partyplaner.partyplaner.Keys;
 import partyplaner.partyplaner.R;
 
@@ -20,36 +21,40 @@ import partyplaner.partyplaner.R;
 
 public class Comment extends Fragment {
 
+    private Comment[] answers;
+    private int parentId;
+    private ExpandableFragment expandableFragment;
+    private partyplaner.data.party.Comment comment;
     private int bodyId;
     private int authorId;
     private int textId;
     private int commentId;
+    private int commentInputBackId;
     //evtl. private int sendButtonId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.event_fragment_single_comment, container, false);
-
-        if (savedInstanceState == null) {
+            Bundle args = getArguments();
             bodyId = View.generateViewId();
             authorId = View.generateViewId();
             textId = View.generateViewId();
             commentId = View.generateViewId();
+            commentInputBackId = View.generateViewId();
+            parentId = args.getInt(Keys.EXTRA_PARTYID);
 
             LinearLayout body = view.findViewById(R.id.body_single_comment);
             TextView author = view.findViewById(R.id.comment_author);
             TextView text = view.findViewById(R.id.comment_text);
             EditText comment = view.findViewById(R.id.comment_input);
+            LinearLayout commentInputBack = view.findViewById(R.id.comment_input_field);
 
             body.setId(bodyId);
             author.setId(authorId);
             text.setId(textId);
             comment.setId(commentId);
-
-            Bundle args = getArguments();
-            text.setText(args.getString(Keys.EXTRA_COMMENT));
-            author.setText(args.getString(Keys.EXTRA_NAME));
+            commentInputBack.setId(commentInputBackId);
 
             ImageView send = view.findViewById(R.id.send_comment);
             send.setOnClickListener(new View.OnClickListener() {
@@ -58,9 +63,15 @@ public class Comment extends Fragment {
                     sendComment(view);
                 }
             });
-        }
+            update();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        update();
     }
 
     private void sendComment(View view) {
@@ -80,5 +91,35 @@ public class Comment extends Fragment {
             transaction.add(bodyId, fragment);
             transaction.commit();
         }
+    }
+
+    private void update() {
+        if (comment != null && getView() != null) {
+            TextView author = getView().findViewById(authorId);
+            TextView text = getView().findViewById(textId);
+
+            author.setText(comment.getUser().getName());
+            text.setText(comment.getText());
+
+            loadUser();
+
+            if (parentId < 0) {
+                LinearLayout back = getView().findViewById(commentInputBackId);
+                back.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0));
+            }
+        }
+    }
+
+    private void loadUser() {
+
+    }
+
+    public void setExpandable(ExpandableFragment expandableFragment) {
+        this.expandableFragment = expandableFragment;
+    }
+
+    public void setComment(partyplaner.data.party.Comment comment) {
+        this.comment = comment;
+        update();
     }
 }
