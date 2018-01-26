@@ -17,11 +17,11 @@ before_install:
  - android list targets
 
 env:
-    matrix:
-        - ANDROID_TARGET=android-16 ANDROID_ABI=armeabi-v7a
-        - ANDROID_TARGET=android-21 ANDROID_ABI=armeabi-v7a
-        - ANDROID_TARGET=android-25 ANDROID_ABI=armeabi-v7a
-        - ANDROID_TARGET=android-26 ANDROID_ABI=armeabi-v7a
+ matrix:
+  - ANDROID_TARGET=android-16 ANDROID_ABI=armeabi-v7a
+  - ANDROID_TARGET=android-21 ANDROID_ABI=armeabi-v7a
+  - ANDROID_TARGET=android-25 ANDROID_ABI=armeabi-v7a
+  - ANDROID_TARGET=android-26 ANDROID_ABI=armeabi-v7a
 
 before_script:
  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI 
