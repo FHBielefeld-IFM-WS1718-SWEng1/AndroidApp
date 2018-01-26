@@ -106,13 +106,13 @@ public class TaskList extends Fragment implements IReceiveData{
                 us = guest.getUser();
             }
         }
-        int userid = (us != null) ? us.getId() : 0;
+        String userid = (us != null) ? String.valueOf(us.getId()) : "null";
 
-        if (us != null && !task.trim().equals("")) {
+        if (!task.trim().equals("")) {
             Intent apiHanlder = new Intent(getActivity(), APIService.class);
             apiHanlder.putExtra(Keys.EXTRA_URL, "/party/task?api=" + I.getMyself().getApiKey());
             apiHanlder.putExtra(Keys.EXTRA_REQUEST, "POST");
-            String data = "{\"user_id\":" + us.getId() + ",\"party_id\":" + partyId + ",\"text\":\"" + task.trim() + "\",\"status\":0" + "}";
+            String data = "{\"user_id\":" + userid + ",\"party_id\":" + partyId + ",\"text\":\"" + task.trim() + "\",\"status\":0" + "}";
             Log.e(getClass().getName(), data);
             apiHanlder.putExtra(Keys.EXTRA_DATA, data);
             apiHanlder.putExtra(Keys.EXTRA_ID, Keys.EXTRA_PUT_TASK);
@@ -124,7 +124,9 @@ public class TaskList extends Fragment implements IReceiveData{
 
     private void addTask(Task task) {
         Bundle arguments = new Bundle();
-        arguments.putString(Keys.EXTRA_NAME, task.getResponsibleUser().getName());
+        if (task.getResponsibleUser() != null) {
+            arguments.putString(Keys.EXTRA_NAME, task.getResponsibleUser().getName());
+        }
         arguments.putString(Keys.EXTRA_TASK, task.getTask());
         arguments.putInt(Keys.EXTRA_ID, task.getId());
         if(task.isDone() == 1) {

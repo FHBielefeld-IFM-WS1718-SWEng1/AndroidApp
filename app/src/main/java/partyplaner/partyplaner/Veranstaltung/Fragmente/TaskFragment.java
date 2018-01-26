@@ -94,9 +94,8 @@ public class TaskFragment extends Fragment {
     }
 
     private void setDeleteEditButton(final LayoutInflater inflater, boolean owner, CheckBox statusBox, ImageView delete, ImageView edit) {
-        if (!owner && !user.equals(I.getMyself().getName())) {
+        if (!owner) {
             delete.setVisibility(View.INVISIBLE);
-            edit.setVisibility(View.INVISIBLE);
         } else {
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -117,31 +116,36 @@ public class TaskFragment extends Fragment {
                     }).create().show();
                 }
             });
-            edit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    final View dialogView = inflater.inflate(R.layout.double_input_dialog, null);
-                    builder.setMessage("Neuen Namen und/oder Nutzer eingeben. (Bei leerem Feld bleibt es unverändet)")
-                            .setView(dialogView)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
+            statusBox.setClickable(true);
+        }
+        if (user != null) {
+            if (I.getMyself().getName().equals(user)) {
+                statusBox.setClickable(true);
+            }
+        }
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                final View dialogView = inflater.inflate(R.layout.double_input_dialog, null);
+                builder.setMessage("Neuen Namen und/oder Nutzer eingeben. (Bei leerem Feld bleibt es unverändet)")
+                        .setView(dialogView)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
                                 EditText inputTask = dialogView.findViewById(R.id.double_dialog_name_input);
                                 EditText inputUser = dialogView.findViewById(R.id.double_dialog_user_input);
                                 updateTask(inputUser.getText().toString(), inputTask.getText().toString(), isChecked);
-                                    dialog.cancel();
-                                }
-                            }).setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    }).create().show();
-                }
-            });
-            statusBox.setClickable(true);
-        }
+                                dialog.cancel();
+                            }
+                        }).setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                }).create().show();
+            }
+        });
     }
 
     private void updateTask(String name, String task, boolean status) {
@@ -169,7 +173,7 @@ public class TaskFragment extends Fragment {
             apiHanlder.putExtra(Keys.EXTRA_URL, "/party/task?api=" + I.getMyself().getApiKey());
             apiHanlder.putExtra(Keys.EXTRA_REQUEST, "PUT");
             int statusInt = (status) ? 1 : 0;
-            String data = "{\"id\":" + id + ",\"user_id\":" + I.getMyself().getId() + ",\"party_id\":" + this.data.getParty().getId() +
+            String data = "{\"id\":" + id + ",\"userid\":" + I.getMyself().getId() + ",\"party_id\":" + this.data.getParty().getId() +
                     ",\"text\":\"" + newTask + "\",\"status\":" + statusInt + "}";
             Log.e("SingleTodo", data);
             apiHanlder.putExtra(Keys.EXTRA_DATA, data);

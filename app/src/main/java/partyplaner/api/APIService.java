@@ -16,6 +16,7 @@ import android.util.Log;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.net.URI;
 
 import partyplaner.partyplaner.Keys;
 
@@ -64,9 +65,13 @@ public class APIService extends IntentService {
         }
         String response = GeneralAPIRequestHandler.request(url, RouteType.stringToRoute(request), data);
 
-        Intent localIntent = new Intent(type)
-                        .putExtra(Keys.EXTRA_DATA, response)
-                .putExtra(Keys.EXTRA_ID, intent.getStringExtra(Keys.EXTRA_ID));
+        Uri responseUri = Uri.parse(response);
+
+        Log.e(getClass().getName(), "response" + responseUri.toString());
+        Intent localIntent = new Intent(type);
+        //localIntent.setData(responseUri);
+        localIntent.putExtra(Keys.EXTRA_DATA, response);
+        localIntent.putExtra(Keys.EXTRA_ID, intent.getStringExtra(Keys.EXTRA_ID));
         LocalBroadcastManager.getInstance(this).sendBroadcast(localIntent);
     }
 }
