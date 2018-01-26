@@ -27,7 +27,5 @@ before_script:
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
 script:
-  - chmod +x ./gradlew clean installDebug
-  - chmod +x ./gradlew check
-  - chmod +x ./gradlew testDebugUnitTest
-  - chmod +x ./gradlew connectedDebugAndroidTest
+  - chmod +x android list target
+  - ./gradlew connectedAndroidTest
