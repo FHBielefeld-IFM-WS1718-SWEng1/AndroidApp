@@ -63,6 +63,7 @@ public class PartyHomeFragment extends Fragment implements IServiceReceiver{
         background.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getActivity().stopService(new Intent(getActivity(), APIService.class));
                 Intent intent = new Intent(getActivity(), EventMainActivity.class);
                 intent.putExtra(Keys.EXTRA_OWNER, true);
                 intent.putExtra(Keys.EXTRA_PARTYID, id);

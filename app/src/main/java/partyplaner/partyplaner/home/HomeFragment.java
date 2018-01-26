@@ -53,7 +53,6 @@ public class HomeFragment extends Fragment implements IReceiveData{
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        //keine Doppelten Partys, wenn das Handy gekippt wird
         if (savedInstanceState == null) {
             partyHolder = view.findViewById(R.id.party_list);
 

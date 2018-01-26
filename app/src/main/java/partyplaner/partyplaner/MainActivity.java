@@ -142,11 +142,13 @@ public class MainActivity extends AppCompatActivity
 
         switch (id) {
             case R.id.action_add_event:
+                this.stopService(new Intent(this, APIService.class));
                 Intent intent = new Intent(this, EditEventActivity.class);
                 intent.putExtra(Keys.EXTRA_EDIT_PARTY, false);
                 startActivity(intent);
                 break;
             case R.id.action_edit_profile:
+                this.stopService(new Intent(this, APIService.class));
                 Intent editProfileIntent = new Intent(this, EditProfileActivity.class);
                 startActivity(editProfileIntent);
                 break;
@@ -372,9 +374,11 @@ public class MainActivity extends AppCompatActivity
         }
         boolean alreadyAContact = false;
         if(placeholder >= 0){
-            for(int i = 0; i<contactList.length; i++){
-                if(contactList[i].getName().equals(addName)){
-                    alreadyAContact = true;
+            if (contactList != null) {
+                for (int i = 0; i < contactList.length; i++) {
+                    if (contactList[i].getName().equals(addName)) {
+                        alreadyAContact = true;
+                    }
                 }
             }
             if(!alreadyAContact && !addName.equals(I.getMyself().getName().toLowerCase())){

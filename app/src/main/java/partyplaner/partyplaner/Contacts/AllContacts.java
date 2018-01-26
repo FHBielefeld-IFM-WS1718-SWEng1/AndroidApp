@@ -92,7 +92,8 @@ public class AllContacts extends Fragment implements IReceiveData{
 
             sortContacts();
             for (User user : contactList) {
-                addContact(user);
+                if (user.getId() != I.getMyself().getId())
+                    addContact(user);
             }
         }
     }
