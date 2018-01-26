@@ -91,8 +91,11 @@ public class ProfileFragment extends Fragment implements IReceiveData {
     }
 
     private void setImage() {
-        profile.setImageResource(0);
-        profile.setImageBitmap(I.getMyself().getImage());
+        if (I.getMyself().getImage() != null) {
+            profile.setImageBitmap(I.getMyself().getImage());
+        } else {
+            profile.setImageResource(R.drawable.manu_avatar);
+        }
     }
 
     @Override

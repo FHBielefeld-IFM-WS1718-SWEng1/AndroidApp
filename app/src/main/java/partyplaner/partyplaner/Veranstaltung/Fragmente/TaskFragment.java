@@ -128,6 +128,8 @@ public class TaskFragment extends Fragment {
             public void onClick(View v) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 final View dialogView = inflater.inflate(R.layout.double_input_dialog, null);
+                EditText inputTask = dialogView.findViewById(R.id.double_dialog_name_input);
+                inputTask.setText(task);
                 builder.setMessage("Neuen Namen und/oder Nutzer eingeben. (Bei leerem Feld bleibt es unverändet)")
                         .setView(dialogView)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
