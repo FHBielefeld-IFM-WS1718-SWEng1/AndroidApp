@@ -1,0 +1,26 @@
+language: android
+android:
+  components:
+  - tools
+  - platform-tools
+  - tools
+  - build-tools-26.0.2
+  - android-26
+  - sys-img-armeabi-v7a-android-19
+before_script:
+  - chmod +x gradlew
+  - $ANDROID_SDK/tools/emulator -avd Nexus_5X_API_23 -wipe-data & EMULATOR_PID=$!
+
+before_install:
+  - pip install --user codecov
+  
+script:
+  - WAIT_CMD="$ANDROID_SDK/platform-tools/adb wait-for-device shell getprop init.svc.bootanim"
+    until $WAIT_CMD | grep -m 1 stopped; do
+      echo "Waiting..."
+      sleep 1
+    done
+  - adb shell input keyevent 82 &
+  - ./gradlew connectedAndroidTest -i
+  - ./gradlew assemble
+  - ./gradlew connectedAndroidTest -PdisablePreDex --stacktrace
